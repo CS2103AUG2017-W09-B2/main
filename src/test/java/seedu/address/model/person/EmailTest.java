@@ -10,7 +10,6 @@ public class EmailTest {
     @Test
     public void isValidEmail() {
         // blank email
-        assertFalse(Email.isValidEmail("")); // empty string
         assertFalse(Email.isValidEmail(" ")); // spaces only
 
         // missing parts
