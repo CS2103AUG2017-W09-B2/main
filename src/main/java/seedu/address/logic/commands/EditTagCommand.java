@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "edittag";
-    public static final String COMMAND_ALIAS = "et";
+    public static final String COMMAND_ALIAS = "etag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the specified tag "
             + "and updates all existing contacts that shares this tag with the new value.\n"
