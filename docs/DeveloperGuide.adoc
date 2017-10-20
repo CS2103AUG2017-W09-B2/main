@@ -548,6 +548,76 @@ Hence, a private field will remain private and the value stored by that field wi
 
 // end::Privacy
 
+=== Add/Delete Tag mechanism
+
+The add/delete tag mechanism is facilitated by `personArrayList`, which resides inside `LogicManager`. It supports add/delete
+tag for all persons in the address book. This command will inherit from `UndoableCommand`.
+
+The add/delete tag command are executed by `AddTagCommand` and `DeleteTagCommand` are parsed through `AddTagCommandParser` and `DeleteTagCommandParser`.
+It is different from `edit [INDEX] [TAG]` since it allows the user to perform the addition and deletion of tags for multiple people at once.
+If the user wants to add the `t/friends` tag for the first 3 persons in the address book, the `AddTagCommand` (`addtag 1 2 3 t/friends`) will be executed.
+The same operation will happen for `deletetag` command.
+
+The `AddTagCommand` goes through all the persons in the address book and add tag to the persons with specific index. The `DeleteTagCommand` works
+in a similar way.
+
+The example of how `AddTagCommand` is working:
+[source,java]
+----
+/**
+ * Adds a tag to the persons in the list from the address book.
+ */
+public class AddTagCommand extends UndoableCommand {
+    /**
+         * Check whether the index within the range then checks whether the specific persons have the tag.
+         * If not, add the tag to the person that doesn't have the given tag.
+         */
+        @Override
+        public CommandResult executeUndoableCommand() throws CommandException {
+
+            for (Index targetIndex : targetIndexes) {
+                // check whether the index within the range
+            }
+            for (int i = 0; i < targetIndexes.size(); i++) {
+                // check whether all persons have the given tag
+            }
+            // throw exception for duplicated tag
+            return new CommandResult();
+        }
+----
+
+Suppose the user enter the `addtag 1 2 t/friends` command. The following sequence diagram shows how the add tag command works:
+
+image::AddTagSdForLogic.png[width="800"]
+
+The `deletetag` command works the same as `addtag` command with different name only.
+
+[NOTE]
+If the input index does not exist, the `AddTagCommand` and `DeleteTagCommand` will throw an exception.
+
+If the tag to be deleted does not exist, the `DeleteTagCommand` will throw an exception.
+
+If the tag to be added exists in every target person in the address book, the `AddTagCommand` will throw an exception.
+
+==== Design Considerations
+
+**Aspect:** Implementation of the `addtag` and `deletetag` +
+**Alternative 1 (current choice):** implement the methods in `ModelManager` +
+**Pros:** Easier to implement. `ModelManager` includes all the methods and variables. +
+**Cons:** Must modify `Model` also to fit the `ModelManager`. Beginner may have difficulty to understand the different functions in Model component+
+**Alternative 2:** Implement the `addtag` and `deletetag` in `AddTagCommand` and `DeleteTagCommand` respectively. +
+**Pros:** Easier to understand. +
+**Cons:** Repetitive code. Additional overload constructor needs to be implement. The `AddTagCommand` and `DeleteTagCommand` will have to update the person list.
+This violates the Single Responsibility Principle.
+
+---
+**Aspect:** Implementation of the `AddTagCommend` and `DeleteTagCommand` +
+**Alternative 1 (current choice):** create new command `addtag` and `deletetag` +
+**Pros:** Less modification of existing command and parser +
+**Cons:** Users have to learn how to use the additional commands +
+**Alternative 2:** Modify the existing `add` and `delete` command +
+**Pros:** Users could use the same commands to achieve different purpose +
+**Cons:** Additional override the constructor for the existing command. It might not be easy for the beginner.
 
 === Logging
 
@@ -563,6 +633,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+
 
 === Configuration
 
