@@ -935,6 +935,20 @@ To determine if the field that is added should be set to private, a <code>p</cod
 Hence, <code>pe/[EMAIL]</code> will set that person&#8217;s email to be private, whereas if <code>e/[EMAIL]</code> was used, that person&#8217;s email would be public.<br></p>
 </div>
 <div class="paragraph">
+<p>These new prefixes can be found in <code>CliSyntax</code>, and <code>AddCommandParser</code> will take data with these prefixes.
+<code>AddCommandParser</code> will then call the appropriate method in <code>ParserUtil</code>, which will parse the string provided into a new field.
+Depending on whether or not the field is supposed to be private, <code>ParsetUtil</code> will call the appropriate constructor.
+Upon obtaining all the fields anc creating a new <code>Person</code>, <code>AddCommandParser</code> will create a new <code>AddCommand</code> to handle the addition of the new <code>Person</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is illustrated by the following sequence diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddPrivateSequenceDiagram.png" alt="AddPrivateSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
 <p>The <code>isPrivate</code> boolean is private, however, the value can be obtained using the following getter method:</p>
 </div>
 <div class="listingblock">
@@ -976,13 +990,44 @@ This can be seen from the <code>toString</code> method in <code>Name</code>:</p>
 <p>In addition, if <code>isPrivate</code> is <code>true</code> for <code>Name</code>, clicking on a person&#8217;s card in the UI will not trigger a search on Google for that person&#8217;s name.</p>
 </div>
 <div class="paragraph">
-<p>Instead, a message <code>"Cannot perform a search on that person. Their name is private."</code> will be printed in the UI to inform the user that they are not allowed to search for a person possessing a private <code>Name</code>.</p>
+<p>Instead, a <code>NewResultAvailableEvent</code> will be raised by <code>BrowserPanel</code> to inform the user that they are not allowed to search for a person possessing a private <code>Name</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
 </div>
 <div class="paragraph">
-<p>To keep track of whether each field is private or not, <code>XmlAdaptedPerson</code> will have to store the <code>isPrivate</code> value for each field of <code>Person</code>.</p>
+<p>To keep track of whether each field is private or not, <code>XmlAdaptedPerson</code> will have to store the <code>isPrivate</code> value for each field of <code>Person</code>.
+This is done by adding the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> nameIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> phoneIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> emailIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> addressIsPrivate;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which results in a <code>Person</code> being saved in the xml file in the following format</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="html"><span class="tag">&lt;persons&gt;</span>
+    <span class="tag">&lt;name&gt;</span>Alex Yeoh<span class="tag">&lt;/name&gt;</span>
+    <span class="tag">&lt;nameIsPrivate&gt;</span>false<span class="tag">&lt;/nameIsPrivate&gt;</span>
+    <span class="tag">&lt;phone&gt;</span>87438807<span class="tag">&lt;/phone&gt;</span>
+    <span class="tag">&lt;phoneIsPrivate&gt;</span>false<span class="tag">&lt;/phoneIsPrivate&gt;</span>
+    <span class="tag">&lt;email&gt;</span>alexyeoh@example.com<span class="tag">&lt;/email&gt;</span>
+    <span class="tag">&lt;emailIsPrivate&gt;</span>false<span class="tag">&lt;/emailIsPrivate&gt;</span>
+    <span class="tag">&lt;address&gt;</span>Blk 30 Geylang Street 29, #06-40<span class="tag">&lt;/address&gt;</span>
+    <span class="tag">&lt;addressIsPrivate&gt;</span>false<span class="tag">&lt;/addressIsPrivate&gt;</span>
+    <span class="tag">&lt;tagged&gt;</span>friends<span class="tag">&lt;/tagged&gt;</span>
+<span class="tag">&lt;/persons&gt;</span></code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>If an old save file without privacy data is loaded, then the <code>toModelType()</code> method in <code>XmlAdaptedPerson</code> will set <code>isPrivate</code> to be <code>false</code> for each field of <code>Person</code>, to keep the displayed information the same.</p>
@@ -994,7 +1039,7 @@ This can be seen from the <code>toString</code> method in <code>Name</code>:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a private field is to be edited by <code>EditCommand</code>, <code>EditCommand</code> will not modify the data of that field, even though the command succeeds.<br>
+If a private field is to be edited by <code>EditCommand</code>, <code>createEditedPerson()</code> in <code>EditCommand</code> will not modify the data of that field, even though <code>EditCommand</code> will create a new <code>CommandResult</code> with a success message.<br>
 Hence, a private field will remain private and the value stored by that field will remain the same as it originally was.
 </td>
 </tr>
@@ -2594,7 +2639,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-20 16:01:34 +00:00
+Last updated 2017-10-20 17:12:39 +00:00
 </div>
 </div>
 </body>
