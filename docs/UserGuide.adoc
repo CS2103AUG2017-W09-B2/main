@@ -80,7 +80,7 @@ Examples:
 
 === Add a tag to persons : `addtag`
 Adds a tag to persons from the address book. +
-Format: `addtag [TAG] INDEX` +
+Format: `addtag INDEX t/[TAG]` +
 Shorthand commands: `atag`
 
 ****
@@ -92,8 +92,8 @@ Shorthand commands: `atag`
 Examples:
 
 * `list` +
-`addtag friends 1` +
-Adds the freinds tag of the 1st person in the address book.
+`addtag 1 2 t/friends` +
+Adds the freinds tag of the 1st and 2nd person in the address book.
 
 
 === Listing all persons : `list` `listtask`
@@ -210,7 +210,7 @@ Deletes the 1st task in the results of the `findtask` command.
 
 === delete a tag of persons : `deletetag`
 Delete the tag of persons from the address book. +
-Format: `deletetag [TAG] INDEX` +
+Format: `deletetag INDEX t/[TAG]` +
 Shorthand commands: `dtag`
 
 ****
@@ -222,8 +222,8 @@ Shorthand commands: `dtag`
 Examples:
 
 * `list` +
-`deletetag friends 1` +
-Delete the freinds tag of the 1st person in the address book.
+`deletetag 1 2 t/friends` +
+Delete the freinds tag of the 1st and 2nd person in the address book.
 
 === Sorting all persons : `sort`
 
@@ -533,16 +533,16 @@ The program will learn your typing habits and give autocomplete suggestions that
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665, b/29-02-1996 f/SOC c/www.enteryourcalendarurlhere.com t/friend t/colleague`
 * *Add task* : `addtask n/NAME d/DESCRIPTION [t/DEADLINE] [p/PRIORITY]` +
 e.g. `addtask n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high`
-* *Add tag* : `addtag [TAG] INDEX` +
-e.g. `addtag friends 2`
+* *Add tag* : `addtag INDEX t/[TAG]` +
+e.g. `addtag 1 2 t/friends`
 * *Clear person* : `clear`
 * *Clear tasks* : `cleartask`
 * *Delete person* : `delete INDEX` +
 e.g. `delete 3`
 * *Delete task* : `deletetask INDEX` +
 e.g. `deletetask 4`
-* *Delete tag* : `deletetag [TAG] INDEX` +
-e.g. `deletetag friends 1`
+* *Delete tag* : `deletetag INDEX t/[TAG]` +
+e.g. `deletetag 1 2 t/friends`
 * *Edit* : `edit or e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] c/[GOOGLE CALENDAR URL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Edit task* : `edittask INDEX [n/NAME] [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]` +
