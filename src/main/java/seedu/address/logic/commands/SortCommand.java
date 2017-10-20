@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
  * Sorts all persons in address book by any field. Sorting can be done in ascending or descending order
  */
-public class SortCommand extends Command {
+public class SortCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_ALIAS = "so";
 
     public static final ArrayList<String> ACCEPTED_FIELD_PARAMETERS = new ArrayList<>(Arrays.asList(
             "name", "phone", "email", "address"));
@@ -44,7 +47,8 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult executeUndoableCommand() {
+        requireNonNull(model);
         model.sortPersons(getField(), getOrder());
         return new CommandResult(MESSAGE_SUCCESS);
     }

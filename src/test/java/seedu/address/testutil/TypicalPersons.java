@@ -75,7 +75,21 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static AddressBook getTaglessAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (ReadOnlyPerson person : getTaglessPersons()) {
+            try {
+                ab.addPerson(person);
+            } catch (DuplicatePersonException e) {
+                assert false : "not possible";
+            }
+        }
+        return ab;
+    }
     public static List<ReadOnlyPerson> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+    public static List<ReadOnlyPerson> getTaglessPersons() {
+        return new ArrayList<>(Arrays.asList(CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

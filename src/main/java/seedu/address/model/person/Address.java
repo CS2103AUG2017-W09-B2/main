@@ -19,6 +19,7 @@ public class Address {
     public static final String ADDRESS_PLACEHOLDER_VALUE = "";
 
     public final String value;
+    private boolean isPrivate = false;
 
     /**
      * Validates given address.
@@ -36,6 +37,11 @@ public class Address {
         this.value = address;
     }
 
+    public Address(String address, boolean isPrivate) throws IllegalValueException {
+        this(address);
+        this.setPrivate(isPrivate);
+    }
+
     /**
      * Returns true if a given string is a valid person email.
      */
@@ -45,6 +51,9 @@ public class Address {
 
     @Override
     public String toString() {
+        if (isPrivate) {
+            return "<Private Address>";
+        }
         return value;
     }
 
@@ -60,4 +69,11 @@ public class Address {
         return value.hashCode();
     }
 
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
 }

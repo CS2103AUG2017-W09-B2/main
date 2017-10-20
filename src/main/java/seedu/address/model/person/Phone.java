@@ -15,6 +15,8 @@ public class Phone {
     public static final String PHONE_PLACEHOLDER_VALUE = "";
     public final String value;
 
+    private boolean isPrivate = false;
+
     /**
      * Validates given phone number.
      *
@@ -32,6 +34,11 @@ public class Phone {
         this.value = trimmedPhone;
     }
 
+    public Phone(String phone, boolean isPrivate) throws IllegalValueException {
+        this(phone);
+        this.setPrivate(isPrivate);
+    }
+
     /**
      * Returns true if a given string is a valid person phone number.
      */
@@ -41,6 +48,9 @@ public class Phone {
 
     @Override
     public String toString() {
+        if (isPrivate) {
+            return "<Private Phone>";
+        }
         return value;
     }
 
@@ -56,4 +66,11 @@ public class Phone {
         return value.hashCode();
     }
 
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
 }

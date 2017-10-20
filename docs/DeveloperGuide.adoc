@@ -345,6 +345,210 @@ image::UndoRedoActivityDiagram.png[width="200"]
 **Cons:** Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things. +
 // end::undoredo[]
 
+=== Task Object
+
+The Task object stores information related to a single deadline or task, in a manner similar to how Person information is stored. +
+As such, it also shares the same types of commands as the Person object, namely the add, delete, list, select, and edit commands.
+Instead of making a new Logic object for each new command, polymorphism is used to implement the "Task" version of each command.
+
+An example of using polymorphism to handle Person vs Task addition:
+
+[source,java]
+----
+public class AddCommand extends Command {
+    public AddCommand(ReadOnlyPerson person) {
+        toAdd = new Person(person);
+        toHandle = HANDLE_TYPE_PERSON;
+    }
+
+    public AddCommand(ReadOnlyTask task) {
+        toAdd = new Task(task);
+        toHandle = HANDLE_TYPE_TASK;
+    }
+}
+----
+
+The AddCommand will thus call a different constructor depending on the type of the argument supplied to it. To facilitate this, the respective Parser class must also be modified:
+
+[source,java]
+----
+public AddCommand parse(String args) throws ParseException {
+    int objectType = checkType(args);
+
+    if (objectType == HANDLE_TYPE_PERSON) {
+        Person toAdd = createNewPerson(args);
+    } else if (objectType == HANDLE_TYPE_TASK) {
+        Task toAdd = createNewTask(args);
+    }
+    return new AddCommand(toAdd);
+}
+----
+
+The AddCommandParser checks the args to see if this is a task, then creates the object to be added, and creates a new AddCommand to handle the result. +
+The sequence diagram below shows how this is done:
+
+image::AddTaskSeq.png[width="800"]
+
+To support the addition of Task objects, the Storage component is modified to accept Task objects in a similar manner as to how Person objects are being stored.
+
+[source, html]
+---
+    <persons>
+        <name>someone else</name>
+        <phone></phone>
+        <email></email>
+        <address></address>
+    </persons>
+    <tasks>
+        <name>Buy new pencil</name>
+        <description>Buy new pencil for writing purposes</description>
+        <deadline></deadline>
+        <priority>2</priority>
+    </tasks>
+---
+
+Tasks objects are stored in the same level of hierarchy as Person objects, and during startup, are read and entered into the UniqueTaskList, which handles all the tasks that are present in the address book.
+
+
+==== Design Considerations
+
+**Aspect:** Implementation of Task-related commands +
+**Alternative 1 (current choice):** Use polymorphism to allow existing commands to implement the new commands +
+**Pros:** Under this scheme, any command can be extended to allow addition of new commands of any type, without affecting the architecture significantly +
+**Cons:** SRP may be violated as each Command class may now need to handle 2 different types of objects. +
+**Alternative 2:** Create new classes for all new commands +
+**Pros:** Simpler to implement. +
+**Cons:** Code duplication occurs as the commands for Person and Tasks objects share the same structure.
+
+---
+
+**Aspect:** Storage of Task objects +
+**Alternative 1 (current choice):** Store Tasks objects in a separate XML file +
+**Pros:** Easier to manage as Person storage will not interfere with Task storage, and vice versa.
+**Cons:** All existing save/load functions will require an additional method to handle Task storage.
+**Alternative 2:** Store Task objects together in the default XML storage file +
+**Pros** Only 1 storage file is needed. The storage manager thus only needs to refer to one storage +
+**Cons** Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.
+
+=== Sort enhancement
+
+The sort enhancment is facilitated by the `sortBy` method in UniquePersonList. It supports
+sort by ascending or by descending order in any field.
+
+The sort enhancement utilises the Java Collections Sort API by passing it a custom Comparator.
+
+The sort command is parsed through `SortCommandParser`, which passes control over to the `SortCommand`
+class. The actual sorting happens via the UniquePersonList class.
+
+The Logic Diagram for this sort command implementation is shown below:
+
+image::SortCommandDiagram.png[width="800"]
+
+Suppose a user enters a new command `sort name desc`. The following sequence diagram
+demonstrates how the sort command works.
+
+image::SortSequenceDiagram.png[width="800]
+
+Note that the execution of the sort methods result in the actual person list being sorted.
+
+==== Design Considerations
+
+**Aspect:** Implementation of `sort Command` +
+**Alternative 1 (current choice):** Implement sorting functionality in `UniquePersonList` class. +
+**Pros:** Delegates the concern of sorting to the class that is responsible for the core of most operations done to the person lists. Future changes to the implementation will be easier as a consequence. +
+**Cons:** Hard for new developers to understand the flow of control passed between classes at first. +
+**Alternative 2:** Implement the sorting functionality within other classes like `AddressBook` or `SortCommand`. +
+**Pros:** May be more intuitive for new developers and it is easier to trace function calls between lesser classes involved. +
+**Cons:** Violates Separation of Concern principle and causes unnecessary content coupling whereby the `UniquePersonList` will have to rely on the `SortCommand` class.
+
+---
+
+**Aspect:** Temporary Sort Implementation vs. Persistent Sort Implementation +
+**Alternative 1 (current choice):** Saves the entire address book after sorting. +
+**Pros:** More intuitive for both user and developer and reduced complexity in implementation. +
+**Cons:** Old order of contact instances in the address book will be lost +
+**Alternative 2:** Duplicate a temporary version of the list and sort it for viewing (i.e. the actual list is not sorted) +
+**Pros:** Old order of contact instances remains intact. +
+**Cons:** Will use more memory and may be less intuitive for developer to understand and in terms of user experience. Also, sorting will not persist in the system.
+
+
+// tag::Privacy
+=== Privacy of fields
+
+The `Name`, `Phone`, `Email` and `Address` of a `Person` contains a boolean `isPrivate`, which will determine if the field belonging to that person is private or not.
+
+Adding a person with private fields uses the same `AddCommand` as adding a person with no public fields. +
+To determine if the field that is added should be set to private, a `p` is added to the start of the prefix. +
+Hence, `pe/[EMAIL]` will set that person's email to be private, whereas if `e/[EMAIL]` was used, that person's email would be public. +
+
+The `isPrivate` boolean is private, however, the value can be obtained using the following getter method:
+[source,java]
+----
+public boolean isPrivate() {
+    return isPrivate;
+}
+----
+
+To change the `isPrivate` value, the following setter method is used:
+[source,java]
+----
+public void setPrivate(boolean isPrivate) {
+    this.isPrivate = isPrivate;
+}
+----
+
+If a field is private, then the `toString` method will return a string `<Private [FIELD]>`, where `[FIELD]` is the name of that field. +
+This can be seen from the `toString` method in `Name`:
+[source,java]
+----
+@Override
+public String toString() {
+    if (isPrivate) {
+        return "<Private Name>";
+    }
+    return fullName;
+}
+----
+
+Since the information displayed in a person's card in the UI gets the value of the field through the `toString()` method, this hides the actual value of the field in the UI.
+
+In addition, if `isPrivate` is `true` for `Name`, clicking on a person's card in the UI will not trigger a search on Google for that person's name.
+
+Instead, a message `"Cannot perform a search on that person. Their name is private."` will be printed in the UI to inform the user that they are not allowed to search for a person possessing a private `Name`.
+
+`ChangePrivacyCommand` facilitates the setting of an existing person's field's privacy. Depending on the user's input, `ChangePrivacyCommand` will use each field's `setPrivate()` method to set the value of `isPrivate`.
+
+To keep track of whether each field is private or not, `XmlAdaptedPerson` will have to store the `isPrivate` value for each field of `Person`.
+
+If an old save file without privacy data is loaded, then the `toModelType()` method in `XmlAdaptedPerson` will set `isPrivate` to be `false` for each field of `Person`, to keep the displayed information the same.
+
+[NOTE]
+If a private field is to be edited by `EditCommand`, `EditCommand` will not modify the data of that field, even though the command succeeds. +
+Hence, a private field will remain private and the value stored by that field will remain the same as it originally was.
+
+
+==== Design Considerations
+
+**Aspect:** Implementation of `isPrivate` +
+**Alternative 1 (current choice):** Add a boolean to each field class +
+**Pros:** Similar implementation to how the fields are currently being implemented. Privacy settings can be obtained directly from the field class itself. +
+**Cons:** Repetitive code. Additional overloaded constructor and methods are needed to set and get the value of `isPrivate`.  +
+**Alternative 2:** Store a person's privacy settings outside of the field classes in an Array or a HashMap in `Person`. +
+**Pros:** Can access and modify the privacy settings of all fields easily. +
+**Cons:** The fields themselves do not have any indication of whether or not they are private, and will have to check with the `Person` the belong to.
+
+---
+**Aspect:** How to determine if a field for a newly added person should be private. +
+**Alternative 1 (current choice):** Add a `p` to the start of each field's prefix to signify that that field should be private. +
+**Pros:** Can add `Person` containing any combination of private and public fields in 1 command line. +
+**Cons:** Have to modify `AddCommand`, `AddCommandParser`, `ParserUtil` and other classes to detect the new prefix and call a separate constructor when a field is private. +
+**Alternative 2:** A `Person` is added with all field public, a separate command will then have to be used to set the desired fields to be private. +
+**Pros:** Easier implementation, do not have to modify `AddCommand`. +
+**Cons:** Requires 2 command lines to create a `Person` with private fields, which takes more time and is more inconvenient for users.
+
+// end::Privacy
+
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.

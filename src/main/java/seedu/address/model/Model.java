@@ -1,11 +1,14 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -23,9 +26,19 @@ public interface Model {
     /** Deletes the given person. */
     void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException;
 
+    /** Deletes given tag from specific persons */
+    void deleteTag(Tag toDelete, ArrayList<Index> targetIndexes) throws PersonNotFoundException,
+            DuplicatePersonException;
+
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
+    /** Adds given tag to specific persons */
+    void addTag(Tag toAdd, ArrayList<Index> targetIndexes) throws PersonNotFoundException,
+            DuplicatePersonException;
+    /** Edits the specified tag, and updates all instances in the address book */
+    void editTag(Tag toChange, Tag newTag, ArrayList<Index> affectedIndexes) throws PersonNotFoundException,
+            DuplicatePersonException;
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      *

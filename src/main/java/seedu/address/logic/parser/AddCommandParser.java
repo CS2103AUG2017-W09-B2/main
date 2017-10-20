@@ -2,10 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_PRIVATE;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -33,17 +38,59 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                        PREFIX_NAME_PRIVATE, PREFIX_PHONE_PRIVATE, PREFIX_EMAIL_PRIVATE, PREFIX_ADDRESS_PRIVATE,
+                        PREFIX_TAG_PRIVATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)) {
+        if (!(arePrefixesPresent(argMultimap, PREFIX_NAME)
+                || (arePrefixesPresent(argMultimap, PREFIX_NAME_PRIVATE)))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (!(arePrefixesPresent(argMultimap, PREFIX_PHONE)
+                || (arePrefixesPresent(argMultimap, PREFIX_PHONE_PRIVATE)))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (!(arePrefixesPresent(argMultimap, PREFIX_EMAIL)
+                || (arePrefixesPresent(argMultimap, PREFIX_EMAIL_PRIVATE)))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (!(arePrefixesPresent(argMultimap, PREFIX_ADDRESS)
+                || (arePrefixesPresent(argMultimap, PREFIX_ADDRESS_PRIVATE)))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         try {
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
+            Name name;
+            Phone phone;
+            Email email;
+            Address address;
+
+            if ((arePrefixesPresent(argMultimap, PREFIX_NAME))) {
+                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME), false).get();
+            } else {
+                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME_PRIVATE), true).get();
+            }
+
+            if ((arePrefixesPresent(argMultimap, PREFIX_PHONE))) {
+                phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE), false).get();
+            } else {
+                phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE_PRIVATE), true).get();
+            }
+
+            if ((arePrefixesPresent(argMultimap, PREFIX_EMAIL))) {
+                email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL), false).get();
+            } else {
+                email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL_PRIVATE), true).get();
+            }
+
+            if ((arePrefixesPresent(argMultimap, PREFIX_ADDRESS))) {
+                address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS), false).get();
+            } else {
+                address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS_PRIVATE), true).get();
+            }
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             ReadOnlyPerson person = new Person(name, phone, email, address, tagList);

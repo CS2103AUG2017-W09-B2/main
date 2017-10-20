@@ -1,9 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -25,7 +28,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -99,6 +106,46 @@ public class EditCommandTest {
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_privateFields_success() throws Exception {
+        showFirstPersonOnly(model);
+
+        ReadOnlyPerson personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        personInFilteredList.getName().setPrivate(true);
+        Name originalName = personInFilteredList.getName();
+
+        personInFilteredList.getPhone().setPrivate(true);
+        Phone originalPhone = personInFilteredList.getPhone();
+
+        personInFilteredList.getEmail().setPrivate(true);
+        Email originalEmail = personInFilteredList.getEmail();
+
+        personInFilteredList.getAddress().setPrivate(true);
+        Address originalAddress = personInFilteredList.getAddress();
+
+        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
+        EditCommand editCommand = prepareCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, personInFilteredList);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updatePerson(model.getFilteredPersonList().get(0), personInFilteredList);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        assertEquals(personInFilteredList.getName(), originalName);
+        assertEquals(personInFilteredList.getPhone(), originalPhone);
+        assertEquals(personInFilteredList.getEmail(), originalEmail);
+        assertEquals(personInFilteredList.getAddress(), originalAddress);
+
+        personInFilteredList.getName().setPrivate(false);
+        personInFilteredList.getPhone().setPrivate(false);
+        personInFilteredList.getEmail().setPrivate(false);
+        personInFilteredList.getAddress().setPrivate(false);
     }
 
     @Test

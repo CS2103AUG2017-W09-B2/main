@@ -1,26 +1,24 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Task name in the address book.
  */
 public class Name {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Person names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task names can be in any format, and should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String NAME_VALIDATION_REGEX = "[^\\s].*";
 
-    public final String fullName;
-    private boolean isPrivate = false;
+    public final String taskName;
 
     /**
      * Validates given name.
@@ -33,16 +31,11 @@ public class Name {
         if (!isValidName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
-        this.fullName = trimmedName;
-    }
-
-    public Name(String name, boolean isPrivate) throws IllegalValueException {
-        this(name);
-        this.setPrivate(isPrivate);
+        this.taskName = trimmedName;
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task name.
      */
     public static boolean isValidName(String test) {
         return test.matches(NAME_VALIDATION_REGEX);
@@ -51,29 +44,19 @@ public class Name {
 
     @Override
     public String toString() {
-        if (isPrivate) {
-            return "<Private Name>";
-        }
-        return fullName;
+        return taskName;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && this.fullName.equals(((Name) other).fullName)); // state check
+                && this.taskName.equals(((Name) other).taskName)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return taskName.hashCode();
     }
 
-    public boolean isPrivate() {
-        return isPrivate;
-    }
-
-    public void setPrivate(boolean isPrivate) {
-        this.isPrivate = isPrivate;
-    }
 }

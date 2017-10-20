@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -23,8 +24,12 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
     public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
+    public static final String PRIVATE_NAME_CANNOT_SEARCH = "Cannot perform a search on that person. "
+            + "Their name is private.";
 
     private static final String FXML = "BrowserPanel.fxml";
+
+
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -41,9 +46,18 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads a google search for a person's name if their name is not private
+     * Prints out a message on the result display otherwise
+     * @param person The person we want to search for
+     */
     private void loadPersonPage(ReadOnlyPerson person) {
-        loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll(" ", "+")
-                + GOOGLE_SEARCH_URL_SUFFIX);
+        if (person.getName().isPrivate()) {
+            raise(new NewResultAvailableEvent(PRIVATE_NAME_CANNOT_SEARCH));
+        } else {
+            loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll(" ", "+")
+                    + GOOGLE_SEARCH_URL_SUFFIX);
+        }
     }
 
     public void loadPage(String url) {

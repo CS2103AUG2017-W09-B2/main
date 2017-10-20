@@ -58,12 +58,13 @@ Alternatively, the keyboard shortcut `F1` may be used.
 === Adding a person/task: `add` `addtask`
 
 Adds a person or task to the address book +
-Format (person): `add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] c/[GOOGLE CALENDAR URL] [t/TAG]...` +
+Format (person): `add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] f/[FACULTY] c/[GOOGLE CALENDAR URL] [t/TAG]...` +
 Format (task): `addtask n/NAME [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]` +
 Shorthand commands: `a` `at`
 
 [TIP]
 A person can have any number of tags (including 0) +
+A person's `Name`, `Phone`, `Email` or `Address` can be set to be private by placing a `p` in front of the prefix. +
 A task can have the following 5 priorities: `lowest, low, normal, high, highest` +
 Newly added tasks are marked as incomplete by default.
 
@@ -73,8 +74,27 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com b/29-02-1996 a/Newgate Prison p/1234567 t/criminal`
 * `add n/Ima Hidearu b/ a/ e/ p/ t/secretive`
 * `add n/Luke Groundswimmer p/ a/ e/ c/`
+* `add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate c/`
 * `addtask n/Update documentationn d/Update docs for V1.1 for CS2103T t/10-10-17 p/high`
 * `addtask n/Buy new pencil p/low`
+
+=== Add a tag to persons : `addtag`
+Adds a tag to persons from the address book. +
+Format: `addtag [TAG] INDEX` +
+Shorthand commands: `atag`
+
+****
+* Adds the tag of the person at the specific `INDEX`
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`addtag friends 1` +
+Adds the freinds tag of the 1st person in the address book.
+
 
 === Listing all persons : `list` `listtask`
 
@@ -96,6 +116,7 @@ Shorthand commands: `e` `et`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* A private field will not be modified by the Edit command.
 ****
 
 Examples:
@@ -113,6 +134,7 @@ Edits the priority of the 2nd task to be `highest`.
 
 Changes the privacy settings of the details for an existing person in the address book. +
 Format: `changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]`
+Shorthand commands: `cp`
 
 ****
 * Changes the privacy settings of the details for the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
@@ -130,7 +152,7 @@ Sets the phone number of the 1st person to be public and their email address to 
 * `cp 2 a/show b/hide t/show` +
 Sets the address and tags of the 2nd person to be public and their birthday to be private. The 2nd person's address and tags will be displayed, if available, while their birthday will be hidden in the UI.
 
-=== Locating persons by name: `find` `findtask`
+=== Locating persons by name : `find` `findtask`
 
 Finds persons/tasks whose names or description contain any of the given keywords. +
 Format (person): `find KEYWORD [MORE_KEYWORDS]` +
@@ -186,15 +208,35 @@ Deletes the 2nd task in the address book.
 `deletetask 1` +
 Deletes the 1st task in the results of the `findtask` command.
 
+=== delete a tag of persons : `deletetag`
+Delete the tag of persons from the address book. +
+Format: `deletetag [TAG] INDEX` +
+Shorthand commands: `dtag`
+
+****
+* Delete the tag of the person at the specific `INDEX`
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`deletetag friends 1` +
+Delete the freinds tag of the 1st person in the address book.
+
 === Sorting all persons : `sort`
 
 Sorts all persons in address book by any field in ascending or descending order. +
-Format: `sort FIELD ORDER`
+Format: `sort FIELD ORDER` +
+Shorthand command: `so`
+
 
 ****
 * Sorts all persons currenlty in the address book by user input field and order.
 * Field parameters are limited to the following fields: NAME, PHONE, EMAIL, ADDRESS.
 * Order parameters are limited to the following fields: ASC, DESC.
+* Sort can be undone to return to the original list of people.
 ****
 
 Examples:
@@ -303,7 +345,7 @@ Assigns the 1st task in the results of the `findtask` command to the 2nd person 
 
 Removes assignment of the people associated with the PEOPLEINDEX to the task at the specified TASKINDEX. +
 Format: `dismiss TASKINDEX PEOPLEINDEX...` +
-Shorthand commands: `dt`
+Shorthand commands: `dm`
 
 ****
 * The PEOPLEINDEX refers to the index numbers shown in the most recent *person* listing.
@@ -386,11 +428,11 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Setting a budget : `setbudget` `sb` (To be added in V2.0)
+=== Setting a budget : `setbudget` (To be added in V2.0)
 
 Sets the amount of money available to be a certain amount.
 Format: `setbudget MONEY [t/TAG]`
-
+Shorthand commands: `sb`
 ****
 * Set a certain amount of money to keep track of as a budget.
 * The value can be tagged so that multiple things can be kept track of at the same time.
@@ -409,10 +451,11 @@ Sets a $60 transport budget.
 * `sb 2000` +
 Sets a $2000 untagged budget.
 
-=== Spending : `spend` `sp` (To be added in V2.0)
+=== Spending : `spend` (To be added in V2.0)
 
 Spends the money from an existing budget.
 Format: `spend MONEY [t/TAG]`
+Shorthand commands: `sp`
 
 ****
 * Spends a certain amount of money from an existing budget.
@@ -486,16 +529,20 @@ The program will learn your typing habits and give autocomplete suggestions that
 
 == Command Summary
 
-* *Add* : `add or a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/[GOOGLE CALENDAR URL] [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665, c/www.enteryourcalendarurlhere.com t/friend t/colleague`
+* *Add* : `add or a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY f/FACULTY c/[GOOGLE CALENDAR URL] [t/TAG]...` +
+e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665, b/29-02-1996 f/SOC c/www.enteryourcalendarurlhere.com t/friend t/colleague`
 * *Add task* : `addtask n/NAME d/DESCRIPTION [t/DEADLINE] [p/PRIORITY]` +
 e.g. `addtask n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high`
+* *Add tag* : `addtag [TAG] INDEX` +
+e.g. `addtag friends 2`
 * *Clear person* : `clear`
 * *Clear tasks* : `cleartask`
 * *Delete person* : `delete INDEX` +
 e.g. `delete 3`
 * *Delete task* : `deletetask INDEX` +
 e.g. `deletetask 4`
+* *Delete tag* : `deletetag [TAG] INDEX` +
+e.g. `deletetag friends 1`
 * *Edit* : `edit or e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] c/[GOOGLE CALENDAR URL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Edit task* : `edittask INDEX [n/NAME] [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]` +
@@ -511,10 +558,10 @@ e.g. `findtask update p/high`
 e.g.`select 2`
 * *Select task* : `selecttask INDEX` +
 e.g.`selecttask 2`
-* *Mark task as complete* : `markcomplete INDEX` +
-e.g. `markcomplete 4`
-* *Mark task as incomplete* : `markincomplete INDEX` +
-e.g. `markincomplete 5`
+* *Set task as complete* : `setcomplete INDEX` +
+e.g. `setcomplete 4`
+* *Set task as incomplete* : `setincomplete INDEX` +
+e.g. `setincomplete 5`
 * *Assign to task* : `assign TASKINDEX PERSONINDEX...` +
 e.g. `assign 4 1 17 18 21`
 * *Dismiss from task* : `dismiss TASKINDEX PERSONINDEX...` +

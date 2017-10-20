@@ -91,15 +91,40 @@ public class EditCommand extends UndoableCommand {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     * A person with private fields cannot be edited
      */
     private static Person createEditedPerson(ReadOnlyPerson personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Name updatedName;
+        Phone updatedPhone;
+        Email updatedEmail;
+        Address updatedAddress;
+
+        if (!personToEdit.getName().isPrivate()) {
+            updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        } else {
+            updatedName = personToEdit.getName();
+        }
+
+        if (!personToEdit.getPhone().isPrivate()) {
+            updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        } else {
+            updatedPhone = personToEdit.getPhone();
+        }
+
+        if (!personToEdit.getEmail().isPrivate()) {
+            updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        } else {
+            updatedEmail = personToEdit.getEmail();
+        }
+
+        if (!personToEdit.getAddress().isPrivate()) {
+            updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        } else {
+            updatedAddress = personToEdit.getAddress();
+        }
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);

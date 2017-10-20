@@ -14,6 +14,7 @@ public class Email {
     public static final String EMAIL_PLACEHOLDER_VALUE = "";
 
     public final String value;
+    private boolean isPrivate = false;
 
     /**
      * Validates given email.
@@ -32,6 +33,11 @@ public class Email {
         this.value = trimmedEmail;
     }
 
+    public Email(String email, boolean isPrivate) throws IllegalValueException {
+        this(email);
+        this.setPrivate(isPrivate);
+    }
+
     /**
      * Returns if a given string is a valid person email.
      */
@@ -41,6 +47,9 @@ public class Email {
 
     @Override
     public String toString() {
+        if (isPrivate) {
+            return "<Private Email>";
+        }
         return value;
     }
 
@@ -56,4 +65,11 @@ public class Email {
         return value.hashCode();
     }
 
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
 }

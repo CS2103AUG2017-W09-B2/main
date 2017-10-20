@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_PRIVATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -35,6 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_COLLEAGUE = "colleague";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -46,6 +51,14 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String NAME_DESC_AMY_PRIVATE = " " + PREFIX_NAME_PRIVATE + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB_PRIVATE = " " + PREFIX_NAME_PRIVATE + VALID_NAME_BOB;
+    public static final String PHONE_DESC_AMY_PRIVATE = " " + PREFIX_PHONE_PRIVATE + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_BOB_PRIVATE = " " + PREFIX_PHONE_PRIVATE + VALID_PHONE_BOB;
+    public static final String EMAIL_DESC_AMY_PRIVATE = " " + PREFIX_EMAIL_PRIVATE + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_BOB_PRIVATE = " " + PREFIX_EMAIL_PRIVATE + VALID_EMAIL_BOB;
+    public static final String ADDRESS_DESC_AMY_PRIVATE = " " + PREFIX_ADDRESS_PRIVATE + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_BOB_PRIVATE = " " + PREFIX_ADDRESS_PRIVATE + VALID_ADDRESS_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
