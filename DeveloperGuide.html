@@ -48,8 +48,9 @@
 <li><a href="#task-object">3.2. Task Object</a></li>
 <li><a href="#sort-enhancement">3.3. Sort enhancement</a></li>
 <li><a href="#privacy-of-fields">3.4. Privacy of fields</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#configuration">3.6. Configuration</a></li>
+<li><a href="#add-delete-tag-mechanism">3.5. Add/Delete Tag mechanism</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1023,7 +1024,103 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.5. Add/Delete Tag mechanism</a></h3>
+<div class="paragraph">
+<p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
+tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>The add/delete tag command are executed by <code>AddTagCommand</code> and <code>DeleteTagCommand</code> are parsed through <code>AddTagCommandParser</code> and <code>DeleteTagCommandParser</code>.
+It is different from <code>edit [INDEX] [TAG]</code> since it allows the user to perform the addition and deletion of tags for multiple people at once.
+If the user wants to add the <code>t/friends</code> tag for the first 3 persons in the address book, the <code>AddTagCommand</code> (<code>addtag 1 2 3 t/friends</code>) will be executed.
+The same operation will happen for <code>deletetag</code> command.</p>
+</div>
+<div class="paragraph">
+<p>The <code>AddTagCommand</code> goes through all the persons in the address book and add tag to the persons with specific index. The <code>DeleteTagCommand</code> works
+in a similar way.</p>
+</div>
+<div class="paragraph">
+<p>The example of how <code>AddTagCommand</code> is working:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * Adds a tag to the persons in the list from the address book.
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AddTagCommand</span> <span class="directive">extends</span> UndoableCommand {
+    <span class="comment">/**
+         * Check whether the index within the range then checks whether the specific persons have the tag.
+         * If not, add the tag to the person that doesn't have the given tag.
+         */</span>
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+
+            <span class="keyword">for</span> (Index targetIndex : targetIndexes) {
+                <span class="comment">// check whether the index within the range</span>
+            }
+            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; targetIndexes.size(); i++) {
+                <span class="comment">// check whether all persons have the given tag</span>
+            }
+            <span class="comment">// throw exception for duplicated tag</span>
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult();
+        }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Suppose the user enter the <code>addtag 1 2 t/friends</code> command. The following sequence diagram shows how the add tag command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddTagSdForLogic.png" alt="AddTagSdForLogic" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>deletetag</code> command works the same as <code>addtag</code> command with different name only.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input index does not exist, the <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will throw an exception.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If the tag to be deleted does not exist, the <code>DeleteTagCommand</code> will throw an exception.</p>
+</div>
+<div class="paragraph">
+<p>If the tag to be added exists in every target person in the address book, the <code>AddTagCommand</code> will throw an exception.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
+<strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
+<strong>Pros:</strong> Easier to implement. <code>ModelManager</code> includes all the methods and variables.<br>
+<strong>Cons:</strong> Must modify <code>Model</code> also to fit the <code>ModelManager</code>. Beginner may have difficulty to understand the different functions in Model component+
+<strong>Alternative 2:</strong> Implement the <code>addtag</code> and <code>deletetag</code> in <code>AddTagCommand</code> and <code>DeleteTagCommand</code> respectively.<br>
+<strong>Pros:</strong> Easier to understand.<br>
+<strong>Cons:</strong> Repetitive code. Additional overload constructor needs to be implement. The <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will have to update the person list.
+This violates the Single Responsibility Principle.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommend</code> and <code>DeleteTagCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> create new command <code>addtag</code> and <code>deletetag</code><br>
+<strong>Pros:</strong> Less modification of existing command and parser<br>
+<strong>Cons:</strong> Users have to learn how to use the additional commands<br>
+<strong>Alternative 2:</strong> Modify the existing <code>add</code> and <code>delete</code> command<br>
+<strong>Pros:</strong> Users could use the same commands to achieve different purpose<br>
+<strong>Cons:</strong> Additional override the constructor for the existing command. It might not be easy for the beginner.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1061,7 +1158,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.6. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2497,7 +2594,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-20 12:38:29 +00:00
+Last updated 2017-10-20 15:14:32 +00:00
 </div>
 </div>
 </body>

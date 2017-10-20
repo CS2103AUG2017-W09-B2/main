@@ -176,7 +176,7 @@ Shorthand commands: <code>a</code> <code>at</code></p>
 <td class="content">
 A person can have any number of tags (including 0)<br>
 A person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code> or <code>Address</code> can be set to be private by placing a <code>p</code> in front of the prefix.<br>
-A task can have the following 5 priorities: <code>1 2 3 4 5</code>, where 5 represents the highest priority<br>
+A task priority must be a positive integer from 1 to 5 inclusive, with 5 being the highest priority<br>
 Newly added tasks are marked as incomplete by default.
 </td>
 </tr>
@@ -214,16 +214,16 @@ Newly added tasks are marked as incomplete by default.
 <div class="sect2">
 <h3 id="add-a-tag-to-persons-code-addtag-code"><a class="link" href="#add-a-tag-to-persons-code-addtag-code">2.3. Add a tag to persons : <code>addtag</code></a></h3>
 <div class="paragraph">
-<p>Adds a tag to people in the address book.<br>
-Format: <code>addtag INDEX&#8230;&#8203; t/TAG `<br>
-Shorthand commands: `atag</code></p>
+<p>Adds a tag to persons from the address book.<br>
+Format: <code>addtag INDEX&#8230;&#8203; t/[TAG]</code><br>
+Shorthand commands: <code>atag</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Adds the tag to the person at the specified <code>INDEX</code></p>
+<p>Adds the tag of the person at the specific <code>INDEX</code></p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -232,7 +232,7 @@ Shorthand commands: `atag</code></p>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>If no indexes are specified, addtag will add the tag to all existing contacts in the address book.</p>
+<p>If no indexes are provided, addtag will add the tag to all contacts in the address book.</p>
 </li>
 </ul>
 </div>
@@ -245,13 +245,13 @@ Shorthand commands: `atag</code></p>
 <ul>
 <li>
 <p><code>list</code><br>
-<code>addtag t/friends 1</code><br>
-Adds the friends tag of the 1st person in the address book.</p>
+<code>addtag 1 2 t/friends</code><br>
+Adds the friends tag of the 1st and 2nd person in the address book.</p>
 </li>
 <li>
 <p><code>list</code><br>
-<code>addtag t/friends</code><br>
-Adds the friends tag to everyone in the address book.</p>
+<code>addtag t/acquaintance</code><br>
+Adds the acquaintance tag to all contacts in the address book.</p>
 </li>
 </ul>
 </div>
@@ -317,8 +317,8 @@ Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all 
 Removes the phone number of the 1st person.</p>
 </li>
 <li>
-<p><code>edit task 2 p/1</code><br>
-Edits the priority of the 2nd task to be <code>1</code>.</p>
+<p><code>edit task 2 p/5</code><br>
+Edits the priority of the 2nd task to be <code>5</code>.</p>
 </li>
 </ul>
 </div>
@@ -481,7 +481,7 @@ Deletes the 2nd task in the address book.</p>
 <li>
 <p><code>find task update</code><br>
 <code>delete task 1</code><br>
-Deletes the 1st task in the results of the <code>findtask</code> command.</p>
+Deletes the 1st task in the results of the <code>find task</code> command.</p>
 </li>
 </ul>
 </div>
@@ -490,7 +490,7 @@ Deletes the 1st task in the results of the <code>findtask</code> command.</p>
 <h3 id="delete-a-tag-of-persons-code-deletetag-code"><a class="link" href="#delete-a-tag-of-persons-code-deletetag-code">2.9. delete a tag of persons : <code>deletetag</code></a></h3>
 <div class="paragraph">
 <p>Delete the tag of persons from the address book.<br>
-Format: <code>deletetag INDEX&#8230;&#8203; t/TAG</code><br>
+Format: <code>deletetag INDEX&#8230;&#8203; t/[TAG]</code><br>
 Shorthand commands: <code>dtag</code></p>
 </div>
 <div class="sidebarblock">
@@ -507,7 +507,7 @@ Shorthand commands: <code>dtag</code></p>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>If no indexes are specified, deletetag will delete this tag from all contacts in the address book.</p>
+<p>If no indexes are provided, deletetag will delete the tag from all contacts in the address book.</p>
 </li>
 </ul>
 </div>
@@ -520,13 +520,13 @@ Shorthand commands: <code>dtag</code></p>
 <ul>
 <li>
 <p><code>list</code><br>
-<code>deletetag t/friends 1</code><br>
-Delete the friends tag of the 1st person in the address book.</p>
+<code>deletetag 1 2 t/friends</code><br>
+Delete the friends tag of the 1st and 2nd person in the address book.</p>
 </li>
 <li>
 <p><code>list</code><br>
 <code>deletetag t/friends</code><br>
-Delete the friends tag from everyone in the address book.</p>
+Delete the friends tag from all contacts in the address book.</p>
 </li>
 </ul>
 </div>
@@ -667,7 +667,7 @@ Sets the 2nd task in the address book as completed.</p>
 <li>
 <p><code>find task update</code><br>
 <code>setcomplete 1</code><br>
-Sets the 1st task in the results of the <code>findtask</code> command as completed.</p>
+Sets the 1st task in the results of the <code>find task</code> command as completed.</p>
 </li>
 </ul>
 </div>
@@ -709,7 +709,7 @@ Sets the 2nd task in the address book as incomplete.</p>
 <li>
 <p><code>find task update</code><br>
 <code>setincomplete 1</code><br>
-Sets the 1st task in the results of the <code>findtask</code> command as incomplete.</p>
+Sets the 1st task in the results of the <code>find task</code> command as incomplete.</p>
 </li>
 </ul>
 </div>
@@ -1016,10 +1016,8 @@ Sets a $60 untagged budget and spends $0.50, leaving a budget of $59.50.</p>
 <div class="sect2">
 <h3 id="clearing-all-entries-code-clear-code-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-code-c-code">2.21. Clearing all entries : <code>clear</code> <code>c</code></a></h3>
 <div class="paragraph">
-<p>Clears all person/task entries from the address book.<br>
-Format (person): <code>clear</code><br>
-Format (task):  <code>clear task</code><br>
-Format (all): <code>clear all</code><br>
+<p>Clears all entries from the address book.<br>
+Format: <code>clear</code><br>
 Shorthand commands: <code>c</code></p>
 </div>
 </div>
@@ -1109,17 +1107,14 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 e.g. <code>add task n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high</code></p>
 </li>
 <li>
-<p><strong>Add tag</strong> : <code>addtag [TAG] INDEX</code><br>
-e.g. <code>addtag friends 2</code></p>
+<p><strong>Add tag</strong> : <code>addtag INDEX t/[TAG]</code><br>
+e.g. <code>addtag 1 2 t/friends</code></p>
 </li>
 <li>
 <p><strong>Clear person</strong> : <code>clear</code></p>
 </li>
 <li>
-<p><strong>Clear tasks</strong> : `clear `</p>
-</li>
-<li>
-<p><strong>Clear all</strong> : <code>clear all</code></p>
+<p><strong>Clear tasks</strong> : <code>cleartask</code></p>
 </li>
 <li>
 <p><strong>Delete person</strong> : <code>delete INDEX</code><br>
@@ -1130,8 +1125,8 @@ e.g. <code>delete 3</code></p>
 e.g. <code>delete task 4</code></p>
 </li>
 <li>
-<p><strong>Delete tag</strong> : <code>deletetag [TAG] INDEX</code><br>
-e.g. <code>deletetag friends 1</code></p>
+<p><strong>Delete tag</strong> : <code>deletetag INDEX t/[TAG]</code><br>
+e.g. <code>deletetag 1 2 t/friends</code></p>
 </li>
 <li>
 <p><strong>Edit</strong> : <code>edit or e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] c/[GOOGLE CALENDAR URL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
@@ -1139,7 +1134,7 @@ e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
 <p><strong>Edit task</strong> : <code>edit task INDEX [n/NAME] [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]</code><br>
-e.g. <code>edit task 2 p/4</code></p>
+e.g. <code>edit task 2 p/veryhigh</code></p>
 </li>
 <li>
 <p><strong>Find person</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
@@ -1219,7 +1214,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-20 12:38:29 +00:00
+Last updated 2017-10-20 15:14:32 +00:00
 </div>
 </div>
 </body>
