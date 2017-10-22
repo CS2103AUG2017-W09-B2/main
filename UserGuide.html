@@ -49,7 +49,7 @@
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">2.20. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#setting-a-budget-code-setbudget-code-to-be-added-in-v2-0">2.21. Setting a budget : <code>setbudget</code> (To be added in V2.0)</a></li>
 <li><a href="#spending-code-spend-code-to-be-added-in-v2-0">2.22. Spending : <code>spend</code> (To be added in V2.0)</a></li>
-<li><a href="#clearing-all-entries-code-clear-code-code-c-code">2.23. Clearing all entries : <code>clear</code> <code>c</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">2.23. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">2.24. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">2.25. Saving the data</a></li>
 <li><a href="#using-the-browser-to-be-added-in-v2-0">2.26. Using the browser (To be added in V2.0)</a></li>
@@ -248,16 +248,16 @@ Format: <code>add task n/NAME d/DESCRIPTION [t/DEADLINE] [p/PRIORITY]</code><br>
 <div class="sect2">
 <h3 id="add-a-tag-to-persons-code-addtag-code"><a class="link" href="#add-a-tag-to-persons-code-addtag-code">2.3. Add a tag to persons : <code>addtag</code></a></h3>
 <div class="paragraph">
-<p>Adds a tag to persons from the address book.<br>
-Format: <code>addtag INDEX&#8230;&#8203; t/[TAG]</code><br>
-Shorthand commands: <code>atag</code></p>
+<p>You can use the <code>addtag</code> command to add tag for multiple persons in the address book. For example, you may wish to add tag <code>friends</code> to the first two persons in the address book.<br>
+<code>addtag</code> can be replaced by <code>atag</code> for faster input.<br>
+Format: <code>addtag INDEX&#8230;&#8203; t/[TAG]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Adds the tag of the person at the specific <code>INDEX</code></p>
+<p>Adds the tag of the person at the specific <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -613,9 +613,9 @@ Deletes the 1st task in the results of the <code>find task</code> command.</p>
 <div class="sect2">
 <h3 id="delete-a-tag-of-persons-code-deletetag-code"><a class="link" href="#delete-a-tag-of-persons-code-deletetag-code">2.10. delete a tag of persons : <code>deletetag</code></a></h3>
 <div class="paragraph">
-<p>Delete the tag of persons from the address book.<br>
-Format: <code>deletetag INDEX&#8230;&#8203; t/[TAG]</code><br>
-Shorthand commands: <code>dtag</code></p>
+<p>You can use <code>deletetag</code> to delete the tag of multiple persons from the address book.<br>
+<code>deletetag</code> can be replaced by <code>dtag</code> for faster input.<br>
+Format: <code>deletetag INDEX&#8230;&#8203; t/[TAG]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -659,8 +659,8 @@ Delete the friends tag from all contacts in the address book.</p>
 <h3 id="sorting-your-contact-list-code-sort-code"><a class="link" href="#sorting-your-contact-list-code-sort-code">2.11. Sorting your contact list : <code>sort</code></a></h3>
 <div class="paragraph">
 <p>Sort your contacts by any field in ascending or descending order using the <code>sort</code> command<br>
-Format: <code>sort FIELD ORDER</code><br>
-Shorthand command: <code>so</code></p>
+<code>sort</code> can be replaced by <code>so</code> for faster input.<br>
+Format: <code>sort FIELD ORDER</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -701,9 +701,9 @@ This allows you to sort all persons in the address book in descending order by t
 <div class="sect2">
 <h3 id="backing-up-your-data-code-backup-code-or-code-bk-code"><a class="link" href="#backing-up-your-data-code-backup-code-or-code-bk-code">2.12. Backing up your data : <code>backup</code> or <code>bk</code></a></h3>
 <div class="paragraph">
-<p>You can backup your saved data on AddressBook++ by using the <code>backup</code> command.
-Format: <code>backup [RELATIVE LOCATION]</code><br>
-Shorthand command: <code>bk</code></p>
+<p>You can backup your saved data on AddressBook++ by using the <code>backup</code> command.<br>
+<code>backup</code> can be replaced by <code>bk</code> for faster input.<br>
+Format: <code>backup [RELATIVE LOCATION]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -983,8 +983,8 @@ Dismisses the 2nd person in the address book from the 1st task in the results of
 <h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">2.18. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code><br>
-Shorthand commands: <code>h</code></p>
+<code>history</code> can be replaced by <code>h</code> for faster input.<br>
+Format: <code>history</code><br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1083,9 +1083,9 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="sect2">
 <h3 id="setting-a-budget-code-setbudget-code-to-be-added-in-v2-0"><a class="link" href="#setting-a-budget-code-setbudget-code-to-be-added-in-v2-0">2.21. Setting a budget : <code>setbudget</code> (To be added in V2.0)</a></h3>
 <div class="paragraph">
-<p>You can set the amount of money you have in your budget by using the <code>setbudget</code> command.
-Format: <code>setbudget MONEY [t/TAG]</code>
-Shorthand commands: <code>sb</code></p>
+<p>You can set the amount of money you have in your budget by using the <code>setbudget</code> command.<br>
+<code>setbudget</code> can be replaced by <code>sb</code> for faster input.<br>
+Format: <code>setbudget MONEY [t/TAG]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1180,11 +1180,11 @@ Sets a $60 untagged budget and spends $0.50, leaving a budget of $59.50.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-code-c-code">2.23. Clearing all entries : <code>clear</code> <code>c</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.23. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br>
-Format: <code>clear</code><br>
-Shorthand commands: <code>c</code></p>
+<code>clear</code> can be replaced by <code>c</code> for faster input.<br>
+Format: <code>clear</code><br></p>
 </div>
 </div>
 <div class="sect2">
@@ -1384,7 +1384,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-22 13:54:56 +00:00
+Last updated 2017-10-22 15:15:18 +00:00
 </div>
 </div>
 </body>
