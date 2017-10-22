@@ -46,11 +46,12 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
 <li><a href="#task-object">3.2. Task Object</a></li>
-<li><a href="#sort-enhancement">3.3. Sort enhancement</a></li>
-<li><a href="#privacy-of-fields">3.4. Privacy of fields</a></li>
-<li><a href="#add-delete-tag-mechanism">3.5. Add/Delete Tag mechanism</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#configuration">3.7. Configuration</a></li>
+<li><a href="#sort-command">3.3. Sort Command</a></li>
+<li><a href="#backup-command">3.4. Backup Command</a></li>
+<li><a href="#privacy-of-fields">3.5. Privacy of fields</a></li>
+<li><a href="#add-delete-tag-mechanism">3.6. Add/Delete Tag mechanism</a></li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#configuration">3.8. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -869,9 +870,9 @@ The sequence diagram below shows how this is done:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-enhancement"><a class="link" href="#sort-enhancement">3.3. Sort enhancement</a></h3>
+<h3 id="sort-command"><a class="link" href="#sort-command">3.3. Sort Command</a></h3>
 <div class="paragraph">
-<p>The sort enhancment is facilitated by the <code>sortBy</code> method in UniquePersonList. It supports
+<p>The sort command is facilitated by the <code>sortBy</code> method in UniquePersonList. It supports
 sort by ascending or by descending order in any field.</p>
 </div>
 <div class="paragraph">
@@ -925,7 +926,62 @@ demonstrates how the sort command works.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.4. Privacy of fields</a></h3>
+<h3 id="backup-command"><a class="link" href="#backup-command">3.4. Backup Command</a></h3>
+<div class="paragraph">
+<p>The backup command makes use of both the model manager and the storage manager. The <code>LogicManager</code> class was
+improved to support the accessing of storage value.</p>
+</div>
+<div class="paragraph">
+<p>The backup command arguments are parsed through the <code>BackupCommandParser</code>, which passes control over to the
+<code>BackupCommand</code> class. If there is a file path specified by the user, then the <code>execute()</code> command within the
+<code>BackupCommand</code> class will save the backup file to that path. If not file path is specified, the backup file will be
+saved to a default location.</p>
+</div>
+<div class="paragraph">
+<p>Suppose a user enters a new command <code>backup</code>. The backup file will be saved to a default location:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BackupSequenceDefaultDiagram.png" alt="BackupSequenceDefaultDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Suppose a user enters a new command <code>backup testBackup.xml</code>. The following sequence diagram
+demonstrates how this works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BackupSequenceCustomDiagram.png" alt="BackupSequenceCustomDiagram" width=""800">
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the execution of the sort methods result in the actual person list being sorted.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br>
+<strong>Alternative 1 (current choice):</strong> Implement backup command via Command Line Interface<br>
+<strong>Pros:</strong> Backing up data is easier and faster for users who are familiar with the commands. Less button clicks.<br>
+<strong>Cons:</strong> UI not as intuitive. Users who are not familiar with the application may not know about this feature<br>
+<strong>Alternative 2:</strong> Implement backup command via GUI<br>
+<strong>Pros:</strong> More intuitive for all users since the options are all graphical<br>
+<strong>Cons:</strong> Hinders productivity. Excessive number of clicks to accomplish an essential task.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Custom and/or Default file paths for backup file<br>
+<strong>Alternative 1 (current choice):</strong> Implemented both types of commands<br>
+<strong>Pros:</strong> User can choose either command option. Gives the user more choices<br>
+<strong>Cons:</strong> May seem confusing to the user at first<br>
+<strong>Alternative 2:</strong> Implement only the default option (save backup file to data directory of application)<br>
+<strong>Pros:</strong> Faster for the user to key in one word rather than a command with many words<br>
+<strong>Cons:</strong> Reduces choice for experienced users who may want to save to another location or use a different save name</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.5. Privacy of fields</a></h3>
 <div class="paragraph">
 <p>The <code>Name</code>, <code>Phone</code>, <code>Email</code> and <code>Address</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
 </div>
@@ -1046,7 +1102,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a boolean to each field class<br>
@@ -1069,7 +1125,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.5. Add/Delete Tag mechanism</a></h3>
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.6. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1141,7 +1197,7 @@ If the input index does not exist, the <code>AddTagCommand</code> and <code>Dele
 <p>If the tag to be added exists in every target person in the address book, the <code>AddTagCommand</code> will throw an exception.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -1165,7 +1221,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1203,7 +1259,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2639,7 +2695,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-22 08:42:02 +00:00
+Last updated 2017-10-22 10:08:32 +00:00
 </div>
 </div>
 </body>
