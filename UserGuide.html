@@ -33,7 +33,7 @@
 <li><a href="#listing-all-persons-code-list-code">2.4. Listing all persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">2.5. Editing a person : <code>edit</code></a></li>
 <li><a href="#renaming-existing-tags-code-edittag-code-since-v1-2">2.6. Renaming existing tags : <code>edittag</code> (Since v1.2)</a></li>
-<li><a href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-to-be-added-in-v2-0">2.7. Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code> <code>cp</code> (To be added in V2.0)</a></li>
+<li><a href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-since-v1-3">2.7. Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code> <code>cp</code> (Since V1.3)</a></li>
 <li><a href="#locating-persons-by-name-code-find-code">2.8. Locating persons by name : <code>find</code></a></li>
 <li><a href="#deleting-a-person-code-delete-code">2.9. Deleting a person : <code>delete</code></a></li>
 <li><a href="#delete-a-tag-of-persons-code-deletetag-code">2.10. delete a tag of persons : <code>deletetag</code></a></li>
@@ -161,7 +161,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">2.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code><br>
-Alternatively, the keyboard shortcut <code>F1</code> may be used.</p>
+Alternatively,  you may opt to use the keyboard shortcut <code>F1</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -429,9 +429,9 @@ Changes the tag called <code>friends</code> to one called <code>enemies</code> i
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-to-be-added-in-v2-0"><a class="link" href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-to-be-added-in-v2-0">2.7. Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code> <code>cp</code> (To be added in V2.0)</a></h3>
+<h3 id="changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-since-v1-3"><a class="link" href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-since-v1-3">2.7. Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code> <code>cp</code> (Since V1.3)</a></h3>
 <div class="paragraph">
-<p>Changes the privacy settings of the details for an existing person in the address book.<br>
+<p>You can use the <code>changeprivacy</code> command to set the privacy settings for each field of an existing <code>Person</code> in the address book, which allows you to choose specifically, what information will be displayed.<br>
 Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]</code>
 Shorthand commands: <code>cp</code></p>
 </div>
@@ -440,22 +440,22 @@ Shorthand commands: <code>cp</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Changes the privacy settings of the details for the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>This command allows you to change the privacy settings for the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>At least one of the optional fields must be provided.</p>
+<p>You must provide at least one of the optional fields.</p>
 </li>
 <li>
-<p>The 6 optional values after <code>/</code> can only take in <code>show</code> or <code>hide</code> as inputs.</p>
+<p>You can only provide <code>true</code> or <code>false</code> as inputs after each prefix.</p>
 </li>
 <li>
-<p>Fields with an input of <code>show</code> will set the privacy of that field for that person to be public. The data in that field will be visible in the UI.</p>
+<p>If you choose to input <code>false</code>, you will set the privacy of that field for that person to be public. The data in that field will be visible in the UI.</p>
 </li>
 <li>
-<p>Fields with an input of <code>hide</code> will set the privacy of that field for that person to be private. The data in that field will remain stored but not be visible in the UI.</p>
+<p>If you choose to input <code>true</code>, you will set the privacy of that field for that person to be private. The data in that field cannot be modified and will not be visible in the UI.</p>
 </li>
 <li>
-<p>Details that do not originally contain any data will still remain empty after changing their privacy</p>
+<p>Fields that do not originally contain any data will still remain empty after changing their privacy</p>
 </li>
 </ul>
 </div>
@@ -467,12 +467,12 @@ Shorthand commands: <code>cp</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>changeprivacy 1 p/show e/hide</code><br>
+<p><code>changeprivacy 1 p/false e/true</code><br>
 Sets the phone number of the 1st person to be public and their email address to be private. The 1st person&#8217;s phone number will be displayed, if available, while their email address will be hidden in the UI.</p>
 </li>
 <li>
-<p><code>cp 2 a/show b/hide t/show</code><br>
-Sets the address and tags of the 2nd person to be public and their birthday to be private. The 2nd person&#8217;s address and tags will be displayed, if available, while their birthday will be hidden in the UI.</p>
+<p><code>cp 2 a/false n/true t/false</code><br>
+Sets the address and tags of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and tags will be displayed, if available, while their name will be hidden in the UI.</p>
 </li>
 </ul>
 </div>
@@ -1083,7 +1083,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="sect2">
 <h3 id="setting-a-budget-code-setbudget-code-to-be-added-in-v2-0"><a class="link" href="#setting-a-budget-code-setbudget-code-to-be-added-in-v2-0">2.21. Setting a budget : <code>setbudget</code> (To be added in V2.0)</a></h3>
 <div class="paragraph">
-<p>Sets the amount of money available to be a certain amount.
+<p>You can set the amount of money you have in your budget by using the <code>setbudget</code> command.
 Format: <code>setbudget MONEY [t/TAG]</code>
 Shorthand commands: <code>sb</code></p>
 </div>
@@ -1092,16 +1092,13 @@ Shorthand commands: <code>sb</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Set a certain amount of money to keep track of as a budget.</p>
-</li>
-<li>
-<p>The value can be tagged so that multiple things can be kept track of at the same time.</p>
+<p>You can tag each budget to keep track of multiple budgets at the same time.</p>
 </li>
 <li>
 <p>The input for <code>MONEY</code> must be greater than or equal to 0.</p>
 </li>
 <li>
-<p>Up to 2 decimal points can be input for <code>MONEY</code> to keep track of cents.</p>
+<p>You can input up to 2 decimal points for <code>MONEY</code> if you would like to keep track of cents.</p>
 </li>
 </ul>
 </div>
@@ -1130,7 +1127,7 @@ Sets a $2000 untagged budget.</p>
 <div class="sect2">
 <h3 id="spending-code-spend-code-to-be-added-in-v2-0"><a class="link" href="#spending-code-spend-code-to-be-added-in-v2-0">2.22. Spending : <code>spend</code> (To be added in V2.0)</a></h3>
 <div class="paragraph">
-<p>Spends the money from an existing budget.
+<p>You can keep track of the money from an existing budget as you spend it by using the <code>spend</code> command.
 Format: <code>spend MONEY [t/TAG]</code>
 Shorthand commands: <code>sp</code></p>
 </div>
@@ -1139,28 +1136,26 @@ Shorthand commands: <code>sp</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Spends a certain amount of money from an existing budget.</p>
+<p>This command stimulates the spending a certain amount of money from an existing budget.</p>
 </li>
 <li>
 <p>The tag is used to determine which budget to spend from.</p>
 </li>
 <li>
-<p>The input for <code>MONEY</code> must be greater than or equal to 0.</p>
+<p>Your input for <code>MONEY</code> must be greater than or equal to 0.</p>
 </li>
 <li>
-<p>Up to 2 decimal points can be input for <code>MONEY</code> to keep track of cents.</p>
+<p>You can input up to 2 decimal points for <code>MONEY</code> if you would like to keep track of cents.</p>
 </li>
 <li>
-<p>Upon successful spending, the value stored by a budget will be reduced by the amount spent.</p>
+<p>If the expenditure is lower than the budget, the value stored by a budget will be reduced by the amount spent.</p>
 </li>
 <li>
-<p>If a budget for the input tag does not exist,
-a message will appear telling the user that a budget corresponding to the input tag does not exist</p>
+<p>If the budget you chose to deduct from does not exist, a message will appear to tell you that that budget does not exist.</p>
 </li>
 <li>
-<p>If spending exceeds the budget, a message will appear in the UI
-warning the user that they have exceeded their budget.
-The amount of money in the budget will remain the same.</p>
+<p>If the expenditure exceeds the budget, a message will appear in the UI warning you that you have exceeded their budget.
+The amount of money left in the budget will remain the same.</p>
 </li>
 </ul>
 </div>
@@ -1187,7 +1182,7 @@ Sets a $60 untagged budget and spends $0.50, leaving a budget of $59.50.</p>
 <div class="sect2">
 <h3 id="clearing-all-entries-code-clear-code-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-code-c-code">2.23. Clearing all entries : <code>clear</code> <code>c</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
+<p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br>
 Format: <code>clear</code><br>
 Shorthand commands: <code>c</code></p>
 </div>
@@ -1195,43 +1190,43 @@ Shorthand commands: <code>c</code></p>
 <div class="sect2">
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.24. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
-<p>Exits the program.<br>
+<p>Once you have finished using Address++, you may use this command to exit the program.<br>
 Format: <code>exit</code></p>
 </div>
 <div class="paragraph">
-<p>Alternatively, the keyboard shortcut <code>ALT+F4</code> may be used.</p>
+<p>Alternatively, you may opt to use the keyboard shortcut <code>ALT+F4</code>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.25. Saving the data</a></h3>
 <div class="paragraph">
-<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.</p>
+<p>Address book data is saved in the hard disk automatically after any command that changes the data.<br>
+There is no need for you to save manually.</p>
 </div>
 <div class="paragraph">
-<p>To change the location of the save file, click on <code>File &#8594; Save As</code> or use the keyboard shortcut <code>CTRL+S</code> and select the new location and file name for the save file in the pop-up window.</p>
+<p>If you want to change the location of the save file, click on <code>File &#8594; Save As</code> or use the keyboard shortcut <code>CTRL+S</code> and select the new location and file name for the save file in the pop-up window.</p>
 </div>
 <div class="paragraph">
-<p>To open a different save file, click on <code>File &#8594; Open</code> or use the keyboard shortcut <code>CTRL+O</code> and select the new save file to use from the pop-up window.</p>
+<p>If you want to open a different save file, click on <code>File &#8594; Open</code> or use the keyboard shortcut <code>CTRL+O</code> and select the new save file to use from the pop-up window.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="using-the-browser-to-be-added-in-v2-0"><a class="link" href="#using-the-browser-to-be-added-in-v2-0">2.26. Using the browser (To be added in V2.0)</a></h3>
 <div class="paragraph">
-<p>Clicking on a box containing a contact will open the browser on the right side of the window.</p>
+<p>If you click on a box containing a contact, an internet browser on the right side of the window.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Performing a left click will cause the browser to perform a search on Google for the name of the contact.</p>
+<p>Performing a left click will allow you to perform a search on Google for the name of the contact.</p>
 </li>
 <li>
-<p>Performing a right click will open Google Maps, which will search for the address of the contact.</p>
+<p>Performing a right click will open Google Maps, which will let you search for the address of the contact.</p>
 </li>
 <li>
-<p>If a person&#8217;s name or address is set to private, the browser will not perform a search when that person&#8217;s box is clicked.</p>
+<p>If a person&#8217;s name or address is set to private, the browser will not perform a search if you click on their box.</p>
 </li>
 </ul>
 </div>
@@ -1389,7 +1384,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-22 10:59:54 +00:00
+Last updated 2017-10-22 13:54:56 +00:00
 </div>
 </div>
 </body>
