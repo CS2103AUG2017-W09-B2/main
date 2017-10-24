@@ -452,8 +452,8 @@ Changes the tag called <code>friends</code> to one called <code>enemies</code> i
 <div class="sect2">
 <h3 id="changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-since-v1-3"><a class="link" href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-code-cp-code-since-v1-3">4.7. Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code> <code>cp</code> (Since V1.3)</a></h3>
 <div class="paragraph">
-<p>You can use the <code>changeprivacy</code> command to set the privacy settings for each field of an existing <code>Person</code> in the address book, which allows you to choose specifically, what information will be displayed.<br>
-Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]</code>
+<p>You can use the <code>changeprivacy</code> command to set the privacy settings for each field of an existing <code>Person</code> in the address book, which allows you to choose specifically what information will be displayed.<br>
+Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]</code>
 Shorthand commands: <code>cp</code></p>
 </div>
 <div class="sidebarblock">
@@ -476,7 +476,10 @@ Shorthand commands: <code>cp</code></p>
 <p>If you choose to input <code>true</code>, you will set the privacy of that field for that person to be private. The data in that field cannot be modified and will not be visible in the UI.</p>
 </li>
 <li>
-<p>Fields that do not originally contain any data will still remain empty after changing their privacy</p>
+<p>Fields that do not originally contain any data will still remain empty after changing their privacy.</p>
+</li>
+<li>
+<p>If you do not add a prefix for the field in the command, that field will default to be public.</p>
 </li>
 </ul>
 </div>
@@ -492,8 +495,8 @@ Shorthand commands: <code>cp</code></p>
 Sets the phone number of the 1st person to be public and their email address to be private. The 1st person&#8217;s phone number will be displayed, if available, while their email address will be hidden in the UI.</p>
 </li>
 <li>
-<p><code>cp 2 a/false n/true t/false</code><br>
-Sets the address and tags of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and tags will be displayed, if available, while their name will be hidden in the UI.</p>
+<p><code>cp 2 a/false n/true e/false</code><br>
+Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.</p>
 </li>
 </ul>
 </div>
@@ -1290,12 +1293,20 @@ There is no need for you to save manually.</p>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665, b/29-02-1996 f/SOC c/www.enteryourcalendarurlhere.com t/friend t/colleague</code></p>
 </li>
 <li>
+<p><strong>Add with private fields</strong> : <code>add or a pn/NAME pp/PHONE_NUMBER pe/EMAIL pa/ADDRESS b/BIRTHDAY f/FACULTY c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665</code></p>
+</li>
+<li>
 <p><strong>Add task</strong> : <code>add task n/NAME d/DESCRIPTION [t/DEADLINE] [p/PRIORITY]</code><br>
 e.g. <code>add task n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high</code></p>
 </li>
 <li>
 <p><strong>Add tag</strong> : <code>addtag INDEX t/[TAG]</code><br>
 e.g. <code>addtag 1 2 t/friends</code></p>
+</li>
+<li>
+<p><strong>Change a person&#8217;s details' privacy</strong> : <code>changeprivacy or cp INDEX [n/TRUE or FALSE] [p/TRUE or FALSE] [e/TRUE or FALSE] [a/TRUE or FALSE]</code><br>
+e.g. <code>changeprivacy 2 n/true p/false e/true a/false</code></p>
 </li>
 <li>
 <p><strong>Clear person</strong> : <code>clear</code></p>
@@ -1405,7 +1416,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 15:23:35 +00:00
+Last updated 2017-10-24 16:04:49 +00:00
 </div>
 </div>
 </body>

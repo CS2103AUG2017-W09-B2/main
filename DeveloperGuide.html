@@ -49,9 +49,10 @@
 <li><a href="#sort-command">3.3. Sort Command</a></li>
 <li><a href="#backup-command">3.4. Backup Command</a></li>
 <li><a href="#privacy-of-fields">3.5. Privacy of fields</a></li>
-<li><a href="#add-delete-tag-mechanism">3.6. Add/Delete Tag mechanism</a></li>
-<li><a href="#logging">3.7. Logging</a></li>
-<li><a href="#configuration">3.8. Configuration</a></li>
+<li><a href="#changing-of-a-person-s-privacy">3.6. Changing of a Person&#8217;s Privacy</a></li>
+<li><a href="#add-delete-tag-mechanism">3.7. Add/Delete Tag mechanism</a></li>
+<li><a href="#logging">3.8. Logging</a></li>
+<li><a href="#configuration">3.9. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1049,9 +1050,6 @@ This can be seen from the <code>toString</code> method in <code>Name</code>:</p>
 <p>Instead, a <code>NewResultAvailableEvent</code> will be raised by <code>BrowserPanel</code> to inform the user that they are not allowed to search for a person possessing a private <code>Name</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
-</div>
-<div class="paragraph">
 <p>To keep track of whether each field is private or not, <code>XmlAdaptedPerson</code> will have to store the <code>isPrivate</code> value for each field of <code>Person</code>.
 This is done by adding the following</p>
 </div>
@@ -1125,7 +1123,62 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.6. Add/Delete Tag mechanism</a></h3>
+<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.6. Changing of a Person&#8217;s Privacy</a></h3>
+<div class="paragraph">
+<p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram for <code>ChangePrivacyCommand</code> is illustrated below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChangePrivacySequenceDiagram.png" alt="ChangePrivacySequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the input, the <code>ChangePrivacyCommandParser</code> will set the privacy values, represented by Booleans, in the <code>PersonPrivacySettings</code> object to be <code>true</code> or <code>false</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ChangePrivacyCommandParser</code> will then create a new <code>ChangePrivacyCommand</code> using the input <code>Index</code> and the <code>PersonPrivacySettings</code></p>
+</div>
+<div class="paragraph">
+<p>When <code>ChangePrivacyCommand</code> starts executing, it will create a new <code>Person</code> based on the data of the <code>Person</code> at the specified <code>Index</code>.
+It will then adjust the privacy values based on the input <code>PersonPrivacySettings</code>.</p>
+</div>
+<div class="paragraph">
+<p>Once it is done, it will update the original <code>Person</code> with the newly created <code>Person</code> in <code>Model</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If there are missing fields in the input string, the getter methods in <code>PersonPrivacySettings</code> will return <code>false</code>, but the actual value stored will remain as <code>null</code>.
+This allows <code>isAnyFieldNonNull</code> to check if the user has input any field at all.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to implement changing of a person&#8217;s privacy.<br>
+<strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
+<strong>Pros:</strong> It is clear to users and developers that <code>changeprivacy</code> is to modify a person&#8217;s privacy while <code>edit</code> changes the actual data if the relevant field is not private. <br>
+<strong>Cons:</strong> Additional command, parser and tests must be created. <br>
+<strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
+<strong>Pros:</strong> Can make use of existing code to aid the implementation.<br>
+<strong>Cons:</strong> Increases the complexity of EditCommand for both users and developers. More ambiguous as to how editing a private field will affect the data.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.7. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1197,7 +1250,7 @@ If the input index does not exist, the <code>AddTagCommand</code> and <code>Dele
 <p>If the tag to be added exists in every target person in the address book, the <code>AddTagCommand</code> will throw an exception.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -1221,7 +1274,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1259,7 +1312,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.8. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2695,7 +2748,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 15:23:35 +00:00
+Last updated 2017-10-24 16:04:49 +00:00
 </div>
 </div>
 </body>
