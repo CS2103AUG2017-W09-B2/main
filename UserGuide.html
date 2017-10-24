@@ -133,7 +133,8 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all contacts</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/This remark is a stub</code> :
+adds a contact named <code>John Doe</code> to the Address Book.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
@@ -189,7 +190,7 @@ Alternatively,  you may opt to use the keyboard shortcut <code>F1</code>.</p>
 <div class="paragraph">
 <p>You can use the <code>add</code> command to add new people to your address book, be it a newly met project member, or your friend who is taking the same module as you.<br>
 <code>add</code> can be replaced by <code>a</code> for faster input.<br>
-Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] f/[FACULTY] c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br></p>
+Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] r/[REMARK] f/[FACULTY] c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -202,7 +203,7 @@ Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] f/[
 <p>The <code>EMAIL</code> should be in the format address@email.domain<br></p>
 </li>
 <li>
-<p>You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code> or <code>Address</code> to be private by placing a <code>p</code> in front of the prefix.<br></p>
+<p>You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> or <code>Remark</code> to be private by placing a <code>p</code> in front of the prefix.<br></p>
 </li>
 </ul>
 </div>
@@ -214,13 +215,13 @@ Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] f/[
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995</code></p>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com b/29-02-1996 a/Newgate Prison p/1234567 t/criminal</code></p>
+<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com b/29-02-1996 a/Newgate Prison p/1234567 t/criminal r/Stares at the wall</code></p>
 </li>
 <li>
-<p><code>add n/Ima Hidearu b/ a/ e/ p/ t/secretive</code></p>
+<p><code>add n/Ima Hidearu b/ a/ e/ p/ r/ t/secretive</code></p>
 </li>
 <li>
 <p><code>add n/Luke Groundswimmer p/ a/ e/ c/</code></p>
@@ -1404,7 +1405,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 11:43:37 +00:00
+Last updated 2017-10-24 15:23:35 +00:00
 </div>
 </div>
 </body>
