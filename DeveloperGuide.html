@@ -50,9 +50,10 @@
 <li><a href="#backup-command">3.4. Backup Command</a></li>
 <li><a href="#privacy-of-fields">3.5. Privacy of fields</a></li>
 <li><a href="#changing-of-a-person-s-privacy">3.6. Changing of a Person&#8217;s Privacy</a></li>
-<li><a href="#add-delete-tag-mechanism">3.7. Add/Delete Tag mechanism</a></li>
-<li><a href="#logging">3.8. Logging</a></li>
-<li><a href="#configuration">3.9. Configuration</a></li>
+<li><a href="#locating-a-person-on-google-maps">3.7. Locating a Person on Google Maps</a></li>
+<li><a href="#add-delete-tag-mechanism">3.8. Add/Delete Tag mechanism</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1099,11 +1100,40 @@ Hence, a private field will remain private and the value stored by that field wi
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>This is done through the <code>createEditedPerson</code> method in <code>EditCommand</code>.
+<code>createEditedPerson</code> sets the boolean <code>areFieldsAllPrivate</code> to initially be true.</p>
+</div>
+<div class="paragraph">
+<p>As the new instance of each field is being generated, if any field contains a value in the input <code>EditPersonDescriptor</code> and that field was not originally private, <code>areFieldsAllPrivate</code> is set to false.</p>
+</div>
+<div class="paragraph">
+<p>This can be seen from the following code, which is used for the generation of a new <code>Name</code> object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="directive">static</span> <span class="predefined-type">Name</span> createUpdatedName(ReadOnlyPerson personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        <span class="predefined-type">Name</span> updatedName;
+        <span class="keyword">if</span> (!personToEdit.getName().isPrivate()) {
+            updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+            <span class="keyword">if</span> (editPersonDescriptor.getName().isPresent()) {
+                areFieldsAllPrivate = <span class="predefined-constant">false</span>;
+            }
+        } <span class="keyword">else</span> {
+            updatedName = personToEdit.getName();
+        }
+        <span class="keyword">return</span> updatedName;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Upon generation of all the fields, if <code>areFieldsAllPrivate</code> is still true, <code>createEditedPerson</code> will throw an <code>IllegalArgumentException</code>, which will cause <code>EditCommand</code> to throw a <code>CommandException</code> and prevent the command from continuing.</p>
+</div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a boolean to each field class<br>
+<strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
 <strong>Pros:</strong> Similar implementation to how the fields are currently being implemented. Privacy settings can be obtained directly from the field class itself.<br>
 <strong>Cons:</strong> Repetitive code. Additional overloaded constructor and methods are needed to set and get the value of <code>isPrivate</code>. <br>
 <strong>Alternative 2:</strong> Store a person&#8217;s privacy settings outside of the field classes in an Array or a HashMap in <code>Person</code>.<br>
@@ -1178,7 +1208,89 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.7. Add/Delete Tag mechanism</a></h3>
+<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.7. Locating a Person on Google Maps</a></h3>
+<div class="paragraph">
+<p>Upon calling the <code>locate</code> command, <code>LocateCommandParser</code> will parse the input string into an <code>Index</code>, and create a new <code>LocateCommand</code>. Should the arguments be a non-integer, a <code>ParseException</code> will be thrown.<br>
+This can be seen from the code snippet below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">public</span> LocateCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+        <span class="keyword">try</span> {
+            Index index = ParserUtil.parseIndex(args);
+            <span class="keyword">return</span> <span class="keyword">new</span> LocateCommand(index);
+        } <span class="keyword">catch</span> (IllegalValueException ive) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(
+                    <span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, LocateCommand.MESSAGE_USAGE));
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Upon execution of <code>LocateCommand</code>, it will search the <code>Model</code> for the <code>Person</code> at the input <code>Index</code>. If the <code>Index</code> is out of range of the list of <code>Person`s, a `CommandException</code> will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>Otherwise, <code>LocateCommand</code> will post a new <code>BrowserPanelLocateEvent</code> and pass in the <code>Person</code> found to that event. It will then return a <code>CommandResult</code> indicating the success of its execution.</p>
+</div>
+<div class="paragraph">
+<p>This code for this can be found below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+
+        <span class="predefined-type">List</span>&lt;ReadOnlyPerson&gt; lastShownList = model.getFilteredPersonList();
+
+        <span class="keyword">if</span> (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        EventsCenter.getInstance().post(<span class="keyword">new</span> BrowserPanelLocateEvent(
+                model.getFilteredPersonList().get(targetIndex.getZeroBased())));
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_LOCATE_PERSON_SUCCESS, targetIndex.getOneBased()));
+
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>BrowserPanel will then use <code>handleBrowserPanelLocationEvent</code> to process this newly created event. It will call <code>loadMapsPage</code>, which will check if the <code>Person&#8217;s `Address</code> is private or not. If their <code>Address</code> is public, it will launch the browser, showing the <code>Address</code> of that <code>Person</code> on Google Maps. Otherwise, an error message will be printed, as can be seen below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">private</span> <span class="type">void</span> loadMapsPage(ReadOnlyPerson person) {
+        <span class="keyword">if</span> (person.getAddress().isPrivate()) {
+            raise(<span class="keyword">new</span> NewResultAvailableEvent(PRIVATE_ADDRESS_CANNOT_SEARCH));
+        } <span class="keyword">else</span> {
+            loadPage(GOOGLE_MAPS_URL_PREFIX + person.getAddress().toString().replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
+                + GOOGLE_MAPS_URL_SUFFIX);
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The overall sequence of events is illustrated by the following sequence diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LocateSequenceDiagram.png" alt="LocateSequenceDiagram" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
+<strong>Alternative 1 (current choice):</strong> Create a seperate command <code>locate</code>.<br>
+<strong>Pros:</strong> No modification needed for existing commands, which makes it clear the purpose of each command.<br>
+<strong>Cons:</strong> Additional commands will need to be learnt for both developers and users.<br>
+<strong>Alternative 2:</strong> Add the functionality into <code>SelectCommand</code>.<br>
+<strong>Pros:</strong> Expands the utility of <code>SelectCommand</code> beyond performing a Google search on their name.<br>
+<strong>Cons:</strong> Will require significant modification of existing code, and may make it more confusing for users.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.8. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1250,7 +1362,7 @@ If the input index does not exist, the <code>AddTagCommand</code> and <code>Dele
 <p>If the tag to be added exists in every target person in the address book, the <code>AddTagCommand</code> will throw an exception.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -1274,7 +1386,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1312,7 +1424,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.9. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2748,7 +2860,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-26 15:07:09 +00:00
+Last updated 2017-10-29 13:54:56 +00:00
 </div>
 </div>
 </body>
