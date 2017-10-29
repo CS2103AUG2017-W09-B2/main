@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>AddressBook Level 4 - User Guide</title>
+<title>Address++ - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - User Guide</h1>
+<h1>Address++ - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -107,7 +107,7 @@ This app will not work with earlier versions of Java 8.
 <p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/CS2103AUG2017-W09-B2/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+<p>Copy the file to the folder you want to use as the home folder for your Address++.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
@@ -133,7 +133,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/This remark is a stub</code> :
-adds a contact named <code>John Doe</code> to the Address Book.</p>
+adds a contact named <code>John Doe</code> to Address++.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
@@ -548,7 +548,7 @@ Format: `find task KEYWORD [MORE_KEYWORDS] [p/PRIORITY]<br></p>
 <p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
 </li>
 <li>
-<p>Only the name is searched for persons.</p>
+<p>You can only search for names in Address++</p>
 </li>
 <li>
 <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
@@ -730,7 +730,7 @@ This allows you to sort all persons in the address book in descending order by t
 <div class="sect2">
 <h3 id="backing-up-your-data-code-backup-code"><a class="link" href="#backing-up-your-data-code-backup-code">4.12. Backing up your data : <code>backup</code></a></h3>
 <div class="paragraph">
-<p>You can backup your saved data on AddressBook++ by using the <code>backup</code> command.<br>
+<p>You can backup your saved data on Address++ by using the <code>backup</code> command.<br>
 <code>backup</code> can be replaced by <code>bk</code> for faster input.<br>
 Format: <code>backup [RELATIVE LOCATION]</code><br></p>
 </div>
@@ -739,7 +739,7 @@ Format: <code>backup [RELATIVE LOCATION]</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Allows you to backup your saved data on AddressBook++ in another file.</p>
+<p>Allows you to backup your saved data on Address++ in another file.</p>
 </li>
 <li>
 <p>You can backup your data in the default location or you can specify your desired save location.</p>
@@ -1016,7 +1016,7 @@ Assigns the 1st task in the results of the <code>find task</code> command to the
 <div class="sect2">
 <h3 id="dismiss-contacts-from-task-code-dismiss-code-to-be-coming-in-v2-0"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-to-be-coming-in-v2-0">4.18. Dismiss contacts from task : <code>dismiss</code> (To be coming in V2.0)</a></h3>
 <div class="paragraph">
-<p>You can use <code>dismiss</code> to removes assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br>
+<p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br>
 <code>dismiss</code> can be replaced by <code>ds</code> for faster input.<br>
 Format: <code>dismiss TASKINDEX PEOPLEINDEX&#8230;&#8203;</code><br></p>
 </div>
@@ -1244,7 +1244,7 @@ There is no need for you to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> : <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY f/FACULTY c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> : <code>add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [f/FACULTY] [c/GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665, b/29-02-1996 f/SOC c/www.enteryourcalendarurlhere.com t/friend t/colleague</code></p>
 </li>
 <li>
@@ -1252,7 +1252,7 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 e.g. <code>add pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665</code></p>
 </li>
 <li>
-<p><strong>Add task</strong> : <code>add task n/NAME d/DESCRIPTION [t/DEADLINE] [p/PRIORITY]</code><br>
+<p><strong>Add task</strong> : <code>add task n/NAME [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]</code><br>
 e.g. <code>add task n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high</code></p>
 </li>
 <li>
@@ -1374,7 +1374,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-29 13:54:56 +00:00
+Last updated 2017-10-29 14:11:32 +00:00
 </div>
 </div>
 </body>
