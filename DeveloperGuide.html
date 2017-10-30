@@ -52,8 +52,9 @@
 <li><a href="#changing-of-a-person-s-privacy">3.6. Changing of a Person&#8217;s Privacy</a></li>
 <li><a href="#locating-a-person-on-google-maps">3.7. Locating a Person on Google Maps</a></li>
 <li><a href="#add-delete-tag-mechanism">3.8. Add/Delete Tag mechanism</a></li>
-<li><a href="#logging">3.9. Logging</a></li>
-<li><a href="#configuration">3.10. Configuration</a></li>
+<li><a href="#find-tag-mechanism">3.9. Find Tag mechanism</a></li>
+<li><a href="#logging">3.10. Logging</a></li>
+<li><a href="#configuration">3.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1320,7 +1321,8 @@ in a similar way.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>deletetag</code> command works the same as <code>addtag</code> command with different name only.</p>
+<p><em>Figure 3.8.1 : Add Tag Sequence Diagram for Logic</em><br>
+The <code>deletetag</code> command works the same as <code>addtag</code> command with different name only.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1329,16 +1331,12 @@ in a similar way.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the input index does not exist, the <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will throw an exception.
+If the input index does not exist, the <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will throw an exception.<br>
+If the tag to be deleted does not exist, the <code>DeleteTagCommand</code> will throw an exception.<br>
+If the tag to be added exists in every target person in the address book, the <code>AddTagCommand</code> will throw an exception.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>If the tag to be deleted does not exist, the <code>DeleteTagCommand</code> will throw an exception.</p>
-</div>
-<div class="paragraph">
-<p>If the tag to be added exists in every target person in the address book, the <code>AddTagCommand</code> will throw an exception.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.1. Design Considerations</a></h4>
@@ -1354,7 +1352,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommend</code> and <code>DeleteTagCommand</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> create new command <code>addtag</code> and <code>deletetag</code><br>
 <strong>Pros:</strong> Less modification of existing command and parser<br>
 <strong>Cons:</strong> Users have to learn how to use the additional commands<br>
@@ -1365,7 +1363,99 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.9. Find Tag mechanism</a></h3>
+<div class="paragraph">
+<p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
+This command will not inherit from <code>UndoableCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>findtag</code> command is executed by <code>FindTagCommand</code> and is parsed through <code>FindTagCommandParser</code>.
+After parsing through <code>FindTagCommandParser</code>, it does not goes to the <code>FindTagCommand</code> straightly. The list of tags input will be processed by <code>NameContainsTagsPredicate</code> first.
+It is similar to the <code>find</code> command since find persons through their names and find persons through their tags are quite similar.</p>
+</div>
+<div class="paragraph">
+<p>Please take not that although <code>FindTagCommand</code> is similar to <code>FindCommand</code>, there are still some differences.
+<code>FindTagCommand</code> provides exclusive finding whereas <code>FindCommand</code> does not. It is achieved in the <code>NameContainsTagsPredicate</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is the example of how <code>NameContainsTagsPredicate</code> is working:
+Firstly, it will convert a Set of Tag to String.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="predefined-type">String</span> convertTagToString(ReadOnlyPerson person) {
+        <span class="predefined-type">Set</span>&lt;Tag&gt; personTags = person.getTags();
+        <span class="predefined-type">StringBuilder</span> allTagNames = <span class="keyword">new</span> <span class="predefined-type">StringBuilder</span>();
+        <span class="keyword">for</span> (Tag tag : personTags) {
+            allTagNames.append(tag.getTagName());
+            allTagNames.append(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>);
+        }
+        <span class="keyword">return</span> allTagNames.toString().trim();
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After having a list of string, it will then split strings into two ArrayList. One is for the tags we are looking for and another one
+is for the tags to be excluded.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>/**
+     * Update the wantedTag and unwantedTag list
+     * @param wantedTag list of tags to be searched
+     * @param unwantedTag list of tags to not be searched
+     */
+    private void updateWantedTagUnwantedTag(List&lt;String&gt; wantedTag, List&lt;String&gt; unwantedTag) {
+        for (String everyTag : tags) {
+            if (!everyTag.startsWith("/not")) {
+                wantedTag.add(everyTag);
+            } else {
+                unwantedTag.add(everyTag.substring(4));
+            }
+        }
+    }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, it will return the result according to the user input.<br>
+Suppose the user enter <code>findtag friends</code> command. The following sequence diagram shows how the find tag command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindTagSequenceDiagram.png" alt="FindTagSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.9.1 : Find Tag Sequence Diagram for Logic</em><br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input index tags do not exist, the <code>FindTagCommand</code> will give a empty list.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br>
+<strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
+<strong>Pros:</strong> Easier to implement. <code>findtag</code> command will be similar to the <code>find</code> command.<br>
+<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br>
+<strong>Alternative 2:</strong> Implement the <code>findtag</code> in <code>FindCommand</code>.<br>
+<strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
+<strong>Cons:</strong> The existing <code>FindCommand</code> will not only response for finding persons through names only. This Violates Single Responsibility Principle
+and Separation of Concerns as FindCommand now needs to do two different things.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1403,7 +1493,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.10. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2205,7 +2295,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-30 15:09:02 +00:00
+Last updated 2017-10-30 15:46:15 +00:00
 </div>
 </div>
 </body>

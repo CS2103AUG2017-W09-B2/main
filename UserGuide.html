@@ -31,17 +31,17 @@
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-person-task-code-add-code">4.2. Adding a person/task: <code>add</code></a></li>
-<li><a href="#add-a-tag-to-persons-code-addtag-code-since-v1-2">4.3. Add a tag to persons : <code>addtag</code> (Since V1.2)</a></li>
+<li><a href="#adding-a-tag-to-persons-code-addtag-code-since-v1-2">4.3. Adding a tag to persons : <code>addtag</code> (Since V1.2)</a></li>
 <li><a href="#listing-all-persons-code-list-code">4.4. Listing all persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">4.5. Editing a person : <code>edit</code></a></li>
 <li><a href="#renaming-existing-tags-code-edittag-code-since-v1-2">4.6. Renaming existing tags : <code>edittag</code> (Since v1.2)</a></li>
 <li><a href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3">4.7. Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code>(Since V1.3)</a></li>
-<li><a href="#favourite-persons-code-favourite-code-since-v1-3">4.8. Favourite persons : <code>favourite</code> (since V1.3)</a></li>
+<li><a href="#favouriting-persons-code-favourite-code-since-v1-3">4.8. Favouriting persons : <code>favourite</code> (since V1.3)</a></li>
 <li><a href="#listing-all-favourite-persons-code-showfavourite-code-since-v1-3">4.9. Listing all favourite persons : <code>showfavourite</code> (since V1.3)</a></li>
 <li><a href="#locating-persons-by-name-code-find-code">4.10. Locating persons by name : <code>find</code></a></li>
 <li><a href="#locating-persons-by-tag-code-findtag-code-since-v1-4">4.11. Locating persons by tag : <code>findtag</code> (Since V1.4)</a></li>
 <li><a href="#deleting-a-person-code-delete-code">4.12. Deleting a person : <code>delete</code></a></li>
-<li><a href="#delete-a-tag-of-persons-code-deletetag-code-since-v1-2">4.13. delete a tag of persons : <code>deletetag</code> (Since V1.2)</a></li>
+<li><a href="#deleting-a-tag-of-persons-code-deletetag-code-since-v1-2">4.13. Deleting a tag of persons : <code>deletetag</code> (Since V1.2)</a></li>
 <li><a href="#sorting-your-contact-list-code-sort-code">4.14. Sorting your contact list : <code>sort</code></a></li>
 <li><a href="#backing-up-your-data-code-backup-code">4.15. Backing up your data : <code>backup</code></a></li>
 <li><a href="#selecting-a-person-code-select-code">4.16. Selecting a person : <code>select</code></a></li>
@@ -52,7 +52,7 @@
 <li><a href="#dismiss-contacts-from-task-code-dismiss-code-to-be-coming-in-v2-0">4.21. Dismiss contacts from task : <code>dismiss</code> (To be coming in V2.0)</a></li>
 <li><a href="#listing-entered-commands-code-history-code">4.22. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">4.23. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#unfavourite-persons-code-unfavourite-code-since-v1-3">4.24. Unfavourite persons : <code>unfavourite</code> (since V1.3)</a></li>
+<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">4.24. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">4.25. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#clearing-all-entries-code-clear-code">4.26. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">4.27. Exiting the program : <code>exit</code></a></li>
@@ -270,7 +270,7 @@ Format: <code>add task n/NAME d/DESCRIPTION [t/DEADLINE] [p/PRIORITY]</code><br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-a-tag-to-persons-code-addtag-code-since-v1-2"><a class="link" href="#add-a-tag-to-persons-code-addtag-code-since-v1-2">4.3. Add a tag to persons : <code>addtag</code> (Since V1.2)</a></h3>
+<h3 id="adding-a-tag-to-persons-code-addtag-code-since-v1-2"><a class="link" href="#adding-a-tag-to-persons-code-addtag-code-since-v1-2">4.3. Adding a tag to persons : <code>addtag</code> (Since V1.2)</a></h3>
 <div class="paragraph">
 <p>You can use the <code>addtag</code> command to add tag for multiple persons in the address book. For example, you may wish to add tag <code>friends</code> to the first two persons in the address book.<br>
 <code>addtag</code> can be replaced by <code>atag</code> for faster input.<br>
@@ -281,16 +281,16 @@ Format: <code>addtag INDEX&#8230;&#8203; t/[TAG]</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Adds the tag of the person at the specific <code>INDEX</code>.</p>
+<p>You can add the tag of the person at the specific <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>If no indexes are provided, addtag will add the tag to all contacts in the address book.</p>
+<p>If you don not key in any indexes, addtag will add the tag to all contacts in the address book.</p>
 </li>
 </ul>
 </div>
@@ -511,7 +511,7 @@ Sets the address and email of the 2nd person to be public and their name to be p
 </div>
 </div>
 <div class="sect2">
-<h3 id="favourite-persons-code-favourite-code-since-v1-3"><a class="link" href="#favourite-persons-code-favourite-code-since-v1-3">4.8. Favourite persons : <code>favourite</code> (since V1.3)</a></h3>
+<h3 id="favouriting-persons-code-favourite-code-since-v1-3"><a class="link" href="#favouriting-persons-code-favourite-code-since-v1-3">4.8. Favouriting persons : <code>favourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use <code>favourite</code> command to make persons in the address book become your favourite persons. For example, you may wish to set your girlfriend as your favourite contact.<br>
 <code>favourite</code> can be replaced by <code>fav</code> for faster input.<br>
@@ -539,13 +539,13 @@ Favourite the 1st person in the results of the <code>find</code> command.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Favourites the person at the specified <code>INDEX</code>.</p>
+<p>You can set a person to be the favourite person at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -752,7 +752,7 @@ Deletes the 1st task in the results of the <code>find task</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-a-tag-of-persons-code-deletetag-code-since-v1-2"><a class="link" href="#delete-a-tag-of-persons-code-deletetag-code-since-v1-2">4.13. delete a tag of persons : <code>deletetag</code> (Since V1.2)</a></h3>
+<h3 id="deleting-a-tag-of-persons-code-deletetag-code-since-v1-2"><a class="link" href="#deleting-a-tag-of-persons-code-deletetag-code-since-v1-2">4.13. Deleting a tag of persons : <code>deletetag</code> (Since V1.2)</a></h3>
 <div class="paragraph">
 <p>You can use <code>deletetag</code> to delete the tag of multiple persons from the address book.<br>
 <code>deletetag</code> can be replaced by <code>dtag</code> for faster input.<br>
@@ -763,16 +763,16 @@ Format: <code>deletetag INDEX&#8230;&#8203; t/[TAG]</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Delete the tag of the person at the specific <code>INDEX</code></p>
+<p>You can delete the tag of the person at the specific <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>If no indexes are provided, deletetag will delete the tag from all contacts in the address book.</p>
+<p>If you do not key in any index, deletetag will delete the tag from all contacts in the address book.</p>
 </li>
 </ul>
 </div>
@@ -1241,7 +1241,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="unfavourite-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavourite-persons-code-unfavourite-code-since-v1-3">4.24. Unfavourite persons : <code>unfavourite</code> (since V1.3)</a></h3>
+<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">4.24. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use <code>unfavourite</code> command to set your previous favourite persons become the normal persons. For example,<br>
 after you break up with your girlfriend, you may wish to set your girlfriend back to normal person.<br>
@@ -1270,13 +1270,13 @@ Unfavourite the 1st person in the results of the <code>find</code> command.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Unfavourites the person at the specified <code>INDEX</code>.</p>
+<p>You can unfavourites the person at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -1532,7 +1532,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-30 15:09:02 +00:00
+Last updated 2017-10-30 15:46:15 +00:00
 </div>
 </div>
 </body>
