@@ -17,7 +17,8 @@
     <URL value="@Extensions.css" />
   </stylesheets>
 
-  <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+    //@@author jeffreygohkw
+    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
     <Menu mnemonicParsing="false" text="File">
       <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#handleOpen" text="Open">
             <graphic>
@@ -47,7 +48,7 @@
          </MenuItem>
     </Menu>
     <Menu mnemonicParsing="false" text="Help">
-      <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help">
+        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help">
             <graphic>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -64,6 +65,7 @@
         </items>
       </Menu>
   </MenuBar>
+    //@@author
 
   <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
     <padding>
