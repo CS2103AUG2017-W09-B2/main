@@ -25,10 +25,12 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
 
+    //@@author jeffreygohkw
     @Test
     public void privatePhoneIsHidden_success() throws IllegalValueException {
         Phone p = new Phone("999", true);
         assertTrue(p.isPrivate());
         assertEquals(p.toString(), "<Private Phone>");
     }
+    //@@author
 }

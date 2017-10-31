@@ -65,6 +65,7 @@ public class BrowserPanel extends UiPart<Region> {
         }
     }
 
+    //@@author jeffreygohkw
     /**
      * Loads a google search for a person'saddress if their address is not private
      * Prints out a message on the result display otherwise
@@ -78,6 +79,7 @@ public class BrowserPanel extends UiPart<Region> {
                 + GOOGLE_MAPS_URL_SUFFIX);
         }
     }
+    //@@author
 
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
@@ -104,9 +106,11 @@ public class BrowserPanel extends UiPart<Region> {
         loadPersonPage(event.getNewSelection().person);
     }
 
+    //@@author jeffreygohkw
     @Subscribe
     private void handleBrowserPanelLocateEvent(BrowserPanelLocateEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadMapsPage(event.getNewSelection());
     }
+    //@@author
 }

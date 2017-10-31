@@ -186,10 +186,12 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
+        //@@author jeffreygohkw
         MainWindow mw = ui.getMainWindow();
         mw.setMainApp(this);
         mw.setStorage(storage);
         mw.setModel(model);
+        //@@author
     }
 
     @Override

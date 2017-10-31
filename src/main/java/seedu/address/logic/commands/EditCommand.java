@@ -142,8 +142,10 @@ public class EditCommand extends UndoableCommand {
                     throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
                 }
                 ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
+                //@@author jeffreygohkw
                 Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
                 model.updatePerson(personToEdit, editedPerson);
+                //@@author
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
             }
@@ -155,12 +157,14 @@ public class EditCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException pnfe) {
             throw new AssertionError("The target task cannot be missing");
+            //@@author jeffreygohkw
         } catch (IllegalArgumentException e) {
             throw new CommandException(MESSAGE_ALL_FIELDS_PRIVATE);
         }
-
+        //@@author
     }
 
+    //@@author jeffreygohkw
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
@@ -329,6 +333,7 @@ public class EditCommand extends UndoableCommand {
         }
         return updateFavourite;
     }
+    //@@author
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}

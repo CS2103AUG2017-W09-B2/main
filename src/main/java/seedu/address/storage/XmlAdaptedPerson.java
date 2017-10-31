@@ -23,27 +23,36 @@ import seedu.address.model.tag.Tag;
 public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String name;
+    //@@author jeffreygohkw
     @XmlElement(required = true)
     private Boolean nameIsPrivate;
+    //@@author
     @XmlElement(required = true)
     private String phone;
+    //@@author jeffreygohkw
     @XmlElement(required = true)
     private Boolean phoneIsPrivate;
+    //@@author
     @XmlElement(required = true)
     private String email;
+    //@@author jeffreygohkw
     @XmlElement(required = true)
     private Boolean emailIsPrivate;
+    //@@author
     @XmlElement(required = true)
     private String address;
+    //@@author jeffreygohkw
     @XmlElement(required = true)
     private Boolean addressIsPrivate;
+    //@@author
     @XmlElement (required = true)
     private String favourite;
     @XmlElement(required = true)
     private String remark;
+    //@@author jeffreygohkw
     @XmlElement(required = true)
     private Boolean remarkIsPrivate;
-
+    //@@author
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -67,11 +76,13 @@ public class XmlAdaptedPerson {
         favourite = source.getFavourite().toString();
         remark = source.getRemark().value;
 
+        //@@author jeffreygohkw
         nameIsPrivate = source.getName().isPrivate();
         phoneIsPrivate = source.getPhone().isPrivate();
         emailIsPrivate = source.getEmail().isPrivate();
         addressIsPrivate = source.getAddress().isPrivate();
         remarkIsPrivate = source.getRemark().isPrivate();
+        //@@author
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -89,6 +100,7 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
+        //@@author jeffreygohkw
         if (nameIsPrivate == null) {
             nameIsPrivate = false;
         }
@@ -110,6 +122,7 @@ public class XmlAdaptedPerson {
         final Address address = new Address(this.address, this.addressIsPrivate);
         final Boolean favourite = new Boolean(this.favourite);
         final Remark remark = new Remark(this.remark, this.remarkIsPrivate);
+        //@@author
         final Set<Tag> tags = new HashSet<>(personTags);
         return new Person(name, phone, email, address, favourite, remark, tags);
     }

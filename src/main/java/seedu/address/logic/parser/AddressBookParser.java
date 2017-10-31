@@ -77,9 +77,11 @@ public class AddressBookParser {
         case DismissCommand.COMMAND_ALIAS:
             return new DismissTaskCommandParser().parse(arguments);
 
+        //@@author jeffreygohkw
         case ChangePrivacyCommand.COMMAND_WORD:
         case ChangePrivacyCommand.COMMAND_ALIAS:
             return new ChangePrivacyCommandParser().parse(arguments);
+        //@@author
 
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_ALIAS:
@@ -93,9 +95,11 @@ public class AddressBookParser {
         case SelectCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
 
+        //@@author jeffreygohkw
         case LocateCommand.COMMAND_WORD:
         case LocateCommand.COMMAND_ALIAS:
             return new LocateCommandParser().parse(arguments);
+        //@@author
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS:

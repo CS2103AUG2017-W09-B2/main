@@ -54,6 +54,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
 
+        //@@author jeffreygohkw
         // google maps page of a person
         postNow(panelLocateEventStub);
         URL expectedMapUrl = new URL(GOOGLE_MAPS_URL_PREFIX
@@ -61,5 +62,6 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedMapUrl, browserPanelHandle.getLoadedUrl());
+        //@@author
     }
 }

@@ -58,6 +58,7 @@ public class ParserUtil {
         return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
     }
 
+    //@@author jeffreygohkw
     /**
      * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
      * Takes in a (@code boolean isPrivate) which will set the Name to be private if true.
@@ -67,6 +68,7 @@ public class ParserUtil {
         requireNonNull(name);
         return name.isPresent() ? Optional.of(new Name(name.get(), isPrivate)) : Optional.empty();
     }
+    //@@author
 
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
@@ -77,6 +79,7 @@ public class ParserUtil {
         return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
     }
 
+    //@@author jeffreygohkw
     /**
      * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
      * Takes in a (@code boolean isPrivate) which will set the Phone to be private if true.
@@ -86,6 +89,7 @@ public class ParserUtil {
         requireNonNull(phone);
         return phone.isPresent() ? Optional.of(new Phone(phone.get(), isPrivate)) : Optional.empty();
     }
+    //@@author
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
@@ -96,6 +100,7 @@ public class ParserUtil {
         return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
     }
 
+    //@@author jeffreygohkw
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
      * Takes in a (@code boolean isPrivate) which will set the Address to be private if true.
@@ -106,7 +111,7 @@ public class ParserUtil {
         requireNonNull(address);
         return address.isPresent() ? Optional.of(new Address(address.get(), isPrivate)) : Optional.empty();
     }
-
+    //@@author
 
     /**
      * Parses a {@code Optional<String> remark} into an {@code Optional<Remark>} if {@code remark} is present.
@@ -117,6 +122,7 @@ public class ParserUtil {
         return remark.isPresent() ? Optional.of(new Remark(remark.get())) : Optional.empty();
     }
 
+    //@@author jeffreygohkw
     /**
      * Parses a {@code Optional<String> remark} into an {@code Optional<Remark>} if {@code remark} is present.
      * Takes in a (@code boolean isPrivate) which will set the Remark to be private if true.
@@ -127,7 +133,7 @@ public class ParserUtil {
         requireNonNull(remark);
         return remark.isPresent() ? Optional.of(new Remark(remark.get(), isPrivate)) : Optional.empty();
     }
-
+    //@@author
 
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
@@ -138,6 +144,7 @@ public class ParserUtil {
         return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
     }
 
+    //@@author jeffreygohkw
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      * Takes in a (@code boolean isPrivate) which will set the Email to be private if true.
@@ -147,6 +154,7 @@ public class ParserUtil {
         requireNonNull(email);
         return email.isPresent() ? Optional.of(new Email(email.get(), isPrivate)) : Optional.empty();
     }
+    //@@author
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.

@@ -14,7 +14,9 @@ public class Email {
     public static final String EMAIL_PLACEHOLDER_VALUE = "";
 
     public final String value;
+    //@@author jeffreygohkw
     private boolean isPrivate = false;
+    //@@author
 
     /**
      * Validates given email.
@@ -33,10 +35,13 @@ public class Email {
         this.value = trimmedEmail;
     }
 
+    //@@author jeffreygohkw
+
     public Email(String email, boolean isPrivate) throws IllegalValueException {
         this(email);
         this.setPrivate(isPrivate);
     }
+    //@@author
 
     /**
      * Returns if a given string is a valid person email.
@@ -47,9 +52,11 @@ public class Email {
 
     @Override
     public String toString() {
+        //@@author jeffreygohkw
         if (isPrivate) {
             return "<Private Email>";
         }
+        //@@author
         return value;
     }
 
@@ -64,7 +71,7 @@ public class Email {
     public int hashCode() {
         return value.hashCode();
     }
-
+    //@@author jeffreygohkw
     public boolean isPrivate() {
         return isPrivate;
     }
@@ -72,4 +79,6 @@ public class Email {
     public void setPrivate(boolean isPrivate) {
         this.isPrivate = isPrivate;
     }
+    //@@author
+
 }

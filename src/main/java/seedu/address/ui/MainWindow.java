@@ -48,9 +48,11 @@ public class MainWindow extends UiPart<Region> {
 
     private final FileChooser fileChooser = new FileChooser();
 
+    //@@author jeffreygohkw
     private MainApp mainApp;
     private Storage storage;
     private Model model;
+    //@@author
     private Stage primaryStage;
     private Logic logic;
 
@@ -70,6 +72,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private MenuItem helpMenuItem;
 
+    //@@author jeffreygohkw
     @FXML
     private MenuItem openMenuItem;
 
@@ -78,6 +81,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem exitMenuItem;
+    //@@author
 
     @FXML
     private MenuItem increaseSizeMenuItem;
@@ -128,9 +132,11 @@ public class MainWindow extends UiPart<Region> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        //@@author jeffreygohkw
         setAccelerator(openMenuItem, KeyCombination.valueOf("CTRL+O"));
         setAccelerator(saveMenuItem, KeyCombination.valueOf("CTRL+S"));
         setAccelerator(exitMenuItem, KeyCombination.valueOf("ALT+F4"));
+        //@@author
         setAccelerator(increaseSizeMenuItem, KeyCombination.valueOf("SHORTCUT+W"));
         setAccelerator(decreaseSizeMenuItem, KeyCombination.valueOf("SHORTCUT+S"));
         setAccelerator(resetSizeMenuItem, KeyCombination.valueOf("SHORTCUT+R"));
@@ -166,6 +172,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author jeffreygohkw
     /**
      * Is called by the main application to give a reference back to itself.
      *
@@ -192,6 +199,7 @@ public class MainWindow extends UiPart<Region> {
     public void setModel(Model m) {
         this.model = m;
     }
+    //@@author
 
     /**
      * Fills up all the placeholders of this window.
@@ -301,6 +309,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.show();
     }
 
+    //@@author jeffreygohkw
     /**
      * Opens the data from a desired location
      */
@@ -352,6 +361,7 @@ public class MainWindow extends UiPart<Region> {
         }
         raise(new SaveAsRequestEvent());
     }
+    //@@author
 
     @FXML
     private void handleExit() {

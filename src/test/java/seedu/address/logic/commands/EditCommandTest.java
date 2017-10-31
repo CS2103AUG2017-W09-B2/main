@@ -95,6 +95,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    //@@author jeffreygohkw
     @Test
     public void execute_privateFields_success() throws Exception {
         showFirstPersonOnly(model);
@@ -146,6 +147,7 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, expectedMessage);
     }
+    //@@author
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
