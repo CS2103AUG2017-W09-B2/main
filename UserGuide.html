@@ -18,7 +18,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>Team W09-B2</code>      Since: <code>Aug 2017</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -48,8 +48,8 @@
 <li><a href="#locating-a-person-s-address-code-locate-code-since-v1-4">4.17. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></li>
 <li><a href="#mark-task-as-complete-code-setcomplete-code-to-be-coming-in-v2-0">4.18. Mark task as complete : <code>setcomplete</code> (To be coming in V2.0)</a></li>
 <li><a href="#mark-task-as-incomplete-code-setincomplete-code-to-be-coming-in-v2-0">4.19. Mark task as incomplete : <code>setincomplete</code> (To be coming in V2.0)</a></li>
-<li><a href="#assign-contacts-to-task-code-assign-code-to-be-coming-in-v2-0">4.20. Assign contacts to task : <code>assign</code> (To be coming in V2.0)</a></li>
-<li><a href="#dismiss-contacts-from-task-code-dismiss-code-to-be-coming-in-v2-0">4.21. Dismiss contacts from task : <code>dismiss</code> (To be coming in V2.0)</a></li>
+<li><a href="#assign-contacts-to-task-code-assign-code-since-v1-4">4.20. Assign contacts to task : <code>assign</code> (Since V1.4)</a></li>
+<li><a href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">4.21. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
 <li><a href="#listing-entered-commands-code-history-code">4.22. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">4.23. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">4.24. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
@@ -236,14 +236,14 @@ Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] r/[
 </div>
 <div class="paragraph">
 <p>By adding the word <code>task</code>, you can use the same command to add a new task or deadline, such as a reminder of project deadlines.<br>
-Format: <code>add task n/NAME d/DESCRIPTION [t/DEADLINE] [p/PRIORITY]</code><br></p>
+Format: <code>add task n/NAME d/[DESCRIPTION] by/[DEADLINE] p/[PRIORITY]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Task deadlines should be in the format DD/MM/YYYY<br></p>
+<p>Task deadlines should be in the format DD-MM-YYYY<br></p>
 </li>
 <li>
 <p>A task priority must be a positive integer from 1 to 5 inclusive, with 5 being the highest priority<br></p>
@@ -317,15 +317,11 @@ Adds the acquaintance tag to all contacts in the address book.</p>
 <div class="sect2">
 <h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">4.4. Listing all persons : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Need a quick overview of what needs to be done? You can use the <code>list</code> command to quickly show all your contacts, or tasks, in the address book. To list out only the tasks present, use <code>list task</code> instead.<br>
-Format: <code>list</code> <code>list task</code><br></p>
+<p>Need a quick overview of what needs to be done? You can use the <code>list</code> command to quickly show all your contacts, or tasks, in the address book.<br>
+Format: <code>list</code><br></p>
 </div>
 <div class="paragraph">
-<p>If you want to see all your contacts, as well as all your tasks at the same time, type <code>list all</code> instead.<br>
-Format: <code>list all</code></p>
-</div>
-<div class="paragraph">
-<p>Instead of typing out <code>add</code> every time, you can alternatively use <code>l</code> to shorten the command.</p>
+<p>Instead of typing out <code>list</code> every time, you can alternatively use <code>l</code> to shorten the command.</p>
 </div>
 </div>
 <div class="sect2">
@@ -388,7 +384,7 @@ Removes the phone number of the 1st person.</p>
 </div>
 <div class="paragraph">
 <p>Adding <code>task</code> after <code>edit</code> will allow you to edit task details instead. You may wish to edit your task deadlines, for example, when your project schedule changes, or your task priorities, when a task becomes more urgent.<br>
-Format: <code>edit task INDEX [n/NAME] [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]</code><br></p>
+Format: <code>edit task INDEX [n/NAME] [d/DESCRIPTION] [by/DEADLINE] [p/PRIORITY]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -600,7 +596,7 @@ Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>J
 <p>Adding <code>task</code> after <code>find</code> will allow you to sieve through your tasks, instead of your contacts.<br>
 In addition to searching the name and description of tasks, you can also opt to filter your tasks by their priority. Simply include <code>p/PRIORITY</code> after all your other criteria to do so.<br>
 All tasks with a priority higher than or equal to the value provided will be shown.<br>
-Format: `find task KEYWORD [MORE_KEYWORDS] [p/PRIORITY]<br></p>
+Format: <code>find task KEYWORD [MORE_KEYWORDS] [p/PRIORITY]</code> (Priority search to be coming in v2.0)<br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -639,7 +635,7 @@ Returns any task that has the word <code>update</code> in their names or descrip
 </li>
 <li>
 <p><code>find task update 4</code><br>
-Returns all tasks that has the word <code>update</code> in their names or descriptions, and are of priority <code>4</code> or higher.</p>
+Returns all tasks that has the word <code>update</code> in their names or descriptions</p>
 </li>
 </ul>
 </div>
@@ -1079,11 +1075,11 @@ Sets the 1st task in the results of the <code>find task</code> command as incomp
 </div>
 </div>
 <div class="sect2">
-<h3 id="assign-contacts-to-task-code-assign-code-to-be-coming-in-v2-0"><a class="link" href="#assign-contacts-to-task-code-assign-code-to-be-coming-in-v2-0">4.20. Assign contacts to task : <code>assign</code> (To be coming in V2.0)</a></h3>
+<h3 id="assign-contacts-to-task-code-assign-code-since-v1-4"><a class="link" href="#assign-contacts-to-task-code-assign-code-since-v1-4">4.20. Assign contacts to task : <code>assign</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>assign</code> to assign contacts to an ongoing task. You may wish to use <code>assign</code> when collaborating with others for projects, for example.<br>
 <code>assign</code> can be replaced by <code>as</code> for faster input.<br>
-Format: <code>assign TASKINDEX PEOPLEINDEX&#8230;&#8203;</code><br></p>
+Format: <code>assign PEOPLEINDEX&#8230;&#8203; to/TASKINDEX</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1113,24 +1109,24 @@ Format: <code>assign TASKINDEX PEOPLEINDEX&#8230;&#8203;</code><br></p>
 <li>
 <p><code>list</code><br>
 <code>list task</code><br>
-<code>assign 2 1 4 5</code><br>
-Assigns the 2nd task in the address book to the 1st, 4th and 5th contacts.</p>
+<code>assign 1 4 5 to/2</code><br>
+Assigns the 1st, 4th and 5th contacts to 2nd task in the address book.</p>
 </li>
 <li>
 <p><code>list</code><br>
 <code>find task update</code><br>
-<code>assign 1 2</code><br>
-Assigns the 1st task in the results of the <code>find task</code> command to the 2nd person in the address book.</p>
+<code>assign 2 to/1</code><br>
+Assigns the 2nd person in the address book to the 1st task in the results of the <code>find task</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="dismiss-contacts-from-task-code-dismiss-code-to-be-coming-in-v2-0"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-to-be-coming-in-v2-0">4.21. Dismiss contacts from task : <code>dismiss</code> (To be coming in V2.0)</a></h3>
+<h3 id="dismiss-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">4.21. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br>
 <code>dismiss</code> can be replaced by <code>ds</code> for faster input.<br>
-Format: <code>dismiss TASKINDEX PEOPLEINDEX&#8230;&#8203;</code><br></p>
+Format: <code>dismiss PEOPLEINDEX&#8230;&#8203; from/TASKINDEX</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1160,13 +1156,13 @@ Format: <code>dismiss TASKINDEX PEOPLEINDEX&#8230;&#8203;</code><br></p>
 <li>
 <p><code>list</code><br>
 <code>list task</code><br>
-<code>dismiss 2 1 4 5</code><br>
+<code>dismiss 1 4 5 from/2</code><br>
 Dismisses 1st, 4th and 5th contacts in the address book from the 2nd task.</p>
 </li>
 <li>
 <p><code>list</code><br>
 <code>find task update</code><br>
-<code>dismiss 1 2</code><br>
+<code>dismiss 2 from/1</code><br>
 Dismisses the 2nd person in the address book from the 1st task in the results of the <code>find task</code> command.</p>
 </li>
 </ul>
@@ -1402,7 +1398,7 @@ There is no need for you to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> : <code>add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [f/FACULTY] [c/GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> : <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] f/[FACULTY] c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665, b/29-02-1996 f/SOC c/www.enteryourcalendarurlhere.com t/friend t/colleague</code></p>
 </li>
 <li>
@@ -1410,7 +1406,7 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 e.g. <code>add pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665</code></p>
 </li>
 <li>
-<p><strong>Add task</strong> : <code>add task n/NAME [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]</code><br>
+<p><strong>Add task</strong> : <code>add task n/NAME d/[DESCRIPTION] by/[DEADLINE] p/[PRIORITY]</code><br>
 e.g. <code>add task n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high</code></p>
 </li>
 <li>
@@ -1488,12 +1484,12 @@ e.g. <code>setcomplete 4</code></p>
 e.g. <code>setincomplete 5</code></p>
 </li>
 <li>
-<p><strong>Assign to task</strong> : <code>assign TASKINDEX PERSONINDEX&#8230;&#8203;</code><br>
-e.g. <code>assign 4 1 17 18 21</code></p>
+<p><strong>Assign to task</strong> : <code>assign PERSONINDEX&#8230;&#8203; to/TASKINDEX</code><br>
+e.g. <code>assign 4 1 17 18 to/21</code></p>
 </li>
 <li>
-<p><strong>Dismiss from task</strong> : <code>dismiss TASKINDEX PERSONINDEX&#8230;&#8203;</code><br>
-e.g. <code>dismiss 4 1 17</code></p>
+<p><strong>Dismiss from task</strong> : <code>dismiss PERSONINDEX&#8230;&#8203; from/TASKINDEX</code><br>
+e.g. <code>dismiss 4 1 from/17</code></p>
 </li>
 <li>
 <p><strong>History</strong> : <code>history</code></p>
@@ -1532,7 +1528,7 @@ e.g. <code>dismiss 4 1 17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-30 15:46:15 +00:00
+Last updated 2017-10-31 14:28:25 +00:00
 </div>
 </div>
 </body>
