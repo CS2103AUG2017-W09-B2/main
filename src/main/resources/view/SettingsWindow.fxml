@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="150.0" prefWidth="400.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="33.0" layoutY="116.0" prefHeight="186.0" prefWidth="400.0" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="32.0" prefWidth="400.0" styleClass="label-bright" stylesheets="@DarkTheme.css" text="Password Settings" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="oldPassword" promptText="Old Password" styleClass="text-field" stylesheets="@DarkTheme.css">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="30.0" />
+               </VBox.margin>
+            </TextField>
+            <PasswordField fx:id="newPassword" promptText="New Password" styleClass="text-field" stylesheets="@DarkTheme.css">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="30.0" />
+               </VBox.margin>
+            </PasswordField>
+            <PasswordField fx:id="confirmPassword" promptText="Confirm Password" styleClass="text-field" stylesheets="@DarkTheme.css">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="30.0" />
+               </VBox.margin>
+            </PasswordField>
+         </children>
+      </VBox>
+      <HBox layoutX="-5.0" layoutY="228.0" prefHeight="50.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleSavePasswordChange" prefHeight="55.0" prefWidth="200.0" stylesheets="@DarkTheme.css" text="SAVE" />
+            <Button mnemonicParsing="false" onAction="#handleCancelPasswordAction" prefHeight="51.0" prefWidth="201.0" stylesheets="@DarkTheme.css" text="CANCEL" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

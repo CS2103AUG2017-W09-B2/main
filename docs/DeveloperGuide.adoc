@@ -439,7 +439,7 @@ The sort enhancement utilises the Java Collections Sort API by passing it a cust
 The sort command is parsed through `SortCommandParser`, which passes control over to the `SortCommand`
 class. The actual sorting happens via the UniquePersonList class.
 
-The Logic Diagram for this sort command implementation is shown below:
+The UML outline diagram for this sort command implementation is shown below:
 
 image::SortCommandDiagram.png[width="800"]
 
@@ -448,7 +448,8 @@ demonstrates how the sort command works.
 
 image::SortSequenceDiagram.png[width="800]
 
-Note that the execution of the sort methods result in the actual person list being sorted.
+Note that the execution of the sort methods result in the actual person list being sorted. The resulting list
+is not returned, but will be reflected in the application's storage and graphical user interface.
 
 ==== Design Considerations
 

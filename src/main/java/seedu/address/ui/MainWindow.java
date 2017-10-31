@@ -8,14 +8,18 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
@@ -75,6 +79,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private MenuItem saveMenuItem;
+
+    @FXML
+    private MenuItem preferencesMenuItem;
 
     @FXML
     private MenuItem exitMenuItem;
@@ -312,8 +319,32 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
-     * Closes the application.
+     * Handles open preferences
      */
+    @FXML
+    private void handleOpenPreferences() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainWindow.class.getResource("/view/SettingsWindow.fxml"));
+        try {
+            AnchorPane page = (AnchorPane) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Create dialog stage
+        Stage preferenceStage = new Stage();
+        preferenceStage.setTitle("Edit Preferences");
+        preferenceStage.initModality(Modality.WINDOW_MODAL);
+        preferenceStage.initOwner(primaryStage);
+        preferenceStage.getIcons().add(new Image("/images/address_book_32_alternative.png"));
+
+        // Set controller
+        SettingsWindow controller = loader.getController();
+        controller.setSettingsStage(preferenceStage);
+
+        preferenceStage.showAndWait();
+    }
+
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
