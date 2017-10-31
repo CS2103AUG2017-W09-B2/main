@@ -338,10 +338,11 @@ public class ChangePrivacyCommand extends UndoableCommand {
 ```
 ###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
-        ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson;
-        try {
-            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+                Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+                model.updatePerson(personToEdit, editedPerson);
+```
+###### \java\seedu\address\logic\commands\EditCommand.java
+``` java
         } catch (IllegalArgumentException e) {
             throw new CommandException(MESSAGE_ALL_FIELDS_PRIVATE);
         }
@@ -653,6 +654,7 @@ public class LocateCommand extends Command {
             throw new ParseException(ive.getMessage(), ive);
         }
     }
+
 ```
 ###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
@@ -836,6 +838,8 @@ public class ChangePrivacyCommandParser implements Parser<ChangePrivacyCommand> 
     public static final Prefix PREFIX_DEADLINE = new Prefix("by/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
+    public static final Prefix PREFIX_TARGET = new Prefix("to/");
+    public static final Prefix PREFIX_FROM = new Prefix("from/");
 }
 ```
 ###### \java\seedu\address\logic\parser\LocateCommandParser.java
@@ -1298,5 +1302,12 @@ public class LocateCommandParser implements Parser<LocateCommand> {
                </ImageView>
             </graphic></MenuItem>
     </Menu>
+      <Menu mnemonicParsing="false" text="Font Size">
+        <items>
+          <MenuItem fx:id="increaseSizeMenuItem" mnemonicParsing="false" onAction="#handleIncreaseFontSize" text="Increase +" />
+            <MenuItem fx:id="decreaseSizeMenuItem" mnemonicParsing="false" onAction="#handleDecreaseFontSize" text="Decrease -" />
+            <MenuItem fx:id="resetSizeMenuItem" mnemonicParsing="false" onAction="#handleResetFontSize" text="Reset" />
+        </items>
+      </Menu>
   </MenuBar>
 ```

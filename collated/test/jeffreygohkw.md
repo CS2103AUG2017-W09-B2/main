@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertFalse;
 import static seedu.address.logic.commands.ChangePrivacyCommand.PersonPrivacySettings;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonsAddressBook;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ import seedu.address.testutil.PersonPrivacySettingsBuilder;
 
 public class ChangePrivacyCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPersonsAddressBook(), new UserPrefs());
 
     @Test
     public void personPrivacySettingsTests() {
@@ -196,7 +196,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonsAddressBook;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -225,7 +225,7 @@ public class LocateCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPersonsAddressBook(), new UserPrefs());
     }
 
     @Test
