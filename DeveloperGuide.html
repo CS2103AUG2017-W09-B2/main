@@ -44,17 +44,18 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
-<li><a href="#task-object">3.2. Task Object</a></li>
-<li><a href="#sort-command">3.3. Sort Command</a></li>
-<li><a href="#backup-command">3.4. Backup Command</a></li>
-<li><a href="#privacy-of-fields">3.5. Privacy of fields</a></li>
-<li><a href="#changing-of-a-person-s-privacy">3.6. Changing of a Person&#8217;s Privacy</a></li>
-<li><a href="#locating-a-person-on-google-maps">3.7. Locating a Person on Google Maps</a></li>
-<li><a href="#add-delete-tag-mechanism">3.8. Add/Delete Tag mechanism</a></li>
-<li><a href="#find-tag-mechanism">3.9. Find Tag mechanism</a></li>
-<li><a href="#logging">3.10. Logging</a></li>
-<li><a href="#configuration">3.11. Configuration</a></li>
+<li><a href="#increase-decrease-reset-font-size">3.1. Increase/Decrease/Reset Font Size</a></li>
+<li><a href="#undo-redo-mechanism">3.2. Undo/Redo mechanism</a></li>
+<li><a href="#task-object">3.3. Task Object</a></li>
+<li><a href="#sort-command">3.4. Sort Command</a></li>
+<li><a href="#backup-command">3.5. Backup Command</a></li>
+<li><a href="#privacy-of-fields">3.6. Privacy of fields</a></li>
+<li><a href="#changing-of-a-person-s-privacy">3.7. Changing of a Person&#8217;s Privacy</a></li>
+<li><a href="#locating-a-person-on-google-maps">3.8. Locating a Person on Google Maps</a></li>
+<li><a href="#add-delete-tag-mechanism">3.9. Add/Delete Tag mechanism</a></li>
+<li><a href="#find-tag-mechanism">3.10. Find Tag mechanism</a></li>
+<li><a href="#logging">3.11. Logging</a></li>
+<li><a href="#configuration">3.12. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -573,7 +574,56 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></h3>
+<h3 id="increase-decrease-reset-font-size"><a class="link" href="#increase-decrease-reset-font-size">3.1. Increase/Decrease/Reset Font Size</a></h3>
+<div class="paragraph">
+<p>On some screens, the text appear to be too small. The aim of the increase/decrease/reset font size feature is to allow
+users to customize the application&#8217;s font size quickly on the go.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FontSizeUI.png" alt="FontSizeUI" width="540">
+</div>
+</div>
+<div class="paragraph">
+<p>There are two methods of calling changes in font size. The first way is through the UI. The Class Diagram for this
+procedure is shown below:</p>
+</div>
+<div class="paragraph">
+<p>Image Placeholder</p>
+</div>
+<div class="paragraph">
+<p>The other method of calling changes in font size is through a CLI command. When the relevant command is entered,
+the Command class calls MainWindow. The rest of the process flow is identical to that of the UI triggered font size
+command.</p>
+</div>
+<div class="paragraph">
+<p>Image Placeholder</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Task-related commands<br>
+<strong>Alternative 1 (current choice):</strong> Use polymorphism to allow existing commands to implement the new commands<br>
+<strong>Pros:</strong> Under this scheme, any command can be extended to allow addition of new commands of any type, without affecting the architecture significantly<br>
+<strong>Cons:</strong> SRP may be violated as each Command class may now need to handle 2 different types of objects.<br>
+<strong>Alternative 2:</strong> Create new classes for all new commands<br>
+<strong>Pros:</strong> Simpler to implement.<br>
+<strong>Cons:</strong> Code duplication occurs as the commands for Person and Tasks objects share the same structure.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storage of Task objects<br>
+<strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
+<strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.
+<strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.
+<strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
+<strong>Pros</strong> Only 1 storage file is needed. The storage manager thus only needs to refer to one storage<br>
+<strong>Cons</strong> Any changes to the Person or Task</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">3.2. Undo/Redo mechanism</a></h3>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -725,7 +775,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
@@ -768,7 +818,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="task-object"><a class="link" href="#task-object">3.2. Task Object</a></h3>
+<h3 id="task-object"><a class="link" href="#task-object">3.3. Task Object</a></h3>
 <div class="paragraph">
 <p>The Task object stores information related to a single deadline or task, in a manner similar to how Person information is stored.<br>
 As such, it also shares the same types of commands as the Person object, namely the add, delete, list, select, and edit commands.
@@ -843,7 +893,7 @@ The sequence diagram below shows how this is done:</p>
 <p>Tasks objects are stored in the same level of hierarchy as Person objects, and during startup, are read and entered into the UniqueTaskList, which handles all the tasks that are present in the address book.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Task-related commands<br>
 <strong>Alternative 1 (current choice):</strong> Use polymorphism to allow existing commands to implement the new commands<br>
@@ -866,7 +916,7 @@ The sequence diagram below shows how this is done:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-command"><a class="link" href="#sort-command">3.3. Sort Command</a></h3>
+<h3 id="sort-command"><a class="link" href="#sort-command">3.4. Sort Command</a></h3>
 <div class="paragraph">
 <p>The sort command is facilitated by the <code>sortBy</code> method in UniquePersonList. It supports
 sort by ascending or by descending order in any field.</p>
@@ -900,7 +950,7 @@ demonstrates how the sort command works.</p>
 is not returned, but will be reflected in the application&#8217;s storage and graphical user interface.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br>
 <strong>Alternative 1 (current choice):</strong> Implement sorting functionality in <code>UniquePersonList</code> class.<br>
@@ -923,7 +973,7 @@ is not returned, but will be reflected in the application&#8217;s storage and gr
 </div>
 </div>
 <div class="sect2">
-<h3 id="backup-command"><a class="link" href="#backup-command">3.4. Backup Command</a></h3>
+<h3 id="backup-command"><a class="link" href="#backup-command">3.5. Backup Command</a></h3>
 <div class="paragraph">
 <p>The backup command makes use of both the model manager and the storage manager. The <code>LogicManager</code> class was
 improved to support the accessing of storage value.</p>
@@ -955,7 +1005,7 @@ demonstrates how this works:</p>
 <p>Note that the execution of the sort methods result in the actual person list being sorted.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br>
 <strong>Alternative 1 (current choice):</strong> Implement backup command via Command Line Interface<br>
@@ -978,7 +1028,7 @@ demonstrates how this works:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.5. Privacy of fields</a></h3>
+<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.6. Privacy of fields</a></h3>
 <div class="paragraph">
 <p>The <code>Name</code>, <code>Phone</code>, <code>Email</code> and <code>Address</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
 </div>
@@ -1105,7 +1155,7 @@ Hence, a private field will remain private and the value stored by that field wi
 <p>Upon generation of all the fields, if <code>areFieldsAllPrivate</code> is still true, <code>createEditedPerson</code> will throw an <code>IllegalArgumentException</code>, which will cause <code>EditCommand</code> to throw a <code>CommandException</code> and prevent the command from continuing.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
@@ -1128,7 +1178,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.6. Changing of a Person&#8217;s Privacy</a></h3>
+<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.7. Changing of a Person&#8217;s Privacy</a></h3>
 <div class="paragraph">
 <p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
 </div>
@@ -1173,7 +1223,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br>
 <strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
@@ -1186,7 +1236,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.7. Locating a Person on Google Maps</a></h3>
+<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.8. Locating a Person on Google Maps</a></h3>
 <div class="paragraph">
 <p>Upon calling the <code>locate</code> command, <code>LocateCommandParser</code> will parse the input string into an <code>Index</code>, and create a new <code>LocateCommand</code>. Should the arguments be a non-integer, a <code>ParseException</code> will be thrown.<br>
 This can be seen from the code snippet below:</p>
@@ -1258,7 +1308,7 @@ This can be seen from the code snippet below:</p>
 <p><em>Figure 3.7.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
 <strong>Alternative 1 (current choice):</strong> Create a seperate command <code>locate</code>.<br>
@@ -1271,7 +1321,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.8. Add/Delete Tag mechanism</a></h3>
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.9. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1340,7 +1390,7 @@ If the tag to be added exists in every target person in the address book, the <c
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -1364,7 +1414,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.9. Find Tag mechanism</a></h3>
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.10. Find Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
 This command will not inherit from <code>UndoableCommand</code>.</p>
@@ -1442,7 +1492,7 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
@@ -1456,7 +1506,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1494,7 +1544,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.11. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.12. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2296,7 +2346,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-01 04:45:48 +00:00
+Last updated 2017-11-01 05:25:35 +00:00
 </div>
 </div>
 </body>
