@@ -646,8 +646,9 @@ Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>J
 <div class="paragraph">
 <p>Adding <code>task</code> after <code>find</code> will allow you to sieve through your tasks, instead of your contacts.<br>
 In addition to searching the name and description of tasks, you can also opt to filter your tasks by their priority. Simply include <code>p/PRIORITY</code> after all your other criteria to do so.<br>
+You can also opt to find all tasks that are either complete or incomplete by including an optional <code>done/ISTASKDONE</code> in the command.
 All tasks with a priority higher than or equal to the value provided will be shown.<br>
-Format: <code>find task KEYWORD [MORE_KEYWORDS] [p/PRIORITY]</code> (Priority search to be coming in v2.0)<br></p>
+Format: <code>find task KEYWORD [MORE_KEYWORDS] [p/PRIORITY] [done/ISTASKDONE]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -670,6 +671,15 @@ Format: <code>find task KEYWORD [MORE_KEYWORDS] [p/PRIORITY]</code> (Priority se
 </li>
 <li>
 <p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+<li>
+<p><strong>You must include at least 1 search keyword</strong>, in order to filter the results by their priority, and whether or not it is completed.</p>
+</li>
+<li>
+<p>The <code>PRIORITY</code> must be an integer from 1 to 5, inclusive.</p>
+</li>
+<li>
+<p><code>ISTASKDONE</code> must be either <code>true</code> or <code>false</code>. If it is <code>true</code>, you will only see tasks that have been marked as complete, and if it is `false, you will only see tasks that are not complete, in addition to all other search criteria.</p>
 </li>
 </ul>
 </div>
@@ -1639,7 +1649,7 @@ e.g. <code>dismiss 4 1 from/17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-02 15:18:47 +00:00
+Last updated 2017-11-03 04:03:23 +00:00
 </div>
 </div>
 </body>
