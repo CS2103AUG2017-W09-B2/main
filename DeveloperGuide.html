@@ -585,40 +585,51 @@ users to customize the application&#8217;s font size quickly on the go.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>There are two methods of calling changes in font size. The first way is through the UI. The Class Diagram for this
-procedure is shown below:</p>
+<p>There are two methods of calling changes in font size:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>onAction</code> handlers are used to handle UI font size buttons. These handlers will post
+new events via <code>ComponentManager</code>.</p>
+</li>
+<li>
+<p>CLI commands also post new events to handle font size changes, when the relevant command is entered (e.g. <code>fontsize increase</code>).</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FontSizeChangeSequenceDiagram.png" alt="FontSizeChangeSequenceDiagram" width="700">
+</div>
 </div>
 <div class="paragraph">
-<p>Image Placeholder</p>
+<p>From the sequence diagram above, we can observe that the font size changes are handled by subscriber functions in PersonListPanel
+and TaskListPanel.</p>
 </div>
-<div class="paragraph">
-<p>The other method of calling changes in font size is through a CLI command. When the relevant command is entered,
-the Command class calls MainWindow. The rest of the process flow is identical to that of the UI triggered font size
-command.</p>
-</div>
-<div class="paragraph">
-<p>Image Placeholder</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The initial implementation required access to the model from the UI. This implementation was replaced with one that
+standardised the handling of font size change requests through events.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of Task-related commands<br>
-<strong>Alternative 1 (current choice):</strong> Use polymorphism to allow existing commands to implement the new commands<br>
-<strong>Pros:</strong> Under this scheme, any command can be extended to allow addition of new commands of any type, without affecting the architecture significantly<br>
-<strong>Cons:</strong> SRP may be violated as each Command class may now need to handle 2 different types of objects.<br>
-<strong>Alternative 2:</strong> Create new classes for all new commands<br>
-<strong>Pros:</strong> Simpler to implement.<br>
-<strong>Cons:</strong> Code duplication occurs as the commands for Person and Tasks objects share the same structure.</p>
-</div>
-<hr>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Storage of Task objects<br>
-<strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
-<strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.
-<strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.
-<strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
-<strong>Pros</strong> Only 1 storage file is needed. The storage manager thus only needs to refer to one storage<br>
-<strong>Cons</strong> Any changes to the Person or Task</p>
+<p><strong>Aspect:</strong> Use either UI or CLI based implementations<br>
+<strong>Alternative 1 (current choice):</strong> Implementing both UI and CLI functionality<br>
+<strong>Pros:</strong> More options for the user. The was also not much increase in complexity when implementing the CLI version <br>
+<strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br>
+<strong>Alternative 2:</strong> Implementing only UI functionality<br>
+<strong>Pros:</strong> Less tedious to implement and very intuitive for the user<br>
+<strong>Cons:</strong> Users who prefer typing commands will not have the option of editing their font sizes using the CLI</p>
 </div>
 </div>
 </div>
@@ -2359,7 +2370,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-05 10:40:24 +00:00
+Last updated 2017-11-05 12:19:01 +00:00
 </div>
 </div>
 </body>
