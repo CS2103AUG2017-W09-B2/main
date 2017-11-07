@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Kelvin Lin - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Kelvin Lin - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">Project: AddressBook - Level 4</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/main/Esilocke.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/test/Esilocke.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-edit-tag"><a class="link" href="#enhancement-added-edit-tag">Enhancement Added: Edit Tag</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="renaming-existing-tags-code-edittag-code-since-v1-2"><a class="link" href="#renaming-existing-tags-code-edittag-code-since-v1-2">Renaming existing tags : <code>edittag</code> (Since v1.2)</a></h3>
+<div class="paragraph">
+<p>You can use <code>edittag</code> to rename one existing tag. For example, you may wish to promote all existing "acquaintances" into "friends", or change all "CS2103" project mates to "CS2101" project mates instead.<br>
+<code>edittag</code> can be replaced by <code>et</code> for faster input.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>edittag TAGTOBERENAMED NEWTAGNAME</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The two tag names must be different.</p>
+</li>
+<li>
+<p>This command will not work if none of your contacts have a tag with the <code>TAGTOBERENAMED</code> value.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edittag friends enemies</code><br>
+Changes the tag called <code>friends</code> to one called <code>enemies</code> instead. All existing contacts with a <code>friends</code> tag will now have an <code>enemies</code> tag instead.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>The user may find a need to change the name of a particular name.<br>
+In the context of the target user, suppose that a user wishes to change the tag <code>CS2103Groupmates</code> to <code>friends</code>, after he has completed the module.<br>
+The user would need to delete the tag from all users who are tagged with <code>CS2103Groupmates</code>, and add the tag <code>friends</code> to them one-by-one. <code>edittag</code> thus aims to make this process faster by allowing users to rename all instances of the tag from the address book.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-optional-data-input"><a class="link" href="#enhancement-added-optional-data-input">Enhancement Added: Optional Data Input</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p>Optional Data Input allows tasks and persons to have only one compulsory field, the name. All other fields in a person or task can be left unspecified, allowing for a greater range of inputs.</p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>We may not always have the opportunity to have contacts or tasks with complete information.<br>
+Some contacts may not have an address, or email address, while some tasks may not have a deadline, or require a description. Without Optional Data Input, the user would need to come up with random placeholder values for each prefix, which would greatly hinder user experience as the user would need to type in unnecessary values to satisfy the command format.<br>
+Allowing optional data input thus lifts the restriction of making every field compulsory, and thus allows users to fill in a wider range of input.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-tasks-management"><a class="link" href="#enhancement-added-tasks-management">Enhancement Added: Tasks Management</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mark-task-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>Have you finally completed a task in the address book? You can use <code>setcomplete</code> to mark the specified task as complete.<br>
+<code>setcomplete</code> can be replaced by <code>stc</code> for faster input.<br>
+Format: <code>setcomplete INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Marks the task at the specified <code>INDEX</code> as completed.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list task</code><br>
+<code>setcomplete 2</code><br>
+Sets the 2nd task in the address book as completed.</p>
+</li>
+<li>
+<p><code>find task update</code><br>
+<code>setcomplete 1</code><br>
+Sets the 1st task in the results of the <code>find task</code> command as completed.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mark-task-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>Did you accidentally mark a task as completed? You can use <code>setincomplete</code> to mark the specified task as incomplete.<br>
+<code>setincomplete</code> can be replaced by <code>sti</code> for faster input.<br>
+Format: <code>setincomplete INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Marks the task at the specified <code>INDEX</code> as incomplete.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list task</code><br>
+<code>setincomplete 2</code><br>
+Sets the 2nd task in the address book as incomplete.</p>
+</li>
+<li>
+<p><code>find task update</code><br>
+<code>setincomplete 1</code><br>
+Sets the 1st task in the results of the <code>find task</code> command as incomplete.
+=== Assign contacts to task : <code>assign</code> (Since V1.4)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can use <code>assign</code> to assign contacts to an ongoing task. You may wish to use <code>assign</code> when collaborating with others for projects, for example.<br>
+<code>assign</code> can be replaced by <code>as</code> for faster input.<br>
+Format: <code>assign PEOPLEINDEX&#8230;&#8203; to/TASKINDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The PEOPLEINDEX refers to the index numbers shown in the most recent <strong>person</strong> listing.</p>
+</li>
+<li>
+<p>The TASKINDEX refers to the index number shown in the most recent <strong>task</strong> listing.</p>
+</li>
+<li>
+<p>At least 1 or more PEOPLEINDEX must be present in the command.</p>
+</li>
+<li>
+<p>PERSONINDEX and TASKINDEX <strong>must be positive integers</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>list task</code><br>
+<code>assign 1 4 5 to/2</code><br>
+Assigns the 1st, 4th and 5th contacts to 2nd task in the address book.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>find task update</code><br>
+<code>assign 2 to/1</code><br>
+Assigns the 2nd person in the address book to the 1st task in the results of the <code>find task</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dismiss-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
+<div class="paragraph">
+<p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br>
+<code>dismiss</code> can be replaced by <code>ds</code> for faster input.<br>
+Format: <code>dismiss PEOPLEINDEX&#8230;&#8203; from/TASKINDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The PEOPLEINDEX refers to the index numbers shown in the most recent <strong>person</strong> listing.</p>
+</li>
+<li>
+<p>The TASKINDEX refers to the index number shown in the most recent <strong>task</strong> listing.</p>
+</li>
+<li>
+<p>At least 1 or more PEOPLEINDEX must be present in the command.</p>
+</li>
+<li>
+<p>PERSONINDEX and TASKINDEX <strong>must be positive integers</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>list task</code><br>
+<code>dismiss 1 4 5 from/2</code><br>
+Dismisses 1st, 4th and 5th contacts in the address book from the 2nd task.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>find task update</code><br>
+<code>dismiss 2 from/1</code><br>
+Dismisses the 2nd person in the address book from the 1st task in the results of the <code>find task</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Our intended target audience are primarily NUS students, who are working on projects. In addition to managing their contact details, allowing users to manage their tasks would also greatly improve their user experience, as they would not need to keep track of their project deadlines separately.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task-object"><a class="link" href="#task-object">Task Object</a></h3>
+<div class="paragraph">
+<p>The Task object stores information related to a single deadline or task, in a manner similar to how Person information is stored.<br>
+As such, it also shares the same types of commands as the Person object, namely the <code>add</code>, <code>delete</code>, <code>find</code>, <code>select</code>, and <code>edit</code> commands.
+Object inheritance is thus used to create the commands that are shared with those used to handle Person objects.</p>
+</div>
+<div class="sect3">
+<h4 id="task-related-command-implementation"><a class="link" href="#task-related-command-implementation">Task-related Command implementation</a></h4>
+<div class="paragraph">
+<p>An example of using inheritance to handle Person vs Task addition:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddPersonCommand</span> <span class="directive">extends</span> AddCommand {
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AddTaskCommand</span> <span class="directive">extends</span> AddCommand {
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> AddCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="type">int</span> objectType = checkType(args);
+
+    <span class="keyword">if</span> (objectType == HANDLE_TYPE_PERSON) {
+        Person toAdd = createNewPerson(args);
+        <span class="keyword">return</span> AddPersonCommand(toAdd);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (objectType == HANDLE_TYPE_TASK) {
+        Task toAdd = createNewTask(args);
+        <span class="keyword">return</span> AddTaskCommand(toAdd);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Parser in charge of the command will thus return either an AddPersonCommand, or an AddTaskCommand, depending on whether you specify to add a Task or not in the arguments.
+<br>
+The sequence diagram below shows how this is done:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddTaskSeq.png" alt="AddTaskSeq" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="task-object-storage"><a class="link" href="#task-object-storage">Task Object Storage</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">---
+    <span class="tag">&lt;persons&gt;</span>
+        <span class="tag">&lt;name&gt;</span>someone else<span class="tag">&lt;/name&gt;</span>
+        <span class="tag">&lt;phone&gt;</span><span class="tag">&lt;/phone&gt;</span>
+        <span class="tag">&lt;email&gt;</span><span class="tag">&lt;/email&gt;</span>
+        <span class="tag">&lt;address&gt;</span><span class="tag">&lt;/address&gt;</span>
+    <span class="tag">&lt;/persons&gt;</span>
+    <span class="tag">&lt;tasks&gt;</span>
+        <span class="tag">&lt;name&gt;</span>Buy new pencil<span class="tag">&lt;/name&gt;</span>
+        <span class="tag">&lt;description&gt;</span>Buy new pencil for writing purposes<span class="tag">&lt;/description&gt;</span>
+        <span class="tag">&lt;deadline&gt;</span><span class="tag">&lt;/deadline&gt;</span>
+        <span class="tag">&lt;priority&gt;</span>2<span class="tag">&lt;/priority&gt;</span>
+    <span class="tag">&lt;/tasks&gt;</span>
+---</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Task objects are stored in a similar manner to Person objects, and share the same level of hierarchy as Person objects. During startup, tasks are read and entered into the UniqueTaskList, which handles all the tasks that are present in the address book.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Task-related commands<br>
+<strong>Alternative 1 (current choice):</strong> Use inheritance to implement different commands for Task and Person objects<br>
+<strong>Pros:</strong> Can be easily extended to allow handling of other types of objects, and preserves Separation of Concerns.<br>
+<strong>Cons:</strong> Minor code duplication occurs as the commands for Person and Tasks objects share the same structure.<br>
+<strong>Alternative 2:</strong> Use polymorphism to allow existing commands to implement task handling<br>
+<strong>Pros:</strong> Code duplication is kept to a minimum as the Command will handle Task and Person objects in the same class.<br>
+<strong>Cons:</strong> Single Responsibility Principle is violated as each Command class now needs to handle 2 different types of objects.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storage of Task objects<br>
+<strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
+<strong>Pros</strong> Only 1 storage file is needed. The storage manager thus only needs to refer to one storage<br>
+<strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.<br>
+<strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
+<strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.<br>
+<strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.<br></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="assign-and-dismiss-commands"><a class="link" href="#assign-and-dismiss-commands">Assign and Dismiss Commands</a></h3>
+<div class="paragraph">
+<p>The <code>assign</code> and <code>dismiss</code> command allows you to assign contacts to and from your tasks, thus aiding coordination and collaboration.<br>
+The Assignees class stores information related to who is assigned to a particular task through maintaining an internal ArrayList that keeps track of all the indexes of the people who are assigned to the task.<br></p>
+</div>
+<div class="paragraph">
+<p>The indexes stored in the Assignees class <strong>refer to the index of the person in the UniquePersonList, not the visible index shown to the user in the UI</strong>. This means that the indexes will not change even if the list shown in the UI changes, such as after a <code>find</code> operation.<br>
+For example, given the below list of persons:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>First person</p>
+</li>
+<li>
+<p>Second person</p>
+</li>
+<li>
+<p>Third person</p>
+</li>
+<li>
+<p>Fourth person</p>
+</li>
+<li>
+<p>Fifth person</p>
+</li>
+<li>
+<p>Sixth person</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After a <code>find</code> operation, the following list of persons is shown to the user:<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Second person</p>
+</li>
+<li>
+<p>Fourth person</p>
+</li>
+<li>
+<p>Fifth person</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When you call <code>assign 1 2 to/1</code>, while the first and second persons in the visible list will be assigned to the first Task, in this case the "Second person" and "Fourth person", internally the assignee list contains the following values:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">assignedList = {<span class="integer">1</span>, <span class="integer">3</span>}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The indexes 1 and 3 refer to the zero-based index of the "Second person" and "Fourth person" in the complete list.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storage of assigned persons in the Assignee class<br>
+<strong>Alternative 1 (current choice):</strong> Store the Indexes of the persons only<br>
+<strong>Pros:</strong> The assigned persons will only need to be retrieved on a per-need basis, rather than residing in the Assignee class all the time, thus making storage simpler<br>
+<strong>Cons:</strong> UniquePersonList will be coupled to Tasks, as Tasks will need to retrieve information from the UniquePersonList in order to .<br>
+<strong>Alternative 2:</strong> Store the whole person in the Assignees class<br>
+<strong>Pros:</strong> The Assignees class will not need to depend on the UniquePersonList as its internal list is independent from that of the UniquePersonList<br>
+<strong>Cons:</strong> Repetition of information is incurred in the storage file, as the same person can appear multiple times if he is assigned to multiple tasks. This will increase the size of the storage file, and make read-write operations slow.<br></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-add-automatic-reminders-for-upcoming-tasks"><a class="link" href="#enhancement-proposed-add-automatic-reminders-for-upcoming-tasks">Enhancement Proposed: Add automatic reminders for upcoming tasks</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>When a user has many tasks, they might wish to see which tasks are due, or already past their deadlines. While the user could do this indirectly via sorting the tasks by their deadlines, having the application remind the user of the number of tasks upcoming would serve as an alternative.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Conducted internal rigorous Acceptance testing (Link to Issues found)</p>
+</li>
+<li>
+<p>Conducted Acceptance Testing for other teams [<a href="https://github.com/CS2103AUG2017-F09-B1/main/issues/83">F09-B1</a>] [<a href="https://github.com/CS2103AUG2017-F09-B1/main/issues/82">F09-B1</a>]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-07 16:13:48 +00:00
+</div>
+</div>
+</body>
+</html>

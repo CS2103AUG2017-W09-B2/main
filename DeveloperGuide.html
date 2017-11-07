@@ -833,29 +833,22 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h3 id="task-object"><a class="link" href="#task-object">3.3. Task Object</a></h3>
 <div class="paragraph">
 <p>The Task object stores information related to a single deadline or task, in a manner similar to how Person information is stored.<br>
-As such, it also shares the same types of commands as the Person object, namely the add, delete, list, select, and edit commands.
-Instead of making a new Logic object for each new command, polymorphism is used to implement the "Task" version of each command.</p>
+As such, it also shares the same types of commands as the Person object, namely the <code>add</code>, <code>delete</code>, <code>find</code>, <code>select</code>, and <code>edit</code> commands.
+Object inheritance is thus used to create the commands that are shared with those used to handle Person objects.</p>
 </div>
+<div class="sect3">
+<h4 id="task-related-command-implementation"><a class="link" href="#task-related-command-implementation">3.3.1. Task-related Command implementation</a></h4>
 <div class="paragraph">
-<p>An example of using polymorphism to handle Person vs Task addition:</p>
+<p>An example of using inheritance to handle Person vs Task addition:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddCommand</span> <span class="directive">extends</span> Command {
-    <span class="directive">public</span> AddCommand(ReadOnlyPerson person) {
-        toAdd = <span class="keyword">new</span> Person(person);
-        toHandle = HANDLE_TYPE_PERSON;
-    }
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddPersonCommand</span> <span class="directive">extends</span> AddCommand {
+}
 
-    <span class="directive">public</span> AddCommand(ReadOnlyTask task) {
-        toAdd = <span class="keyword">new</span> Task(task);
-        toHandle = HANDLE_TYPE_TASK;
-    }
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AddTaskCommand</span> <span class="directive">extends</span> AddCommand {
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>The AddCommand will thus call a different constructor depending on the type of the argument supplied to it. To facilitate this, the respective Parser class must also be modified:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -864,15 +857,17 @@ Instead of making a new Logic object for each new command, polymorphism is used 
 
     <span class="keyword">if</span> (objectType == HANDLE_TYPE_PERSON) {
         Person toAdd = createNewPerson(args);
+        <span class="keyword">return</span> AddPersonCommand(toAdd);
     } <span class="keyword">else</span> <span class="keyword">if</span> (objectType == HANDLE_TYPE_TASK) {
         Task toAdd = createNewTask(args);
+        <span class="keyword">return</span> AddTaskCommand(toAdd);
     }
-    <span class="keyword">return</span> <span class="keyword">new</span> AddCommand(toAdd);
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The AddCommandParser checks the args to see if this is a task, then creates the object to be added, and creates a new AddCommand to handle the result.<br>
+<p>The Parser in charge of the command will thus return either an AddPersonCommand, or an AddTaskCommand, depending on whether you specify to add a Task or not in the arguments.
+<br>
 The sequence diagram below shows how this is done:</p>
 </div>
 <div class="imageblock">
@@ -880,12 +875,12 @@ The sequence diagram below shows how this is done:</p>
 <img src="images/AddTaskSeq.png" alt="AddTaskSeq" width="800">
 </div>
 </div>
-<div class="paragraph">
-<p>To support the addition of Task objects, the Storage component is modified to accept Task objects in a similar manner as to how Person objects are being stored.</p>
 </div>
+<div class="sect3">
+<h4 id="task-object-storage"><a class="link" href="#task-object-storage">3.3.2. Task Object Storage</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="html">---
+<pre class="CodeRay highlight"><code data-lang="xml">---
     <span class="tag">&lt;persons&gt;</span>
         <span class="tag">&lt;name&gt;</span>someone else<span class="tag">&lt;/name&gt;</span>
         <span class="tag">&lt;phone&gt;</span><span class="tag">&lt;/phone&gt;</span>
@@ -902,28 +897,29 @@ The sequence diagram below shows how this is done:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Tasks objects are stored in the same level of hierarchy as Person objects, and during startup, are read and entered into the UniqueTaskList, which handles all the tasks that are present in the address book.</p>
+<p>Task objects are stored in a similar manner to Person objects, and share the same level of hierarchy as Person objects. During startup, tasks are read and entered into the UniqueTaskList, which handles all the tasks that are present in the address book.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Task-related commands<br>
-<strong>Alternative 1 (current choice):</strong> Use polymorphism to allow existing commands to implement the new commands<br>
-<strong>Pros:</strong> Under this scheme, any command can be extended to allow addition of new commands of any type, without affecting the architecture significantly<br>
-<strong>Cons:</strong> SRP may be violated as each Command class may now need to handle 2 different types of objects.<br>
-<strong>Alternative 2:</strong> Create new classes for all new commands<br>
-<strong>Pros:</strong> Simpler to implement.<br>
-<strong>Cons:</strong> Code duplication occurs as the commands for Person and Tasks objects share the same structure.</p>
+<strong>Alternative 1 (current choice):</strong> Use inheritance to implement different commands for Task and Person objects<br>
+<strong>Pros:</strong> Can be easily extended to allow handling of other types of objects, and preserves Separation of Concerns.<br>
+<strong>Cons:</strong> Minor code duplication occurs as the commands for Person and Tasks objects share the same structure.<br>
+<strong>Alternative 2:</strong> Use polymorphism to allow existing commands to implement task handling<br>
+<strong>Pros:</strong> Code duplication is kept to a minimum as the Command will handle Task and Person objects in the same class.<br>
+<strong>Cons:</strong> Single Responsibility Principle is violated as each Command class now needs to handle 2 different types of objects.<br></p>
 </div>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Storage of Task objects<br>
-<strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
-<strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.
-<strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.
 <strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
 <strong>Pros</strong> Only 1 storage file is needed. The storage manager thus only needs to refer to one storage<br>
-<strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.</p>
+<strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.<br>
+<strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
+<strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.<br>
+<strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.<br></p>
 </div>
 </div>
 </div>
@@ -2542,7 +2538,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 15:05:30 +00:00
+Last updated 2017-11-07 16:13:48 +00:00
 </div>
 </div>
 </body>
