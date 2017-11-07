@@ -397,10 +397,8 @@ task into the Address++ application.</p>
 <div class="paragraph">
 <p><strong>Example Scenario 2</strong><br>
 You realize that you have run out of pencils. You decide to add a task into Address++ to remind you to get some
-new ones later.</p>
-</div>
-<div class="paragraph">
-<p><code>add task n/Buy new pencil p/2</code></p>
+new ones later.
+<code>add task n/Buy new pencil p/2</code></p>
 </div>
 </div>
 </div>
@@ -803,7 +801,7 @@ Format: <code>showtag</code><br></p>
 <h3 id="locating-persons-by-tag-code-findtag-code-since-v1-4"><a class="link" href="#locating-persons-by-tag-code-findtag-code-since-v1-4">3.14. Locating persons by tag : <code>findtag</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use the <code>findtag</code> command to quickly filter out contacts who match your criteria. For example, you may wish to find contacts who are your <code>classmates</code>.<br>
-If you want to find contacts who are your <code>classmates</code> but not your <code>friends</code>, you just need to add <code>/not</code> in front of the <code>friends</code>.<br>
+If you want to find contacts who are your <code>classmates</code> but not your <code>friends</code>, you just need to add <code>/</code> in front of the <code>friends</code>.<br>
 <code>findtag</code> can be replaced by <code>ftag</code> for faster input.<br>
 Format: <code>findtag KEYWORD [MORE_KEYWORDS]</code><br></p>
 </div>
@@ -821,24 +819,38 @@ Returns any persons having tag <code>friends</code></p>
 Returns any person having tags <code>friends</code> or <code>colleagues</code></p>
 </li>
 <li>
-<p><code>findtag /notfriends</code><br>
+<p><code>findtag /friends</code><br>
 Returns any persons not have tag <code>friends</code></p>
 </li>
 <li>
-<p><code>findtag classmates /notfriends</code><br>
-Returns any person have tags <code>classmates</code> but not have tag <code>friends</code></p>
+<p><code>findtag classmates /friends</code><br>
+Returns any person having tags <code>classmates</code> but not having tag <code>friends</code></p>
 </li>
 </ul>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
-<p>*Important note on <code>findtag</code> criteria
-* The search is not case insensitive. e.g <code>friends</code> will match <code>FRIENDS</code>
-* The order of the keywords does not matter. e.g. <code>friends classmates</code> will match <code>classmates friends</code>
-* Only the tag is searched for persons.
-* Only full words will be matched e.g. <code>friend</code> will not match <code>friends</code>
-* There is no space <code>/not</code> and tag name e.g. <code>/not friends</code> will not match <code>/notfriends</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Important note on <code>findtag</code> criteria</p>
+</li>
+<li>
+<p>The search is not case insensitive. e.g <code>friends</code> will match <code>FRIENDS</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>friends classmates</code> will match <code>classmates friends</code></p>
+</li>
+<li>
+<p>Only the tag is searched for persons.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>friend</code> will not match <code>friends</code></p>
+</li>
+<li>
+<p>There is no space <code>/not</code> and tag name e.g. <code>/not friends</code> will not match <code>/notfriends</code></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1750,7 +1762,7 @@ e.g. <code>dismiss 4 1 from/17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 00:34:31 +00:00
+Last updated 2017-11-07 12:14:08 +00:00
 </div>
 </div>
 </body>
