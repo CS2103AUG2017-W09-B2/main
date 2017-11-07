@@ -52,10 +52,11 @@
 <li><a href="#privacy-of-fields">3.6. Privacy of fields</a></li>
 <li><a href="#changing-of-a-person-s-privacy">3.7. Changing of a Person&#8217;s Privacy</a></li>
 <li><a href="#locating-a-person-on-google-maps">3.8. Locating a Person on Google Maps</a></li>
-<li><a href="#add-delete-tag-mechanism">3.9. Add/Delete Tag mechanism</a></li>
-<li><a href="#find-tag-mechanism">3.10. Find Tag mechanism</a></li>
-<li><a href="#logging">3.11. Logging</a></li>
-<li><a href="#configuration">3.12. Configuration</a></li>
+<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.9. Navigating from one address to another using Google Maps</a></li>
+<li><a href="#add-delete-tag-mechanism">3.10. Add/Delete Tag mechanism</a></li>
+<li><a href="#find-tag-mechanism">3.11. Find Tag mechanism</a></li>
+<li><a href="#logging">3.12. Logging</a></li>
+<li><a href="#configuration">3.13. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1054,7 +1055,7 @@ demonstrates how this works:</p>
 <div class="sect2">
 <h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.6. Privacy of fields</a></h3>
 <div class="paragraph">
-<p>The <code>Name</code>, <code>Phone</code>, <code>Email</code> and <code>Address</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
+<p>The <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
 </div>
 <div class="paragraph">
 <p>Adding a person with private fields uses the same <code>AddCommand</code> as adding a person with no public fields.<br>
@@ -1073,7 +1074,7 @@ Upon obtaining all the fields anc creating a new <code>Person</code>, <code>AddC
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.5.1 : Sequence Diagram for adding a Person with private fields</em></p>
+<p><em>Figure 3.6.1 : Sequence Diagram for adding a Person with private fields</em></p>
 </div>
 <div class="paragraph">
 <p>If a field is private, then the <code>toString</code> method will return a string <code>&lt;Private [FIELD]&gt;</code>, where <code>[FIELD]</code> is the name of that field.<br>
@@ -1112,7 +1113,9 @@ This is done by adding the following</p>
 <span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
    <span class="directive">private</span> <span class="predefined-type">Boolean</span> emailIsPrivate;
 <span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
-   <span class="directive">private</span> <span class="predefined-type">Boolean</span> addressIsPrivate;</code></pre>
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> addressIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> remarkIsPrivate;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1129,6 +1132,8 @@ This is done by adding the following</p>
     <span class="tag">&lt;emailIsPrivate&gt;</span>false<span class="tag">&lt;/emailIsPrivate&gt;</span>
     <span class="tag">&lt;address&gt;</span>Blk 30 Geylang Street 29, #06-40<span class="tag">&lt;/address&gt;</span>
     <span class="tag">&lt;addressIsPrivate&gt;</span>false<span class="tag">&lt;/addressIsPrivate&gt;</span>
+    <span class="tag">&lt;remark&gt;</span>cheerful lad<span class="tag">&lt;/remark&gt;</span>
+    <span class="tag">&lt;remarkIsPrivate&gt;</span>false<span class="tag">&lt;/remarkIsPrivate&gt;</span>
     <span class="tag">&lt;tagged&gt;</span>friends<span class="tag">&lt;/tagged&gt;</span>
 <span class="tag">&lt;/persons&gt;</span></code></pre>
 </div>
@@ -1162,17 +1167,17 @@ Hence, a private field will remain private and the value stored by that field wi
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="directive">static</span> <span class="predefined-type">Name</span> createUpdatedName(ReadOnlyPerson personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        <span class="predefined-type">Name</span> updatedName;
-        <span class="keyword">if</span> (!personToEdit.getName().isPrivate()) {
-            updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-            <span class="keyword">if</span> (editPersonDescriptor.getName().isPresent()) {
-                areFieldsAllPrivate = <span class="predefined-constant">false</span>;
-            }
-        } <span class="keyword">else</span> {
-            updatedName = personToEdit.getName();
+    <span class="predefined-type">Name</span> updatedName;
+    <span class="keyword">if</span> (!personToEdit.getName().isPrivate()) {
+        updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        <span class="keyword">if</span> (editPersonDescriptor.getName().isPresent()) {
+            areFieldsAllPrivate = <span class="predefined-constant">false</span>;
         }
-        <span class="keyword">return</span> updatedName;
-    }</code></pre>
+    } <span class="keyword">else</span> {
+        updatedName = personToEdit.getName();
+    }
+    <span class="keyword">return</span> updatedName;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1215,7 +1220,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.6.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
+<p><em>Figure 3.7.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
 </div>
 <div class="paragraph">
 <p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
@@ -1253,7 +1258,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 <strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
 <strong>Pros:</strong> It is clear to users and developers that <code>changeprivacy</code> is to modify a person&#8217;s privacy while <code>edit</code> changes the actual data if the relevant field is not private. <br>
 <strong>Cons:</strong> Additional command, parser and tests must be created. <br>
-<strong>Alternative 2:</strong> Enhance the functi-onality of EditCommand.<br>
+<strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
 <strong>Pros:</strong> Can make use of existing code to aid the implementation.<br>
 <strong>Cons:</strong> Increases the complexity of EditCommand for both users and developers. More ambiguous as to how editing a private field will affect the data.</p>
 </div>
@@ -1268,14 +1273,14 @@ This can be seen from the code snippet below:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">public</span> LocateCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
-        <span class="keyword">try</span> {
-            Index index = ParserUtil.parseIndex(args);
-            <span class="keyword">return</span> <span class="keyword">new</span> LocateCommand(index);
-        } <span class="keyword">catch</span> (IllegalValueException ive) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(
-                    <span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, LocateCommand.MESSAGE_USAGE));
-        }
-    }</code></pre>
+    <span class="keyword">try</span> {
+        Index index = ParserUtil.parseIndex(args);
+        <span class="keyword">return</span> <span class="keyword">new</span> LocateCommand(index);
+    } <span class="keyword">catch</span> (IllegalValueException ive) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(
+                <span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, LocateCommand.MESSAGE_USAGE));
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1311,13 +1316,13 @@ This can be seen from the code snippet below:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">private</span> <span class="type">void</span> loadMapsPage(ReadOnlyPerson person) {
-        <span class="keyword">if</span> (person.getAddress().isPrivate()) {
-            raise(<span class="keyword">new</span> NewResultAvailableEvent(PRIVATE_ADDRESS_CANNOT_SEARCH));
-        } <span class="keyword">else</span> {
-            loadPage(GOOGLE_MAPS_URL_PREFIX + person.getAddress().toString().replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
-                + GOOGLE_MAPS_URL_SUFFIX);
-        }
-    }</code></pre>
+    <span class="keyword">if</span> (person.getAddress().isPrivate()) {
+        raise(<span class="keyword">new</span> NewResultAvailableEvent(PRIVATE_ADDRESS_CANNOT_SEARCH));
+    } <span class="keyword">else</span> {
+        loadPage(GOOGLE_MAPS_URL_PREFIX + person.getAddress().toString().replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
+            + GOOGLE_MAPS_URL_SUFFIX);
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1329,13 +1334,13 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.7.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
+<p><em>Figure 3.8.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
-<strong>Alternative 1 (current choice):</strong> Create a seperate command <code>locate</code>.<br>
+<strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
 <strong>Pros:</strong> No modification needed for existing commands, which makes it clear the purpose of each command.<br>
 <strong>Cons:</strong> Additional commands will need to be learnt for both developers and users.<br>
 <strong>Alternative 2:</strong> Add the functionality into <code>SelectCommand</code>.<br>
@@ -1345,7 +1350,174 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.9. Add/Delete Tag mechanism</a></h3>
+<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.9. Navigating from one address to another using Google Maps</a></h3>
+<div class="paragraph">
+<p>When the <code>navigate</code> command is entered into the command line, <code>NavigateCommandParse</code> will first reset its internal <code>from</code>, <code>to</code>, <code>fromIndex</code>, <code>toIndex</code> to null. It will then check for the input prefixes and ensure that only one of the prefixes from the group <code>fp/</code>, <code>ft/</code>, and <code>fa/</code>, which we will subsequently call the <code>from</code> prefixes are present. It then does the same with the prefixes from the group <code>tp/</code>, <code>tt/</code> and <code>ta/</code>, which we will call the <code>to</code> prefixes.<br></p>
+</div>
+<div class="paragraph">
+<p>This is done by invoking the <code>checkFrom</code> and <code>checkTo</code> methods as can be seen from the code snippet below. For the example <code>checkFrom</code>, it takes in 3 booleans on whether or not each prefix is present and checks whether or not there is exactly one kind of <code>from</code> prefix. It throws an error if there are no <code>from</code> prefixes or more than one type of <code>from</code> prefixes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> checkFrom(ArgumentMultimap argumentMultimap, <span class="type">boolean</span> fromAddress, <span class="type">boolean</span> fromPerson, <span class="type">boolean</span> fromTask)
+        <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="keyword">if</span> (!(fromAddress || fromPerson || fromTask)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, NavigateCommand.MESSAGE_USAGE));
+    } <span class="keyword">else</span> <span class="keyword">if</span> ((fromAddress &amp;&amp; (fromPerson || fromTask)) || (fromPerson &amp;&amp; fromTask)) {
+        <span class="comment">// If 2 or more from prefixes are present</span>
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(NavigateCommand.MESSAGE_MULTIPLE_FROM_ERROR);
+    } <span class="keyword">else</span> {
+        <span class="keyword">try</span> {
+            setArgsForNavigateCommand(argumentMultimap, fromAddress, fromPerson, <span class="predefined-constant">true</span>);
+        } <span class="keyword">catch</span> (IllegalValueException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(e.getMessage(), e);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>checkFrom</code> calls <code>setArgsForNavigateCommand</code>, which sets the variables in the <code>NavigateCommandParser</code> to the appropriate values depending on whether the address originates from a person, a task or is a manual input by the user.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> setArgsForNavigateCommand(ArgumentMultimap argumentMultimap, <span class="type">boolean</span> address, <span class="type">boolean</span> person, <span class="type">boolean</span> forFrom) <span class="directive">throws</span> IllegalValueException {
+    <span class="keyword">if</span> (address) {
+        <span class="keyword">if</span> (forFrom) {
+            from = <span class="keyword">new</span> Location(ParserUtil.parseLocationFromAddress(
+                    argumentMultimap.getValue(PREFIX_NAVIGATE_FROM_ADDRESS)).get().toString());
+        } <span class="keyword">else</span> {
+            to = <span class="keyword">new</span> Location(ParserUtil.parseLocationFromAddress(
+                    argumentMultimap.getValue(PREFIX_NAVIGATE_TO_ADDRESS)).get().toString());
+        }
+    } <span class="keyword">else</span> <span class="keyword">if</span> (person) {
+        <span class="keyword">if</span> (forFrom) {
+            fromIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_FROM_PERSON).get());
+        } <span class="keyword">else</span> {
+            toIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_TO_PERSON).get());
+        }
+    } <span class="keyword">else</span> {
+        <span class="keyword">if</span> (forFrom) {
+            fromIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_FROM_TASK).get());
+        } <span class="keyword">else</span> {
+            toIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_TO_TASK).get());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, <code>NavigateCommandParser</code> will create a new <code>NavigateCommand</code> based on the inputs as set by <code>setArgsForNavigateCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>When <code>NavigateCommand</code> is created, it first checks if there are duplicate <code>from</code> or <code>to</code> addresses that are passed into it and throws an error if that is the case.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> checkDuplicateFromAndToLocation(Location locationFrom, Location locationTo, Index fromIndex, Index toIndex) <span class="directive">throws</span> <span class="exception">IllegalArgumentException</span> {
+    <span class="keyword">if</span> (locationFrom != <span class="predefined-constant">null</span> &amp;&amp; fromIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_MULTIPLE_FROM_ERROR);
+    }
+    <span class="keyword">if</span> (locationTo != <span class="predefined-constant">null</span> &amp;&amp; toIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_MULTIPLE_TO_ERROR);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If it passes this check, <code>NavigateCommand</code> stores <code>fromLocation</code> and <code>toLocation</code>, which are the Locations of any manually added address by the user to navigate from and to respectively. It also stores <code>toIndex</code> and <code>fromIndex</code>, which are the Indexes of the <code>Person</code> or <code>Task</code> to extract the address from as well as <code>toIsTask</code> and <code>fromIsTask</code>, which are booleans that indicate whether <code>toIndex</code> and <code>fromIndex</code> are indexes of Persons or Tasks.</p>
+</div>
+<div class="paragraph">
+<p>Upon execution of <code>NavigateCommmand</code>, it will first check if it has a non-null <code>fromIndex</code>, if it does, it will create a new Location based on its <code>fromIndex</code> and <code>fromIsTask</code> values using the <code>setLocationByIndex</code> method. Otherwise, it will set the Location to be the Location in <code>locationfrom</code>. This can be seen below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (fromIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">try</span> {
+            from = setLocationByIndex(fromIndex, fromIsTask);
+        } <span class="keyword">catch</span> (IllegalValueException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR);
+        }
+    } <span class="keyword">else</span> {
+        from = locationFrom;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>setLocationByIndex throws Exceptions if the target Person or Task does not have a valid Address to extract.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (fromIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">try</span> {
+            from = setLocationByIndex(fromIndex, fromIsTask);
+        } <span class="keyword">catch</span> (IllegalValueException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR);
+        }
+    } <span class="keyword">else</span> {
+        from = locationFrom;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>NavigateCommand</code> does the same for the Address to navigate <code>To</code> and posts a new <code>BrowserPanelNavigateEvent</code>, passing in the <code>Location</code> to navigate <code>From</code> and the <code>Location</code> to navigate <code>To</code>.<br>
+<code>NavigateCommand</code> will then create a new <code>CommandResult</code> to indicate a successful <code>Command</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>BrowserPanel</code> will then get the information from this <code>BrowserPanelNavigateEvent</code>, and load the appropriate Google Maps URL after replacing information such as the Unit Number and extra whitespaces. This has to be done as Google Maps does not function properly with Unit Numbers or spaces in its URL.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> loadDirectionsPage(<span class="predefined-type">String</span> fromLocation, <span class="predefined-type">String</span> toLocation) {
+    loadPage(GOOGLE_MAPS_DIRECTIONS_PREFIX + <span class="string"><span class="delimiter">&quot;</span><span class="content">&amp;origin=</span><span class="delimiter">&quot;</span></span>
+            + fromLocation.replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">#(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>).replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
+            .replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">-(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">&amp;destination=</span><span class="delimiter">&quot;</span></span>
+            + toLocation.replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">#(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>).replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
+            .replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">-(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)
+            + GOOGLE_MAPS_DIRECTIONS_SUFFIX);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The overall sequence of events is illustrated by the following sequence diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NavigateSequenceDiagram.png" alt="NavigateSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.9.1 : Sequence Diagram for Navigating from one Address to another</em></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br>
+<strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
+<strong>Pros:</strong> Only 1 constructor needed.<br>
+<strong>Cons:</strong> Additional methods will be needed to properly identify which Location to use for navigation. <br>
+<strong>Alternative 2:</strong> Create many constructors to segregate the different possible scenarios that might happen.<br>
+<strong>Pros:</strong> It is clear what information to use to generate the Locations<br>
+<strong>Cons:</strong> Requires large numbers of constructors to be created, easy for mistakes to occur as Constructors all share the same name but different argument types.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to transfer information of the address from one class to another<br>
+<strong>Alternative 1 (current choice):</strong> Wrap the address in a <code>Location</code> class before posting the BrowserPanelNavigateEvent.<br>
+<strong>Pros:</strong> Only Locations, which indicates that the address is properly parsed, will be passed for the BrowserPanel to read, reducing the possibility of BrowserPanel reading stray unwanted strings as addresses to navigate to and from. The value stored inside each Location cannot be altered once that Location object has been created.<br>
+<strong>Cons:</strong> A new class has to be created and Strings, Addresses and TaskAddresses will need to be converted to Locations first. <br>
+<strong>Alternative 2:</strong> Simply pass on a String containing the address from class to class<br>
+<strong>Pros:</strong> Easy to read and transfer information, lower overhead<br>
+<strong>Cons:</strong> It is easier for stray Strings to pollute the information, and the Strings can be unintentionally modified.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.10. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1414,7 +1586,7 @@ If the tag to be added exists in every target person in the address book, the <c
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -1438,7 +1610,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.10. Find Tag mechanism</a></h3>
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.11. Find Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
 This command will not inherit from <code>UndoableCommand</code>.</p>
@@ -1516,7 +1688,7 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.10.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.11.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
@@ -1530,7 +1702,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.12. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1568,7 +1740,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.12. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.13. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2370,7 +2542,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 13:37:28 +00:00
+Last updated 2017-11-07 15:05:30 +00:00
 </div>
 </div>
 </body>

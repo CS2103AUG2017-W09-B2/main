@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Jeffrey Goh - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Jeffrey Goh - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-address"><a class="link" href="#project-address">Project: Address++</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Address++ is a desktop address book application primarily targeted at students with projects. Users will interact with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/main/jeffreygohkw.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/test/jeffreygohkw.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-privacy-of-fields"><a class="link" href="#enhancement-added-privacy-of-fields">Enhancement Added: Privacy of Fields</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h3>
+<div class="paragraph">
+<p>You can use the <code>add</code> command to add new people to your address book</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>add</code> can be replaced by <code>a</code> for faster input.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] r/[REMARK] [t/TAG]&#8230;&#8203;</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br>
+* A person can have any number of tags (including 0)<br>
+* The <code>EMAIL</code> should be in the format address@email.domain<br>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> or <code>Remark</code> to be private by placing a <code>p</code> in front of the prefix.<br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios</strong>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+Suppose you wanted to add your new friend John Doe. You could type the following command to add his details:</p>
+</div>
+<div class="paragraph">
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+Now suppose you have another friend named Ima Hidearu, who does not provide you with all the contact information that
+you need. You can choose to omit these fields by typing in the command:</p>
+</div>
+<div class="paragraph">
+<p><code>add n/Ima Hidearu a/ e/ p/ r/ t/secretive</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 3</strong><br>
+Sometimes, you may wish to keep some fields private (i.e. not reveal them in the application). You can use the private
+option while typing in your command:</p>
+</div>
+<div class="paragraph">
+<p><code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do note that you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">Editing a person : <code>edit</code></a></h3>
+<div class="paragraph">
+<p>You can use the <code>edit</code> command to quickly fix mistakes in your entries, or add/remove details in your contacts. You may wish to edit your contacts when they change their phone numbers, for example.<br>
+<code>edit</code> can be replaced by <code>e</code> for faster input.<br>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The index refers to the index number shown in the last listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>You must provide at least one field to edit for each command.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the person will be removed. This means that you cannot cumulatively add tags using multiple <code>edit</code> commands.</p>
+</li>
+<li>
+<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+<li>
+<p>A private field will not be modified by the Edit command.</p>
+</li>
+<li>
+<p>An Edit command containing only private fields will result in a error message.</p>
+</li>
+<li>
+<p>An Edit command with both private and public fields will only modify the public fields.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
+Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>edit 2 n/Betsy Crower t/</code><br>
+Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+</li>
+<li>
+<p><code>edit 1 p/</code><br>
+Removes the phone number of the 1st person.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Adding <code>task</code> after <code>edit</code> will allow you to edit task details instead. You may wish to edit your task deadlines, for example, when your project schedule changes, or your task priorities, when a task becomes more urgent.<br>
+Format: <code>edit task INDEX [n/NAME] [d/DESCRIPTION] [by/DEADLINE] [p/PRIORITY]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The index refers to the index number shown in the last listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit task 2 p/5</code><br>
+Edits the priority of the 2nd task to be <code>5</code>.</p>
+</li>
+<li>
+<p><code>edit task 2 p/ t/</code><br>
+Removes the priority and deadline of the second task.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3"><a class="link" href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3">Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code>(Since V1.3)</a></h3>
+<div class="paragraph">
+<p>You can use the <code>changeprivacy</code> command to set the privacy settings for each field of an existing <code>Person</code> in the address book, which allows you to choose specifically what information will be displayed.<br>
+Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK]</code>
+Shorthand commands: <code>cp</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command allows you to change the privacy settings for the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>You must provide at least one of the optional fields.</p>
+</li>
+<li>
+<p>You can only provide <code>true</code> or <code>false</code> as inputs after each prefix.</p>
+</li>
+<li>
+<p>If you choose to input <code>false</code>, you will set the privacy of that field for that person to be public. The data in that field will be visible in the UI.</p>
+</li>
+<li>
+<p>If you choose to input <code>true</code>, you will set the privacy of that field for that person to be private. The data in that field cannot be modified and will not be visible in the UI.</p>
+</li>
+<li>
+<p>Fields that do not originally contain any data will still remain empty after changing their privacy.</p>
+</li>
+<li>
+<p>If you do not add a prefix for the field in the command, that field will keep its original privacy setting.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>changeprivacy 1 p/false e/true</code><br>
+Sets the phone number of the 1st person to be public and their email address to be private. The 1st person&#8217;s phone number will be displayed, if available, while their email address will be hidden in the UI.</p>
+</li>
+<li>
+<p><code>cp 2 a/false n/true e/false</code><br>
+Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>Users may have contacts that they would like to keep confidential or those that they do not feel comfortable displaying in public. Instead of removing the contact from the address book, setting a field to private allows users to choose exactly what information they would like to display and what they would like to hide.</p>
+</div>
+<div class="paragraph">
+<p>In addition, a private name cannot be searched for, and a private address cannot be used in the locate and navigate commands to prevent users from finding out the value of the private field.</p>
+</div>
+<div class="paragraph">
+<p>Having a private field also doubles up as an extra layer of protection against unintentional modifications, as private fields cannot be edited without changing them back to public fields.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">Privacy of fields</a></h3>
+<div class="paragraph">
+<p>The <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
+</div>
+<div class="paragraph">
+<p>Adding a person with private fields uses the same <code>AddCommand</code> as adding a person with no public fields.<br>
+To determine if the field that is added should be set to private, a <code>p</code> is added to the start of the prefix.<br>
+Hence, <code>pe/[EMAIL]</code> will set that person&#8217;s email to be private, whereas if <code>e/[EMAIL]</code> was used, that person&#8217;s email would be public.<br></p>
+</div>
+<div class="paragraph">
+<p>These new prefixes can be found in <code>CliSyntax</code>, and <code>AddCommandParser</code> will take data with these prefixes.
+<code>AddCommandParser</code> will then call the appropriate method in <code>ParserUtil</code>, which will parse the string provided into a new field.
+Depending on whether or not the field is supposed to be private, <code>ParsetUtil</code> will call the appropriate constructor.
+Upon obtaining all the fields anc creating a new <code>Person</code>, <code>AddCommandParser</code> will create a new <code>AddCommand</code> to handle the addition of the new <code>Person</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddPrivateSequenceDiagram.png" alt="AddPrivateSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.6.1 : Sequence Diagram for adding a Person with private fields</em></p>
+</div>
+<div class="paragraph">
+<p>If a field is private, then the <code>toString</code> method will return a string <code>&lt;Private [FIELD]&gt;</code>, where <code>[FIELD]</code> is the name of that field.<br>
+This can be seen from the <code>toString</code> method in <code>Name</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">public</span> <span class="predefined-type">String</span> toString() {
+    <span class="keyword">if</span> (isPrivate) {
+        <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">&lt;Private Name&gt;</span><span class="delimiter">&quot;</span></span>;
+    }
+    <span class="keyword">return</span> fullName;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since the information displayed in a person&#8217;s card in the UI gets the value of the field through the <code>toString()</code> method, this hides the actual value of the field in the UI.</p>
+</div>
+<div class="paragraph">
+<p>In addition, if <code>isPrivate</code> is <code>true</code> for <code>Name</code>, clicking on a person&#8217;s card in the UI will not trigger a search on Google for that person&#8217;s name.</p>
+</div>
+<div class="paragraph">
+<p>Instead, a <code>NewResultAvailableEvent</code> will be raised by <code>BrowserPanel</code> to inform the user that they are not allowed to search for a person possessing a private <code>Name</code>.</p>
+</div>
+<div class="paragraph">
+<p>To keep track of whether each field is private or not, <code>XmlAdaptedPerson</code> will have to store the <code>isPrivate</code> value for each field of <code>Person</code>.
+This is done by adding the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> nameIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> phoneIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> emailIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> addressIsPrivate;
+<span class="annotation">@XmlElement</span>(required = <span class="predefined-constant">true</span>)
+   <span class="directive">private</span> <span class="predefined-type">Boolean</span> remarkIsPrivate;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which results in a <code>Person</code> being saved in the xml file in the following format</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="html"><span class="tag">&lt;persons&gt;</span>
+    <span class="tag">&lt;name&gt;</span>Alex Yeoh<span class="tag">&lt;/name&gt;</span>
+    <span class="tag">&lt;nameIsPrivate&gt;</span>false<span class="tag">&lt;/nameIsPrivate&gt;</span>
+    <span class="tag">&lt;phone&gt;</span>87438807<span class="tag">&lt;/phone&gt;</span>
+    <span class="tag">&lt;phoneIsPrivate&gt;</span>false<span class="tag">&lt;/phoneIsPrivate&gt;</span>
+    <span class="tag">&lt;email&gt;</span>alexyeoh@example.com<span class="tag">&lt;/email&gt;</span>
+    <span class="tag">&lt;emailIsPrivate&gt;</span>false<span class="tag">&lt;/emailIsPrivate&gt;</span>
+    <span class="tag">&lt;address&gt;</span>Blk 30 Geylang Street 29, #06-40<span class="tag">&lt;/address&gt;</span>
+    <span class="tag">&lt;addressIsPrivate&gt;</span>false<span class="tag">&lt;/addressIsPrivate&gt;</span>
+    <span class="tag">&lt;remark&gt;</span>cheerful lad<span class="tag">&lt;/remark&gt;</span>
+    <span class="tag">&lt;remarkIsPrivate&gt;</span>false<span class="tag">&lt;/remarkIsPrivate&gt;</span>
+    <span class="tag">&lt;tagged&gt;</span>friends<span class="tag">&lt;/tagged&gt;</span>
+<span class="tag">&lt;/persons&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an old save file without privacy data is loaded, then the <code>toModelType()</code> method in <code>XmlAdaptedPerson</code> will set <code>isPrivate</code> to be <code>false</code> for each field of <code>Person</code>, to keep the displayed information the same.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a private field is to be edited by <code>EditCommand</code>, <code>createEditedPerson()</code> in <code>EditCommand</code> will not modify the data of that field, even though <code>EditCommand</code> will create a new <code>CommandResult</code> with a success message.<br>
+Hence, a private field will remain private and the value stored by that field will remain the same as it originally was.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This is done through the <code>createEditedPerson</code> method in <code>EditCommand</code>.
+<code>createEditedPerson</code> sets the boolean <code>areFieldsAllPrivate</code> to initially be true.</p>
+</div>
+<div class="paragraph">
+<p>As the new instance of each field is being generated, if any field contains a value in the input <code>EditPersonDescriptor</code> and that field was not originally private, <code>areFieldsAllPrivate</code> is set to false.</p>
+</div>
+<div class="paragraph">
+<p>This can be seen from the following code, which is used for the generation of a new <code>Name</code> object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="directive">static</span> <span class="predefined-type">Name</span> createUpdatedName(ReadOnlyPerson personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    <span class="predefined-type">Name</span> updatedName;
+    <span class="keyword">if</span> (!personToEdit.getName().isPrivate()) {
+        updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        <span class="keyword">if</span> (editPersonDescriptor.getName().isPresent()) {
+            areFieldsAllPrivate = <span class="predefined-constant">false</span>;
+        }
+    } <span class="keyword">else</span> {
+        updatedName = personToEdit.getName();
+    }
+    <span class="keyword">return</span> updatedName;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Upon generation of all the fields, if <code>areFieldsAllPrivate</code> is still true, <code>createEditedPerson</code> will throw an <code>IllegalArgumentException</code>, which will cause <code>EditCommand</code> to throw a <code>CommandException</code> and prevent the command from continuing.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
+<strong>Pros:</strong> Similar implementation to how the fields are currently being implemented. Privacy settings can be obtained directly from the field class itself.<br>
+<strong>Cons:</strong> Repetitive code. Additional overloaded constructor and methods are needed to set and get the value of <code>isPrivate</code>. <br>
+<strong>Alternative 2:</strong> Store a person&#8217;s privacy settings outside of the field classes in an Array or a HashMap in <code>Person</code>.<br>
+<strong>Pros:</strong> Can access and modify the privacy settings of all fields easily.<br>
+<strong>Cons:</strong> The fields themselves do not have any indication of whether or not they are private, and will have to check with the <code>Person</code> the belong to.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to determine if a field for a newly added person should be private.<br>
+<strong>Alternative 1 (current choice):</strong> Add a <code>p</code> to the start of each field&#8217;s prefix to signify that that field should be private.<br>
+<strong>Pros:</strong> Can add <code>Person</code> containing any combination of private and public fields in 1 command line.<br>
+<strong>Cons:</strong> Have to modify <code>AddCommand</code>, <code>AddCommandParser</code>, <code>ParserUtil</code> and other classes to detect the new prefix and call a separate constructor when a field is private.<br>
+<strong>Alternative 2:</strong> A <code>Person</code> is added with all field public, a separate command will then have to be used to set the desired fields to be private.<br>
+<strong>Pros:</strong> Easier implementation, do not have to modify <code>AddCommand</code>.<br>
+<strong>Cons:</strong> Requires 2 command lines to create a <code>Person</code> with private fields, which takes more time and is more inconvenient for users.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">Changing of a Person&#8217;s Privacy</a></h3>
+<div class="paragraph">
+<p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram for <code>ChangePrivacyCommand</code> is illustrated below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ChangePrivacySequenceDiagram.png" alt="ChangePrivacySequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.7.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
+</div>
+<div class="paragraph">
+<p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the input, the <code>ChangePrivacyCommandParser</code> will set the privacy values, represented by Booleans, in the <code>PersonPrivacySettings</code> object to be <code>true</code> or <code>false</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ChangePrivacyCommandParser</code> will then create a new <code>ChangePrivacyCommand</code> using the input <code>Index</code> and the <code>PersonPrivacySettings</code></p>
+</div>
+<div class="paragraph">
+<p>When <code>ChangePrivacyCommand</code> starts executing, it will create a new <code>Person</code> based on the data of the <code>Person</code> at the specified <code>Index</code>.
+It will then adjust the privacy values based on the input <code>PersonPrivacySettings</code>.</p>
+</div>
+<div class="paragraph">
+<p>Once it is done, it will update the original <code>Person</code> with the newly created <code>Person</code> in <code>Model</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If there are missing fields in the input string, the getter methods in <code>PersonPrivacySettings</code> will return <code>false</code>, but the actual value stored will remain as <code>null</code>.
+This allows <code>isAnyFieldNonNull</code> to check if the user has input any field at all.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br>
+<strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
+<strong>Pros:</strong> It is clear to users and developers that <code>changeprivacy</code> is to modify a person&#8217;s privacy while <code>edit</code> changes the actual data if the relevant field is not private. <br>
+<strong>Cons:</strong> Additional command, parser and tests must be created. <br>
+<strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
+<strong>Pros:</strong> Can make use of existing code to aid the implementation.<br>
+<strong>Cons:</strong> Increases the complexity of EditCommand for both users and developers. More ambiguous as to how editing a private field will affect the data.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-locating-a-person-s-address"><a class="link" href="#enhancement-added-locating-a-person-s-address">Enhancement Added: Locating a person&#8217;s address</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-a-person-s-address-code-locate-code-since-v1-4"><a class="link" href="#locating-a-person-s-address-code-locate-code-since-v1-4">Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></h3>
+<div class="paragraph">
+<p>If you ever need to visit one of your contacts, you can use <code>locate</code> to choose a contact, and search for their address online using Google Maps.<br>
+<code>locate</code> can be replaced by <code>loc</code> for faster input.<br>
+Format (person): <code>locate INDEX</code><br></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>locate 2</code><br>
+Locates the address of the 2nd person in the address book on Google Maps.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>locate 1</code><br>
+Locates the address of the 1st person in the results of the <code>find</code> command on Google Maps.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Depending on the stored value of the address, Google Maps may be unable to find the correct address or may display multiple addresses of the same name.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>It is up to you to provide specific and valid addresses.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A person with a private address cannot be searched on Google Maps.</p>
+</li>
+<li>
+<p>A person with no address will open Google Maps, but it will not search for an address as there is no address to search for.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code> and must be within the range of people in the most recent listing.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>While a person&#8217;s phone and email address can be used directly, users often are unaware of where exactly their contacts' addresses are located in real life. The locate command aims to solve this problem by taking the address of a contact and searching for it on Google Maps. This allows the user to find out where exactly their contacts' addresses are located.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">Locating a Person on Google Maps</a></h3>
+<div class="paragraph">
+<p>Upon calling the <code>locate</code> command, <code>LocateCommandParser</code> will parse the input string into an <code>Index</code>, and create a new <code>LocateCommand</code>. Should the arguments be a non-integer, a <code>ParseException</code> will be thrown.<br>
+This can be seen from the code snippet below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">public</span> LocateCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="keyword">try</span> {
+        Index index = ParserUtil.parseIndex(args);
+        <span class="keyword">return</span> <span class="keyword">new</span> LocateCommand(index);
+    } <span class="keyword">catch</span> (IllegalValueException ive) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(
+                <span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, LocateCommand.MESSAGE_USAGE));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Upon execution of <code>LocateCommand</code>, it will search the <code>Model</code> for the <code>Person</code> at the input <code>Index</code>. If the <code>Index</code> is out of range of the list of <code>Person`s, a `CommandException</code> will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>Otherwise, <code>LocateCommand</code> will post a new <code>BrowserPanelLocateEvent</code> and pass in the <code>Person</code> found to that event. It will then return a <code>CommandResult</code> indicating the success of its execution.</p>
+</div>
+<div class="paragraph">
+<p>This code for this can be found below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+
+        <span class="predefined-type">List</span>&lt;ReadOnlyPerson&gt; lastShownList = model.getFilteredPersonList();
+
+        <span class="keyword">if</span> (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        EventsCenter.getInstance().post(<span class="keyword">new</span> BrowserPanelLocateEvent(
+                model.getFilteredPersonList().get(targetIndex.getZeroBased())));
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_LOCATE_PERSON_SUCCESS, targetIndex.getOneBased()));
+
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>BrowserPanel will then use <code>handleBrowserPanelLocationEvent</code> to process this newly created event. It will call <code>loadMapsPage</code>, which will check if the <code>Person&#8217;s `Address</code> is private or not. If their <code>Address</code> is public, it will launch the browser, showing the <code>Address</code> of that <code>Person</code> on Google Maps. Otherwise, an error message will be printed, as can be seen below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">private</span> <span class="type">void</span> loadMapsPage(ReadOnlyPerson person) {
+    <span class="keyword">if</span> (person.getAddress().isPrivate()) {
+        raise(<span class="keyword">new</span> NewResultAvailableEvent(PRIVATE_ADDRESS_CANNOT_SEARCH));
+    } <span class="keyword">else</span> {
+        loadPage(GOOGLE_MAPS_URL_PREFIX + person.getAddress().toString().replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
+            + GOOGLE_MAPS_URL_SUFFIX);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The overall sequence of events is illustrated by the following sequence diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LocateSequenceDiagram.png" alt="LocateSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.8.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
+<strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
+<strong>Pros:</strong> No modification needed for existing commands, which makes it clear the purpose of each command.<br>
+<strong>Cons:</strong> Additional commands will need to be learnt for both developers and users.<br>
+<strong>Alternative 2:</strong> Add the functionality into <code>SelectCommand</code>.<br>
+<strong>Pros:</strong> Expands the utility of <code>SelectCommand</code> beyond performing a Google search on their name.<br>
+<strong>Cons:</strong> Will require significant modification of existing code, and may make it more confusing for users.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-navigating-from-one-address-to-another"><a class="link" href="#enhancement-added-navigating-from-one-address-to-another">Enhancement Added: Navigating from one address to another</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="navigating-from-one-address-to-another-code-navigate-code-since-v1-5"><a class="link" href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>Although <code>locate</code> shows you where a person&#8217;s address is, it does not tell you how to get there. The <code>navigate</code> command will provide directions, with the help of Google Maps, on how to get from one address to another.<br>
+<code>navigate</code> can be replaced by <code>nav</code> for faster input.<br>
+Format (person): <code>navigate [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>navigate fa/NUS tp/1</code><br>
+Opens Google Maps to provide directions on how to navigate from NUS to the address of the first person in the address book.</p>
+</li>
+<li>
+<p><code>navigate  fp/3 tt/2</code><br>
+Opens Google Maps to provide directions on how to navigate from the address of the third person in the address book to the address of the second task in the address book.</p>
+</li>
+<li>
+<p><code>navigate  ft/1 ta/Changi Airport</code><br>
+Opens Google Maps to provide directions on how to navigate from the address of the first task in the address book to Changi Airport.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Depending on the stored value of the address, Google Maps may be unable to find the correct address or may display multiple addresses of the same name.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>It is up to you to provide specific and valid addresses.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A person with a private address or a person with no address cannot be navigated from or navigated to.</p>
+</li>
+<li>
+<p>A task with no address cannot be navigated from or navigated to.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code> and must be within the range of people in the most recent listing.</p>
+</li>
+<li>
+<p>You may only input exactly one of the 3 prefixes from <code>fp/</code> <code>ft/</code> and <code>fa/</code> to indicate the address to navigate from, and exactly one of the 3 prefixes from <code>tp/</code> <code>tt/</code> and <code>ta/</code> to indicate the address to navigate to.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If you input any less or any more than 1 of the 3 prefixes from each group, the command will fail.</p>
+</li>
+<li>
+<p>There is no need to match the type of prefixes. You can navigate with any combination of prefixes as long as there is only one prefix to indicate the address to navigate from and only one prefix to indicate the address to navigate to.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Locating a contact does not tell users how to arrive at that particular contact&#8217;s address. Furthermore, users may face the scenario where they have to travel and meet different groups and different contacts throughout the day. The Navigate command allows users to find out the most efficient path from one address to another with the aid of Google Maps.</p>
+</div>
+<div class="paragraph">
+<p>Users are able to utilize the addresses attached to a person, as well as those attached to a task, in the navigate command. They can also manually input addresses in the custom line if they are looking for directions to or from an address that is not presently stored inside the address book. This greatly enhances the flexibility of the command, and allows users to use the command without having to add a dummy task or person to store new addresses beforehand.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">Navigating from one address to another using Google Maps</a></h3>
+<div class="paragraph">
+<p>When the <code>navigate</code> command is entered into the command line, <code>NavigateCommandParse</code> will first reset its internal <code>from</code>, <code>to</code>, <code>fromIndex</code>, <code>toIndex</code> to null. It will then check for the input prefixes and ensure that only one of the prefixes from the group <code>fp/</code>, <code>ft/</code>, and <code>fa/</code>, which we will subsequently call the <code>from</code> prefixes are present. It then does the same with the prefixes from the group <code>tp/</code>, <code>tt/</code> and <code>ta/</code>, which we will call the <code>to</code> prefixes.<br></p>
+</div>
+<div class="paragraph">
+<p>This is done by invoking the <code>checkFrom</code> and <code>checkTo</code> methods as can be seen from the code snippet below. For the example <code>checkFrom</code>, it takes in 3 booleans on whether or not each prefix is present and checks whether or not there is exactly one kind of <code>from</code> prefix. It throws an error if there are no <code>from</code> prefixes or more than one type of <code>from</code> prefixes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> checkFrom(ArgumentMultimap argumentMultimap, <span class="type">boolean</span> fromAddress, <span class="type">boolean</span> fromPerson, <span class="type">boolean</span> fromTask)
+        <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="keyword">if</span> (!(fromAddress || fromPerson || fromTask)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, NavigateCommand.MESSAGE_USAGE));
+    } <span class="keyword">else</span> <span class="keyword">if</span> ((fromAddress &amp;&amp; (fromPerson || fromTask)) || (fromPerson &amp;&amp; fromTask)) {
+        <span class="comment">// If 2 or more from prefixes are present</span>
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(NavigateCommand.MESSAGE_MULTIPLE_FROM_ERROR);
+    } <span class="keyword">else</span> {
+        <span class="keyword">try</span> {
+            setArgsForNavigateCommand(argumentMultimap, fromAddress, fromPerson, <span class="predefined-constant">true</span>);
+        } <span class="keyword">catch</span> (IllegalValueException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(e.getMessage(), e);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>checkFrom</code> calls <code>setArgsForNavigateCommand</code>, which sets the variables in the <code>NavigateCommandParser</code> to the appropriate values depending on whether the address originates from a person, a task or is a manual input by the user.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> setArgsForNavigateCommand(ArgumentMultimap argumentMultimap, <span class="type">boolean</span> address, <span class="type">boolean</span> person, <span class="type">boolean</span> forFrom) <span class="directive">throws</span> IllegalValueException {
+    <span class="keyword">if</span> (address) {
+        <span class="keyword">if</span> (forFrom) {
+            from = <span class="keyword">new</span> Location(ParserUtil.parseLocationFromAddress(
+                    argumentMultimap.getValue(PREFIX_NAVIGATE_FROM_ADDRESS)).get().toString());
+        } <span class="keyword">else</span> {
+            to = <span class="keyword">new</span> Location(ParserUtil.parseLocationFromAddress(
+                    argumentMultimap.getValue(PREFIX_NAVIGATE_TO_ADDRESS)).get().toString());
+        }
+    } <span class="keyword">else</span> <span class="keyword">if</span> (person) {
+        <span class="keyword">if</span> (forFrom) {
+            fromIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_FROM_PERSON).get());
+        } <span class="keyword">else</span> {
+            toIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_TO_PERSON).get());
+        }
+    } <span class="keyword">else</span> {
+        <span class="keyword">if</span> (forFrom) {
+            fromIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_FROM_TASK).get());
+        } <span class="keyword">else</span> {
+            toIndex = ParserUtil.parseIndex(argumentMultimap
+                    .getValue(PREFIX_NAVIGATE_TO_TASK).get());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, <code>NavigateCommandParser</code> will create a new <code>NavigateCommand</code> based on the inputs as set by <code>setArgsForNavigateCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>When <code>NavigateCommand</code> is created, it first checks if there are duplicate <code>from</code> or <code>to</code> addresses that are passed into it and throws an error if that is the case.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> checkDuplicateFromAndToLocation(Location locationFrom, Location locationTo, Index fromIndex, Index toIndex) <span class="directive">throws</span> <span class="exception">IllegalArgumentException</span> {
+    <span class="keyword">if</span> (locationFrom != <span class="predefined-constant">null</span> &amp;&amp; fromIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_MULTIPLE_FROM_ERROR);
+    }
+    <span class="keyword">if</span> (locationTo != <span class="predefined-constant">null</span> &amp;&amp; toIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_MULTIPLE_TO_ERROR);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If it passes this check, <code>NavigateCommand</code> stores <code>fromLocation</code> and <code>toLocation</code>, which are the Locations of any manually added address by the user to navigate from and to respectively. It also stores <code>toIndex</code> and <code>fromIndex</code>, which are the Indexes of the <code>Person</code> or <code>Task</code> to extract the address from as well as <code>toIsTask</code> and <code>fromIsTask</code>, which are booleans that indicate whether <code>toIndex</code> and <code>fromIndex</code> are indexes of Persons or Tasks.</p>
+</div>
+<div class="paragraph">
+<p>Upon execution of <code>NavigateCommmand</code>, it will first check if it has a non-null <code>fromIndex</code>, if it does, it will create a new Location based on its <code>fromIndex</code> and <code>fromIsTask</code> values using the <code>setLocationByIndex</code> method. Otherwise, it will set the Location to be the Location in <code>locationfrom</code>. This can be seen below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (fromIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">try</span> {
+            from = setLocationByIndex(fromIndex, fromIsTask);
+        } <span class="keyword">catch</span> (IllegalValueException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR);
+        }
+    } <span class="keyword">else</span> {
+        from = locationFrom;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>setLocationByIndex throws Exceptions if the target Person or Task does not have a valid Address to extract.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (fromIndex != <span class="predefined-constant">null</span>) {
+        <span class="keyword">try</span> {
+            from = setLocationByIndex(fromIndex, fromIsTask);
+        } <span class="keyword">catch</span> (IllegalValueException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR);
+        }
+    } <span class="keyword">else</span> {
+        from = locationFrom;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>NavigateCommand</code> does the same for the Address to navigate <code>To</code> and posts a new <code>BrowserPanelNavigateEvent</code>, passing in the <code>Location</code> to navigate <code>From</code> and the <code>Location</code> to navigate <code>To</code>.<br>
+<code>NavigateCommand</code> will then create a new <code>CommandResult</code> to indicate a successful <code>Command</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>BrowserPanel</code> will then get the information from this <code>BrowserPanelNavigateEvent</code>, and load the appropriate Google Maps URL after replacing information such as the Unit Number and extra whitespaces. This has to be done as Google Maps does not function properly with Unit Numbers or spaces in its URL.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> loadDirectionsPage(<span class="predefined-type">String</span> fromLocation, <span class="predefined-type">String</span> toLocation) {
+    loadPage(GOOGLE_MAPS_DIRECTIONS_PREFIX + <span class="string"><span class="delimiter">&quot;</span><span class="content">&amp;origin=</span><span class="delimiter">&quot;</span></span>
+            + fromLocation.replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">#(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>).replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
+            .replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">-(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">&amp;destination=</span><span class="delimiter">&quot;</span></span>
+            + toLocation.replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">#(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>).replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">+</span><span class="delimiter">&quot;</span></span>)
+            .replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">-(</span><span class="char">\\</span><span class="content">w+)</span><span class="char">\\</span><span class="content">s*</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)
+            + GOOGLE_MAPS_DIRECTIONS_SUFFIX);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The overall sequence of events is illustrated by the following sequence diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/NavigateSequenceDiagram.png" alt="NavigateSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.9.1 : Sequence Diagram for Navigating from one Address to another</em></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br>
+<strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
+<strong>Pros:</strong> Only 1 constructor needed.<br>
+<strong>Cons:</strong> Additional methods will be needed to properly identify which Location to use for navigation. <br>
+<strong>Alternative 2:</strong> Create many constructors to segregate the different possible scenarios that might happen.<br>
+<strong>Pros:</strong> It is clear what information to use to generate the Locations<br>
+<strong>Cons:</strong> Requires large numbers of constructors to be created, easy for mistakes to occur as Constructors all share the same name but different argument types.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to transfer information of the address from one class to another<br>
+<strong>Alternative 1 (current choice):</strong> Wrap the address in a <code>Location</code> class before posting the BrowserPanelNavigateEvent.<br>
+<strong>Pros:</strong> Only Locations, which indicates that the address is properly parsed, will be passed for the BrowserPanel to read, reducing the possibility of BrowserPanel reading stray unwanted strings as addresses to navigate to and from. The value stored inside each Location cannot be altered once that Location object has been created.<br>
+<strong>Cons:</strong> A new class has to be created and Strings, Addresses and TaskAddresses will need to be converted to Locations first. <br>
+<strong>Alternative 2:</strong> Simply pass on a String containing the address from class to class<br>
+<strong>Pros:</strong> Easy to read and transfer information, lower overhead<br>
+<strong>Cons:</strong> It is easier for stray Strings to pollute the information, and the Strings can be unintentionally modified.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added Save As and Open (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/10">#10</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/17">#17</a>)</p>
+</li>
+<li>
+<p>Add Icons for Open, Save As, Exit and Help (Pull request <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/10">#10</a>)</p>
+</li>
+<li>
+<p>Add Keyboard Shortcuts for Open, Save As, Exit and Help (Pull request <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/10">#11</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/101">#101</a>)</p>
+</li>
+<li>
+<p>Modified SortCommand to be undoable, and wrote test cases for it (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/29">#29</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/30">#30</a>)</p>
+</li>
+<li>
+<p>Created TaskAddress to store the address of tasks (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/129">#129</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/132">#132</a>)</p>
+</li>
+<li>
+<p>Added Travis, Coveralls and Appveyor links for Continuous Integration (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/4">#4</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/22">#22</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-07 15:05:30 +00:00
+</div>
+</div>
+</body>
+</html>

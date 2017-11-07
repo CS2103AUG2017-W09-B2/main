@@ -52,25 +52,24 @@ at students who work on projects or assignments frequently, but it can also be u
 <li><a href="#backing-up-your-data-code-backup-code">3.18. Backing up your data : <code>backup</code></a></li>
 <li><a href="#selecting-a-person-code-select-code">3.19. Selecting a person : <code>select</code></a></li>
 <li><a href="#locating-a-person-s-address-code-locate-code-since-v1-4">3.20. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></li>
-<li><a href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.21. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></li>
-<li><a href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.22. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></li>
-<li><a href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.23. Assign contacts to task : <code>assign</code> (Since V1.4)</a></li>
-<li><a href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.24. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.25. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.26. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.27. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.28. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.29. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.30. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.31. Saving the data</a></li>
-<li><a href="#using-the-browser">3.32. Using the browser</a></li>
-<li><a href="#exporting-the-data">3.33. Exporting the data</a></li>
-<li><a href="#auto-complete-learning-your-typing-habits">3.34. Auto-Complete: Learning Your Typing Habits</a></li>
+<li><a href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.21. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></li>
+<li><a href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.22. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></li>
+<li><a href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.23. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></li>
+<li><a href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.24. Assign contacts to task : <code>assign</code> (Since V1.4)</a></li>
+<li><a href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.25. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.26. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.27. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.28. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.29. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.30. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.31. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.32. Saving the data</a></li>
+<li><a href="#using-the-browser">3.33. Using the browser</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
 <li><a href="#command-summary-and-cheat-sheet">5. Command Summary and Cheat Sheet</a></li>
-<li><a href="#keyboard-shortcuts">6. Keyboard Shortcuts</a></li>
+<li><a href="#command-shorthand-cheat-sheet">6. Command Shorthand Cheat Sheet</a></li>
 <li><a href="#v2-0-ui-concept">7. v2.0 UI Concept</a></li>
 </ul>
 </div>
@@ -295,7 +294,7 @@ Alternatively,  you may opt to use the keyboard shortcut <kbd>F1</kbd>.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] r/[REMARK] f/[FACULTY] c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br></p>
+<p>Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] r/[REMARK] [t/TAG]&#8230;&#8203;</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -329,7 +328,7 @@ Now suppose you have another friend named Ima Hidearu, who does not provide you 
 you need. You can choose to omit these fields by typing in the command:</p>
 </div>
 <div class="paragraph">
-<p><code>add n/Ima Hidearu b/ a/ e/ p/ r/ t/secretive</code></p>
+<p><code>add n/Ima Hidearu a/ e/ p/ r/ t/secretive</code></p>
 </div>
 </div>
 </div>
@@ -341,7 +340,14 @@ Sometimes, you may wish to keep some fields private (i.e. not reveal them in the
 option while typing in your command:</p>
 </div>
 <div class="paragraph">
-<p><code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate c/</code></p>
+<p><code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do note that you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -454,7 +460,7 @@ Format: <code>list</code><br></p>
 <div class="paragraph">
 <p>You can use the <code>edit</code> command to quickly fix mistakes in your entries, or add/remove details in your contacts. You may wish to edit your contacts when they change their phone numbers, for example.<br>
 <code>edit</code> can be replaced by <code>e</code> for faster input.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br></p>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -583,7 +589,7 @@ Changes the tag called <code>friends</code> to one called <code>enemies</code> i
 <h3 id="changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3"><a class="link" href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3">3.9. Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code>(Since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use the <code>changeprivacy</code> command to set the privacy settings for each field of an existing <code>Person</code> in the address book, which allows you to choose specifically what information will be displayed.<br>
-Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]</code>
+Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK]</code>
 Shorthand commands: <code>cp</code></p>
 </div>
 <div class="sidebarblock">
@@ -626,7 +632,8 @@ Sets the phone number of the 1st person to be public and their email address to 
 </li>
 <li>
 <p><code>cp 2 a/false n/true e/false</code><br>
-Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.</p>
+Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 </li>
 </ul>
 </div>
@@ -1164,7 +1171,7 @@ Locates the address of the 1st person in the results of the <code>find</code> co
 <div class="ulist">
 <ul>
 <li>
-<p>It is up to you to provide a specific and valid address.</p>
+<p>It is up to you to provide specific and valid addresses.</p>
 </li>
 </ul>
 </div>
@@ -1173,10 +1180,13 @@ Locates the address of the 1st person in the results of the <code>find</code> co
 <p>A person with a private address cannot be searched on Google Maps.</p>
 </li>
 <li>
+<p>A person with no address will open Google Maps, but it will not search for an address as there is no address to search for.</p>
+</li>
+<li>
 <p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code> and must be within the range of people in the most recent listing.</p>
 </li>
 </ul>
 </div>
@@ -1184,7 +1194,77 @@ Locates the address of the 1st person in the results of the <code>find</code> co
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-task-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.21. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
+<h3 id="navigating-from-one-address-to-another-code-navigate-code-since-v1-5"><a class="link" href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.21. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>Although <code>locate</code> shows you where a person&#8217;s address is, it does not tell you how to get there. The <code>navigate</code> command will provide directions, with the help of Google Maps, on how to get from one address to another.<br>
+<code>navigate</code> can be replaced by <code>nav</code> for faster input.<br>
+Format (person): <code>navigate [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>navigate fa/NUS tp/1</code><br>
+Opens Google Maps to provide directions on how to navigate from NUS to the address of the first person in the address book.</p>
+</li>
+<li>
+<p><code>navigate  fp/3 tt/2</code><br>
+Opens Google Maps to provide directions on how to navigate from the address of the third person in the address book to the address of the second task in the address book.</p>
+</li>
+<li>
+<p><code>navigate  ft/1 ta/Changi Airport</code><br>
+Opens Google Maps to provide directions on how to navigate from the address of the first task in the address book to Changi Airport.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Depending on the stored value of the address, Google Maps may be unable to find the correct address or may display multiple addresses of the same name.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>It is up to you to provide specific and valid addresses.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A person with a private address or a person with no address cannot be navigated from or navigated to.</p>
+</li>
+<li>
+<p>A task with no address cannot be navigated from or navigated to.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code> and must be within the range of people in the most recent listing.</p>
+</li>
+<li>
+<p>You may only input exactly one of the 3 prefixes from <code>fp/</code> <code>ft/</code> and <code>fa/</code> to indicate the address to navigate from, and exactly one of the 3 prefixes from <code>tp/</code> <code>tt/</code> and <code>ta/</code> to indicate the address to navigate to.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If you input any less or any more than 1 of the 3 prefixes from each group, the command will fail.</p>
+</li>
+<li>
+<p>There is no need to match the type of prefixes. You can navigate with any combination of prefixes as long as there is only one prefix to indicate the address to navigate from and only one prefix to indicate the address to navigate to.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mark-task-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.22. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Have you finally completed a task in the address book? You can use <code>setcomplete</code> to mark the specified task as complete.<br>
 <code>setcomplete</code> can be replaced by <code>stc</code> for faster input.<br>
@@ -1226,7 +1306,7 @@ Sets the 1st task in the results of the <code>find task</code> command as comple
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-task-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.22. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
+<h3 id="mark-task-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.23. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Did you accidentally mark a task as completed? You can use <code>setincomplete</code> to mark the specified task as incomplete.<br>
 <code>setincomplete</code> can be replaced by <code>sti</code> for faster input.<br>
@@ -1268,7 +1348,7 @@ Sets the 1st task in the results of the <code>find task</code> command as incomp
 </div>
 </div>
 <div class="sect2">
-<h3 id="assign-contacts-to-task-code-assign-code-since-v1-4"><a class="link" href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.23. Assign contacts to task : <code>assign</code> (Since V1.4)</a></h3>
+<h3 id="assign-contacts-to-task-code-assign-code-since-v1-4"><a class="link" href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.24. Assign contacts to task : <code>assign</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>assign</code> to assign contacts to an ongoing task. You may wish to use <code>assign</code> when collaborating with others for projects, for example.<br>
 <code>assign</code> can be replaced by <code>as</code> for faster input.<br>
@@ -1315,7 +1395,7 @@ Assigns the 2nd person in the address book to the 1st task in the results of the
 </div>
 </div>
 <div class="sect2">
-<h3 id="dismiss-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.24. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
+<h3 id="dismiss-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.25. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br>
 <code>dismiss</code> can be replaced by <code>ds</code> for faster input.<br>
@@ -1362,7 +1442,7 @@ Dismisses the 2nd person in the address book from the 1st task in the results of
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.25. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.26. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 <code>history</code> can be replaced by <code>h</code> for faster input.<br>
@@ -1384,7 +1464,7 @@ Format: <code>history</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.26. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.27. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Did you make a mistake somewhere? <code>undo</code> restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 <code>undo</code> can be replaced by <code>u</code> for faster input.<br>
@@ -1430,7 +1510,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.27. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
+<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.28. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use <code>unfavourite</code> command to set your previous favourite persons become the normal persons. For example,<br>
 after you break up with your girlfriend, you may wish to set your girlfriend back to normal person.<br>
@@ -1473,7 +1553,7 @@ Unfavourite the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.28. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.29. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Perhaps an <code>undo</code> wasn&#8217;t necessary. <code>redo</code> reverses the most recent <code>undo</code> command.<br>
 <code>redo</code> can be replaced by <code>r</code> for faster input.<br>
@@ -1506,7 +1586,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.29. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.30. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br>
 <code>clear</code> can be replaced by <code>c</code> for faster input.<br>
@@ -1514,7 +1594,7 @@ Format: <code>clear</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.30. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.31. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Once you have finished using Address++, you may use this command to exit the program.<br>
 Format: <code>exit</code></p>
@@ -1524,7 +1604,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.31. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.32. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need for you to save manually.</p>
@@ -1537,7 +1617,7 @@ There is no need for you to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-the-browser"><a class="link" href="#using-the-browser">3.32. Using the browser</a></h3>
+<h3 id="using-the-browser"><a class="link" href="#using-the-browser">3.33. Using the browser</a></h3>
 <div class="paragraph">
 <p>If you click on a box containing a contact, an internet browser on the right side of the window.</p>
 </div>
@@ -1559,21 +1639,6 @@ There is no need for you to save manually.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="exporting-the-data"><a class="link" href="#exporting-the-data">3.33. Exporting the data</a></h3>
-<div class="paragraph">
-<p>Address book data can be exported in a number of different formats, thus allowing the data to be compatible to any device.</p>
-</div>
-<div class="paragraph">
-<p>To export data, click on <code>File &#8594; Export As&#8230;&#8203;</code> or use the keyboard shortcut <kbd>CTRL</kbd>+<kbd>E</kbd>` and select the new location and file name for the export file in the pop-up window.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="auto-complete-learning-your-typing-habits"><a class="link" href="#auto-complete-learning-your-typing-habits">3.34. Auto-Complete: Learning Your Typing Habits</a></h3>
-<div class="paragraph">
-<p>The program will learn your typing habits and give autocomplete suggestions that become more accurate over time.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1591,12 +1656,12 @@ There is no need for you to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> : <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] b/[BIRTHDAY] f/[FACULTY] c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665, b/29-02-1996 f/SOC c/www.enteryourcalendarurlhere.com t/friend t/colleague</code></p>
+<p><strong>Add</strong> : <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] r/[REMARK] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/Sleeps at 3am t/friend t/colleague</code></p>
 </li>
 <li>
-<p><strong>Add with private fields</strong> : <code>add or a pn/NAME pp/PHONE_NUMBER pe/EMAIL pa/ADDRESS b/BIRTHDAY f/FACULTY c/[GOOGLE CALENDAR URL] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665</code></p>
+<p><strong>Add with private fields</strong> : <code>add pn/NAME pp/[PHONE_NUMBER] pe/[EMAIL] pa/[ADDRESS] r/[REMARK] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665 r/Sleeps at 3am t/friend t/colleague</code></p>
 </li>
 <li>
 <p><strong>Add task</strong> : <code>add task n/NAME d/[DESCRIPTION] by/[DEADLINE] p/[PRIORITY]</code><br>
@@ -1607,14 +1672,17 @@ e.g. <code>add task n/Update Documentation d/Update documentations for V1.1 for 
 e.g. <code>addtag 1 2 t/friends</code></p>
 </li>
 <li>
-<p><strong>Change a person&#8217;s details' privacy</strong> : <code>changeprivacy INDEX [n/TRUE or FALSE] [p/TRUE or FALSE] [e/TRUE or FALSE] [a/TRUE or FALSE]</code><br>
-e.g. <code>changeprivacy 2 n/true p/false e/true a/false</code></p>
+<p><strong>Change a person&#8217;s details' privacy</strong> : <code>changeprivacy INDEX [n/TRUE or FALSE] [p/TRUE or FALSE] [e/TRUE or FALSE] [a/TRUE or FALSE] [r/TRUE or FALSE]</code><br>
+e.g. <code>changeprivacy 2 n/true p/false e/true a/false r/true</code></p>
 </li>
 <li>
-<p><strong>Clear person</strong> : <code>clear</code></p>
+<p><strong>Clear all data</strong> : <code>clear</code></p>
 </li>
 <li>
-<p><strong>Clear tasks</strong> : <code>cleartask</code></p>
+<p><strong>Clear persons</strong> : <code>clear person</code></p>
+</li>
+<li>
+<p><strong>Clear tasks</strong> : <code>clear task</code></p>
 </li>
 <li>
 <p><strong>Delete person</strong> : <code>delete INDEX</code><br>
@@ -1629,7 +1697,7 @@ e.g. <code>delete task 4</code></p>
 e.g. <code>deletetag 1 2 t/friends</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] c/[GOOGLE CALENDAR URL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
@@ -1668,16 +1736,17 @@ e.g. <code>find task update p/high</code></p>
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 <li>
-<p><strong>List persons</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>List tasks</strong> : <code>list task</code></p>
+<p><strong>List persons and tasks</strong> : <code>list</code></p>
 </li>
 <li>
 <p><strong>List tags</strong> : <code>showtag</code></p>
 </li>
 <li>
-<p><strong>Locate a person&#8217;s address</strong> : <code>locate</code></p>
+<p><strong>Locate a person&#8217;s address</strong> : <code>locate INDEX</code></p>
+</li>
+<li>
+<p><strong>Navigating from one address to another</strong> : <code>`navigate [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br>
+e.g. navigate fa/Tampines Mall ta/Sentosa</p>
 </li>
 <li>
 <p><strong>Select person</strong> : <code>select INDEX</code><br>
@@ -1717,10 +1786,134 @@ e.g. <code>dismiss 4 1 from/17</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="keyboard-shortcuts"><a class="link" href="#keyboard-shortcuts">6. Keyboard Shortcuts</a></h2>
+<h2 id="command-shorthand-cheat-sheet"><a class="link" href="#command-shorthand-cheat-sheet">6. Command Shorthand Cheat Sheet</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
+<li>
+<p><strong>Add</strong> : <code>a n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/Sleeps at 3am t/friend t/colleague</code></p>
+</li>
+<li>
+<p><strong>Add with private fields</strong> : <code>a pn/[NAME] pp/[PHONE_NUMBER] pe/[EMAIL] pa/[ADDRESS] pr/[REMARK] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>a pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665 pr/Sleeps at 3am</code></p>
+</li>
+<li>
+<p><strong>Add task</strong> : <code>a task n/NAME d/[DESCRIPTION] by/[DEADLINE] p/[PRIORITY]</code><br>
+e.g. <code>a task n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high</code></p>
+</li>
+<li>
+<p><strong>Add tag</strong> : <code>atag INDEX t/[TAG]</code><br>
+e.g. <code>atag 1 2 t/friends</code></p>
+</li>
+<li>
+<p><strong>Change a person&#8217;s details' privacy</strong> : <code>cp INDEX [n/TRUE or FALSE] [p/TRUE or FALSE] [e/TRUE or FALSE] [a/TRUE or FALSE] [r/TRUE or FALSE]</code><br>
+e.g. <code>cp 2 n/true p/false e/true a/false r/true</code></p>
+</li>
+<li>
+<p><strong>Clear all data</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Clear persons</strong> : <code>c person</code></p>
+</li>
+<li>
+<p><strong>Clear tasks</strong> : <code>c task</code></p>
+</li>
+<li>
+<p><strong>Delete person</strong> : <code>d INDEX</code><br>
+e.g. <code>d 3</code></p>
+</li>
+<li>
+<p><strong>Delete task</strong> : <code>d task INDEX</code><br>
+e.g. <code>d task 4</code></p>
+</li>
+<li>
+<p><strong>Delete tag</strong> : <code>dtag INDEX t/[TAG]</code><br>
+e.g. <code>dtag 1 2 t/friends</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>e 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>Edit task</strong> : <code>e task INDEX [n/NAME] [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY]</code><br>
+e.g. <code>e task 2 p/veryhigh</code></p>
+</li>
+<li>
+<p><strong>Edit tag</strong> : <code>et TAGTOCHANGE NEWTAGNAME</code><br>
+e.g. <code>et friends enemies</code></p>
+</li>
+<li>
+<p><strong>Favourite persons</strong> :`fav INDEX`<br>
+e.g. <code>fav 1</code></p>
+</li>
+<li>
+<p><strong>Unfavourite persons</strong> :`unfav INDEX`<br>
+e.g. <code>unfav 1</code></p>
+</li>
+<li>
+<p><strong>Show favourite list</strong> :`sfav`<br>
+e.g. <code>sfav</code></p>
+</li>
+<li>
+<p><strong>Find person</strong> : <code>f KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>f James Jake</code></p>
+</li>
+<li>
+<p><strong>Find tag</strong> : <code>ftag Tag [MORE_TAGS]</code><br>
+e.g. <code>ftag friends</code></p>
+</li>
+<li>
+<p><strong>Find task</strong> : <code>f task KEYWORD [MORE_KEYWORDS] [p/PRIORITY]</code><br>
+e.g. <code>f task update p/high</code></p>
+</li>
+<li>
+<p><strong>List persons and tasks</strong> : <code>l</code></p>
+</li>
+<li>
+<p><strong>List tags</strong> : <code>stag</code></p>
+</li>
+<li>
+<p><strong>Locate a person&#8217;s address</strong> : <code>loc INDEX</code></p>
+</li>
+<li>
+<p><strong>Navigating from one address to another</strong> : <code>`navi [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br>
+e.g. navi fa/Tampines Mall ta/Sentosa</p>
+</li>
+<li>
+<p><strong>Select person</strong> : <code>s INDEX</code><br>
+e.g.<code>s 2</code></p>
+</li>
+<li>
+<p><strong>Select task</strong> : <code>s task INDEX</code><br>
+e.g.<code>s task 2</code></p>
+</li>
+<li>
+<p><strong>Set task as complete</strong> : <code>stc INDEX</code><br>
+e.g. <code>stc 4</code></p>
+</li>
+<li>
+<p><strong>Set task as incomplete</strong> : <code>sti INDEX</code><br>
+e.g. <code>sti 5</code></p>
+</li>
+<li>
+<p><strong>Assign to task</strong> : <code>as PERSONINDEX&#8230;&#8203; to/TASKINDEX</code><br>
+e.g. <code>as 4 1 17 18 to/21</code></p>
+</li>
+<li>
+<p><strong>Dismiss from task</strong> : <code>ds PERSONINDEX&#8230;&#8203; from/TASKINDEX</code><br>
+e.g. <code>ds 4 1 from/17</code></p>
+</li>
+<li>
+<p><strong>History</strong> : <code>h</code></p>
+</li>
+<li>
+<p><strong>Undo</strong> : <code>u</code></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>r</code>
+== Keyboard Shortcuts</p>
+</li>
 <li>
 <p><strong>Exit</strong> : <kbd>ALT</kbd>+<kbd>F4</kbd></p>
 </li>
@@ -1762,7 +1955,7 @@ e.g. <code>dismiss 4 1 from/17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 13:37:28 +00:00
+Last updated 2017-11-07 15:05:30 +00:00
 </div>
 </div>
 </body>
