@@ -49,7 +49,7 @@
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] r/[REMARK] [t/TAG]&#8230;&#8203;</code><br></p>
+<p>Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] r/[REMARK] v/[AVATAR] [t/TAG]&#8230;&#8203;</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -57,7 +57,7 @@
 <p><strong>Things To Note</strong><br>
 * A person can have any number of tags (including 0)<br>
 * The <code>EMAIL</code> should be in the format address@email.domain<br>
-* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> or <code>Remark</code> to be private by placing a <code>p</code> in front of the prefix.<br></p>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code>, <code>Remark</code>, <code>Avatar</code> to be private by placing a <code>p</code> in front of the prefix.<br></p>
 </div>
 </div>
 </div>
@@ -71,7 +71,8 @@
 Suppose you wanted to add your new friend John Doe. You could type the following command to add his details:</p>
 </div>
 <div class="paragraph">
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears</code></p>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears
+v/https://helloworld/image.png</code></p>
 </div>
 </div>
 </div>
@@ -83,7 +84,7 @@ Now suppose you have another friend named Ima Hidearu, who does not provide you 
 you need. You can choose to omit these fields by typing in the command:</p>
 </div>
 <div class="paragraph">
-<p><code>add n/Ima Hidearu a/ e/ p/ r/ t/secretive</code></p>
+<p><code>add n/Ima Hidearu a/ e/ p/ r/ v/ t/secretive</code></p>
 </div>
 </div>
 </div>
@@ -112,7 +113,7 @@ option while typing in your command:</p>
 <div class="paragraph">
 <p>You can use the <code>edit</code> command to quickly fix mistakes in your entries, or add/remove details in your contacts. You may wish to edit your contacts when they change their phone numbers, for example.<br>
 <code>edit</code> can be replaced by <code>e</code> for faster input.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br></p>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [v/AVATAR] [t/TAG]&#8230;&#8203;</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -206,7 +207,7 @@ Removes the priority and deadline of the second task.</p>
 <h3 id="changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3"><a class="link" href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3">Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code>(Since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use the <code>changeprivacy</code> command to set the privacy settings for each field of an existing <code>Person</code> in the address book, which allows you to choose specifically what information will be displayed.<br>
-Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK]</code>
+Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [v/AVATAR]</code>
 Shorthand commands: <code>cp</code></p>
 </div>
 <div class="sidebarblock">
@@ -249,8 +250,7 @@ Sets the phone number of the 1st person to be public and their email address to 
 </li>
 <li>
 <p><code>cp 2 a/false n/true e/false</code><br>
-Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.</p>
 </li>
 </ul>
 </div>
@@ -933,7 +933,7 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 16:13:48 +00:00
+Last updated 2017-11-07 23:09:42 +00:00
 </div>
 </div>
 </body>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Charles Goh - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Charles Goh - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-addressbook"><a class="link" href="#project-addressbook">Project: AddressBook++</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>AddressBook++ is a desktop address book application used for teaching Software Engineering principles.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about
+6 kLoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/main/charlesgoh.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/test/charlesgoh.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-sort-command"><a class="link" href="#enhancement-added-sort-command">Enhancement Added: Sort Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-your-contact-list-and-tasks-code-sort-code"><a class="link" href="#sorting-your-contact-list-and-tasks-code-sort-code">Sorting your contact list and tasks : <code>sort</code></a></h3>
+<div class="paragraph">
+<p>Sort your contacts or tasks by using the <code>sort</code> command<br>
+<code>sort</code> can be replaced by <code>so</code> for faster input.<br>
+Format: <code>sort LIST FIELD ORDER</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Allows you to sort your contacts by any field in either ascending or descending order</p>
+</li>
+<li>
+<p>Allows you to srot your tasks by deadline or by priority in ascending or descending order</p>
+</li>
+<li>
+<p>Field parameters for person contacts: NAME, PHONE, EMAIL, ADDRESS, REMARK, AVATAR.</p>
+</li>
+<li>
+<p>Field parameters for tasks: DEADLINE, PRIORITY.</p>
+</li>
+<li>
+<p>Order parameters are limited to the following fields: ASC, DESC.</p>
+</li>
+<li>
+<p>You can undo this command if you want to revert to the pre-sort ordering of contacts</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples for sorting person contacts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sort person name asc</code><br>
+This allows you to sort all persons in the address book in ascending order by the name field.</p>
+</li>
+<li>
+<p><code>sort person address desc</code><br>
+This allows you to sort all persons in the address book in descending order by the address field.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples for sorting tasks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sort task deadline asc</code><br>
+This allows you to sort all tasks in ascending order by the deadline field (i.e. closer deadlines are at the bottom).</p>
+</li>
+<li>
+<p><code>sort task priority desc</code><br>
+This allows you to sort all tasks in descending order by the priority field (i.e. higher priority tasks
+are listed on top).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark>
+---</p>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>As more contacts and tasks are added to the application, the lists may get long and disorganized. The Sort Command
+allows users to sort both contacts and tasks by important fields. Examples include sorting contacts by name and
+sorting contacts by deadlines.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sort-command"><a class="link" href="#sort-command">Sort Command</a></h3>
+<div class="paragraph">
+<p>The sort command is facilitated by the <code>sortBy</code> methods in UniquePersonList and UniqueTaskList. It supports
+sort by ascending or by descending order in any field.</p>
+</div>
+<div class="paragraph">
+<p>The sort enhancement utilises the Java Collections Sort API by passing it a custom Comparator.</p>
+</div>
+<div class="paragraph">
+<p>The sort command is parsed through <code>SortCommandParser</code>, which passes control over to the <code>SortCommand</code>
+class. The actual sorting happens via the UniquePersonList class or the UniqueTaskList class.</p>
+</div>
+<div class="paragraph">
+<p>The UML Class diagram for sort commands that trigger sorting in person listings is shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortCommandPersonDiagram.png" alt="SortCommandPersonDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Likewise, the UML Class diagram for sort commands that trigger sorting in person listings is shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortCommandTaskDiagram.png" alt="SortCommandTaskDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>We can deduce from the UML diagrams diagrams above that the only difference between the implementation
+of the sorting for persons and tasks lies in the location where the sorting is actually executed.</p>
+</div>
+<div class="paragraph">
+<p>Suppose a user enters a new command <code>sort name desc</code>. The following sequence diagram
+demonstrates how the sort command works.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width=""800">
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the execution of the sort methods result in the actual person or task list being sorted. The resulting list
+is not returned, but will be reflected in the application&#8217;s storage and graphical user interface.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br>
+<strong>Alternative 1 (current choice):</strong> Implement sorting functionality in <code>UniquePersonList</code> and <code>UniqueTaskList</code> class.<br>
+<strong>Pros:</strong> Delegates the concern of sorting to the class that is responsible for the core of most operations done to the lists.
+Future changes to the implementation will be easier as a consequence.<br>
+<strong>Cons:</strong> Hard for new developers to understand the flow of control passed between classes at first.<br>
+<strong>Alternative 2:</strong> Implement the sorting functionality within other classes like <code>AddressBook</code> or <code>SortCommand</code>.<br>
+<strong>Pros:</strong> May be more intuitive for new developers and it is easier to trace function calls between lesser classes involved.<br>
+<strong>Cons:</strong> Violates Separation of Concern principle and causes unnecessary content coupling whereby the <code>UniquePersonList</code> will have to rely on the <code>SortCommand</code> class.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Temporary Sort Implementation vs. Persistent Sort Implementation<br>
+<strong>Alternative 1 (current choice):</strong> Saves the entire address book after sorting.<br>
+<strong>Pros:</strong> More intuitive and reduces complexity in implementation.<br>
+<strong>Cons:</strong> Old order of contact instances in the address book will be lost<br>
+<strong>Alternative 2:</strong> Duplicate a temporary version of the list and sort it for viewing (i.e. the actual list is not sorted)<br>
+<strong>Pros:</strong> Old order of contact instances remains intact.<br>
+<strong>Cons:</strong> Will use more memory and may be less intuitive for developer to understand and in terms of user experience. Also, sorting will not persist in the system.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-backup-command"><a class="link" href="#enhancement-added-backup-command">Enhancement Added: Backup Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="backing-up-your-data-code-backup-code"><a class="link" href="#backing-up-your-data-code-backup-code">Backing up your data : <code>backup</code></a></h3>
+<div class="paragraph">
+<p>You can backup your saved data on Address++ by using the <code>backup</code> command.<br>
+<code>backup</code> can be replaced by <code>bk</code> for faster input.<br>
+Format: <code>backup [RELATIVE LOCATION]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Allows you to backup your saved data on Address++ in another file.</p>
+</li>
+<li>
+<p>You can backup your data in the default location or you can specify your desired save location.</p>
+</li>
+<li>
+<p>You can use the default save name or use your own.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>backup</code> or <code>bk</code><br>
+This command will help you back up in the default save location -&#8594; In the data directory of your application.</p>
+</li>
+<li>
+<p><code>backup ./test.xml</code> or <code>bk ./test.xml</code><br>
+This saves the backup file in the current data directory, with the name <code>test.xml</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark>
+---</p>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>Users are able to back up their data before making any changes so that in the event of an emergency (e.g. clearing all data and then closing afterwards)
+, the old save data can be restored.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="backup-command"><a class="link" href="#backup-command">Backup Command</a></h3>
+<div class="paragraph">
+<p>The backup command makes use of both the model manager and the storage manager. The <code>LogicManager</code> class was
+improved to support the accessing of storage value.</p>
+</div>
+<div class="paragraph">
+<p>The backup command arguments are parsed through the <code>BackupCommandParser</code>, which passes control over to the
+<code>BackupCommand</code> class. The <code>BackupCommand</code> class will save the backup file to a user specified path.</p>
+</div>
+<div class="paragraph">
+<p>Suppose a user enters a new command <code>backup filepath</code>. The backup file will be saved to a default location.
+The sequence diagram that illustrates this process is shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width=""800">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+that the execution of the sort methods result in the actual person list being sorted.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br>
+<strong>Alternative 1 (current choice):</strong> Implement backup command via Command Line Interface<br>
+<strong>Pros:</strong> Backing up data is easier and faster for users who are familiar with the commands. Less button clicks.<br>
+<strong>Cons:</strong> UI not as intuitive. Users who are not familiar with the application may not know about this feature<br>
+<strong>Alternative 2:</strong> Implement backup command via GUI<br>
+<strong>Pros:</strong> More intuitive for all users since the options are all graphical<br>
+<strong>Cons:</strong> Hinders productivity. Excessive number of clicks to accomplish an essential task.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-font-size-command"><a class="link" href="#enhancement-added-font-size-command">Enhancement Added: Font Size Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-font-sizes"><a class="link" href="#changing-font-sizes">Changing Font Sizes</a></h3>
+<div class="paragraph">
+<p>Are the font sizes too small or too big? Address++ allows you to change your font sizes at will. Here are some of the
+ways of triggering a change in font sizes:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Option 1: Menu Font Size Buttons and Keyboard Shortcuts</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FontSizeUI.png" alt="FontSizeUI" width="540">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Increase Size:</strong> <kbd>CTRL</kbd> + <kbd>W</kbd> (<kbd>CMD</kbd> + <kbd>W</kbd> on MacOS)</p>
+</li>
+<li>
+<p><strong>Decrease Size:</strong> <kbd>CTRL</kbd> + <kbd>E</kbd> (<kbd>CMD</kbd> + <kbd>E</kbd> on MacOS)</p>
+</li>
+<li>
+<p><strong>Reset Size:</strong> <kbd>CTRL</kbd> + <kbd>R</kbd> (<kbd>CMD</kbd> + <kbd>R</kbd> on MacOS)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Option 2: Change Font Size Buttons (Top Right Hand Corder)</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FontSizePlusMinusButtons.png" alt="FontSizePlusMinusButtons" width="540">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Increase Size: <kbd>+</kbd></p>
+</li>
+<li>
+<p>Decrease Size: <kbd>-</kbd></p>
+</li>
+<li>
+<p>Reset Size: <kbd>R</kbd></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Option 3: Handtype command into CLI</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FontSizeCLI.png" alt="FontSizeCLI" width="540">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Increase Size Command: <code>fontsize increase</code></p>
+</li>
+<li>
+<p>Decrease Size Command: <code>fontsize decrease</code></p>
+</li>
+<li>
+<p>Reset Size Command: <code>fontsize reset</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark>
+---</p>
+</div>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Different monitors render the application differently. On some monitors, the words appear to be too small. The font size
+commands and buttons allow users to increase/decrease/reset the font sizes at any time when using the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="increase-decrease-reset-font-size"><a class="link" href="#increase-decrease-reset-font-size">Increase/Decrease/Reset Font Size</a></h3>
+<div class="paragraph">
+<p>On some screens, the text appear to be too small. The aim of the increase/decrease/reset font size feature is to allow
+users to customize the application&#8217;s font size quickly on the go.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FontSizeUI.png" alt="FontSizeUI" width="540">
+</div>
+</div>
+<div class="paragraph">
+<p>There are two methods of calling changes in font size:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>onAction</code> handlers are used to handle UI font size buttons. These handlers will post
+new events via <code>ComponentManager</code>.</p>
+</li>
+<li>
+<p>CLI commands also post new events to handle font size changes, when the relevant command is entered (e.g. <code>fontsize increase</code>).</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FontSizeChangeSequenceDiagram.png" alt="FontSizeChangeSequenceDiagram" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>From the sequence diagram above, we can observe that the font size changes are handled by subscriber functions in PersonListPanel
+and TaskListPanel.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The initial implementation required access to the model from the UI. This implementation was replaced with one that
+standardised the handling of font size change requests through events.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Use either UI or CLI based implementations<br>
+<strong>Alternative 1 (current choice):</strong> Implementing both UI and CLI functionality<br>
+<strong>Pros:</strong> More options for the user. The was also not much increase in complexity when implementing the CLI version <br>
+<strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br>
+<strong>Alternative 2:</strong> Implementing only UI functionality<br>
+<strong>Pros:</strong> Less tedious to implement and very intuitive for the user<br>
+<strong>Cons:</strong> Users who prefer typing commands will not have the option of editing their font sizes using the CLI</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-avatar-and-remark-fields"><a class="link" href="#enhancement-added-avatar-and-remark-fields">Enhancement Added: Avatar and Remark Fields</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h3>
+<div class="paragraph">
+<p>You can use the <code>add</code> command to add new people to your address book</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>add</code> can be replaced by <code>a</code> for faster input.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] r/[REMARK] v/[AVATAR] [t/TAG]&#8230;&#8203;</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br>
+* A person can have any number of tags (including 0)<br>
+* The <code>EMAIL</code> should be in the format address@email.domain<br>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code>, <code>Remark</code>, <code>Avatar</code> to be private by placing a <code>p</code> in front of the prefix.<br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios</strong>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+Suppose you wanted to add your new friend John Doe. You could type the following command to add his details:</p>
+</div>
+<div class="paragraph">
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears
+v/https://helloworld/image.png</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+Now suppose you have another friend named Ima Hidearu, who does not provide you with all the contact information that
+you need. You can choose to omit these fields by typing in the command:</p>
+</div>
+<div class="paragraph">
+<p><code>add n/Ima Hidearu a/ e/ p/ r/ v/ t/secretive</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 3</strong><br>
+Sometimes, you may wish to keep some fields private (i.e. not reveal them in the application). You can use the private
+option while typing in your command:</p>
+</div>
+<div class="paragraph">
+<p><code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do note that you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark>
+---</p>
+</div>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>Avatars and remarks help users to identify different contacts. It was also implemented with the intention of making the application
+more user friendly.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-for-avatar-field"><a class="link" href="#implementation-for-avatar-field">Implementation for Avatar Field</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-avatar-on-viewpersonpanel"><a class="link" href="#setting-avatar-on-viewpersonpanel">Setting Avatar on ViewPersonPanel</a></h3>
+<div class="paragraph">
+<p>The following function allows the setting of URL for the <code>ImageView</code> attribute within the <code>ViewPersonPanel</code> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> initializeAvatar() {
+        <span class="keyword">try</span> {
+            <span class="predefined-type">String</span> avatarPath = person.getAvatar().value;
+            <span class="keyword">if</span> (!avatarPath.equals(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+                logger.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Initializing avatar to image at saved URL</span><span class="delimiter">&quot;</span></span>);
+                <span class="predefined-type">Image</span> newImage = <span class="keyword">new</span> <span class="predefined-type">Image</span>(avatarPath);
+                avatarImage.setImage(newImage);
+            }
+        } <span class="keyword">catch</span> (<span class="exception">Exception</span> e) {
+            e.printStackTrace();
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>initializeAvatar</code> method piggybacks on the <code>handlePersonPanelSelectionChangedEvent</code> event handler. Whenever there is
+a change in the person selection panel, this function will call the <code>initializeAvatar</code> method, which will update
+the <code>ImageView</code> attribute.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Subscribe</span>
+    <span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        <span class="local-variable">this</span>.person = event.getNewSelection().person;
+        initializeWithPerson(person);
+        initializeAvatar();
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of v1.5rc, the avatar field supports only URLs sourced online. References to local files may not work at the moment.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Added tests for task related implementations (<a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/115/files">#115</a>)<br></p>
+</li>
+<li>
+<p>Conducted Acceptance Testing for another team [<a href="https://github.com/CS2103AUG2017-W09-B4/main/issues/77">W09-B4</a>]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-07 23:09:42 +00:00
+</div>
+</div>
+</body>
+</html>

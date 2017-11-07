@@ -43,20 +43,17 @@
 </ul>
 </li>
 <li><a href="#implementation">3. Implementation</a>
-<ul class="sectlevel2">
-<li><a href="#increase-decrease-reset-font-size">3.1. Increase/Decrease/Reset Font Size</a></li>
-<li><a href="#undo-redo-mechanism">3.2. Undo/Redo mechanism</a></li>
+<ul class="sectlevel3">
+<li><a href="#design-considerations">3.1. Design Considerations</a></li>
+<li><a href="#design-considerations-2">3.2. Design Considerations</a></li>
 <li><a href="#task-object">3.3. Task Object</a></li>
-<li><a href="#sort-command">3.4. Sort Command</a></li>
-<li><a href="#backup-command">3.5. Backup Command</a></li>
-<li><a href="#privacy-of-fields">3.6. Privacy of fields</a></li>
-<li><a href="#changing-of-a-person-s-privacy">3.7. Changing of a Person&#8217;s Privacy</a></li>
-<li><a href="#locating-a-person-on-google-maps">3.8. Locating a Person on Google Maps</a></li>
-<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.9. Navigating from one address to another using Google Maps</a></li>
-<li><a href="#add-delete-tag-mechanism">3.10. Add/Delete Tag mechanism</a></li>
-<li><a href="#find-tag-mechanism">3.11. Find Tag mechanism</a></li>
-<li><a href="#logging">3.12. Logging</a></li>
-<li><a href="#configuration">3.13. Configuration</a></li>
+<li><a href="#changing-of-a-person-s-privacy">3.4. Changing of a Person&#8217;s Privacy</a></li>
+<li><a href="#locating-a-person-on-google-maps">3.5. Locating a Person on Google Maps</a></li>
+<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.6. Navigating from one address to another using Google Maps</a></li>
+<li><a href="#add-delete-tag-mechanism">3.7. Add/Delete Tag mechanism</a></li>
+<li><a href="#find-tag-mechanism">3.8. Find Tag mechanism</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -572,10 +569,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes some noteworthy details on how certain features are implemented.</p>
+<p>This section describes some noteworthy details on how certain features are implemented.
+=== Increase/Decrease/Reset Font Size</p>
 </div>
-<div class="sect2">
-<h3 id="increase-decrease-reset-font-size"><a class="link" href="#increase-decrease-reset-font-size">3.1. Increase/Decrease/Reset Font Size</a></h3>
 <div class="paragraph">
 <p>On some screens, the text appear to be too small. The aim of the increase/decrease/reset font size feature is to allow
 users to customize the application&#8217;s font size quickly on the go.</p>
@@ -622,7 +618,7 @@ standardised the handling of font size change requests through events.
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Use either UI or CLI based implementations<br>
 <strong>Alternative 1 (current choice):</strong> Implementing both UI and CLI functionality<br>
@@ -630,12 +626,57 @@ standardised the handling of font size change requests through events.
 <strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br>
 <strong>Alternative 2:</strong> Implementing only UI functionality<br>
 <strong>Pros:</strong> Less tedious to implement and very intuitive for the user<br>
-<strong>Cons:</strong> Users who prefer typing commands will not have the option of editing their font sizes using the CLI</p>
+<strong>Cons:</strong> Users who prefer typing commands will not have the option of editing their font sizes using the CLI
+=== Setting Avatar on ViewPersonPanel</p>
+</div>
+<div class="paragraph">
+<p>The following function allows the setting of URL for the <code>ImageView</code> attribute within the <code>ViewPersonPanel</code> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> initializeAvatar() {
+        <span class="keyword">try</span> {
+            <span class="predefined-type">String</span> avatarPath = person.getAvatar().value;
+            <span class="keyword">if</span> (!avatarPath.equals(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+                logger.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Initializing avatar to image at saved URL</span><span class="delimiter">&quot;</span></span>);
+                <span class="predefined-type">Image</span> newImage = <span class="keyword">new</span> <span class="predefined-type">Image</span>(avatarPath);
+                avatarImage.setImage(newImage);
+            }
+        } <span class="keyword">catch</span> (<span class="exception">Exception</span> e) {
+            e.printStackTrace();
+        }
+    }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The <code>initializeAvatar</code> method piggybacks on the <code>handlePersonPanelSelectionChangedEvent</code> event handler. Whenever there is
+a change in the person selection panel, this function will call the <code>initializeAvatar</code> method, which will update
+the <code>ImageView</code> attribute.</p>
 </div>
-<div class="sect2">
-<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">3.2. Undo/Redo mechanism</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Subscribe</span>
+    <span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        <span class="local-variable">this</span>.person = event.getNewSelection().person;
+        initializeWithPerson(person);
+        initializeAvatar();
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of v1.5rc, the avatar field supports only URLs sourced online. References to local files may not work at the moment.
+=== Undo/Redo mechanism
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -786,8 +827,9 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="200">
 </div>
 </div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.1. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
@@ -826,7 +868,6 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br>
 <strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
 <strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br></p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -919,12 +960,9 @@ The sequence diagram below shows how this is done:</p>
 <strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.<br>
 <strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
 <strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.<br>
-<strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.<br></p>
+<strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.<br>
+=== Sort Command</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sort-command"><a class="link" href="#sort-command">3.4. Sort Command</a></h3>
 <div class="paragraph">
 <p>The sort command is facilitated by the <code>sortBy</code> methods in UniquePersonList and UniqueTaskList. It supports
 sort by ascending or by descending order in any field.</p>
@@ -969,8 +1007,9 @@ demonstrates how the sort command works.</p>
 <p>Note that the execution of the sort methods result in the actual person or task list being sorted. The resulting list
 is not returned, but will be reflected in the application&#8217;s storage and graphical user interface.</p>
 </div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.3.4. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br>
 <strong>Alternative 1 (current choice):</strong> Implement sorting functionality in <code>UniquePersonList</code> and <code>UniqueTaskList</code> class.<br>
@@ -989,44 +1028,41 @@ Future changes to the implementation will be easier as a consequence.<br>
 <strong>Cons:</strong> Old order of contact instances in the address book will be lost<br>
 <strong>Alternative 2:</strong> Duplicate a temporary version of the list and sort it for viewing (i.e. the actual list is not sorted)<br>
 <strong>Pros:</strong> Old order of contact instances remains intact.<br>
-<strong>Cons:</strong> Will use more memory and may be less intuitive for developer to understand and in terms of user experience. Also, sorting will not persist in the system.</p>
+<strong>Cons:</strong> Will use more memory and may be less intuitive for developer to understand and in terms of user experience. Also, sorting will not persist in the system.
+=== Backup Command</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="backup-command"><a class="link" href="#backup-command">3.5. Backup Command</a></h3>
 <div class="paragraph">
 <p>The backup command makes use of both the model manager and the storage manager. The <code>LogicManager</code> class was
 improved to support the accessing of storage value.</p>
 </div>
 <div class="paragraph">
 <p>The backup command arguments are parsed through the <code>BackupCommandParser</code>, which passes control over to the
-<code>BackupCommand</code> class. If there is a file path specified by the user, then the <code>execute()</code> command within the
-<code>BackupCommand</code> class will save the backup file to that path. If not file path is specified, the backup file will be
-saved to a default location.</p>
+<code>BackupCommand</code> class. The <code>BackupCommand</code> class will save the backup file to a user specified path.</p>
 </div>
 <div class="paragraph">
-<p>Suppose a user enters a new command <code>backup</code>. The backup file will be saved to a default location:</p>
+<p>Suppose a user enters a new command <code>backup filepath</code>. The backup file will be saved to a default location.
+The sequence diagram that illustrates this process is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/BackupSequenceDefaultDiagram.png" alt="BackupSequenceDefaultDiagram" width="800">
+<img src="images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width=""800">
 </div>
 </div>
-<div class="paragraph">
-<p>Suppose a user enters a new command <code>backup testBackup.xml</code>. The following sequence diagram
-demonstrates how this works:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+that the execution of the sort methods result in the actual person list being sorted.
+</td>
+</tr>
+</table>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/BackupSequenceCustomDiagram.png" alt="BackupSequenceCustomDiagram" width=""800">
-</div>
-</div>
-<div class="paragraph">
-<p>Note that the execution of the sort methods result in the actual person list being sorted.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.3.5. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br>
 <strong>Alternative 1 (current choice):</strong> Implement backup command via Command Line Interface<br>
@@ -1034,22 +1070,9 @@ demonstrates how this works:</p>
 <strong>Cons:</strong> UI not as intuitive. Users who are not familiar with the application may not know about this feature<br>
 <strong>Alternative 2:</strong> Implement backup command via GUI<br>
 <strong>Pros:</strong> More intuitive for all users since the options are all graphical<br>
-<strong>Cons:</strong> Hinders productivity. Excessive number of clicks to accomplish an essential task.</p>
+<strong>Cons:</strong> Hinders productivity. Excessive number of clicks to accomplish an essential task.
+=== Privacy of fields</p>
 </div>
-<hr>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Custom and/or Default file paths for backup file<br>
-<strong>Alternative 1 (current choice):</strong> Implemented both types of commands<br>
-<strong>Pros:</strong> User can choose either command option. Gives the user more choices<br>
-<strong>Cons:</strong> May seem confusing to the user at first<br>
-<strong>Alternative 2:</strong> Implement only the default option (save backup file to data directory of application)<br>
-<strong>Pros:</strong> Faster for the user to key in one word rather than a command with many words<br>
-<strong>Cons:</strong> Reduces choice for experienced users who may want to save to another location or use a different save name</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.6. Privacy of fields</a></h3>
 <div class="paragraph">
 <p>The <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
 </div>
@@ -1179,8 +1202,9 @@ Hence, a private field will remain private and the value stored by that field wi
 <div class="paragraph">
 <p>Upon generation of all the fields, if <code>areFieldsAllPrivate</code> is still true, <code>createEditedPerson</code> will throw an <code>IllegalArgumentException</code>, which will cause <code>EditCommand</code> to throw a <code>CommandException</code> and prevent the command from continuing.</p>
 </div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.3.6. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
@@ -1203,7 +1227,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.7. Changing of a Person&#8217;s Privacy</a></h3>
+<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.4. Changing of a Person&#8217;s Privacy</a></h3>
 <div class="paragraph">
 <p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
 </div>
@@ -1248,7 +1272,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.4.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br>
 <strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
@@ -1261,7 +1285,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.8. Locating a Person on Google Maps</a></h3>
+<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.5. Locating a Person on Google Maps</a></h3>
 <div class="paragraph">
 <p>Upon calling the <code>locate</code> command, <code>LocateCommandParser</code> will parse the input string into an <code>Index</code>, and create a new <code>LocateCommand</code>. Should the arguments be a non-integer, a <code>ParseException</code> will be thrown.<br>
 This can be seen from the code snippet below:</p>
@@ -1333,7 +1357,7 @@ This can be seen from the code snippet below:</p>
 <p><em>Figure 3.8.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.8.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.5.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
 <strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
@@ -1346,7 +1370,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.9. Navigating from one address to another using Google Maps</a></h3>
+<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.6. Navigating from one address to another using Google Maps</a></h3>
 <div class="paragraph">
 <p>When the <code>navigate</code> command is entered into the command line, <code>NavigateCommandParse</code> will first reset its internal <code>from</code>, <code>to</code>, <code>fromIndex</code>, <code>toIndex</code> to null. It will then check for the input prefixes and ensure that only one of the prefixes from the group <code>fp/</code>, <code>ft/</code>, and <code>fa/</code>, which we will subsequently call the <code>from</code> prefixes are present. It then does the same with the prefixes from the group <code>tp/</code>, <code>tt/</code> and <code>ta/</code>, which we will call the <code>to</code> prefixes.<br></p>
 </div>
@@ -1491,7 +1515,7 @@ This can be seen from the code snippet below:</p>
 <p><em>Figure 3.9.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.9.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.6.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br>
 <strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
@@ -1513,7 +1537,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.10. Add/Delete Tag mechanism</a></h3>
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.7. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1582,7 +1606,7 @@ If the tag to be added exists in every target person in the address book, the <c
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.10.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -1606,7 +1630,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.11. Find Tag mechanism</a></h3>
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.8. Find Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
 This command will not inherit from <code>UndoableCommand</code>.</p>
@@ -1684,7 +1708,7 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.11.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
@@ -1698,7 +1722,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.12. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1736,7 +1760,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.13. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2538,7 +2562,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 16:13:48 +00:00
+Last updated 2017-11-07 23:09:42 +00:00
 </div>
 </div>
 </body>
