@@ -440,7 +440,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.7.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
+<p><em>Figure 3.4.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
 </div>
 <div class="paragraph">
 <p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
@@ -628,7 +628,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.8.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
+<p><em>Figure 3.5.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
@@ -878,7 +878,7 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.9.1 : Sequence Diagram for Navigating from one Address to another</em></p>
+<p><em>Figure 3.6.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
@@ -904,14 +904,157 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 </div>
 <div class="sect2">
+<h3 id="enhancement-added-opening-and-saving-of-the-xml-save-file"><a class="link" href="#enhancement-added-opening-and-saving-of-the-xml-save-file">Enhancement Added: Opening and Saving of the .xml save file</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">Opening a save file : <code>open</code></a></h3>
+<div class="paragraph">
+<p>Switching between address books is made easy with the <code>open</code> command, as it allows you can load different save files into the application.<br>
+You can choose which .xml file to open from the pop up window that appears upon executing this command.<br>
+<code>open</code> can be replaced by <code>o</code> for faster input.<br>
+Format <code>open</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">Saving the data as a new save file : <code>save</code></a></h3>
+<div class="paragraph">
+<p>If you would like to save a copy of your data in a separate location or with a different name, the <code>save</code> command will allow you to do just that.<br>
+You can choose what to name your save file and where to save it from the pop up window that appears upon executing this command.<br>
+<code>save</code> can be replaced by <code>sa</code> for faster input.<br>
+Format: <code>save</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">Saving the data</a></h3>
+<div class="paragraph">
+<p>Address book data is saved in the hard disk automatically after any command that changes the data.<br>
+There is no need for you to save manually.</p>
+</div>
+<div class="paragraph">
+<p>If you want to change the location of the save file, you can use the <code>save</code> command, click on <code>File &#8594; Save As</code> or use the keyboard shortcut <kbd>CTRL</kbd>+<kbd>S</kbd> and select the new location and file name for the save file in the pop-up window.</p>
+</div>
+<div class="paragraph">
+<p>If you want to open a different save file, you can use the <code>open</code> command, click on <code>File &#8594; Open</code> or use the keyboard shortcut <kbd>CTRL</kbd>+<kbd>O</kbd> and select the new save file to use from the pop-up window.</p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>Open and Save As will allow users to more easily manage their data. Open allows them to load their data from a .xml file, letting them easily work on multiple different address books.<br>
+Save As allows users to save their address book data, letting it serve as backup or allowing them to be placed in a different location on the computer while still remaining operational.<br>
+This also allows for easier transfers of save files between devices without having to manually drag and manage the save files to and from the folder where Address++ is located.
+It can even potentially allow for syncing save files between devices if external software like Dropbox is used.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="opening-and-saving-of-the-xml-save-file"><a class="link" href="#opening-and-saving-of-the-xml-save-file">Opening and Saving of the .xml save file</a></h3>
+<div class="paragraph">
+<p>Both <code>OpenCommand</code> and <code>SaveAsCommand</code> function in a very similar way.
+When <code>open</code> or <code>save</code> is input by the user, <code>AddressBookParser</code> will create a new <code>OpenCommand</code> or <code>SaveAsCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>These two commands will then post a new <code>OpenRequestEvent</code> or a new <code>SaveAsRequestEvent</code> and return a successful <code>CommandResult</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>MainWindow</code> will have two methods, <code>HandleOpenRequestEvent</code> and <code>HandleSaveAsRequestEvent</code> that subscribe to the above two events and will call <code>handleOpen</code> and <code>handleSaveAs</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> handleOpen() <span class="directive">throws</span> <span class="exception">IOException</span>, DataConversionException {
+    <span class="comment">// Set extension filter</span>
+    FileChooser.ExtensionFilter extFilter = <span class="keyword">new</span> FileChooser.ExtensionFilter(
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">XML files (*.xml)</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">*.xml</span><span class="delimiter">&quot;</span></span>);
+    fileChooser.getExtensionFilters().add(extFilter);
+
+    <span class="comment">// Show open file dialog</span>
+    <span class="predefined-type">File</span> file = fileChooser.showOpenDialog(primaryStage);
+    <span class="keyword">if</span> (file != <span class="predefined-constant">null</span>) {
+        <span class="comment">// Change file path to the opened file</span>
+        storage.changeFilePath(file.getPath(), prefs);
+        <span class="comment">// Reset data in the model to the data from the opened file</span>
+        model.resetData(XmlFileStorage.loadDataFromSaveFile(file));
+        <span class="comment">// Update the UI</span>
+        fillInnerParts();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> handleSaveAs() <span class="directive">throws</span> <span class="exception">IOException</span> {
+    <span class="comment">// Set extension filter</span>
+    FileChooser.ExtensionFilter extFilter = <span class="keyword">new</span> FileChooser.ExtensionFilter(
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">XML files (*.xml)</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">*.xml</span><span class="delimiter">&quot;</span></span>);
+    fileChooser.getExtensionFilters().add(extFilter);
+
+    <span class="comment">// Show save file dialog</span>
+    <span class="predefined-type">File</span> file = fileChooser.showSaveDialog(primaryStage);
+
+    <span class="keyword">if</span> (file != <span class="predefined-constant">null</span>) {
+        <span class="comment">// Make sure it has the correct extension</span>
+        <span class="keyword">if</span> (!file.getPath().endsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">.xml</span><span class="delimiter">&quot;</span></span>)) {
+            file = <span class="keyword">new</span> <span class="predefined-type">File</span>(file.getPath() + <span class="string"><span class="delimiter">&quot;</span><span class="content">.xml</span><span class="delimiter">&quot;</span></span>);
+        }
+        <span class="comment">// Change file path to the new save file</span>
+        storage.changeFilePath(file.getPath(), prefs);
+        <span class="comment">// Save the address book data and the user preferences</span>
+        storage.saveAddressBook(model.getAddressBook());
+        storage.saveUserPrefs(prefs);
+        <span class="comment">// Update the UI</span>
+        fillInnerParts();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both <code>handleOpen</code> and <code>handleSaveAs</code> will create a new <code>FileChooser</code> extension filter that only allows the pop-up window to save files and load files in the .xml format.</p>
+</div>
+<div class="paragraph">
+<p>Upon successfully selecting a file to load or a location to save as in the pop-up window, both methods will call <code>changefilepath</code> in <code>Storage</code> to the selected file path.</p>
+</div>
+<div class="paragraph">
+<p>Finally, both commands diverge as <code>handleOpen</code> will call <code>resetData</code> to reset the data using the new save file, while <code>handleSaveAs</code> will call <code>saveAddressBook</code> and <code>saveUserPrefs</code> to save the data. Both methods will finally call <code>fillInnerParts()</code> to refresh the data displayed on the UI.</p>
+</div>
+<div class="paragraph">
+<p>This process is illustrated using the sequence diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/OpenSequenceDiagram.png" alt="OpenSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.7.1 : Sequence Diagram for Opening a save file</em></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br>
+<strong>Alternative 1 (current choice):</strong> Open a <code>FileChooser</code> window, allowing the user to move through their file directory to acquire their save location and to select the name of the save file.<br>
+<strong>Pros:</strong> User friendly, many other applications function similarly when saving and loading. Easier to implement and use as part of the dropdown menu in the User Interface.<br>
+<strong>Cons:</strong> Not entirely command line based. <br>
+<strong>Alternative 2:</strong> Input the file directory and file name to save or load from as part of the command.<br>
+<strong>Pros:</strong> Entirely command line based, may be more preferable for users who prefer using the command line.<br>
+<strong>Cons:</strong> Requires more complex code. Command must check if the file location to save or load from is valid, and that there is a valid file of that name.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Added Save As and Open (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/10">#10</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/17">#17</a>)</p>
-</li>
-<li>
-<p>Add Icons for Open, Save As, Exit and Help (Pull request <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/10">#10</a>)</p>
+<p>Add Menu Icons for Open, Save As, Exit and Help (Pull request <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/10">#10</a>)</p>
 </li>
 <li>
 <p>Add Keyboard Shortcuts for Open, Save As, Exit and Help (Pull request <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/10">#11</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/101">#101</a>)</p>
@@ -925,6 +1068,9 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 <li>
 <p>Added Travis, Coveralls and Appveyor links for Continuous Integration (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/4">#4</a>, <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/22">#22</a>)</p>
 </li>
+<li>
+<p>Performed Acceptance Testing for Team T16-B2 (Issue <a href="https://github.com/CS2103AUG2017-T16-B2/main/issues/102">#102</a>)</p>
+</li>
 </ul>
 </div>
 </div>
@@ -933,7 +1079,7 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-07 23:09:42 +00:00
+Last updated 2017-11-08 12:19:30 +00:00
 </div>
 </div>
 </body>
