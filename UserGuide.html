@@ -45,22 +45,23 @@ at students who work on projects or assignments frequently, but it can also be u
 <li><a href="#locating-persons-by-tag-code-findtag-code-since-v1-4">3.13. Locating persons by tag : <code>findtag</code> (Since V1.4)</a></li>
 <li><a href="#deleting-a-person-code-delete-code">3.14. Deleting a person : <code>delete</code></a></li>
 <li><a href="#deleting-a-tag-of-persons-code-deletetag-code-since-v1-2">3.15. Deleting a tag of persons : <code>deletetag</code> (Since V1.2)</a></li>
-<li><a href="#locating-a-person-s-address-code-locate-code-since-v1-4">3.16. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></li>
-<li><a href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.17. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></li>
-<li><a href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.18. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></li>
-<li><a href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.19. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></li>
-<li><a href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.20. Assign contacts to task : <code>assign</code> (Since V1.4)</a></li>
-<li><a href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.21. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.22. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.23. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.24. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.25. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.26. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#opening-a-save-file-code-open-code">3.27. Opening a save file : <code>open</code></a></li>
-<li><a href="#saving-the-data-as-a-new-save-file-code-save-code">3.28. Saving the data as a new save file : <code>save</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.29. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.30. Saving the data</a></li>
-<li><a href="#using-the-browser">3.31. Using the browser</a></li>
+<li><a href="#sorting-your-contact-list-and-tasks-code-sort-code">3.16. Sorting your contact list and tasks : <code>sort</code></a></li>
+<li><a href="#locating-a-person-s-address-code-locate-code-since-v1-4">3.17. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></li>
+<li><a href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.18. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></li>
+<li><a href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.19. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></li>
+<li><a href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.20. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></li>
+<li><a href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.21. Assign contacts to task : <code>assign</code> (Since V1.4)</a></li>
+<li><a href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.22. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.23. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.24. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.25. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.26. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.27. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#opening-a-save-file-code-open-code">3.28. Opening a save file : <code>open</code></a></li>
+<li><a href="#saving-the-data-as-a-new-save-file-code-save-code">3.29. Saving the data as a new save file : <code>save</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.30. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.31. Saving the data</a></li>
+<li><a href="#using-the-browser">3.32. Using the browser</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -427,30 +428,53 @@ Format: <code>addtag INDEX&#8230;&#8203; t/[TAG]</code><br></p>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Things To Note</strong><br>
-* You can add the tag of the person at the specific <code>INDEX</code>.<br>
-* The index refers to the index number shown in the most recent listing.<br>
-* The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;<br>
-* If you don not key in any indexes, addtag will add the tag to all contacts in the address book.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
+<p><strong>Things To Note</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>list</code><br>
-<code>addtag 1 2 t/friends</code><br>
-Adds the friends tag of the 1st and 2nd person in the address book.</p>
+<p>You can add the tag of the person at the specific <code>INDEX</code>.<br></p>
 </li>
 <li>
-<p><code>list</code><br>
-<code>addtag t/acquaintance</code><br>
-Adds the acquaintance tag to all contacts in the address book.</p>
+<p>The index refers to the index number shown in the most recent listing.<br></p>
+</li>
+<li>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;<br></p>
+</li>
+<li>
+<p>If you don not key in any indexes, addtag will add the tag to all contacts in the address book.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Examples Scenarios:</strong></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to add tag <code>friends</code> to the 1st and 2nd persons in the address book, you can use <code>list</code> to show all the contacts in the address book first,
+then use the <code>addtag</code> command to achieve it.</p>
+</div>
+<div class="paragraph">
+<p><code>list</code><br>
+<code>addtag 1 2 t/friends</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you want to add a common tag to all the persons in the address book. You can type in the following command.</p>
+</div>
+<div class="paragraph">
+<p><code>list</code><br>
+<code>addtag t/acquaintance</code><br></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -648,29 +672,16 @@ Sets the address and email of the 2nd person to be public and their name to be p
 <div class="sect2">
 <h3 id="favouriting-persons-code-favourite-code-since-v1-3"><a class="link" href="#favouriting-persons-code-favourite-code-since-v1-3">3.9. Favouriting persons : <code>favourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
-<p>You can use <code>favourite</code> command to make persons in the address book become your favourite persons. For example, you may wish to set your girlfriend as your favourite contact.<br>
+<p>You can use <code>favourite</code> command to make persons in the address book become your favourite contacts. For example, you may wish to set your girlfriend as your favourite contact. You will see a heart png next to your girlfriend&#8217;s name
+once you successfully set her as your favourite contact.<br>
 <code>favourite</code> can be replaced by <code>fav</code> for faster input.<br>
 Format: <code>favourite INDEX [MORE INDEX]</code><br></p>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>favourite 2</code><br>
-Favourites the 2nd person in the address book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>favourite 1</code><br>
-Favourite the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -682,9 +693,48 @@ Favourite the 1st person in the results of the <code>find</code> command.</p>
 <li>
 <p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
+<li>
+<p>You will see a heart png next to your favourite persons.</p>
+</li>
 </ul>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p><strong>Examples Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to set the 2nd person in the address book to be your favourite contact. You should <code>list</code> all the persons first, then use <code>favourite</code> command to achieve it.</p>
+</div>
+<div class="paragraph">
+<p><code>list</code><br>
+<code>favourite 2</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you have <code>Betsy Brandt, Betsy Devos and Betsy Ross</code> in your address book. You want to set <code>Betsy Brandt</code> as your favourite contact.
+Instead of <code>listing</code> all the contacts, you can <code>find</code> all the <code>Besty</code> first, then <code>favourite</code> her.</p>
+</div>
+<div class="paragraph">
+<p><code>find Betsy</code><br>
+<code>favourite 1</code><br></p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FavouriteCommandBeforeAndAfter.png" alt="FavouriteCommandBeforeAndAfter" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.9.1 : FavouriteCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -694,19 +744,27 @@ Favourite the 1st person in the results of the <code>find</code> command.</p>
 <code>showfavourite</code> can be replaced by <code>sfav</code> for faster input.<br>
 Format: <code>showfavourite</code><br></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
-<p><code>showfavourite</code> command: It will return an empty list if there is no favourite persons.</p>
+<p><strong>Things To Note</strong></p>
 </div>
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>showfavourite</code> command: It will return an empty list if there is no favourite persons.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ShowFavouriteCommand.png" alt="ShowFavouriteCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.10.1 : ShowFavouriteCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -792,23 +850,26 @@ Returns all tasks that has the word <code>update</code> in their names or descri
 <div class="sect2">
 <h3 id="listing-all-tags-code-showtag-code-since-v1-5"><a class="link" href="#listing-all-tags-code-showtag-code-since-v1-5">3.12. Listing all tags : <code>showtag</code> (Since V1.5)</a></h3>
 <div class="paragraph">
-<p>You can use the <code>showtag</code> command to quickly show all tags in the address book. This is a helper command for <code>findtag</code>+
+<p>You can use the <code>showtag</code> command to quickly show all tags in the address book. Sometimes you may forget <code>tags</code> you added few weeks ago. You may use this command to help you.<br>
 <code>showtag</code> can be replaced by <code>stag</code> for faster input.<br>
 Format: <code>showtag</code><br></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
-<p><code>showtag</code> command: It will return an empty list if there is no tags in the address book.</p>
+<p><strong>Things To Note</strong></p>
 </div>
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>showtag</code> command: It will return an empty list if there is no tags in the address book.</p>
+</li>
+<li>
+<p>You may want to use <code>showtag</code> command to help you recall all the <code>tags</code> in the address book before you try to use <code>findtag</code> to find persons.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -819,36 +880,13 @@ If you want to find contacts who are your <code>classmates</code> but not your <
 <code>findtag</code> can be replaced by <code>ftag</code> for faster input.<br>
 Format: <code>findtag KEYWORD [MORE_KEYWORDS]</code><br></p>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>findtag friends</code><br>
-Returns any persons having tag <code>friends</code></p>
-</li>
-<li>
-<p><code>findtag friends colleagues</code><br>
-Returns any person having tags <code>friends</code> or <code>colleagues</code></p>
-</li>
-<li>
-<p><code>findtag /friends</code><br>
-Returns any persons not have tag <code>friends</code></p>
-</li>
-<li>
-<p><code>findtag classmates /friends</code><br>
-Returns any person having tags <code>classmates</code> but not having tag <code>friends</code></p>
-</li>
-</ul>
-</div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br></p>
+</div>
 <div class="ulist">
 <ul>
-<li>
-<p>Important note on <code>findtag</code> criteria</p>
-</li>
 <li>
 <p>The search is not case insensitive. e.g <code>friends</code> will match <code>FRIENDS</code></p>
 </li>
@@ -859,12 +897,48 @@ Returns any person having tags <code>classmates</code> but not having tag <code>
 <p>Only the tag is searched for persons.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>friend</code> will not match <code>friends</code></p>
+<p>Only full words will be matched. e.g. <code>friend</code> will not match <code>friends</code></p>
 </li>
 <li>
-<p>There is no space <code>/not</code> and tag name e.g. <code>/not friends</code> will not match <code>/notfriends</code></p>
+<p>There is no space between <code>/</code> and tag name. e.g. <code>/ friends</code> will not match <code>/friends</code>.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Examples Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to find contatcs with tag <code>friends</code> or <code>colleagues</code>, you can just key in the following command.</p>
+</div>
+<div class="paragraph">
+<p><code>findtag friends colleagues</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you want to find contacts without tag <code>frineds</code>, you can key in the following command.</p>
+</div>
+<div class="paragraph">
+<p><code>findtag /friends</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 3:</strong><br>
+Suppose you want to find contacts with tag <code>friends</code> but without <code>colleagues</code>, you can key in the following command.</p>
+</div>
+<div class="paragraph">
+<p><code>findtag friends /colleagues</code></p>
 </div>
 </div>
 </div>
@@ -941,6 +1015,9 @@ Format: <code>deletetag INDEX&#8230;&#8203; t/[TAG]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -960,23 +1037,36 @@ Format: <code>deletetag INDEX&#8230;&#8203; t/[TAG]</code><br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples Scenarios:</strong><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>deletetag 1 2 t/friends</code><br>
-Delete the friends tag of the 1st and 2nd person in the address book.</p>
-</li>
-<li>
-<p><code>list</code><br>
-<code>deletetag t/friends</code><br>
-Delete the friends tag from all contacts in the address book.
-=== Sorting your contact list and tasks : <code>sort</code></p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to delete <code>classmates</code> tag for the first two persons in the address book, you can <code>list</code> all the persons first, then
+use the <code>deletetag</code> command to achieve.</p>
 </div>
+<div class="paragraph">
+<p><code>list</code><br>
+<code>deletetag 1 2 t/friends</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you want to delete <code>friends</code> tag from all contacts in the address book.</p>
+</div>
+<div class="paragraph">
+<p><code>list</code><br>
+<code>deletetag t/friends</code><br></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-your-contact-list-and-tasks-code-sort-code"><a class="link" href="#sorting-your-contact-list-and-tasks-code-sort-code">3.16. Sorting your contact list and tasks : <code>sort</code></a></h3>
 <div class="paragraph">
 <p>Sort your contacts or tasks by using the <code>sort</code> command<br>
 <code>sort</code> can be replaced by <code>so</code> for faster input.<br>
@@ -1140,7 +1230,7 @@ Selects the 1st task in the results of the <code>find task</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-a-person-s-address-code-locate-code-since-v1-4"><a class="link" href="#locating-a-person-s-address-code-locate-code-since-v1-4">3.16. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></h3>
+<h3 id="locating-a-person-s-address-code-locate-code-since-v1-4"><a class="link" href="#locating-a-person-s-address-code-locate-code-since-v1-4">3.17. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>If you ever need to visit one of your contacts, you can use <code>locate</code> to choose a contact, and search for their address online using Google Maps.<br>
 <code>locate</code> can be replaced by <code>loc</code> for faster input.<br>
@@ -1195,7 +1285,7 @@ Locates the address of the 1st person in the results of the <code>find</code> co
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-from-one-address-to-another-code-navigate-code-since-v1-5"><a class="link" href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.17. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></h3>
+<h3 id="navigating-from-one-address-to-another-code-navigate-code-since-v1-5"><a class="link" href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.18. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Although <code>locate</code> shows you where a person&#8217;s address is, it does not tell you how to get there. The <code>navigate</code> command will provide directions, with the help of Google Maps, on how to get from one address to another.<br>
 <code>navigate</code> can be replaced by <code>nav</code> for faster input.<br>
@@ -1265,7 +1355,7 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-task-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.18. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
+<h3 id="mark-task-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">3.19. Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Have you finally completed a task in the address book? You can use <code>setcomplete</code> to mark the specified task as complete.<br>
 <code>setcomplete</code> can be replaced by <code>stc</code> for faster input.<br>
@@ -1307,7 +1397,7 @@ Sets the 1st task in the results of the <code>find task</code> command as comple
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-task-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.19. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
+<h3 id="mark-task-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">3.20. Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Did you accidentally mark a task as completed? You can use <code>setincomplete</code> to mark the specified task as incomplete.<br>
 <code>setincomplete</code> can be replaced by <code>sti</code> for faster input.<br>
@@ -1349,7 +1439,7 @@ Sets the 1st task in the results of the <code>find task</code> command as incomp
 </div>
 </div>
 <div class="sect2">
-<h3 id="assign-contacts-to-task-code-assign-code-since-v1-4"><a class="link" href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.20. Assign contacts to task : <code>assign</code> (Since V1.4)</a></h3>
+<h3 id="assign-contacts-to-task-code-assign-code-since-v1-4"><a class="link" href="#assign-contacts-to-task-code-assign-code-since-v1-4">3.21. Assign contacts to task : <code>assign</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>assign</code> to assign contacts to an ongoing task. You may wish to use <code>assign</code> when collaborating with others for projects, for example.<br>
 <code>assign</code> can be replaced by <code>as</code> for faster input.<br>
@@ -1396,7 +1486,7 @@ Assigns the 2nd person in the address book to the 1st task in the results of the
 </div>
 </div>
 <div class="sect2">
-<h3 id="dismiss-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.21. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
+<h3 id="dismiss-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">3.22. Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br>
 <code>dismiss</code> can be replaced by <code>ds</code> for faster input.<br>
@@ -1443,7 +1533,7 @@ Dismisses the 2nd person in the address book from the 1st task in the results of
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.22. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.23. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 <code>history</code> can be replaced by <code>h</code> for faster input.<br>
@@ -1465,7 +1555,7 @@ Format: <code>history</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.23. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.24. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Did you make a mistake somewhere? <code>undo</code> restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 <code>undo</code> can be replaced by <code>u</code> for faster input.<br>
@@ -1511,32 +1601,18 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.24. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
+<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.25. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use <code>unfavourite</code> command to set your previous favourite persons become the normal persons. For example,<br>
 after you break up with your girlfriend, you may wish to set your girlfriend back to normal person.<br>
 <code>unfavourite</code> can be replaced by <code>unfav</code> for faster input.<br>
 Format: <code>unfavourite INDEX [MORE INDEX]</code><br></p>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>unfavourite 2</code><br>
-Unfavourites the 2nd person in the address book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>unfavourite 1</code><br>
-Unfavourite the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1548,13 +1624,44 @@ Unfavourite the 1st person in the results of the <code>find</code> command.</p>
 <li>
 <p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
+<li>
+<p>The heart png will disappear once you <code>unfavourite</code> the person.</p>
+</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Examples Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you do not want to the 2nd person in the address book to be your favourite contact anymore, you should <code>list</code> all the persons first, then use <code>unfavourite</code> command to achieve it.</p>
+</div>
+<div class="paragraph">
+<p><code>list</code><br>
+<code>unfavourite 2</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you have <code>Betsy Brandt, Betsy Devos and Betsy Ross</code> in your address book. You want to <code>unfavourite</code> <code>Betsy Brandt</code> in the address book.
+Instead of <code>listing</code> all the contacts, you can <code>find</code> all the <code>Besty</code> first, then <code>unfavourite</code> her.</p>
+</div>
+<div class="paragraph">
+<p><code>find Betsy</code><br>
+<code>unfavourite 1</code><br></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.25. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.26. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Perhaps an <code>undo</code> wasn&#8217;t necessary. <code>redo</code> reverses the most recent <code>undo</code> command.<br>
 <code>redo</code> can be replaced by <code>r</code> for faster input.<br>
@@ -1587,7 +1694,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.26. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.27. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br>
 <code>clear</code> can be replaced by <code>c</code> for faster input.<br>
@@ -1595,7 +1702,7 @@ Format: <code>clear</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">3.27. Opening a save file : <code>open</code></a></h3>
+<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">3.28. Opening a save file : <code>open</code></a></h3>
 <div class="paragraph">
 <p>Switching between address books is made easy with the <code>open</code> command, as it allows you can load different save files into the application.<br>
 You can choose which .xml file to open from the pop up window that appears upon executing this command.<br>
@@ -1604,7 +1711,7 @@ Format <code>open</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">3.28. Saving the data as a new save file : <code>save</code></a></h3>
+<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">3.29. Saving the data as a new save file : <code>save</code></a></h3>
 <div class="paragraph">
 <p>If you would like to save a copy of your data in a separate location or with a different name, the <code>save</code> command will allow you to do just that.<br>
 You can choose what to name your save file and where to save it from the pop up window that appears upon executing this command.<br>
@@ -1613,7 +1720,7 @@ Format: <code>save</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.29. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.30. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Once you have finished using Address++, you may use this command to exit the program.<br>
 Format: <code>exit</code></p>
@@ -1623,7 +1730,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.30. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.31. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need for you to save manually.</p>
@@ -1636,7 +1743,7 @@ There is no need for you to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="using-the-browser"><a class="link" href="#using-the-browser">3.31. Using the browser</a></h3>
+<h3 id="using-the-browser"><a class="link" href="#using-the-browser">3.32. Using the browser</a></h3>
 <div class="paragraph">
 <p>If you click on a box containing a contact, an internet browser on the right side of the window.</p>
 </div>
@@ -1997,7 +2104,7 @@ e.g. <code>ds 4 1 from/17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-10 07:24:52 +00:00
+Last updated 2017-11-10 15:19:33 +00:00
 </div>
 </div>
 </body>
