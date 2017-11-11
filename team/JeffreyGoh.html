@@ -57,7 +57,7 @@
 <p><strong>Things To Note</strong><br>
 * A person can have any number of tags (including 0)<br>
 * The <code>EMAIL</code> should be in the format address@email.domain<br>
-* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code>, <code>Remark</code>, <code>Avatar</code> to be private by placing a <code>p</code> in front of the prefix.<br></p>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code>, to be private by placing a <code>p</code> in front of the prefix.<br></p>
 </div>
 </div>
 </div>
@@ -207,8 +207,10 @@ Removes the priority and deadline of the second task.</p>
 <h3 id="changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3"><a class="link" href="#changing-the-privacy-of-a-person-s-details-code-changeprivacy-code-since-v1-3">Changing the Privacy of a person&#8217;s details : <code>changeprivacy</code>(Since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use the <code>changeprivacy</code> command to set the privacy settings for each field of an existing <code>Person</code> in the address book, which allows you to choose specifically what information will be displayed.<br>
-Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [v/AVATAR]</code>
-Shorthand commands: <code>cp</code></p>
+<code>changeprivacy</code> can be replaced by <code>cp</code> for faster input.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>changeprivacy INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [v/AVATAR]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -254,6 +256,61 @@ Sets the address and email of the 2nd person to be public and their name to be p
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-privacy-level-of-the-address-book-code-privacylevel-code-since-v1-5"><a class="link" href="#changing-the-privacy-level-of-the-address-book-code-privacylevel-code-since-v1-5">Changing the Privacy Level of the address book : <code>privacylevel</code>(Since V1.5)</a></h3>
+<div class="paragraph">
+<p>Changing a person&#8217;s privacy just to reveal their data or to make a person fully confidential may be time-consuming. If you would like to view all the data hidden by private fields easily, or completely hide a person with private fields, you can use this command to change the Privacy Level of the address book.<br>
+At level 1, all data, regardless of whether they are set to be private or public, can be viewed.<br>
+At level 2, private fields will have their data hidden by a string, such as <code>&lt;Private Phone&gt;</code>.<br>
+At level 3, any person containing at least one private field will be completely hidden in the address book.<br>
+<code>privacylevel</code> can be replaced by <code>pl</code> for faster input.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>privacylevel [LEVEL]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Address++ always launches in privacy level 2.</p>
+</li>
+<li>
+<p>The <code>LEVEL</code> that you input can only contain the values 1, 2, or 3.</p>
+</li>
+<li>
+<p>This does not change the actual privacy setting of each field, thus, changing the privacy level to 1 does not make any of the private fields public.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Thus, even if you have set the address book to be privacy level 1, you cannot edit a field that is set as private without setting it back to public.</p>
+</li>
+<li>
+<p>Similarly, since a person is completely hidden in privacy level 3, you will have to set the privacy level back to 2 or 1 to be able to modify that person.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>privacylevel 1</code><br>
+Changes the privacy level of the address book to 1, revealing all data hidden by private fields.</p>
+</li>
+<li>
+<p><code>pl 3</code><br>
+Changes the privacy level of the address book to 3, hiding all persons with private fields completely in the address book.</p>
+</li>
+</ul>
+</div>
 <hr>
 <div class="sect3">
 <h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
@@ -266,6 +323,9 @@ Sets the address and email of the 2nd person to be public and their name to be p
 <div class="paragraph">
 <p>Having a private field also doubles up as an extra layer of protection against unintentional modifications, as private fields cannot be edited without changing them back to public fields.</p>
 </div>
+<div class="paragraph">
+<p>It may be inconvenient for a user to set a person&#8217;s fields to public and back to private every time they would like to have a peek at the data that was hidden, or to set a person&#8217;s every field to private if they want to hide them. Thus, having a command to change the privacy level of the address book will make it much more convenient for users to access private information.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
@@ -276,6 +336,14 @@ Sets the address and email of the 2nd person to be public and their name to be p
 <h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">Privacy of fields</a></h3>
 <div class="paragraph">
 <p>The <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PersonClassDiagramPrivacy.png" alt="PersonClassDiagramPrivacy" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.4.1 : Class diagram for a Person, only Name, Phone, Email, Address and Remark contain an isPrivate boolean to indicate if it is private or not</em></p>
 </div>
 <div class="paragraph">
 <p>Adding a person with private fields uses the same <code>AddCommand</code> as adding a person with no public fields.<br>
@@ -294,7 +362,7 @@ Upon obtaining all the fields anc creating a new <code>Person</code>, <code>AddC
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.6.1 : Sequence Diagram for adding a Person with private fields</em></p>
+<p><em>Figure 3.4.2 : Sequence Diagram for adding a Person with private fields</em></p>
 </div>
 <div class="paragraph">
 <p>If a field is private, then the <code>toString</code> method will return a string <code>&lt;Private [FIELD]&gt;</code>, where <code>[FIELD]</code> is the name of that field.<br>
@@ -440,7 +508,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.4.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
+<p><em>Figure 3.5.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
 </div>
 <div class="paragraph">
 <p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
@@ -481,6 +549,89 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 <strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
 <strong>Pros:</strong> Can make use of existing code to aid the implementation.<br>
 <strong>Cons:</strong> Increases the complexity of EditCommand for both users and developers. More ambiguous as to how editing a private field will affect the data.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-address-book-s-privacy-level"><a class="link" href="#changing-the-address-book-s-privacy-level">Changing the address book&#8217;s privacy level</a></h3>
+<div class="paragraph">
+<p><code>PrivacyLevelCommand</code> allows the user to change the privacy level of Address++, letting users easily reveal data hidden by private fields, or hide persons containing private fields entirely.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram for <code>PrivacyLevelCommand</code> is illustrated below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PrivacyLevelSequenceDiagram.png" alt="PrivacyLevelSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.6.1 : Sequence Diagram for changing the privacy level of the address book</em></p>
+</div>
+<div class="paragraph">
+<p><code>PrivacyLevelCommandParser</code> will accept any integer that is input in the command line, and create a <code>PrivacyLevelCommand</code> that stores the integer, which represents the privacy level to switch to.</p>
+</div>
+<div class="paragraph">
+<p>Upon execution,<code>PrivacyLevelCommand</code> will first check if the integer falls within the range of the minimum and maximum privacy level. If it does not, a new <code>CommandException</code> is thrown, reminding the user of the valid input levels.</p>
+</div>
+<div class="paragraph">
+<p>If the integer is within the valid range, <code>PrivacyLevelCommand</code> will update the privacy level of <code>Model</code>. Following that, it will proceed to update the privacy level of each person.</p>
+</div>
+<div class="paragraph">
+<p><code>Model</code>, each <code>Person</code> and each field that can be set as private all contain a <code>privacyLevel</code> variable to indicate the current privacy level. This value should remain the same between all of these objects throughout the operation of Address++.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PersonClassDiagramPrivacyLevel.png" alt="PersonClassDiagramPrivacyLevel" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.6.2 : Class Diagram of Person, which shows which classes contain an integer to indicate the privacy level</em></p>
+</div>
+<div class="paragraph">
+<p>Finally, depending on the privacy level, <code>PrivacyLevelCommand</code> will update the call <code>model.updateFilteredPersonList()</code> with the appropriate predicate.</p>
+</div>
+<div class="paragraph">
+<p>This process is illustrated in the code snippet below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+    <span class="keyword">if</span> (level &lt; MIN_PRIVACY_LEVEL || level &gt; MAX_PRIVACY_LEVEL) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(WRONG_PRIVACY_LEVEL_MESSAGE);
+    }
+    model.setPrivacyLevel(level);
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; model.getAddressBook().getPersonList().size(); i++) {
+        ReadOnlyPerson toReplace = model.getPersonAtIndexFromAddressBook(i);
+        Person newPerson = <span class="keyword">new</span> Person(toReplace);
+        newPerson.setPrivacyLevel(level);
+        <span class="keyword">try</span> {
+            model.updatePerson(toReplace, newPerson);
+        } <span class="keyword">catch</span> (DuplicatePersonException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_DUPLICATE_PERSON);
+        } <span class="keyword">catch</span> (PersonNotFoundException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The target person cannot be missing</span><span class="delimiter">&quot;</span></span>);
+        }
+    }
+    <span class="keyword">if</span> (level == <span class="integer">3</span>) {
+        model.updateFilteredPersonList(<span class="keyword">new</span> ShowAllPrivacyLevelPredicate());
+    } <span class="keyword">else</span> {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+    }
+    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(CHANGE_PRIVACY_LEVEL_SUCCESS, <span class="predefined-type">Integer</span>.toString(level)));
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storing of the privacy level<br>
+<strong>Alternative 1 (current choice):</strong> Have each relevant class store a privacy level integer.<br>
+<strong>Pros:</strong> Less coupling, less modification of existing code required. <br>
+<strong>Cons:</strong> Have to modify every relevant object every time <code>PrivacyLevelCommand</code> is called. Runs the risk that an object may accidentally not have its privacy level modified to match the other objects if privacy levels are not properly updated.<br>
+<strong>Alternative 2:</strong> Store the privacy level in the model and have any object that needs to check it query from model.<br>
+<strong>Pros:</strong> Only one integer needs to be modified for the privacy level of the entire address book to change, which also eliminates any possibility that privacy level may be different when used by different objects.<br>
+<strong>Cons:</strong> Increases coupling, classes such as Name will need to have a Model object as one of its variables to access Model. Large scale modification of existing code and tests are necessary.</p>
 </div>
 <hr>
 </div>
@@ -628,10 +779,10 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.5.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
+<p><em>Figure 3.7.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
 <strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
@@ -878,10 +1029,10 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.6.1 : Sequence Diagram for Navigating from one Address to another</em></p>
+<p><em>Figure 3.8.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br>
 <strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
@@ -1033,10 +1184,10 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.7.1 : Sequence Diagram for Opening a save file</em></p>
+<p><em>Figure 3.8.1 : Sequence Diagram for Opening a save file</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br>
 <strong>Alternative 1 (current choice):</strong> Open a <code>FileChooser</code> window, allowing the user to move through their file directory to acquire their save location and to select the name of the save file.<br>
@@ -1079,7 +1230,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-11 12:04:07 +00:00
+Last updated 2017-11-11 12:24:08 +00:00
 </div>
 </div>
 </body>

@@ -52,14 +52,15 @@
 <li><a href="#backup-command">3.6. Backup Command</a></li>
 <li><a href="#privacy-of-fields">3.7. Privacy of fields</a></li>
 <li><a href="#changing-of-a-person-s-privacy">3.8. Changing of a Person&#8217;s Privacy</a></li>
-<li><a href="#locating-a-person-on-google-maps">3.9. Locating a Person on Google Maps</a></li>
-<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.10. Navigating from one address to another using Google Maps</a></li>
-<li><a href="#opening-and-saving-of-the-xml-save-file">3.11. Opening and Saving of the .xml save file</a></li>
-<li><a href="#add-delete-tag-mechanism">3.12. Add/Delete Tag mechanism</a></li>
-<li><a href="#find-tag-mechanism">3.13. Find Tag mechanism</a></li>
-<li><a href="#favourite-unfavourite-person-mechanism">3.14. Favourite/Unfavourite Person mechanism</a></li>
-<li><a href="#logging">3.15. Logging</a></li>
-<li><a href="#configuration">3.16. Configuration</a></li>
+<li><a href="#changing-the-address-book-s-privacy-level">3.9. Changing the address book&#8217;s privacy level</a></li>
+<li><a href="#locating-a-person-on-google-maps">3.10. Locating a Person on Google Maps</a></li>
+<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.11. Navigating from one address to another using Google Maps</a></li>
+<li><a href="#opening-and-saving-of-the-xml-save-file">3.12. Opening and Saving of the .xml save file</a></li>
+<li><a href="#add-delete-tag-mechanism">3.13. Add/Delete Tag mechanism</a></li>
+<li><a href="#find-tag-mechanism">3.14. Find Tag mechanism</a></li>
+<li><a href="#favourite-unfavourite-person-mechanism">3.15. Favourite/Unfavourite Person mechanism</a></li>
+<li><a href="#logging">3.16. Logging</a></li>
+<li><a href="#configuration">3.17. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1094,6 +1095,14 @@ that the execution of the sort methods result in the actual person list being so
 <div class="paragraph">
 <p>The <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PersonClassDiagramPrivacy.png" alt="PersonClassDiagramPrivacy" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.4.1 : Class diagram for a Person, only Name, Phone, Email, Address and Remark contain an isPrivate boolean to indicate if it is private or not</em></p>
+</div>
 <div class="paragraph">
 <p>Adding a person with private fields uses the same <code>AddCommand</code> as adding a person with no public fields.<br>
 To determine if the field that is added should be set to private, a <code>p</code> is added to the start of the prefix.<br>
@@ -1111,7 +1120,7 @@ Upon obtaining all the fields anc creating a new <code>Person</code>, <code>AddC
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.6.1 : Sequence Diagram for adding a Person with private fields</em></p>
+<p><em>Figure 3.4.2 : Sequence Diagram for adding a Person with private fields</em></p>
 </div>
 <div class="paragraph">
 <p>If a field is private, then the <code>toString</code> method will return a string <code>&lt;Private [FIELD]&gt;</code>, where <code>[FIELD]</code> is the name of that field.<br>
@@ -1257,7 +1266,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.4.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
+<p><em>Figure 3.5.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
 </div>
 <div class="paragraph">
 <p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
@@ -1302,7 +1311,90 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.9. Locating a Person on Google Maps</a></h3>
+<h3 id="changing-the-address-book-s-privacy-level"><a class="link" href="#changing-the-address-book-s-privacy-level">3.9. Changing the address book&#8217;s privacy level</a></h3>
+<div class="paragraph">
+<p><code>PrivacyLevelCommand</code> allows the user to change the privacy level of Address++, letting users easily reveal data hidden by private fields, or hide persons containing private fields entirely.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram for <code>PrivacyLevelCommand</code> is illustrated below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrivacyLevelSequenceDiagram.png" alt="PrivacyLevelSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.6.1 : Sequence Diagram for changing the privacy level of the address book</em></p>
+</div>
+<div class="paragraph">
+<p><code>PrivacyLevelCommandParser</code> will accept any integer that is input in the command line, and create a <code>PrivacyLevelCommand</code> that stores the integer, which represents the privacy level to switch to.</p>
+</div>
+<div class="paragraph">
+<p>Upon execution,<code>PrivacyLevelCommand</code> will first check if the integer falls within the range of the minimum and maximum privacy level. If it does not, a new <code>CommandException</code> is thrown, reminding the user of the valid input levels.</p>
+</div>
+<div class="paragraph">
+<p>If the integer is within the valid range, <code>PrivacyLevelCommand</code> will update the privacy level of <code>Model</code>. Following that, it will proceed to update the privacy level of each person.</p>
+</div>
+<div class="paragraph">
+<p><code>Model</code>, each <code>Person</code> and each field that can be set as private all contain a <code>privacyLevel</code> variable to indicate the current privacy level. This value should remain the same between all of these objects throughout the operation of Address++.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PersonClassDiagramPrivacyLevel.png" alt="PersonClassDiagramPrivacyLevel" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.6.2 : Class Diagram of Person, which shows which classes contain an integer to indicate the privacy level</em></p>
+</div>
+<div class="paragraph">
+<p>Finally, depending on the privacy level, <code>PrivacyLevelCommand</code> will update the call <code>model.updateFilteredPersonList()</code> with the appropriate predicate.</p>
+</div>
+<div class="paragraph">
+<p>This process is illustrated in the code snippet below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+    <span class="keyword">if</span> (level &lt; MIN_PRIVACY_LEVEL || level &gt; MAX_PRIVACY_LEVEL) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(WRONG_PRIVACY_LEVEL_MESSAGE);
+    }
+    model.setPrivacyLevel(level);
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; model.getAddressBook().getPersonList().size(); i++) {
+        ReadOnlyPerson toReplace = model.getPersonAtIndexFromAddressBook(i);
+        Person newPerson = <span class="keyword">new</span> Person(toReplace);
+        newPerson.setPrivacyLevel(level);
+        <span class="keyword">try</span> {
+            model.updatePerson(toReplace, newPerson);
+        } <span class="keyword">catch</span> (DuplicatePersonException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_DUPLICATE_PERSON);
+        } <span class="keyword">catch</span> (PersonNotFoundException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The target person cannot be missing</span><span class="delimiter">&quot;</span></span>);
+        }
+    }
+    <span class="keyword">if</span> (level == <span class="integer">3</span>) {
+        model.updateFilteredPersonList(<span class="keyword">new</span> ShowAllPrivacyLevelPredicate());
+    } <span class="keyword">else</span> {
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+    }
+    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(CHANGE_PRIVACY_LEVEL_SUCCESS, <span class="predefined-type">Integer</span>.toString(level)));
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.9.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storing of the privacy level<br>
+<strong>Alternative 1 (current choice):</strong> Have each relevant class store a privacy level integer.<br>
+<strong>Pros:</strong> Less coupling, less modification of existing code required. <br>
+<strong>Cons:</strong> Have to modify every relevant object every time <code>PrivacyLevelCommand</code> is called. Runs the risk that an object may accidentally not have its privacy level modified to match the other objects if privacy levels are not properly updated.<br>
+<strong>Alternative 2:</strong> Store the privacy level in the model and have any object that needs to check it query from model.<br>
+<strong>Pros:</strong> Only one integer needs to be modified for the privacy level of the entire address book to change, which also eliminates any possibility that privacy level may be different when used by different objects.<br>
+<strong>Cons:</strong> Increases coupling, classes such as Name will need to have a Model object as one of its variables to access Model. Large scale modification of existing code and tests are necessary.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.10. Locating a Person on Google Maps</a></h3>
 <div class="paragraph">
 <p>Upon calling the <code>locate</code> command, <code>LocateCommandParser</code> will parse the input string into an <code>Index</code>, and create a new <code>LocateCommand</code>. Should the arguments be a non-integer, a <code>ParseException</code> will be thrown.<br>
 This can be seen from the code snippet below:</p>
@@ -1371,10 +1463,10 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.5.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
+<p><em>Figure 3.7.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.9.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
 <strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
@@ -1387,7 +1479,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.10. Navigating from one address to another using Google Maps</a></h3>
+<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.11. Navigating from one address to another using Google Maps</a></h3>
 <div class="paragraph">
 <p>When the <code>navigate</code> command is entered into the command line, <code>NavigateCommandParse</code> will first reset its internal <code>from</code>, <code>to</code>, <code>fromIndex</code>, <code>toIndex</code> to null. It will then check for the input prefixes and ensure that only one of the prefixes from the group <code>fp/</code>, <code>ft/</code>, and <code>fa/</code>, which we will subsequently call the <code>from</code> prefixes are present. It then does the same with the prefixes from the group <code>tp/</code>, <code>tt/</code> and <code>ta/</code>, which we will call the <code>to</code> prefixes.<br></p>
 </div>
@@ -1529,10 +1621,10 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.6.1 : Sequence Diagram for Navigating from one Address to another</em></p>
+<p><em>Figure 3.8.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.10.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.11.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br>
 <strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
@@ -1554,7 +1646,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="opening-and-saving-of-the-xml-save-file"><a class="link" href="#opening-and-saving-of-the-xml-save-file">3.11. Opening and Saving of the .xml save file</a></h3>
+<h3 id="opening-and-saving-of-the-xml-save-file"><a class="link" href="#opening-and-saving-of-the-xml-save-file">3.12. Opening and Saving of the .xml save file</a></h3>
 <div class="paragraph">
 <p>Both <code>OpenCommand</code> and <code>SaveAsCommand</code> function in a very similar way.
 When <code>open</code> or <code>save</code> is input by the user, <code>AddressBookParser</code> will create a new <code>OpenCommand</code> or <code>SaveAsCommand</code>.</p>
@@ -1631,10 +1723,10 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.7.1 : Sequence Diagram for Opening a save file</em></p>
+<p><em>Figure 3.8.1 : Sequence Diagram for Opening a save file</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.11.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.12.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br>
 <strong>Alternative 1 (current choice):</strong> Open a <code>FileChooser</code> window, allowing the user to move through their file directory to acquire their save location and to select the name of the save file.<br>
@@ -1647,7 +1739,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.12. Add/Delete Tag mechanism</a></h3>
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.13. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1716,7 +1808,7 @@ If the tag to be added exists in every target person in the address book, the <c
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.12.1. Design Considerations</a></h4>
+<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">3.13.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -1740,7 +1832,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.13. Find Tag mechanism</a></h3>
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.14. Find Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
 This command will not inherit from <code>UndoableCommand</code>.</p>
@@ -1818,7 +1910,7 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">3.13.1. Design Considerations</a></h4>
+<h4 id="design-considerations-13"><a class="link" href="#design-considerations-13">3.14.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br>
 <strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
@@ -1832,7 +1924,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">3.14. Favourite/Unfavourite Person mechanism</a></h3>
+<h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">3.15. Favourite/Unfavourite Person mechanism</a></h3>
 <div class="paragraph">
 <p>To favourite a person is achieved by <code>FavouriteCommand</code>. It basically changes the value of the <code>Favourite</code> field of a <code>Person</code>. The <code>Favourite</code> class has two status indicators: one is a boolean value and the other is a String. The boolean one is used in the constructor while the String one is for UI and output purposes.</p>
 </div>
@@ -1849,7 +1941,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.15. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.16. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1887,7 +1979,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.16. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.17. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2652,7 +2744,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-11 12:04:07 +00:00
+Last updated 2017-11-11 12:24:08 +00:00
 </div>
 </div>
 </body>
