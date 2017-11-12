@@ -57,8 +57,8 @@
 <p><strong>Things To Note</strong><br>
 * A person can have any number of tags (including 0)<br>
 * The <code>EMAIL</code> should be in the format address@email.domain<br>
-* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code>, to be private by placing a <code>p</code> in front of the prefix.<br>
-* As of version 1.5rc, the avatar field supports only URLs sourced online. References to local files may not work.</p>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code>, <code>Remark</code> and <code>Avatar</code>, to be private by placing a <code>p</code> in front of the prefix.<br>
+* As of version v1.5, the avatar fields accepts all URLs, and filenames with the prefix "file:"</p>
 </div>
 </div>
 </div>
@@ -69,11 +69,11 @@
 <div class="content">
 <div class="paragraph">
 <p><strong>Example Scenario 1</strong><br>
-You met your new friend John Doe, and want to save him into Address++. You could type the following command to add his details:</p>
+You made a new friend John Doe, and want to save him into Address++. You could type the following command to add his details:</p>
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears
-v/https://helloworld/image.png</code></p>
+v/https://helloworld.world/image.png</code></p>
 </div>
 </div>
 </div>
@@ -99,12 +99,8 @@ option while typing in your command:</p>
 <div class="paragraph">
 <p>&gt;&gt; <code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Do note that you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Note:</strong> you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
 </div>
 </div>
 </div>
@@ -1321,7 +1317,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:25:45 +00:00
+Last updated 2017-11-12 09:21:43 +00:00
 </div>
 </div>
 </body>

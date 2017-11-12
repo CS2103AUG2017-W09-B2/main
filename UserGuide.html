@@ -54,8 +54,31 @@ at students who work on projects or assignments frequently, but it can also be u
 <li><a href="#backing-up-your-data-code-backup-code">3.22. Backing up your data : <code>backup</code></a></li>
 <li><a href="#protecting-your-data-code-lock-code-code-unlock-code">3.23. Protecting your data : <code>lock</code> <code>unlock</code></a></li>
 <li><a href="#changing-your-password-code-changepassword-code">3.24. Changing your password : <code>changepassword</code></a></li>
+<li><a href="#selecting-a-person-code-select-code">3.25. Selecting a person : <code>select</code></a></li>
+<li><a href="#selecting-a-task-code-select-task-code">3.26. Selecting a task : <code>select task/</code></a></li>
+<li><a href="#locating-a-person-s-address-code-locate-code-since-v1-4">3.27. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></li>
+<li><a href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.28. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></li>
+<li><a href="#marking-tasks-as-complete-code-setcomplete-code-since-v1-5">3.29. Marking tasks as complete : <code>setcomplete</code> (Since V1.5)</a></li>
+<li><a href="#marking-tasks-as-incomplete-code-setincomplete-code-since-v1-5">3.30. Marking tasks as incomplete : <code>setincomplete</code> (Since V1.5)</a></li>
+<li><a href="#assigning-contacts-to-task-code-assign-code-since-v1-4">3.31. Assigning contacts to task : <code>assign</code> (Since V1.4)</a></li>
+<li><a href="#dismissing-contacts-from-task-code-dismiss-code-since-v1-4">3.32. Dismissing contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
+<li><a href="#viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5">3.33. Viewing contacts assigned to a task : <code>viewassign</code> (Since V1.5)</a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.34. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.35. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.36. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.37. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.38. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#opening-a-save-file-code-open-code">3.39. Opening a save file : <code>open</code></a></li>
+<li><a href="#saving-the-data-as-a-new-save-file-code-save-code">3.40. Saving the data as a new save file : <code>save</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.41. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.42. Saving the data</a></li>
 </ul>
 </li>
+<li><a href="#faq">4. FAQ</a></li>
+<li><a href="#command-summary-and-cheat-sheet">5. Command Summary and Cheat Sheet</a></li>
+<li><a href="#command-shorthand-cheat-sheet">6. Command Shorthand Cheat Sheet</a></li>
+<li><a href="#keyboard-shortcuts">7. Keyboard Shortcuts</a></li>
+<li><a href="#v2-0-ui-concept">8. v2.0 UI Concept</a></li>
 </ul>
 </div>
 </div>
@@ -168,8 +191,8 @@ adds a contact named <code>John Doe</code> to Address++.</p>
 <div class="sect2">
 <h3 id="changing-font-sizes"><a class="link" href="#changing-font-sizes">3.1. Changing Font Sizes</a></h3>
 <div class="paragraph">
-<p>Are the font sizes too small or too big? Address++ allows you to change your font sizes at will. Here are some of the
-ways of triggering a change in font sizes:</p>
+<p>Are the font sizes too small or too big? Address++ allows you to change your font sizes at will. Here are three
+ways of changing the font sizes:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -191,31 +214,6 @@ ways of triggering a change in font sizes:</p>
 </li>
 <li>
 <p><strong>Reset Size:</strong> <kbd>CTRL</kbd> + <kbd>R</kbd> (<kbd>CMD</kbd> + <kbd>R</kbd> on MacOS)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Option 2: Change Font Size Buttons (Top Right Hand Corder)</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/FontSizePlusMinusButtons.png" alt="FontSizePlusMinusButtons" width="540">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Increase Size: <kbd>+</kbd></p>
-</li>
-<li>
-<p>Decrease Size: <kbd>-</kbd></p>
-</li>
-<li>
-<p>Reset Size: <kbd>R</kbd></p>
 </li>
 </ul>
 </div>
@@ -289,8 +287,8 @@ Alternatively,  you may opt to use the keyboard shortcut <kbd>F1</kbd>.</p>
 <p><strong>Things To Note</strong><br>
 * A person can have any number of tags (including 0)<br>
 * The <code>EMAIL</code> should be in the format address@email.domain<br>
-* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code>, to be private by placing a <code>p</code> in front of the prefix.<br>
-* As of version 1.5rc, the avatar field supports only URLs sourced online. References to local files may not work.</p>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code>, <code>Remark</code> and <code>Avatar</code>, to be private by placing a <code>p</code> in front of the prefix.<br>
+* As of version v1.5, the avatar fields accepts all URLs, and filenames with the prefix "file:"</p>
 </div>
 </div>
 </div>
@@ -301,11 +299,11 @@ Alternatively,  you may opt to use the keyboard shortcut <kbd>F1</kbd>.</p>
 <div class="content">
 <div class="paragraph">
 <p><strong>Example Scenario 1</strong><br>
-You met your new friend John Doe, and want to save him into Address++. You could type the following command to add his details:</p>
+You made a new friend John Doe, and want to save him into Address++. You could type the following command to add his details:</p>
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears
-v/https://helloworld/image.png</code></p>
+v/https://helloworld.world/image.png</code></p>
 </div>
 </div>
 </div>
@@ -331,12 +329,8 @@ option while typing in your command:</p>
 <div class="paragraph">
 <p>&gt;&gt; <code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Do note that you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Note:</strong> you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
 </div>
 </div>
 </div>
@@ -1492,7 +1486,7 @@ You have many contacts on Address++. You decide to make it neater by sorting you
 by name in ascending order:</p>
 </div>
 <div class="paragraph">
-<p><code>sort person name asc</code></p>
+<p>&gt;&gt; <code>sort person name asc</code></p>
 </div>
 </div>
 </div>
@@ -1504,7 +1498,7 @@ You add a few tasks of different priorities. You decide to sort the tasks so you
 the higher priority tasks on the top of the list:</p>
 </div>
 <div class="paragraph">
-<p><code>sort task priority desc</code></p>
+<p>&gt;&gt; <code>sort task priority desc</code></p>
 </div>
 </div>
 </div>
@@ -1540,7 +1534,7 @@ cannot be undone. You type the following code:</p>
 <p><code>backup filename.xml</code></p>
 </div>
 <div class="paragraph">
-<p>The file will then be saved in the same directory location as your .JAR application file</p>
+<p>The file will then be saved in the same directory location as your <code>JAR</code> application file</p>
 </div>
 </div>
 </div>
@@ -1583,11 +1577,11 @@ The default password is 'password'
 <div class="content">
 <div class="paragraph">
 <p><strong>Example Scenario 1</strong><br>
-You just finished editing your contacts on Address when you decide to have a break away from
-you computer. You decide to lock Address using the following command:</p>
+You have just finished editing your contacts on Address and you decide to have a break away from
+your computer. You decide to lock Address using the following command:</p>
 </div>
 <div class="paragraph">
-<p><code>lock pw/password</code></p>
+<p>&gt;&gt; <code>lock pw/password</code></p>
 </div>
 </div>
 </div>
@@ -1596,10 +1590,10 @@ you computer. You decide to lock Address using the following command:</p>
 <div class="paragraph">
 <p><strong>Example Scenario 2</strong><br>
 When you return to your computer, you decide to continue adding contacts in Address.
-You decide to unlock Address using the following command:</p>
+To unlock the Address application, you use the following command:</p>
 </div>
 <div class="paragraph">
-<p><code>unlock pw/password</code></p>
+<p>&gt;&gt; <code>unlock pw/password</code></p>
 </div>
 </div>
 </div>
@@ -1628,7 +1622,7 @@ The default password is 'password'
 </div>
 </div>
 <div class="paragraph">
-<p>Format: <code>changepassword pw/[PASSWORD] pw/[NEWPASSWORD] pw/[CONFIRMPASSWORD]</code><br></p>
+<p>Format: <code>changepassword pw/[PASSWORD] np/[NEWPASSWORD] cfp/[CONFIRMPASSWORD]</code><br></p>
 </div>
 <div class="paragraph">
 <p><strong>Example Scenarios</strong>:</p>
@@ -1642,31 +1636,13 @@ that the default password ("password") is not good enough. You decide to make a 
 one with the following command:</p>
 </div>
 <div class="paragraph">
-<p><code>changepassword pw/password np/newpassword cfp/newpassword</code></p>
+<p>&gt;&gt; <code>changepassword pw/password np/newpassword cfp/newpassword</code></p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 </div>
-<div class="exampleblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p><code>backup</code> or <code>bk</code><br>
-This command will help you back up in the default save location -&#8594; In the data directory of your application.</p>
-</li>
-<li>
-<p><code>backup ./test.xml</code> or <code>bk ./test.xml</code><br>
-This saves the backup file in the current data directory, with the name <code>test.xml</code>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; adb8cacc41228d12ab60533620ff59ea14d313e5
-=== Selecting a person : <code>select</code></p>
-</div>
+<div class="sect2">
+<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">3.25. Selecting a person : <code>select</code></a></h3>
 <div class="paragraph">
 <p>You can use <code>select</code> to pick out one contact, and look at it in greater detail.<br></p>
 </div>
@@ -1717,9 +1693,9 @@ The first person in your contacts has a very long address, and you want to see i
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Selecting a task : <code>select task/</code></p>
 </div>
+<div class="sect2">
+<h3 id="selecting-a-task-code-select-task-code"><a class="link" href="#selecting-a-task-code-select-task-code">3.26. Selecting a task : <code>select task/</code></a></h3>
 <div class="paragraph">
 <p>You can use <code>select task/</code> to pick out a task, and look at it in greater detail.<br></p>
 </div>
@@ -1770,9 +1746,9 @@ The first task has a very long description, and you want to see it in full.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</p>
 </div>
+<div class="sect2">
+<h3 id="locating-a-person-s-address-code-locate-code-since-v1-4"><a class="link" href="#locating-a-person-s-address-code-locate-code-since-v1-4">3.27. Locating a person&#8217;s address : <code>locate</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>If you ever need to visit one of your contacts, you can use <code>locate</code> to choose a contact, and search for their address online using Google Maps.<br></p>
 </div>
@@ -1838,9 +1814,9 @@ Locates the address of the 1st person in the results of the <code>find</code> co
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Navigating from one address to another : <code>navigate</code> (Since V1.5)</p>
 </div>
+<div class="sect2">
+<h3 id="navigating-from-one-address-to-another-code-navigate-code-since-v1-5"><a class="link" href="#navigating-from-one-address-to-another-code-navigate-code-since-v1-5">3.28. Navigating from one address to another : <code>navigate</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Although <code>locate</code> shows you where a person&#8217;s address is, it does not tell you how to get there. The <code>navigate</code> command will provide directions, with the help of Google Maps, on how to get from one address to another.<br></p>
 </div>
@@ -1921,9 +1897,9 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Marking tasks as complete : <code>setcomplete</code> (Since V1.5)</p>
 </div>
+<div class="sect2">
+<h3 id="marking-tasks-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#marking-tasks-as-complete-code-setcomplete-code-since-v1-5">3.29. Marking tasks as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Have you finally completed a task in the address book? You can use <code>setcomplete</code> to mark the specified task as complete.<br></p>
 </div>
@@ -1976,9 +1952,9 @@ You have finally completed a task that involves writing a 1500-word essay.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Marking tasks as incomplete : <code>setincomplete</code> (Since V1.5)</p>
 </div>
+<div class="sect2">
+<h3 id="marking-tasks-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#marking-tasks-as-incomplete-code-setincomplete-code-since-v1-5">3.30. Marking tasks as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>Did you accidentally mark a task as completed? You can use <code>setincomplete</code> to mark the specified task as incomplete.<br></p>
 </div>
@@ -2033,9 +2009,9 @@ in progress.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Assigning contacts to task : <code>assign</code> (Since V1.4)</p>
 </div>
+<div class="sect2">
+<h3 id="assigning-contacts-to-task-code-assign-code-since-v1-4"><a class="link" href="#assigning-contacts-to-task-code-assign-code-since-v1-4">3.31. Assigning contacts to task : <code>assign</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>assign</code> to assign contacts to an ongoing task. You may wish to use <code>assign</code> when collaborating with others for projects, for example.<br></p>
 </div>
@@ -2091,9 +2067,9 @@ You have created a new task to complete a paper model. However you are unable to
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Dismissing contacts from task : <code>dismiss</code> (Since V1.4)</p>
 </div>
+<div class="sect2">
+<h3 id="dismissing-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismissing-contacts-from-task-code-dismiss-code-since-v1-4">3.32. Dismissing contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
 <div class="paragraph">
 <p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br></p>
 </div>
@@ -2150,9 +2126,9 @@ You believe that this task could do with less manpower and would like to remove 
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Viewing contacts assigned to a task : <code>viewassign</code> (Since V1.5)</p>
 </div>
+<div class="sect2">
+<h3 id="viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5"><a class="link" href="#viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5">3.33. Viewing contacts assigned to a task : <code>viewassign</code> (Since V1.5)</a></h3>
 <div class="paragraph">
 <p>You can use <code>viewassign</code> to see who is assigned to a particular task. You may wish to use <code>viewassign</code> when you want to contact only the people who are assigned to a particular task, for example.<br></p>
 </div>
@@ -2203,9 +2179,9 @@ However you have forgotten who you have assigned to that task. You thus use <cod
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Listing entered commands : <code>history</code></p>
 </div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.34. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br></p>
 </div>
@@ -2234,9 +2210,9 @@ However you have forgotten who you have assigned to that task. You thus use <cod
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Undoing previous command : <code>undo</code></p>
 </div>
+<div class="sect2">
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.35. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Did you make a mistake somewhere? <code>undo</code> restores the address book to the state before the previous <em>undoable</em> command was executed.<br></p>
 </div>
@@ -2310,9 +2286,9 @@ You have accidentally deleted one of your contacts. Furthermore, not knowing thi
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Unfavouriting persons : <code>unfavourite</code> (since V1.3)</p>
 </div>
+<div class="sect2">
+<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.36. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use <code>unfavourite</code> command to set your previous favourite persons become the normal persons. For example,<br>
 after you break up with your girlfriend, you may wish to set your girlfriend back to normal person.<br></p>
@@ -2383,9 +2359,9 @@ Instead of <code>listing</code> all the contacts, you can <code>find</code> all 
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Redoing the previously undone command : <code>redo</code></p>
 </div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.37. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Perhaps an <code>undo</code> was not necessary. <code>redo</code> reverses the most recent <code>undo</code> command.<br></p>
 </div>
@@ -2459,9 +2435,9 @@ You have deleted one of your contacts, as well as two of your tasks.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>=== Clearing all entries : <code>clear</code></p>
 </div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.38. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br></p>
 </div>
@@ -2480,9 +2456,11 @@ You have deleted one of your contacts, as well as two of your tasks.</p>
 <div class="paragraph">
 <p>Format: <code>clear</code><br></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">3.39. Opening a save file : <code>open</code></a></h3>
 <div class="paragraph">
-<p>=== Opening a save file : <code>open</code>
-Switching between address books is made easy with the <code>open</code> command, as it allows you can load different save files into the application.<br>
+<p>Switching between address books is made easy with the <code>open</code> command, as it allows you can load different save files into the application.<br>
 You can choose which .xml file to open from the pop up window that appears upon executing this command.<br></p>
 </div>
 <div class="admonitionblock note">
@@ -2500,9 +2478,11 @@ You can choose which .xml file to open from the pop up window that appears upon 
 <div class="paragraph">
 <p>Format <code>open</code></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">3.40. Saving the data as a new save file : <code>save</code></a></h3>
 <div class="paragraph">
-<p>=== Saving the data as a new save file : <code>save</code>
-If you would like to save a copy of your data in a separate location or with a different name, the <code>save</code> command will allow you to do just that.<br>
+<p>If you would like to save a copy of your data in a separate location or with a different name, the <code>save</code> command will allow you to do just that.<br>
 You can choose what to name your save file and where to save it from the pop up window that appears upon executing this command.<br></p>
 </div>
 <div class="admonitionblock note">
@@ -2520,9 +2500,9 @@ You can choose what to name your save file and where to save it from the pop up 
 <div class="paragraph">
 <p>Format: <code>save</code></p>
 </div>
-<div class="paragraph">
-<p>=== Exiting the program : <code>exit</code></p>
 </div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.41. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Once you have finished using Address++, you may use this command to exit the program.<br>
 Format: <code>exit</code></p>
@@ -2530,9 +2510,9 @@ Format: <code>exit</code></p>
 <div class="paragraph">
 <p>Alternatively, you may opt to use the keyboard shortcut <kbd>ALT</kbd>+<kbd>F4</kbd>.</p>
 </div>
-<div class="paragraph">
-<p>=== Saving the data</p>
 </div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.42. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need for you to save manually.</p>
@@ -2543,16 +2523,21 @@ There is no need for you to save manually.</p>
 <div class="paragraph">
 <p>If you want to open a different save file, you can use the <code>open</code> command, click on <code>File &#8594; Open</code> or use the keyboard shortcut <kbd>CTRL</kbd>+<kbd>O</kbd> and select the new save file to use from the pop-up window.</p>
 </div>
-<div class="paragraph">
-<p>== FAQ</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
 <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder. The Open command <kbd>CTRL</kbd>+<kbd>O</kbd> can also be used instead of manually overwriting the file if you wish to keep the original data file or store the new data file in a seperate location.</p>
 </div>
-<div class="paragraph">
-<p>== Command Summary and Cheat Sheet</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="command-summary-and-cheat-sheet"><a class="link" href="#command-summary-and-cheat-sheet">5. Command Summary and Cheat Sheet</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -2695,72 +2680,152 @@ e.g. <code>dismiss 4 1 from/17</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>== Command Shorthand Cheat Sheet
-* <strong>Add</strong> : <code>a n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/Sleeps at 3am t/friend t/colleague</code>
-* <strong>Add person with private fields</strong> : <code>a pn/NAME [pp/PHONE_NUMBER] [pe/EMAIL] [pa/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>a pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665 r/Sleeps at 3am t/friend t/colleague</code>
-* <strong>Add task</strong> : <code>a task/ n/NAME [d/DESCRIPTION] [by/DEADLINE] [p/PRIORITY] [a/ADDRESS]</code><br>
-e.g. <code>a task/ n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high a/NUS</code>
-* <strong>Add tag</strong> : <code>a tag/ [INDEX&#8230;&#8203;] t/[TAG]</code><br>
-e.g. <code>a tag/ 1 2 t/friends</code>
-* <strong>Change a person&#8217;s details' privacy</strong> : <code>cp INDEX [n/TRUE or FALSE] [p/TRUE or FALSE] [e/TRUE or FALSE] [a/TRUE or FALSE] [r/TRUE or FALSE]</code><br>
-e.g. <code>cp 2 n/true p/false e/true a/false r/true</code>
-* <strong>Changing the privacy level of the address book</strong>: <code>pl [LEVEL]</code><br>
-* <strong>Clear all data</strong> : <code>clear</code>
-* <strong>Clear persons</strong> : <code>c person</code>
-* <strong>Clear tasks</strong> : <code>c task</code>
-* <strong>Delete person</strong> : <code>d INDEX</code><br>
-e.g. <code>d 3</code>
-* <strong>Delete task</strong> : <code>d task/ INDEX</code><br>
-e.g. <code>d task/ 4</code>
-* <strong>Delete tag</strong> : <code>d tag/ INDEX t/[TAG]</code><br>
-e.g. <code>d tag/ 1 2 t/friends</code>
-* <strong>Edit</strong> : <code>e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>e 2 n/James Lee e/jameslee@example.com</code>
-* <strong>Edit task</strong> : <code>e task INDEX [n/NAME] [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY] [a/ADDRESS]</code><br>
-e.g. <code>e task/ 2 p/veryhigh</code>
-* <strong>Edit tag</strong> : <code>e tag/ OLDTAGNAME NEWTAGNAME</code><br>
-e.g. <code>e tag/ friends enemies</code>
-* <strong>Favourite persons</strong> :`fav INDEX`<br>
-e.g. <code>fav 1</code>
-* <strong>Unfavourite persons</strong> :`unfav INDEX`<br>
-e.g. <code>unfav 1</code>
-* <strong>Show favourite list</strong> :`sfav`<br>
-e.g. <code>sfav</code>
-* <strong>Find person</strong> : <code>f KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>f James Jake</code>
-* <strong>Find tag</strong> : <code>f tag/ Tag [MORE_TAGS]</code><br>
-e.g. <code>f tag/ friends</code>
-* <strong>Find task</strong> : <code>f task/ KEYWORD [MORE_KEYWORDS] [p/PRIORITY]</code><br>
-e.g. <code>f task/ update p/high</code>
-* <strong>List persons and tasks</strong> : <code>l</code>
-* <strong>List tags</strong> : <code>stag</code>
-* <strong>Locate a person&#8217;s address</strong> : <code>loc INDEX</code>
-* <strong>Navigating from one address to another</strong> : <code>`navi [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br>
-e.g. navi fa/Tampines Mall ta/Sentosa
-* <strong>Select person</strong> : <code>s INDEX</code><br>
-e.g.<code>s 2</code>
-* <strong>Select task</strong> : <code>s task/ INDEX</code><br>
-e.g.<code>s task/ 2</code>
-* <strong>Set task as complete</strong> : <code>stc INDEX</code><br>
-e.g. <code>stc 4</code>
-* <strong>Set task as incomplete</strong> : <code>sti INDEX</code><br>
-e.g. <code>sti 5</code>
-* <strong>Assign to task</strong> : <code>as PERSONINDEX&#8230;&#8203; to/TASKINDEX</code><br>
-e.g. <code>as 4 1 17 18 to/21</code>
-* <strong>Dismiss from task</strong> : <code>ds PERSONINDEX&#8230;&#8203; from/TASKINDEX</code><br>
-e.g. <code>ds 4 1 from/17</code>
-* <strong>History</strong> : <code>h</code>
-* <strong>Undo</strong> : <code>u</code>
-* <strong>Redo</strong> : <code>r</code>
-* <strong>Open</strong> : <code>o</code>
-* <strong>Save As</strong> : <code>sa</code></p>
 </div>
-<div class="paragraph">
-<p>== Keyboard Shortcuts</p>
 </div>
+<div class="sect1">
+<h2 id="command-shorthand-cheat-sheet"><a class="link" href="#command-shorthand-cheat-sheet">6. Command Shorthand Cheat Sheet</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add</strong> : <code>a n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/Sleeps at 3am t/friend t/colleague</code></p>
+</li>
+<li>
+<p><strong>Add person with private fields</strong> : <code>a pn/NAME [pp/PHONE_NUMBER] [pe/EMAIL] [pa/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>a pn/James Ho pp/22224444 pe/jamesho@example.com pa/123, Clementi Rd, 1234665 r/Sleeps at 3am t/friend t/colleague</code></p>
+</li>
+<li>
+<p><strong>Add task</strong> : <code>a task/ n/NAME [d/DESCRIPTION] [by/DEADLINE] [p/PRIORITY] [a/ADDRESS]</code><br>
+e.g. <code>a task/ n/Update Documentation d/Update documentations for V1.1 for CS2103T t/30/10/17 p/high a/NUS</code></p>
+</li>
+<li>
+<p><strong>Add tag</strong> : <code>a tag/ [INDEX&#8230;&#8203;] t/[TAG]</code><br>
+e.g. <code>a tag/ 1 2 t/friends</code></p>
+</li>
+<li>
+<p><strong>Change a person&#8217;s details' privacy</strong> : <code>cp INDEX [n/TRUE or FALSE] [p/TRUE or FALSE] [e/TRUE or FALSE] [a/TRUE or FALSE] [r/TRUE or FALSE]</code><br>
+e.g. <code>cp 2 n/true p/false e/true a/false r/true</code></p>
+</li>
+<li>
+<p><strong>Changing the privacy level of the address book</strong>: <code>pl [LEVEL]</code><br></p>
+</li>
+<li>
+<p><strong>Clear all data</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Clear persons</strong> : <code>c person</code></p>
+</li>
+<li>
+<p><strong>Clear tasks</strong> : <code>c task</code></p>
+</li>
+<li>
+<p><strong>Delete person</strong> : <code>d INDEX</code><br>
+e.g. <code>d 3</code></p>
+</li>
+<li>
+<p><strong>Delete task</strong> : <code>d task/ INDEX</code><br>
+e.g. <code>d task/ 4</code></p>
+</li>
+<li>
+<p><strong>Delete tag</strong> : <code>d tag/ INDEX t/[TAG]</code><br>
+e.g. <code>d tag/ 1 2 t/friends</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [r/REMARK] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>e 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>Edit task</strong> : <code>e task INDEX [n/NAME] [d/DESCRIPTION] [t/DEADLINE] [p/PRIORITY] [a/ADDRESS]</code><br>
+e.g. <code>e task/ 2 p/veryhigh</code></p>
+</li>
+<li>
+<p><strong>Edit tag</strong> : <code>e tag/ OLDTAGNAME NEWTAGNAME</code><br>
+e.g. <code>e tag/ friends enemies</code></p>
+</li>
+<li>
+<p><strong>Favourite persons</strong> :`fav INDEX`<br>
+e.g. <code>fav 1</code></p>
+</li>
+<li>
+<p><strong>Unfavourite persons</strong> :`unfav INDEX`<br>
+e.g. <code>unfav 1</code></p>
+</li>
+<li>
+<p><strong>Show favourite list</strong> :`sfav`<br>
+e.g. <code>sfav</code></p>
+</li>
+<li>
+<p><strong>Find person</strong> : <code>f KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>f James Jake</code></p>
+</li>
+<li>
+<p><strong>Find tag</strong> : <code>f tag/ Tag [MORE_TAGS]</code><br>
+e.g. <code>f tag/ friends</code></p>
+</li>
+<li>
+<p><strong>Find task</strong> : <code>f task/ KEYWORD [MORE_KEYWORDS] [p/PRIORITY]</code><br>
+e.g. <code>f task/ update p/high</code></p>
+</li>
+<li>
+<p><strong>List persons and tasks</strong> : <code>l</code></p>
+</li>
+<li>
+<p><strong>List tags</strong> : <code>stag</code></p>
+</li>
+<li>
+<p><strong>Locate a person&#8217;s address</strong> : <code>loc INDEX</code></p>
+</li>
+<li>
+<p><strong>Navigating from one address to another</strong> : <code>`navi [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br>
+e.g. navi fa/Tampines Mall ta/Sentosa</p>
+</li>
+<li>
+<p><strong>Select person</strong> : <code>s INDEX</code><br>
+e.g.<code>s 2</code></p>
+</li>
+<li>
+<p><strong>Select task</strong> : <code>s task/ INDEX</code><br>
+e.g.<code>s task/ 2</code></p>
+</li>
+<li>
+<p><strong>Set task as complete</strong> : <code>stc INDEX</code><br>
+e.g. <code>stc 4</code></p>
+</li>
+<li>
+<p><strong>Set task as incomplete</strong> : <code>sti INDEX</code><br>
+e.g. <code>sti 5</code></p>
+</li>
+<li>
+<p><strong>Assign to task</strong> : <code>as PERSONINDEX&#8230;&#8203; to/TASKINDEX</code><br>
+e.g. <code>as 4 1 17 18 to/21</code></p>
+</li>
+<li>
+<p><strong>Dismiss from task</strong> : <code>ds PERSONINDEX&#8230;&#8203; from/TASKINDEX</code><br>
+e.g. <code>ds 4 1 from/17</code></p>
+</li>
+<li>
+<p><strong>History</strong> : <code>h</code></p>
+</li>
+<li>
+<p><strong>Undo</strong> : <code>u</code></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>r</code></p>
+</li>
+<li>
+<p><strong>Open</strong> : <code>o</code></p>
+</li>
+<li>
+<p><strong>Save As</strong> : <code>sa</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="keyboard-shortcuts"><a class="link" href="#keyboard-shortcuts">7. Keyboard Shortcuts</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -2786,9 +2851,13 @@ e.g. <code>ds 4 1 from/17</code>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="v2-0-ui-concept"><a class="link" href="#v2-0-ui-concept">8. v2.0 UI Concept</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>== v2.0 UI Concept
-This is the concept design of our v2.0 end product. Actual design may vary.</p>
+<p>This is the concept design of our v2.0 end product. Actual design may vary.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2798,12 +2867,9 @@ This is the concept design of our v2.0 end product. Actual design may vary.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:25:45 +00:00
+Last updated 2017-11-12 09:21:43 +00:00
 </div>
 </div>
 </body>

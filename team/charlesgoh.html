@@ -23,7 +23,7 @@
 professionals with an effective tool to help them manage their contacts and their time.</p>
 </div>
 <div class="paragraph">
-<p>A list of my contributions to Address++ are explained below:</p>
+<p>My contributions to this project are listed below:</p>
 </div>
 <div class="paragraph">
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/main/charlesgoh.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/test/charlesgoh.md">Test code</a>]</p>
@@ -76,11 +76,11 @@ The default password is 'password'
 <div class="content">
 <div class="paragraph">
 <p><strong>Example Scenario 1</strong><br>
-You just finished editing your contacts on Address when you decide to have a break away from
-you computer. You decide to lock Address using the following command:</p>
+You have just finished editing your contacts on Address and you decide to have a break away from
+your computer. You decide to lock Address using the following command:</p>
 </div>
 <div class="paragraph">
-<p><code>lock pw/password</code></p>
+<p>&gt;&gt; <code>lock pw/password</code></p>
 </div>
 </div>
 </div>
@@ -89,10 +89,10 @@ you computer. You decide to lock Address using the following command:</p>
 <div class="paragraph">
 <p><strong>Example Scenario 2</strong><br>
 When you return to your computer, you decide to continue adding contacts in Address.
-You decide to unlock Address using the following command:</p>
+To unlock the Address application, you use the following command:</p>
 </div>
 <div class="paragraph">
-<p><code>unlock pw/password</code></p>
+<p>&gt;&gt; <code>unlock pw/password</code></p>
 </div>
 </div>
 </div>
@@ -121,7 +121,7 @@ The default password is 'password'
 </div>
 </div>
 <div class="paragraph">
-<p>Format: <code>changepassword pw/[PASSWORD] pw/[NEWPASSWORD] pw/[CONFIRMPASSWORD]</code><br></p>
+<p>Format: <code>changepassword pw/[PASSWORD] np/[NEWPASSWORD] cfp/[CONFIRMPASSWORD]</code><br></p>
 </div>
 <div class="paragraph">
 <p><strong>Example Scenarios</strong>:</p>
@@ -135,7 +135,7 @@ that the default password ("password") is not good enough. You decide to make a 
 one with the following command:</p>
 </div>
 <div class="paragraph">
-<p><code>changepassword pw/password np/newpassword cfp/newpassword</code></p>
+<p>&gt;&gt; <code>changepassword pw/password np/newpassword cfp/newpassword</code></p>
 </div>
 </div>
 </div>
@@ -166,7 +166,7 @@ created.</p>
 the application.</p>
 </div>
 <div class="paragraph">
-<p>Like most of the other commands, arguments are parsed through the <code>UnlockCommandParser</code> or <code>LockCommandParser</code>,
+<p>Arguments are processed in the <code>UnlockCommandParser</code> or <code>LockCommandParser</code>,
 which passes control over to the <code>UnlockCommand</code> and <code>LockCommand</code> class respectively.
 These <code>Command</code> classes will then call the Model to toggle the lock&#8217;s state.</p>
 </div>
@@ -179,8 +179,8 @@ These <code>Command</code> classes will then call the Model to toggle the lock&#
 </div>
 </div>
 <div class="paragraph">
-<p>From the activity diagram we can see that lock states are preserved in preferences.json
-after the application closes by passing the lock state into the <code>UserPrefs</code> class to be
+<p>From the activity diagram we can see that lock states are preserved in the <code>preferences.json</code>
+file after the application closes by passing the lock state into the <code>UserPrefs</code> class to be
 saved by the Storage component.</p>
 </div>
 <div class="admonitionblock note">
@@ -228,7 +228,7 @@ information is passed to the Storage Component to be saved into the file <code>p
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">guiSettings</span><span class="delimiter">&quot;</span></span> : {
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowWidth</span><span class="delimiter">&quot;</span></span> : <span class="float">1080.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowWidth</span><span class="delimiter">&quot;</span></span> : <span class="float">1309.0</span>,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">windowHeight</span><span class="delimiter">&quot;</span></span> : <span class="float">720.0</span>,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">windowCoordinates</span><span class="delimiter">&quot;</span></span> : {
       <span class="key"><span class="delimiter">&quot;</span><span class="content">x</span><span class="delimiter">&quot;</span></span> : <span class="integer">0</span>,
@@ -238,7 +238,8 @@ information is passed to the Storage Component to be saved into the file <code>p
   <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookFilePath</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">data/addressbook.xml</span><span class="delimiter">&quot;</span></span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookName</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">My Address++</span><span class="delimiter">&quot;</span></span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookLockState</span><span class="delimiter">&quot;</span></span> : <span class="value">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookEncryptedPassword</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span><span class="delimiter">&quot;</span></span>
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookEncryptedPassword</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">theme</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">/view/DarkTheme.css</span><span class="delimiter">&quot;</span></span>
 }</code></pre>
 </div>
 </div>
@@ -267,13 +268,13 @@ user&#8217;s file directories.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Password Validation &#8594; Is password correct?</p>
+<p><strong>Password Validation</strong> &#8594; Is the password correct?</p>
 </li>
 <li>
-<p>Password Confirmation &#8594; Does the new password and confirmation password match?</p>
+<p><strong>Password Confirmation</strong> &#8594; Does the new password and confirmation password match?</p>
 </li>
 <li>
-<p>Password Uniqueness &#8594; Is the new password different from the old password?</p>
+<p><strong>Password Uniqueness</strong> &#8594; Is the new password different from the old password?</p>
 </li>
 </ol>
 </div>
@@ -375,7 +376,7 @@ You have many contacts on Address++. You decide to make it neater by sorting you
 by name in ascending order:</p>
 </div>
 <div class="paragraph">
-<p><code>sort person name asc</code></p>
+<p>&gt;&gt; <code>sort person name asc</code></p>
 </div>
 </div>
 </div>
@@ -387,7 +388,7 @@ You add a few tasks of different priorities. You decide to sort the tasks so you
 the higher priority tasks on the top of the list:</p>
 </div>
 <div class="paragraph">
-<p><code>sort task priority desc</code></p>
+<p>&gt;&gt; <code>sort task priority desc</code></p>
 </div>
 </div>
 </div>
@@ -399,7 +400,7 @@ the higher priority tasks on the top of the list:</p>
 <h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
 <p>As more contacts and tasks are added to the application, the lists may get long and disorganized. The Sort Command
-allows users to sort both contacts and tasks by important fields. Examples include sorting contacts by name and
+allows users to sort both contacts and tasks by key fields. Examples include sorting contacts by name and
 sorting contacts by deadlines.</p>
 </div>
 </div>
@@ -433,7 +434,7 @@ class. The actual sorting happens via the UniquePersonList class or the UniqueTa
 </div>
 </div>
 <div class="paragraph">
-<p>Likewise, the UML Class diagram for sort commands that trigger sorting in person listings is shown below:</p>
+<p>Likewise, the UML Class diagram for sort commands that trigger sorting in task listings is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -442,10 +443,11 @@ class. The actual sorting happens via the UniquePersonList class or the UniqueTa
 </div>
 <div class="paragraph">
 <p>We can deduce from the UML diagrams diagrams above that the only difference between the implementation
-of the sorting for persons and tasks lies in the location where the sorting is actually executed.</p>
+of the sorting for persons and tasks lies in the location where the sorting is actually executed.
+The sorting of persons happens in <code>UniquePersonList</code> class while the sorting of tasks happens in <code>UniqueTaskList</code>.</p>
 </div>
 <div class="paragraph">
-<p>Suppose a user enters a new command <code>sort name desc</code>. The following sequence diagram
+<p>Suppose a user enters a new command <code>sort person name desc</code>. The following sequence diagram
 demonstrates how the sort command works.</p>
 </div>
 <div class="imageblock">
@@ -454,8 +456,8 @@ demonstrates how the sort command works.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the execution of the sort methods result in the actual person or task list being sorted. The resulting list
-is not returned, but will be reflected in the application&#8217;s storage and graphical user interface.</p>
+<p>Note that the execution of the sort methods results in the actual person or task list being sorted. This list will be
+reflected in both the application&#8217;s storage as well as the graphical user interface.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
@@ -471,7 +473,8 @@ Future changes to the implementation will be easier as a consequence.<br>
 <div class="paragraph">
 <p><strong>Alternative 2:</strong> Implement the sorting functionality within other classes like <code>AddressBook</code> or <code>SortCommand</code>.<br>
 <strong>Pros:</strong> May be more intuitive for new developers and it is easier to trace function calls between lesser classes involved.<br>
-<strong>Cons:</strong> Violates Separation of Concern principle and causes unnecessary content coupling whereby the <code>UniquePersonList</code> will have to rely on the <code>SortCommand</code> class.</p>
+<strong>Cons:</strong> Violates Separation of Concern principle and causes unnecessary content coupling whereby the <code>UniquePersonList</code>
+and <code>UniqueTaskList</code> will have to rely on the <code>SortCommand</code> class.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -534,7 +537,7 @@ cannot be undone. You type the following code:</p>
 <p><code>backup filename.xml</code></p>
 </div>
 <div class="paragraph">
-<p>The file will then be saved in the same directory location as your .JAR application file</p>
+<p>The file will then be saved in the same directory location as your <code>JAR</code> application file</p>
 </div>
 </div>
 </div>
@@ -545,8 +548,8 @@ cannot be undone. You type the following code:</p>
 <div class="sect3">
 <h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
 <div class="paragraph">
-<p>Users are able to back up their data before making any changes so that in the event of an emergency (e.g. clearing all data and then closing afterwards)
-, the old save data can be restored.</p>
+<p>Users are able to back up their data before making any changes so that in the event of an
+emergency (e.g. clearing all data and then closing afterwards), the old save data can be restored.</p>
 </div>
 </div>
 <div class="sect3">
@@ -606,8 +609,8 @@ event notifies the subscriber <code>backupAddressBook</code> method in Storage c
 <div class="sect2">
 <h3 id="changing-font-sizes"><a class="link" href="#changing-font-sizes">Changing Font Sizes</a></h3>
 <div class="paragraph">
-<p>Are the font sizes too small or too big? Address++ allows you to change your font sizes at will. Here are some of the
-ways of triggering a change in font sizes:</p>
+<p>Are the font sizes too small or too big? Address++ allows you to change your font sizes at will. Here are three
+ways of changing the font sizes:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -629,31 +632,6 @@ ways of triggering a change in font sizes:</p>
 </li>
 <li>
 <p><strong>Reset Size:</strong> <kbd>CTRL</kbd> + <kbd>R</kbd> (<kbd>CMD</kbd> + <kbd>R</kbd> on MacOS)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Option 2: Change Font Size Buttons (Top Right Hand Corder)</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/FontSizePlusMinusButtons.png" alt="FontSizePlusMinusButtons" width="540">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Increase Size: <kbd>+</kbd></p>
-</li>
-<li>
-<p>Decrease Size: <kbd>-</kbd></p>
-</li>
-<li>
-<p>Reset Size: <kbd>R</kbd></p>
 </li>
 </ul>
 </div>
@@ -691,7 +669,7 @@ ways of triggering a change in font sizes:</p>
 <div class="sect3">
 <h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
 <div class="paragraph">
-<p>Different monitors render the application differently. On some monitors, the words appear to be too small. The font size
+<p>Different monitors render the application differently. On some monitors, the words may appear to be too small. The font size
 commands and buttons allow users to increase/decrease/reset the font sizes at any time when using the application.</p>
 </div>
 </div>
@@ -755,7 +733,7 @@ standardised the handling of font size change requests through events.
 <div class="paragraph">
 <p><strong>Aspect:</strong> Use either UI or CLI based implementations<br>
 <strong>Alternative 1 (current choice):</strong> Implementing both UI and CLI functionality<br>
-<strong>Pros:</strong> More options for the user. The was also not much increase in complexity when implementing the CLI version <br>
+<strong>Pros:</strong> More options for the user. Not much increase in complexity when implementing the CLI version <br>
 <strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br></p>
 </div>
 <div class="paragraph">
@@ -805,8 +783,8 @@ standardised the handling of font size change requests through events.
 <p><strong>Things To Note</strong><br>
 * A person can have any number of tags (including 0)<br>
 * The <code>EMAIL</code> should be in the format address@email.domain<br>
-* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code>, to be private by placing a <code>p</code> in front of the prefix.<br>
-* As of version 1.5rc, the avatar field supports only URLs sourced online. References to local files may not work.</p>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code>, <code>Remark</code> and <code>Avatar</code>, to be private by placing a <code>p</code> in front of the prefix.<br>
+* As of version v1.5, the avatar fields accepts all URLs, and filenames with the prefix "file:"</p>
 </div>
 </div>
 </div>
@@ -817,11 +795,11 @@ standardised the handling of font size change requests through events.
 <div class="content">
 <div class="paragraph">
 <p><strong>Example Scenario 1</strong><br>
-You met your new friend John Doe, and want to save him into Address++. You could type the following command to add his details:</p>
+You made a new friend John Doe, and want to save him into Address++. You could type the following command to add his details:</p>
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears
-v/https://helloworld/image.png</code></p>
+v/https://helloworld.world/image.png</code></p>
 </div>
 </div>
 </div>
@@ -847,12 +825,8 @@ option while typing in your command:</p>
 <div class="paragraph">
 <p>&gt;&gt; <code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Do note that you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Note:</strong> you do not have to set all fields as private, and you can choose which specific fields you want to set as private.</p>
 </div>
 </div>
 </div>
@@ -904,12 +878,12 @@ the <code>ImageView</code> attribute.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Subscribe</span>
-    <span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        <span class="local-variable">this</span>.person = event.getNewSelection().person;
-        initializeWithPerson(person);
-        initializeAvatar();
-    }</code></pre>
+<span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    <span class="local-variable">this</span>.person = event.getNewSelection().person;
+    initializeWithPerson(person);
+    initializeAvatar();
+}</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -919,7 +893,8 @@ the <code>ImageView</code> attribute.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As of v1.5rc, the avatar field supports only URLs sourced online. References to local files may not work at the moment.
+As of v1.5rc, the avatar field supports only URLs sourced online. References to local files may work but require the
+prefix "file:"
 </td>
 </tr>
 </table>
@@ -947,7 +922,7 @@ As of v1.5rc, the avatar field supports only URLs sourced online. References to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:25:45 +00:00
+Last updated 2017-11-12 09:21:43 +00:00
 </div>
 </div>
 </body>

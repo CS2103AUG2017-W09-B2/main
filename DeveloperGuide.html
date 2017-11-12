@@ -631,7 +631,7 @@ standardised the handling of font size change requests through events.
 <div class="paragraph">
 <p><strong>Aspect:</strong> Use either UI or CLI based implementations<br>
 <strong>Alternative 1 (current choice):</strong> Implementing both UI and CLI functionality<br>
-<strong>Pros:</strong> More options for the user. The was also not much increase in complexity when implementing the CLI version <br>
+<strong>Pros:</strong> More options for the user. Not much increase in complexity when implementing the CLI version <br>
 <strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br></p>
 </div>
 <div class="paragraph">
@@ -670,12 +670,12 @@ the <code>ImageView</code> attribute.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Subscribe</span>
-    <span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        <span class="local-variable">this</span>.person = event.getNewSelection().person;
-        initializeWithPerson(person);
-        initializeAvatar();
-    }</code></pre>
+<span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    <span class="local-variable">this</span>.person = event.getNewSelection().person;
+    initializeWithPerson(person);
+    initializeAvatar();
+}</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -685,7 +685,8 @@ the <code>ImageView</code> attribute.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As of v1.5rc, the avatar field supports only URLs sourced online. References to local files may not work at the moment.
+As of v1.5rc, the avatar field supports only URLs sourced online. References to local files may work but require the
+prefix "file:"
 </td>
 </tr>
 </table>
@@ -1018,7 +1019,7 @@ class. The actual sorting happens via the UniquePersonList class or the UniqueTa
 </div>
 </div>
 <div class="paragraph">
-<p>Likewise, the UML Class diagram for sort commands that trigger sorting in person listings is shown below:</p>
+<p>Likewise, the UML Class diagram for sort commands that trigger sorting in task listings is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1027,10 +1028,11 @@ class. The actual sorting happens via the UniquePersonList class or the UniqueTa
 </div>
 <div class="paragraph">
 <p>We can deduce from the UML diagrams diagrams above that the only difference between the implementation
-of the sorting for persons and tasks lies in the location where the sorting is actually executed.</p>
+of the sorting for persons and tasks lies in the location where the sorting is actually executed.
+The sorting of persons happens in <code>UniquePersonList</code> class while the sorting of tasks happens in <code>UniqueTaskList</code>.</p>
 </div>
 <div class="paragraph">
-<p>Suppose a user enters a new command <code>sort name desc</code>. The following sequence diagram
+<p>Suppose a user enters a new command <code>sort person name desc</code>. The following sequence diagram
 demonstrates how the sort command works.</p>
 </div>
 <div class="imageblock">
@@ -1039,8 +1041,8 @@ demonstrates how the sort command works.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the execution of the sort methods result in the actual person or task list being sorted. The resulting list
-is not returned, but will be reflected in the application&#8217;s storage and graphical user interface.</p>
+<p>Note that the execution of the sort methods results in the actual person or task list being sorted. This list will be
+reflected in both the application&#8217;s storage as well as the graphical user interface.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.1. Design Considerations</a></h4>
@@ -1056,7 +1058,8 @@ Future changes to the implementation will be easier as a consequence.<br>
 <div class="paragraph">
 <p><strong>Alternative 2:</strong> Implement the sorting functionality within other classes like <code>AddressBook</code> or <code>SortCommand</code>.<br>
 <strong>Pros:</strong> May be more intuitive for new developers and it is easier to trace function calls between lesser classes involved.<br>
-<strong>Cons:</strong> Violates Separation of Concern principle and causes unnecessary content coupling whereby the <code>UniquePersonList</code> will have to rely on the <code>SortCommand</code> class.</p>
+<strong>Cons:</strong> Violates Separation of Concern principle and causes unnecessary content coupling whereby the <code>UniquePersonList</code>
+and <code>UniqueTaskList</code> will have to rely on the <code>SortCommand</code> class.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -1113,7 +1116,7 @@ event notifies the subscriber <code>backupAddressBook</code> method in Storage c
 the application.</p>
 </div>
 <div class="paragraph">
-<p>Like most of the other commands, arguments are parsed through the <code>UnlockCommandParser</code> or <code>LockCommandParser</code>,
+<p>Arguments are processed in the <code>UnlockCommandParser</code> or <code>LockCommandParser</code>,
 which passes control over to the <code>UnlockCommand</code> and <code>LockCommand</code> class respectively.
 These <code>Command</code> classes will then call the Model to toggle the lock&#8217;s state.</p>
 </div>
@@ -1126,8 +1129,8 @@ These <code>Command</code> classes will then call the Model to toggle the lock&#
 </div>
 </div>
 <div class="paragraph">
-<p>From the activity diagram we can see that lock states are preserved in preferences.json
-after the application closes by passing the lock state into the <code>UserPrefs</code> class to be
+<p>From the activity diagram we can see that lock states are preserved in the <code>preferences.json</code>
+file after the application closes by passing the lock state into the <code>UserPrefs</code> class to be
 saved by the Storage component.</p>
 </div>
 <div class="admonitionblock note">
@@ -1175,7 +1178,7 @@ information is passed to the Storage Component to be saved into the file <code>p
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">guiSettings</span><span class="delimiter">&quot;</span></span> : {
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowWidth</span><span class="delimiter">&quot;</span></span> : <span class="float">1080.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowWidth</span><span class="delimiter">&quot;</span></span> : <span class="float">1309.0</span>,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">windowHeight</span><span class="delimiter">&quot;</span></span> : <span class="float">720.0</span>,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">windowCoordinates</span><span class="delimiter">&quot;</span></span> : {
       <span class="key"><span class="delimiter">&quot;</span><span class="content">x</span><span class="delimiter">&quot;</span></span> : <span class="integer">0</span>,
@@ -1185,7 +1188,8 @@ information is passed to the Storage Component to be saved into the file <code>p
   <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookFilePath</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">data/addressbook.xml</span><span class="delimiter">&quot;</span></span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookName</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">My Address++</span><span class="delimiter">&quot;</span></span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookLockState</span><span class="delimiter">&quot;</span></span> : <span class="value">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookEncryptedPassword</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span><span class="delimiter">&quot;</span></span>
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookEncryptedPassword</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">theme</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">/view/DarkTheme.css</span><span class="delimiter">&quot;</span></span>
 }</code></pre>
 </div>
 </div>
@@ -1214,13 +1218,13 @@ user&#8217;s file directories.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Password Validation &#8594; Is password correct?</p>
+<p><strong>Password Validation</strong> &#8594; Is the password correct?</p>
 </li>
 <li>
-<p>Password Confirmation &#8594; Does the new password and confirmation password match?</p>
+<p><strong>Password Confirmation</strong> &#8594; Does the new password and confirmation password match?</p>
 </li>
 <li>
-<p>Password Uniqueness &#8594; Is the new password different from the old password?</p>
+<p><strong>Password Uniqueness</strong> &#8594; Is the new password different from the old password?</p>
 </li>
 </ol>
 </div>
@@ -2979,7 +2983,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:25:45 +00:00
+Last updated 2017-11-12 09:21:43 +00:00
 </div>
 </div>
 </body>
