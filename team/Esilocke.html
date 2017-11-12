@@ -35,13 +35,24 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="renaming-existing-tags-code-edittag-code-since-v1-2"><a class="link" href="#renaming-existing-tags-code-edittag-code-since-v1-2">Renaming existing tags : <code>edittag</code> (Since v1.2)</a></h3>
+<h3 id="renaming-existing-tags-code-edit-tag-code-since-v1-2"><a class="link" href="#renaming-existing-tags-code-edit-tag-code-since-v1-2">Renaming existing tags : <code>edit tag/</code> (Since v1.2)</a></h3>
 <div class="paragraph">
-<p>You can use <code>edittag</code> to rename one existing tag. For example, you may wish to promote all existing "acquaintances" into "friends", or change all "CS2103" project mates to "CS2101" project mates instead.<br>
-<code>edittag</code> can be replaced by <code>et</code> for faster input.<br></p>
+<p>You can use <code>edit tag/</code> to rename one existing tag. For example, you may wish to promote all existing "acquaintances" into "friends", or change all "CS2103" project mates to "CS2101" project mates instead.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>edit tag/</code> can be replaced by <code>et</code> for faster input.<br>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Format: <code>edittag TAGTOBERENAMED NEWTAGNAME</code><br></p>
+<p>Format: <code>edit tag/ OLDTAGNAME NEWTAGNAME</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -51,22 +62,26 @@
 <p>The two tag names must be different.</p>
 </li>
 <li>
-<p>This command will not work if none of your contacts have a tag with the <code>TAGTOBERENAMED</code> value.</p>
+<p>This command will not work if none of your contacts have a tag with the <code>OLDTAGNAME</code> value.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edittag friends enemies</code><br>
-Changes the tag called <code>friends</code> to one called <code>enemies</code> instead. All existing contacts with a <code>friends</code> tag will now have an <code>enemies</code> tag instead.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You have finished a project, and have become good friends with your project mates.
+You decide to promote all your project mates into friends.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>edit tag/ project friends</code></p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -133,11 +148,361 @@ Allowing optional data input thus lifts the restriction of making every field co
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-task-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#mark-task-as-complete-code-setcomplete-code-since-v1-5">Mark task as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
+<h3 id="adding-a-task-code-add-task-code"><a class="link" href="#adding-a-task-code-add-task-code">Adding a task: <code>add task/</code></a></h3>
 <div class="paragraph">
-<p>Have you finally completed a task in the address book? You can use <code>setcomplete</code> to mark the specified task as complete.<br>
+<p>You can use the <code>add task/</code> command to add new tasks to your address book. This allows you to keep track of your
+assignments and project objectives.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>add task/ n/NAME [d/DESCRIPTION] [by/DEADLINE] [p/PRIORITY] [a/ADDRESS]</code><br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>add</code> can be replaced by <code>a</code> for faster input.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br>
+* A task priority must be a positive integer from 1 to 5 inclusive, with 5 being the highest priority<br>
+* Newly added tasks are marked as incomplete by default.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You are assigned the task of writing a 1500-word essay that is due in 3 weeks. You decide to add this
+task into Address++.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>add task/ n/Essay d/Write a 1500-word essay on philosophical thinking t/3 weeks later p/4</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+You are required to submit at least one forum post to the school forums each week. To remind yourself of this task,
+you add it into Address++.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>add task/ n/Weekly forum post p/1</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-person-code-edit-task-code"><a class="link" href="#editing-a-person-code-edit-task-code">Editing a person : <code>edit task/</code></a></h3>
+<div class="paragraph">
+<p>You can use the <code>edit task/</code> command to quickly fix mistakes in your entries, or add/remove details in your tasks. You may wish to edit your tasks when their requirements change, for example.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>edit</code> can be replaced by <code>e</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>edit task/ INDEX [n/NAME] [d/DESCRIPTION] [by/DEADLINE] [p/PRIORITY] [a/ADDRESS]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The index refers to the index number shown in the last listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You had previously added a task reminding you to write a 1500-word essay. However you receive notification that the word requirement
+is now 1800 words instead. You edit the task to reflect this change.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>edit task/ 2 d/1800 words essay</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+One of your assignments has been pushed back and is no longer as urgent as before. You edit teh task to reflect this change.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>edit task/ 4 deadline/2 months later p/2</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-task-code-delete-task-code"><a class="link" href="#deleting-a-task-code-delete-task-code">Deleting a task : <code>delete task/</code></a></h3>
+<div class="paragraph">
+<p>You can use the <code>delete task/</code> command to remove tasks from the address book. The <code>delete</code> command will help you clean up obsolete or completed tasks.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>delete</code> can be replaced by <code>d</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>delete task / INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the person or task at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You wish to delete the first task.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>delete task /1</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+You wish to delete a task named "1500-word Essay". However you have many tasks, and are not sure where it is.
+You thus use <code>find task/</code> to find tasks related to "Essays", before using <code>delete task/</code> to delete "1500-word Essay" accordingly.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>find task/ Essay</code><br>
+&gt;&gt; <code>delete 3</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-a-task-code-find-task-code"><a class="link" href="#finding-a-task-code-find-task-code">Finding a task : <code>find task/</code></a></h3>
+<div class="paragraph">
+<p>You can use the <code>find task/</code> command to quickly find tasks that match your criteria, as well as tasks that have a certain level of urgency.<br>
+Furthermore, you can choose to only retrieve tasks that are either complete, or still in progress.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>find</code> can be replaced by <code>f</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>find task/ KEYWORD [MORE_KEYWORDS] [p/PRIORITY] [done/STATE]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Both the name and the description will be searched</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+<li>
+<p><strong>You must include at least 1 search keyword</strong>, in order to filter the results by their priority, and whether or not it is completed.</p>
+</li>
+<li>
+<p>The <code>PRIORITY</code> must be an integer from 1 to 5, inclusive. If the priority search is included, all tasks that have a priority at least that of the specified priority will matced.</p>
+</li>
+<li>
+<p><code>STATE</code> must be either <code>true</code> or <code>false</code>. If it is <code>true</code>, you will only see tasks that have been marked as complete, and if it is `false, you will only see tasks that are not complete, in addition to all other search criteria.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Examples Scenario:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You would like to find all the tasks related to "Report". You first use <code>list</code> to show all your tasks,
+then use <code>find</code> to find all the tasks related to "Report".</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>find task/ report</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Additionally, you would also like to find tasks that have a "High" or "Highest" priority.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>find task/ report p/4</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Furthermore, as you have several tasks related to "Report" that are already complete, you only want to see the tasks that are still not done.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>find task/ report p/4 done/false</code><br></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-task-code-select-task-code"><a class="link" href="#selecting-a-task-code-select-task-code">Selecting a task : <code>select task/</code></a></h3>
+<div class="paragraph">
+<p>You can use <code>select task/</code> to pick out a task, and look at it in greater detail.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>select</code> can be replaced by <code>s</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>select task/ INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+The first task has a very long description, and you want to see it in full.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>select task/ 1</code><br></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="marking-tasks-as-complete-code-setcomplete-code-since-v1-5"><a class="link" href="#marking-tasks-as-complete-code-setcomplete-code-since-v1-5">Marking tasks as complete : <code>setcomplete</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>Have you finally completed a task in the address book? You can use <code>setcomplete</code> to mark the specified task as complete.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <code>setcomplete</code> can be replaced by <code>stc</code> for faster input.<br>
-Format: <code>setcomplete INDEX</code><br></p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>setcomplete INDEX</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -157,29 +522,39 @@ Format: <code>setcomplete INDEX</code><br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list task</code><br>
-<code>setcomplete 2</code><br>
-Sets the 2nd task in the address book as completed.</p>
-</li>
-<li>
-<p><code>find task update</code><br>
-<code>setcomplete 1</code><br>
-Sets the 1st task in the results of the <code>find task</code> command as completed.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You have finally completed a task that involves writing a 1500-word essay.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt;&gt; <code>setcomplete 6</code><br></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-task-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#mark-task-as-incomplete-code-setincomplete-code-since-v1-5">Mark task as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
+<h3 id="marking-tasks-as-incomplete-code-setincomplete-code-since-v1-5"><a class="link" href="#marking-tasks-as-incomplete-code-setincomplete-code-since-v1-5">Marking tasks as incomplete : <code>setincomplete</code> (Since V1.5)</a></h3>
 <div class="paragraph">
-<p>Did you accidentally mark a task as completed? You can use <code>setincomplete</code> to mark the specified task as incomplete.<br>
+<p>Did you accidentally mark a task as completed? You can use <code>setincomplete</code> to mark the specified task as incomplete.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <code>setincomplete</code> can be replaced by <code>sti</code> for faster input.<br>
-Format: <code>setincomplete INDEX</code><br></p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>setincomplete INDEX</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -199,74 +574,41 @@ Format: <code>setincomplete INDEX</code><br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list task</code><br>
-<code>setincomplete 2</code><br>
-Sets the 2nd task in the address book as incomplete.</p>
-</li>
-<li>
-<p><code>find task update</code><br>
-<code>setincomplete 1</code><br>
-Sets the 1st task in the results of the <code>find task</code> command as incomplete.
-=== Assign contacts to task : <code>assign</code> (Since V1.4)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>You can use <code>assign</code> to assign contacts to an ongoing task. You may wish to use <code>assign</code> when collaborating with others for projects, for example.<br>
-<code>assign</code> can be replaced by <code>as</code> for faster input.<br>
-Format: <code>assign PEOPLEINDEX&#8230;&#8203; to/TASKINDEX</code><br></p>
+<p><strong>Example Scenarios:</strong><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The PEOPLEINDEX refers to the index numbers shown in the most recent <strong>person</strong> listing.</p>
-</li>
-<li>
-<p>The TASKINDEX refers to the index number shown in the most recent <strong>task</strong> listing.</p>
-</li>
-<li>
-<p>At least 1 or more PEOPLEINDEX must be present in the command.</p>
-</li>
-<li>
-<p>PERSONINDEX and TASKINDEX <strong>must be positive integers</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You realised that you had marked a task as complete, even though it is still in progress.
+Furthermore you are not sure when you had marked it as complete. However, you are still able to safely mark the task as being
+in progress.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>&gt;&gt; <code>setincomplete 7</code></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>list task</code><br>
-<code>assign 1 4 5 to/2</code><br>
-Assigns the 1st, 4th and 5th contacts to 2nd task in the address book.</p>
-</li>
-<li>
-<p><code>list</code><br>
-<code>find task update</code><br>
-<code>assign 2 to/1</code><br>
-Assigns the 2nd person in the address book to the 1st task in the results of the <code>find task</code> command.</p>
-</li>
-</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="dismiss-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismiss-contacts-from-task-code-dismiss-code-since-v1-4">Dismiss contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
+<h3 id="assigning-contacts-to-task-code-assign-code-since-v1-4"><a class="link" href="#assigning-contacts-to-task-code-assign-code-since-v1-4">Assigning contacts to task : <code>assign</code> (Since V1.4)</a></h3>
 <div class="paragraph">
-<p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br>
-<code>dismiss</code> can be replaced by <code>ds</code> for faster input.<br>
-Format: <code>dismiss PEOPLEINDEX&#8230;&#8203; from/TASKINDEX</code><br></p>
+<p>You can use <code>assign</code> to assign contacts to an ongoing task. You may wish to use <code>assign</code> when collaborating with others for projects, for example.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>assign</code> can be replaced by <code>as</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>assign PEOPLEINDEX&#8230;&#8203; to/TASKINDEX</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -289,23 +631,74 @@ Format: <code>dismiss PEOPLEINDEX&#8230;&#8203; from/TASKINDEX</code><br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong><br></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You have created a new task to complete a paper model. However you are unable to do it by yourself, and require the help of some of your friends.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>assign 1 5 7 to/5</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dismissing-contacts-from-task-code-dismiss-code-since-v1-4"><a class="link" href="#dismissing-contacts-from-task-code-dismiss-code-since-v1-4">Dismissing contacts from task : <code>dismiss</code> (Since V1.4)</a></h3>
+<div class="paragraph">
+<p>You can use <code>dismiss</code> to remove assignment from tasks. You may wish to use <code>dismiss</code> when a contact is no longer in charge of a task, for example.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>dismiss</code> can be replaced by <code>ds</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>dismiss PEOPLEINDEX&#8230;&#8203; from/TASKINDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>list</code><br>
-<code>list task</code><br>
-<code>dismiss 1 4 5 from/2</code><br>
-Dismisses 1st, 4th and 5th contacts in the address book from the 2nd task.</p>
+<p>The PEOPLEINDEX refers to the index numbers shown in the most recent <strong>person</strong> listing.</p>
 </li>
 <li>
-<p><code>list</code><br>
-<code>find task update</code><br>
-<code>dismiss 2 from/1</code><br>
-Dismisses the 2nd person in the address book from the 1st task in the results of the <code>find task</code> command.</p>
+<p>The TASKINDEX refers to the index number shown in the most recent <strong>task</strong> listing.</p>
+</li>
+<li>
+<p>At least 1 or more PEOPLEINDEX must be present in the command.</p>
+</li>
+<li>
+<p>PERSONINDEX and TASKINDEX <strong>must be positive integers</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+One of the tasks that you had created previously with many people assigned turned out to be easier than expected.
+You believe that this task does not require so many people and would like to remove some of them from this task.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>dismiss 1 5 7 from/5</code></p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -544,7 +937,7 @@ For example, given the below list of persons:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 05:33:29 +00:00
+Last updated 2017-11-12 05:33:41 +00:00
 </div>
 </div>
 </body>

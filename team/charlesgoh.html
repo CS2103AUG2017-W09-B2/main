@@ -39,9 +39,22 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 <div class="sect2">
 <h3 id="sorting-your-contact-list-and-tasks-code-sort-code"><a class="link" href="#sorting-your-contact-list-and-tasks-code-sort-code">Sorting your contact list and tasks : <code>sort</code></a></h3>
 <div class="paragraph">
-<p>Sort your contacts or tasks by using the <code>sort</code> command<br>
+<p>Sort your contacts or tasks by using the <code>sort</code> command<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <code>sort</code> can be replaced by <code>so</code> for faster input.<br>
-Format: <code>sort LIST FIELD ORDER</code><br></p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>sort LIST FIELD ORDER</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -207,9 +220,22 @@ Future changes to the implementation will be easier as a consequence.<br>
 <div class="sect2">
 <h3 id="backing-up-your-data-code-backup-code"><a class="link" href="#backing-up-your-data-code-backup-code">Backing up your data : <code>backup</code></a></h3>
 <div class="paragraph">
-<p>You can backup your saved data on Address++ by using the <code>backup</code> command.<br>
+<p>You can backup your saved data on Address++ by using the <code>backup</code> command.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <code>backup</code> can be replaced by <code>bk</code> for faster input.<br>
-Format: <code>backup [RELATIVE LOCATION]</code><br></p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>backup [RELATIVE LOCATION]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -497,7 +523,7 @@ standardised the handling of font size change requests through events.
 <div class="sect2">
 <h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
-<p>You can use the <code>add</code> command to add new people to your address book</p>
+<p>You can use the <code>add</code> command to add new people to your address book.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -512,7 +538,7 @@ standardised the handling of font size change requests through events.
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>add n/NAME p/[PHONE_NUMBER] e/[EMAIL] a/[ADDRESS] r/[REMARK] v/[AVATAR] [t/TAG]&#8230;&#8203;</code><br></p>
+<p>Format: <code>add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [v/AVATAR] [t/TAG]&#8230;&#8203;</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -520,7 +546,8 @@ standardised the handling of font size change requests through events.
 <p><strong>Things To Note</strong><br>
 * A person can have any number of tags (including 0)<br>
 * The <code>EMAIL</code> should be in the format address@email.domain<br>
-* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code>, to be private by placing a <code>p</code> in front of the prefix.<br></p>
+* You can set a person&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code>, to be private by placing a <code>p</code> in front of the prefix.<br>
+* As of version 1.5rc, the avatar field supports only URLs sourced online. References to local files may not work.</p>
 </div>
 </div>
 </div>
@@ -531,10 +558,10 @@ standardised the handling of font size change requests through events.
 <div class="content">
 <div class="paragraph">
 <p><strong>Example Scenario 1</strong><br>
-Suppose you wanted to add your new friend John Doe. You could type the following command to add his details:</p>
+You met your new friend John Doe, and want to save him into Address++. You could type the following command to add his details:</p>
 </div>
 <div class="paragraph">
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears
+<p>&gt;&gt; <code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11-11-1995 r/Likes panda bears
 v/https://helloworld/image.png</code></p>
 </div>
 </div>
@@ -543,11 +570,11 @@ v/https://helloworld/image.png</code></p>
 <div class="content">
 <div class="paragraph">
 <p><strong>Example Scenario 2</strong><br>
-Now suppose you have another friend named Ima Hidearu, who does not provide you with all the contact information that
-you need. You can choose to omit these fields by typing in the command:</p>
+You meet Ima Hidearu, another one of your group members, but you do not know anything about him other than his name.
+ Nevertheless, you are still able to add him into Address++:</p>
 </div>
 <div class="paragraph">
-<p><code>add n/Ima Hidearu a/ e/ p/ r/ v/ t/secretive</code></p>
+<p>&gt;&gt; <code>add n/Ima Hidearu r/secretive</code></p>
 </div>
 </div>
 </div>
@@ -559,7 +586,7 @@ Sometimes, you may wish to keep some fields private (i.e. not reveal them in the
 option while typing in your command:</p>
 </div>
 <div class="paragraph">
-<p><code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
+<p>&gt;&gt; <code>add pn/Neville Shorttop pp/46492787 pe/nevilleS@gmail.com pa/Gryphon Gate pr/A true hero</code><br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -661,7 +688,7 @@ As of v1.5rc, the avatar field supports only URLs sourced online. References to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 05:33:29 +00:00
+Last updated 2017-11-12 05:33:41 +00:00
 </div>
 </div>
 </body>
