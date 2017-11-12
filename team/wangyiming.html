@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Wang Yiming - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Wang Yiming - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-address"><a class="link" href="#project-address">Project: Address++</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="introduction"><a class="link" href="#introduction">Introduction</a></h3>
+<div class="paragraph">
+<p>Address is an application that targets university students, aiming to help them manage their contacts and other aspects of their university life in an efficient manner.
+Address is a Command Line Interface (CLI) application, where most of the commands are executed by typing rather than clicking on buttons.
+Address++ also provides a simple Graphical User Interface (GUI) for a better User Experience (UX).</p>
+</div>
+<div class="paragraph">
+<p>This project is the result of a Software Engineering module, <a href="https://nus-cs2103.github.io/website/">CS2103T</a>,
+in NUS. Address is written mainly in Java, while JavaFX is used for the frontend design. Address is built
+based on <a href="https://github.com/se-edu/addressbook-level4">Address Book (Level 4)</a> and the current codebase has expanded to around 10 kLoC.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="purpose-of-project-portfolio"><a class="link" href="#purpose-of-project-portfolio">Purpose of Project Portfolio</a></h3>
+<div class="paragraph">
+<p>The purpose of this project portfolio is to showcase my contribution to the Address++, a project for the introductory Software Engineering module (CS2103T) at the National University of Singapore.
+It highlights some of the key features I implemented during the course of this module and the technical details behind how these features were implemented.
+It also demonstrates my ability to work with a large code base (about 10KLoC).</p>
+</div>
+<div class="paragraph">
+<p>This is a snapshot of our User Interface</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ui.png" alt="Ui" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>My contributions to this project are listed below:</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/main/wangyiming1019.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/test/wangyiming1019.md">Test code</a>]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-add-delete-tags"><a class="link" href="#enhancement-added-add-delete-tags">Enhancement Added: Add/Delete Tags</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-tag-to-persons-code-add-tag-code-since-v1-2"><a class="link" href="#adding-a-tag-to-persons-code-add-tag-code-since-v1-2">Adding a tag to persons : <code>add tag/</code> (Since V1.2)</a></h3>
+<div class="paragraph">
+<p>You can use the <code>add tag/</code> command to add tag for multiple persons in the address book. For example, you may wish to add the tag <code>friends</code> to the first two persons in the address book.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>add tag/</code> can be replaced by <code>a tag/</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>add tag/ INDEX&#8230;&#8203; t/[TAG]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can add the tag of the person at the specific <code>INDEX</code>.<br></p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.<br></p>
+</li>
+<li>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;<br></p>
+</li>
+<li>
+<p>If you don not key in any indexes, addtag will add the tag to all contacts in the address book.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to add tag <code>friends</code> to the 1st and 2nd persons in the address book. You can use <code>list</code> to show all the contacts in the address book first,
+then use the <code>addtag</code> command to achieve it.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>add tag/ 1 2 t/friends</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you want to add a common tag to all the persons in the address book. You can type in the following command:</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>add tag/ t/acquaintance</code><br></p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddTagCommand.png" alt="AddTagCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.5.1 : AddTagCommand</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-tag-of-persons-code-delete-tag-code-since-v1-2"><a class="link" href="#deleting-a-tag-of-persons-code-delete-tag-code-since-v1-2">Deleting a tag of persons : <code>delete tag/</code> (Since V1.2)</a></h3>
+<div class="paragraph">
+<p>You can use <code>delete tag/</code> to delete the tag of multiple persons from the address book.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>delete tag/</code> can be replaced by <code>d tag/</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>delete tag/ INDEX&#8230;&#8203; t/[TAG]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can delete the tag of the person at the specific <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>If you do not key in any index, delete tag/ will delete the tag from all contacts in the address book.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to delete <code>classmates</code> tag for the first two persons in the address book, you can <code>list</code> all the persons first, then
+use the <code>delete tag/</code> command to achieve.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>delete tag/ 1 2 t/friends</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you want to delete <code>friends</code> tag from all contacts in the address book.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>delete tag/ t/friends</code><br></p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DeleTagCommand.png" alt="DeleTagCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.20.1 : DeleteTagCommand</em>
+<mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>The existing <code>EditCommand</code> has the similar functionality which is to modify the tags. However, it has two limitations.
+First, it can only edit tags for one person only. Second, modified tags will replace all the original tags.
+Our user, university students, often want to organize and modify their contacts in an efficient way.
+To make modifying tags easier, <code>AddTagCommand</code> and <code>DeleteTagCommand</code> allow our users to add and delete tags for multiple persons.
+They only modify the specific tags, leaving the rest tags intact.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">Add/Delete Tag mechanism</a></h3>
+<div class="paragraph">
+<p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
+tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>The add/delete tag command are executed by <code>AddTagCommand</code> and <code>DeleteTagCommand</code> are parsed through <code>AddTagCommandParser</code> and <code>DeleteTagCommandParser</code>.
+It is different from <code>edit [INDEX] [TAG]</code> since it allows the user to perform the addition and deletion of tags for multiple people at once.
+If the user wants to add the <code>t/friends</code> tag for the first 3 persons in the address book, the <code>AddTagCommand</code> (<code>add tag/ 1 2 3 t/friends</code>) will be executed.
+The same operation will happen for <code>delete tag/</code> command.</p>
+</div>
+<div class="paragraph">
+<p>The <code>AddTagCommand</code> goes through all the persons in the address book and add tag to the persons with specific index. The <code>DeleteTagCommand</code> works
+in a similar way.</p>
+</div>
+<div class="paragraph">
+<p>The example of how <code>AddTagCommand</code> is working:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * Adds a tag to the persons in the list from the address book.
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AddTagCommand</span> <span class="directive">extends</span> AddCommand {
+    <span class="comment">/**
+         * Check whether the index within the range then checks whether the specific persons have the tag.
+         * If not, add the tag to the person that doesn't have the given tag.
+         */</span>
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+
+            <span class="keyword">for</span> (Index targetIndex : targetIndexes) {
+                <span class="comment">// check whether the index within the range</span>
+            }
+            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; targetIndexes.size(); i++) {
+                <span class="comment">// check whether all persons have the given tag</span>
+            }
+            <span class="comment">// throw exception for duplicated tag</span>
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult();
+        }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Suppose the user enter the <code>add tag/ 1 2 t/friends</code> command. The following sequence diagram shows how the add tag command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddTagSdForLogic.png" alt="AddTagSdForLogic" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.8.1 : Add Tag Sequence Diagram for Logic</em><br>
+The <code>delete tag/</code> command works the same as <code>add tag/</code> command with different name only.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input index does not exist, the <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will throw an exception.<br>
+If the tag to be deleted does not exist, the <code>DeleteTagCommand</code> will throw an exception.<br>
+If the tag to be added exists in every target person in the address book, the <code>AddTagCommand</code> will throw an exception.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the <code>add tag/</code> and <code>delete tag/</code><br>
+<strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
+<strong>Pros:</strong> Easier to implement. <code>ModelManager</code> includes all the methods and variables.<br>
+<strong>Cons:</strong> Must modify <code>Model</code> also to fit the <code>ModelManager</code>. Beginner may have difficulty to understand the different functions in Model component+</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the <code>addtag</code> and <code>deletetag</code> in <code>AddTagCommand</code> and <code>DeleteTagCommand</code> respectively.<br>
+<strong>Pros:</strong> Easier to understand.<br>
+<strong>Cons:</strong> Repetitive code. Additional overload constructor needs to be implement. The <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will have to update the person list.
+This violates the Single Responsibility Principle.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> create new command <code>add tag/</code> and <code>delete tag/</code><br>
+<strong>Pros:</strong> Less modification of existing command and parser<br>
+<strong>Cons:</strong> Users have to learn how to use the additional commands<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Modify the existing <code>add</code> and <code>delete</code> command<br>
+<strong>Pros:</strong> Users could use the same commands to achieve different purpose<br>
+<strong>Cons:</strong> Additional override the constructor for the existing command. It might not be easy for the beginner.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-find-persons-by-tags"><a class="link" href="#enhancement-added-find-persons-by-tags">Enhancement Added: Find Persons by Tags</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>Address++ is designed as an assistant tool for university students. It aims to help users to manage their contacts in an easy way.
+With the help of this command, users are able to easily find the contacts in the application. This feature allows users to easily
+search for contacts in big numbers by locating them according to their tags.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">Find Tag mechanism</a></h3>
+<div class="paragraph">
+<p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
+This command will not inherit from <code>UndoableCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>find tag/</code> command is executed by <code>FindTagCommand</code> and is parsed through <code>FindTagCommandParser</code>.
+After parsing through <code>FindTagCommandParser</code>, it does not goes to the <code>FindTagCommand</code> straightly. The list of tags input will be processed by <code>NameContainsTagsPredicate</code> first.
+It is similar to the <code>find</code> command since find persons through their names and find persons through their tags are quite similar.</p>
+</div>
+<div class="paragraph">
+<p>Please take not that although <code>FindTagCommand</code> is similar to <code>FindCommand</code>, there are still some differences.
+<code>FindTagCommand</code> provides exclusive finding whereas <code>FindCommand</code> does not. It is achieved in the <code>NameContainsTagsPredicate</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is the example of how <code>NameContainsTagsPredicate</code> is working:
+Firstly, it will convert a Set of Tag to String.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="predefined-type">String</span> convertTagToString(ReadOnlyPerson person) {
+        <span class="predefined-type">Set</span>&lt;Tag&gt; personTags = person.getTags();
+        <span class="predefined-type">StringBuilder</span> allTagNames = <span class="keyword">new</span> <span class="predefined-type">StringBuilder</span>();
+        <span class="keyword">for</span> (Tag tag : personTags) {
+            allTagNames.append(tag.getTagName());
+            allTagNames.append(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>);
+        }
+        <span class="keyword">return</span> allTagNames.toString().trim();
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After having a list of string, it will then split strings into two ArrayList. One is for the tags we are looking for and another one
+is for the tags to be excluded.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+     * Update the wantedTag and unwantedTag list
+     * @param wantedTag list of tags to be searched
+     * @param unwantedTag list of tags to not be searched
+     */</span>
+    <span class="directive">private</span> <span class="type">void</span> updateWantedTagUnwantedTag(<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; wantedTag, <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; unwantedTag) {
+        <span class="keyword">for</span> (<span class="predefined-type">String</span> everyTag : tags) {
+            <span class="keyword">if</span> (!everyTag.startsWith(<span class="string"><span class="delimiter">&quot;</span><span class="content">/not</span><span class="delimiter">&quot;</span></span>)) {
+                wantedTag.add(everyTag);
+            } <span class="keyword">else</span> {
+                unwantedTag.add(everyTag.substring(<span class="integer">4</span>));
+            }
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, it will return the result according to the user input.<br>
+Suppose the user enter <code>find tag/ friends</code> command. The following sequence diagram shows how the find tag command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FindTagSequenceDiagram.png" alt="FindTagSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.14.1 : Find Tag Sequence Diagram for Logic</em><br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input index tags do not exist, the <code>FindTagCommand</code> will give a empty list.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of the <code>find tag/</code><br>
+<strong>Alternative 1 (current choice):</strong> implement a new command <code>find tag/</code><br>
+<strong>Pros:</strong> Easier to implement. <code>find tag/</code> command will be similar to the <code>find</code> command.<br>
+<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the <code>find tag/</code> in <code>FindCommand</code>.<br>
+<strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
+<strong>Cons:</strong> The existing <code>FindCommand</code> will not only response for finding persons through names only. This Violates Single Responsibility Principle
+and Separation of Concerns as FindCommand now needs to do two different things.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-list-tags"><a class="link" href="#enhancement-added-list-tags">Enhancement Added: List Tags</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-tags-code-showtag-code-since-v1-5"><a class="link" href="#listing-all-tags-code-showtag-code-since-v1-5">Listing all tags : <code>showtag</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>You can use the <code>showtag</code> command to quickly show all tags in the address book. Sometimes you may forget <code>tags</code> that you have added a few weeks ago. You may use this command to help you.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>showtag</code> can be replaced by <code>stag</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>showtag</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>showtag</code> command: It will return an empty list if there is no tags in the address book.</p>
+</li>
+<li>
+<p>You may want to use <code>showtag</code> command to help you recall all the <code>tags</code> in the address book before you try to use <code>findtag</code> to find persons.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>This enhancement is to supplement the find by tags function as described above. For users with large numbers of tags,
+it may be difficult for them to remember what tags are saved in the application. This enhancement allows users to easily
+refer to the tags that they have saved in the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<div class="paragraph">
+<p>There are two scenarios of this feature:<br>
+<strong>scenario 1:</strong> There are no tags or persons in the Address++.<br>
+<strong>scenario 2:</strong> There are [TAG] [MORE TAGS]&#8230;&#8203;<br></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="a-brief-explanation-of-code-showtag-code-br"><a class="link" href="#a-brief-explanation-of-code-showtag-code-br">A brief explanation of <code>showtag</code>:<br></a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Creates a list of tags by iterating through every Contact in the application and adding their tags to the list.<br></p>
+</li>
+<li>
+<p>Check if this list of tags is empty or not.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>If it is empty, it falls into scenario 1. Address++ will display an empty list.<br></p>
+</li>
+<li>
+<p>If the list is not empty, it will output the success message along with the list of tags in the appropriate format.
+The details of this step is given in the next subsection.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-of-scenario-2-br"><a class="link" href="#implementation-of-scenario-2-br">Implementation of Scenario 2<br></a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Converts the list of Tags to a list of String.<br></p>
+</li>
+<li>
+<p>Sorts the String list in alphabetical order.<br></p>
+</li>
+<li>
+<p>Appends the names to each other with the appropriate formatting by using a String Builder.<br></p>
+</li>
+<li>
+<p>Output the result.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-br"><a class="link" href="#design-considerations-br">Design Considerations<br></a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Order of Tags displayed<br>
+<strong>Alternative 1 (current choice):</strong> Display in alphabetical order.<br>
+<strong>Pros:</strong> Easier to understand and more readable.<br>
+<strong>Cons:</strong> May not be the most helpful way.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Display based on how many of each tag there are. (ascending order)<br>
+<strong>Pros:</strong> Might be more meaningful for certain users and cases.<br>
+<strong>Cons:</strong> Much more difficult to implement. Alphabetical order is generally easier to understand.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>showtag</code><br>
+<strong>Alternative 1 (current choice):</strong> Implement a new command <code>showtag</code>.<br>
+<strong>Pros:</strong> Easier to implement. <code>showtag</code> command will be similar to the <code>list</code> command..<br>
+<strong>Cons:</strong> Must create function to convert tags to string. It does not fully utilize the existing <code>updateFilteredPersonList</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Modify the <code>ListCommand</code>.<br>
+<strong>Pros:</strong> Easier for user. They do not have to memorize some many commands. <br>
+<strong>Cons:</strong> The existing <code>ListCommand</code> will not only response for listing persons only. This Violates Single Responsibility Principle and Separation of Concerns as <code>ListCommand</code> now needs to do two different things.<br></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-favourite-unfavourite-persons"><a class="link" href="#enhancement-added-favourite-unfavourite-persons">Enhancement Added: Favourite/Unfavourite Persons</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="favouriting-persons-code-favourite-code-since-v1-3"><a class="link" href="#favouriting-persons-code-favourite-code-since-v1-3">Favouriting persons : <code>favourite</code> (since V1.3)</a></h3>
+<div class="paragraph">
+<p>You can use <code>favourite</code> command to make persons in the address book become your favourite contacts. For example, you may wish to set your girlfriend as your favourite contact. You will see a heart png next to your girlfriend&#8217;s name
+once you successfully set her as your favourite contact.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>favourite</code> can be replaced by <code>fav</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>favourite INDEX [MORE INDEX]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can set a person to be the favourite person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>You will see a heart shape next to your favourite persons.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Examples Scenario:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to set the 2nd person in the address book to be your favourite contact. You should <code>list</code> all the persons first, then use <code>favourite</code> command to achieve it.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>favourite 2</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you have <code>Betsy Brandt, Betsy Devos and Betsy Ross</code> in your address book. You want to set <code>Betsy Brandt</code> as your favourite contact.
+Instead of <code>listing</code> all the contacts, you can <code>find</code> all the <code>Besty</code> first, then <code>favourite</code> her.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>find Betsy</code><br>
+&gt;&gt; <code>favourite 1</code><br></p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FavouriteCommandBeforeAndAfter.png" alt="FavouriteCommandBeforeAndAfter" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.12.1 : FavouriteCommand</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
+<div class="paragraph">
+<p>You can use <code>unfavourite</code> command to set your previous favourite persons become the normal persons. For example,<br>
+after you break up with your girlfriend, you may wish to set your girlfriend back to normal person.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>unfavourite</code> can be replaced by <code>unfav</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>unfavourite INDEX [MORE INDEX]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can unfavourites the person at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index you key in <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>The heart png will disappear once you <code>unfavourite</code> the person.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you do not want to the 2nd person in the address book to be your favourite contact anymore, you should <code>list</code> all the persons first, then use <code>unfavourite</code> command to achieve it.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>unfavourite 2</code><br></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you have <code>Betsy Brandt, Betsy Devos and Betsy Ross</code> in your address book. You want to <code>unfavourite</code> <code>Betsy Brandt</code> in the address book.
+Instead of <code>listing</code> all the contacts, you can <code>find</code> all the <code>Besty</code> first, then <code>unfavourite</code> <code>Betsy Brandt</code>.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>find Betsy</code><br>
+&gt;&gt; <code>unfavourite 1</code><br></p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UnfavouriteCommand.png" alt="UnfavouriteCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.20.1 : UnfavouriteCommand</em></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>Users will always want to differentiate some of their favourite contacts from the others so that they can find their frequently contacted persons easily.
+Therefore, <code>FavouriteCommand</code> is implemented in Address++.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">Favourite/Unfavourite Person mechanism</a></h3>
+<div class="paragraph">
+<p>To favourite a person is achieved by <code>FavouriteCommand</code>. It basically changes the value of the <code>favourite</code> status of a <code>Person</code> but there is no specific <code>Favourite</code> field for person.</p>
+</div>
+<div class="paragraph">
+<p>In this sense, a boolean value needs to be created to store the favourite status of a contact. As <code>AddCommand</code> does not involve <code>favourite</code>, the default <code>favourite</code> status for every newly added <code>Person</code> is false.</p>
+</div>
+<div class="paragraph">
+<p>The <code>favourite</code> status is a boolean value and it will be set as true through <code>FavouriteCommand</code>. Then, the target person will be updated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+
+        <span class="predefined-type">List</span>&lt;ReadOnlyPerson&gt; lastShownList = model.getFilteredPersonList();
+
+        <span class="comment">// throw invalid person index</span>
+
+        <span class="comment">// update favourite status</span>
+        ReadOnlyPerson personToFavourite = lastShownList.get(targetIndex.getZeroBased());
+        Person editedPerson = <span class="keyword">new</span> Person(personToFavourite.getName(),
+                personToFavourite.getPhone(), personToFavourite.getEmail(),
+                personToFavourite.getAddress(), <span class="predefined-constant">true</span>,
+                personToFavourite.getRemark(), personToFavourite.getAvatar(),
+                personToFavourite.getTags());
+        <span class="comment">// update target person</span>
+        <span class="keyword">try</span> {
+            model.updatePerson(personToFavourite, editedPerson);
+        } <span class="keyword">catch</span> (DuplicatePersonException dpe) {
+            <span class="comment">// throw exception</span>
+        }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite));
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>FavouriteCommand</code> takes in an integer as its argument. The command is first being parsed in <code>AddressBookParser</code> to be identified as an instance of <code>FavouriteCommand</code>.
+Then it is parsed by <code>FavouriteCommandParser</code> to parse the index. Invalid indexes will be handled by throwing an exception. This is how <code>FavouriteCommandParser</code> is implemented:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+     * Parses the given {@code String} of arguments in the context of the FavouriteCommand
+     * and returns an FavouriteCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */</span>
+    <span class="directive">public</span> FavouriteCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+        <span class="keyword">try</span> {
+            Index index = ParserUtil.parseIndex(args);
+            <span class="keyword">return</span> <span class="keyword">new</span> FavouriteCommand(index);
+        } <span class="keyword">catch</span> (IllegalValueException ive) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(
+                    <span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, FavouriteCommand.MESSAGE_USAGE));
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how a <code>FavouriteCommand</code> is processed:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FavouriteSequenceDiagram.png" alt="FavouriteSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.15.1 : Favourite Sequence Diagram for Logic</em><br></p>
+</div>
+<div class="paragraph">
+<p>To indicate that a person has been <code>favoured</code>, <code>PersonCard</code> is modified to contain a <code>favouriteLabel</code> that changes its appearance based on the <code>favourite</code> status of the person.
+It will first detect the boolean favourite status of the person. If the person is a favourite contact, a heart will be shown.
+The colours of the border and the background of the label are set to transparent, so that only the background picture, which is a heart, will be shown.</p>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">Design Consideration</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>favourite</code><br>
+<strong>Alternative 1 (current choice):</strong> implement a new command <code>favourite</code>.<br>
+<strong>Pros:</strong> Easier to implement. Does not need to modify existing command.<br>
+<strong>Cons:</strong> Must modify <code>Person</code> class to update the person status. The constructor of <code>person</code> has been modified so all the <code>person</code> in the address book must change accordingly.<br>
+<strong>Alternative 2:</strong> Implement the <code>favourite</code> in <code>AddCommand</code><br>
+<strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
+<strong>Cons:</strong> Difficult to implement. The <code>favourite</code> status will be treated as an optional field when using <code>AddCommand</code>. In order to change <code>favourite</code> status, <code>EditCommand</code> may be modified which is very troublesome.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Store <code>Favourite</code> values<br>
+<strong>Alternative 1 (current choice):</strong> Store it as a <code>Boolean</code> value<br>
+<strong>Pros:</strong> Easier to implement. Does not need to create another class.<br>
+<strong>Cons:</strong> Must modify <code>Model</code> and <code>ModelManager</code> to update the person status.It is also prone to bugs when developers forget to change the ObjectProperty to <code>String</code> in UI classes.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Add a new <code>Favourite</code> field<br>
+<strong>Pros:</strong> Similar way to store other personal information. It also follows the open-close principle and exercises cohesion, where all matters related to <code>Favourite</code> field is dealt in its own class.<br>
+<strong>Cons:</strong> Difficult to implement. Adding a new field will cause many changes in UI, Logic, Model and Storage. Some test cases will be rewritten.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Randomize the tag color. (Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/33">#33</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/76">#76</a>)</p>
+</li>
+<li>
+<p>Show the heart picture for favourite person in UI.
+(Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/147">#147</a>)</p>
+</li>
+<li>
+<p>Display favourite person list.
+(Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/79">#79</a>)</p>
+</li>
+<li>
+<p>Fix bug that <code>unfavourite</code> command causes person list disappear.
+(Pull requests <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/130">#130</a>)</p>
+</li>
+<li>
+<p>Add more test case to increase coverage. (Pull request <a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/63">#63</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/79">#79</a>,
+<a href="https://github.com/CS2103AUG2017-W09-B2/main/pull/156">#156</a>)</p>
+</li>
+<li>
+<p>Conduct Acceptance Testing for other teams. (<a href="https://github.com/CS2103AUG2017-T14-B1/main/issues/70">T14-B1</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-12 20:24:01 +00:00
+</div>
+</div>
+</body>
+</html>

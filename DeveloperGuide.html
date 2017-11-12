@@ -2277,8 +2277,10 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 <p><strong>Aspect:</strong> Implementation of the <code>find tag/</code><br>
 <strong>Alternative 1 (current choice):</strong> implement a new command <code>find tag/</code><br>
 <strong>Pros:</strong> Easier to implement. <code>find tag/</code> command will be similar to the <code>find</code> command.<br>
-<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br>
-<strong>Alternative 2:</strong> Implement the <code>find tag/</code> in <code>FindCommand</code>.<br>
+<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the <code>find tag/</code> in <code>FindCommand</code>.<br>
 <strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
 <strong>Cons:</strong> The existing <code>FindCommand</code> will not only response for finding persons through names only. This Violates Single Responsibility Principle
 and Separation of Concerns as FindCommand now needs to do two different things.</p>
@@ -2377,8 +2379,10 @@ The colours of the border and the background of the label are set to transparent
 <p><strong>Aspect:</strong> Store <code>Favourite</code> values<br>
 <strong>Alternative 1 (current choice):</strong> Store it as a <code>Boolean</code> value<br>
 <strong>Pros:</strong> Easier to implement. Does not need to create another class.<br>
-<strong>Cons:</strong> Must modify <code>Model</code> and <code>ModelManager</code> to update the person status.It is also prone to bugs when developers forget to change the ObjectProperty to <code>String</code> in UI classes.<br>
-<strong>Alternative 2:</strong> Add a new <code>Favourite</code> field<br>
+<strong>Cons:</strong> Must modify <code>Model</code> and <code>ModelManager</code> to update the person status.It is also prone to bugs when developers forget to change the ObjectProperty to <code>String</code> in UI classes.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Add a new <code>Favourite</code> field<br>
 <strong>Pros:</strong> Similar way to store other personal information. It also follows the open-close principle and exercises cohesion, where all matters related to <code>Favourite</code> field is dealt in its own class.<br>
 <strong>Cons:</strong> Difficult to implement. Adding a new field will cause many changes in UI, Logic, Model and Storage. Some test cases will be rewritten.</p>
 </div>
@@ -3218,7 +3222,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 18:22:07 +00:00
+Last updated 2017-11-12 20:24:01 +00:00
 </div>
 </div>
 </body>
