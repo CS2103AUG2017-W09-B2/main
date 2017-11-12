@@ -234,19 +234,17 @@ that you are not aware of. You decide to update her entry in Address++ according
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>changeprivacy 1 p/false e/true</code><br>
-Sets the phone number of the 1st person to be public and their email address to be private. The 1st person&#8217;s phone number will be displayed, if available, while their email address will be hidden in the UI.</p>
-</li>
-<li>
-<p><code>cp 2 a/false n/true e/false</code><br>
-Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You are meeting some new groupmates for your upcoming project and you are not too comfortable with exposing your family&#8217;s particulars.<br>
+You decide to hide your family&#8217;s phone number, email and home address by setting them to private.<br>
+&gt;&gt; <code>changeprivacy 1 p/true e/true a/true</code></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -300,19 +298,23 @@ At level 3, any person containing at least one private field will be completely 
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>privacylevel 1</code><br>
-Changes the privacy level of the address book to 1, revealing all data hidden by private fields.</p>
-</li>
-<li>
-<p><code>pl 3</code><br>
-Changes the privacy level of the address book to 3, hiding all persons with private fields completely in the address book.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You have an address book full of various contacts with private fields, however, now you need to access the email addresses of all your contacts to ask them for help in your upcoming survey.<br>
+You decide to use the privacylevel command to reveal all you contact&#8217;s hidden data.
+&gt;&gt; <code>privacylevel 1</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+You wish to completely hide some of your confidential contacts from view, but your address book is too large, and you don&#8217;t want to have to individually set every field for every confidential person to be private.<br>
+Using the privacylevel command, you set each contact with any private field to be hidden in the address book.<br>
+&gt;&gt; <code>privacylevel 3</code></p>
+</div>
+</div>
 </div>
 <hr>
 <div class="sect3">
@@ -346,7 +348,7 @@ Changes the privacy level of the address book to 3, hiding all persons with priv
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.4.1 : Class diagram for a Person, only Name, Phone, Email, Address and Remark contain an isPrivate boolean to indicate if it is private or not</em></p>
+<p><em>Figure 3.7.1 : Class diagram for a Person, only Name, Phone, Email, Address and Remark contain an isPrivate boolean to indicate if it is private or not</em></p>
 </div>
 <div class="paragraph">
 <p>Adding a person with private fields uses the same <code>AddCommand</code> as adding a person with no public fields.<br>
@@ -365,7 +367,7 @@ Upon obtaining all the fields anc creating a new <code>Person</code>, <code>AddC
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.4.2 : Sequence Diagram for adding a Person with private fields</em></p>
+<p><em>Figure 3.7.2 : Sequence Diagram for adding a Person with private fields</em></p>
 </div>
 <div class="paragraph">
 <p>If a field is private, then the <code>toString</code> method will return a string <code>&lt;Private [FIELD]&gt;</code>, where <code>[FIELD]</code> is the name of that field.<br>
@@ -519,20 +521,62 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.5.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
+<p><em>Figure 3.8.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
 </div>
 <div class="paragraph">
 <p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
 </div>
 <div class="paragraph">
-<p>Depending on the input, the <code>ChangePrivacyCommandParser</code> will set the privacy values, represented by Booleans, in the <code>PersonPrivacySettings</code> object to be <code>true</code> or <code>false</code>.</p>
+<p>Depending on the input, the <code>ChangePrivacyCommandParser</code> will set the privacy values, represented by Booleans, in the <code>PersonPrivacySettings</code> object to be <code>true</code> or <code>false</code>.
+This is illustrated in the code below, which shows how the privacy of <code>Name</code> is set in <code>PersonPrivacySettings</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> checkName(ArgumentMultimap argMultimap, PersonPrivacySettings pps) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="keyword">if</span> (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+        <span class="keyword">if</span> (argMultimap.getValue(PREFIX_NAME).toString().equals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Optional[true]</span><span class="delimiter">&quot;</span></span>)) {
+            pps.setNameIsPrivate(<span class="predefined-constant">true</span>);
+
+        } <span class="keyword">else</span> <span class="keyword">if</span> (argMultimap.getValue(PREFIX_NAME).toString().equals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Optional[false]</span><span class="delimiter">&quot;</span></span>)) {
+            pps.setNameIsPrivate(<span class="predefined-constant">false</span>);
+        } <span class="keyword">else</span> {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ChangePrivacyCommand.MESSAGE_USAGE));
+        }
+    }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p><code>ChangePrivacyCommandParser</code> will then create a new <code>ChangePrivacyCommand</code> using the input <code>Index</code> and the <code>PersonPrivacySettings</code></p>
 </div>
 <div class="paragraph">
 <p>When <code>ChangePrivacyCommand</code> starts executing, it will create a new <code>Person</code> based on the data of the <code>Person</code> at the specified <code>Index</code>.
-It will then adjust the privacy values based on the input <code>PersonPrivacySettings</code>.</p>
+It will then adjust the privacy values based on the input <code>PersonPrivacySettings</code>. For example, the new <code>Name</code> is created in the code snippet below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="directive">static</span> <span class="predefined-type">Name</span> createNameWithPrivacy(ReadOnlyPerson person, PersonPrivacySettings pps) {
+    <span class="predefined-type">Name</span> name;
+    <span class="keyword">try</span> {
+        <span class="keyword">if</span> (person.getName().getIsPrivate()) {
+            person.getName().setPrivate(<span class="predefined-constant">false</span>);
+            name = <span class="keyword">new</span> <span class="predefined-type">Name</span>(person.getName().toString());
+            person.getName().setPrivate(<span class="predefined-constant">true</span>);
+        } <span class="keyword">else</span> {
+            name = <span class="keyword">new</span> <span class="predefined-type">Name</span>(person.getName().toString());
+        }
+    } <span class="keyword">catch</span> (IllegalValueException e) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Invalid Name</span><span class="delimiter">&quot;</span></span>);
+    }
+    <span class="keyword">if</span> (pps.getNameIsPrivate() != <span class="predefined-constant">null</span>) {
+        name.setPrivate(pps.getNameIsPrivate());
+    } <span class="keyword">else</span> {
+        name.setPrivate(person.getName().getIsPrivate());
+    }
+    <span class="keyword">return</span> name;
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Once it is done, it will update the original <code>Person</code> with the newly created <code>Person</code> in <code>Model</code>.</p>
@@ -581,7 +625,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.6.1 : Sequence Diagram for changing the privacy level of the address book</em></p>
+<p><em>Figure 3.9.1 : Sequence Diagram for changing the privacy level of the address book</em></p>
 </div>
 <div class="paragraph">
 <p><code>PrivacyLevelCommandParser</code> will accept any integer that is input in the command line, and create a <code>PrivacyLevelCommand</code> that stores the integer, which represents the privacy level to switch to.</p>
@@ -601,7 +645,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.6.2 : Class Diagram of Person, which shows which classes contain an integer to indicate the privacy level</em></p>
+<p><em>Figure 3.9.2 : Class Diagram of Person, which shows which classes contain an integer to indicate the privacy level</em></p>
 </div>
 <div class="paragraph">
 <p>Finally, depending on the privacy level, <code>PrivacyLevelCommand</code> will update the call <code>model.updateFilteredPersonList()</code> with the appropriate predicate.</p>
@@ -612,6 +656,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+    requireNonNull(model);
     <span class="keyword">if</span> (level &lt; MIN_PRIVACY_LEVEL || level &gt; MAX_PRIVACY_LEVEL) {
         <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(WRONG_PRIVACY_LEVEL_MESSAGE);
     }
@@ -683,21 +728,23 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 <p>Format (person): <code>locate INDEX</code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>locate 2</code><br>
-Locates the address of the 2nd person in the address book on Google Maps.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>locate 1</code><br>
-Locates the address of the 1st person in the results of the <code>find</code> command on Google Maps.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You wish to know where the second person in your address book lives.<br>
+&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>locate 2</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+You wish to know where a specific person in your address book, Betsy, lives.<br>
+&gt;&gt; <code>find Betsy</code><br>
+&gt;&gt; <code>locate 1</code><br></p>
+</div>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -744,6 +791,9 @@ Locates the address of the 1st person in the results of the <code>find</code> co
 <div class="sect2">
 <h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">Locating a Person on Google Maps</a></h3>
 <div class="paragraph">
+<p>Locating a person&#8217;s address allows users to take the address that is stored by a person and search it on Google Maps in the browser.</p>
+</div>
+<div class="paragraph">
 <p>Upon calling the <code>locate</code> command, <code>LocateCommandParser</code> will parse the input string into an <code>Index</code>, and create a new <code>LocateCommand</code>. Should the arguments be a non-integer, a <code>ParseException</code> will be thrown.<br>
 This can be seen from the code snippet below:</p>
 </div>
@@ -761,7 +811,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Upon execution of <code>LocateCommand</code>, it will search the <code>Model</code> for the <code>Person</code> at the input <code>Index</code>. If the <code>Index</code> is out of range of the list of <code>Person`s, a `CommandException</code> will be thrown.</p>
+<p>Upon execution of <code>LocateCommand</code>, it will search the <code>Model</code> for the <code>Person</code> at the input <code>Index</code>. If the <code>Index</code> is out of range of the list of persons, a <code>CommandException</code> will be thrown.</p>
 </div>
 <div class="paragraph">
 <p>Otherwise, <code>LocateCommand</code> will post a new <code>BrowserPanelLocateEvent</code> and pass in the <code>Person</code> found to that event. It will then return a <code>CommandResult</code> indicating the success of its execution.</p>
@@ -771,20 +821,19 @@ This can be seen from the code snippet below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
 
-        <span class="predefined-type">List</span>&lt;ReadOnlyPerson&gt; lastShownList = model.getFilteredPersonList();
+    <span class="predefined-type">List</span>&lt;ReadOnlyPerson&gt; lastShownList = model.getFilteredPersonList();
 
-        <span class="keyword">if</span> (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+    <span class="keyword">if</span> (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
 
-        EventsCenter.getInstance().post(<span class="keyword">new</span> BrowserPanelLocateEvent(
-                model.getFilteredPersonList().get(targetIndex.getZeroBased())));
-        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_LOCATE_PERSON_SUCCESS, targetIndex.getOneBased()));
+    EventsCenter.getInstance().post(<span class="keyword">new</span> BrowserPanelLocateEvent(
+            model.getFilteredPersonList().get(targetIndex.getZeroBased())));
+    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_LOCATE_PERSON_SUCCESS, targetIndex.getOneBased()));
 
-    }</code></pre>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -811,7 +860,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.7.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
+<p><em>Figure 3.10.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
@@ -859,23 +908,29 @@ This can be seen from the code snippet below:</p>
 <p>Format (person): <code>navigate [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>navigate fa/NUS tp/1</code><br>
-Opens Google Maps to provide directions on how to navigate from NUS to the address of the first person in the address book.</p>
-</li>
-<li>
-<p><code>navigate  fp/3 tt/2</code><br>
-Opens Google Maps to provide directions on how to navigate from the address of the third person in the address book to the address of the second task in the address book.</p>
-</li>
-<li>
-<p><code>navigate  ft/1 ta/Changi Airport</code><br>
-Opens Google Maps to provide directions on how to navigate from the address of the first task in the address book to Changi Airport.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You are planning to go to your friend Roy&#8217;s house for their birthday party that afternoon, but you&#8217;ve just ended class at NUS.<br>
+You&#8217;ve never been to their house before, and you enlist the aid of Address++ to find the fastest route to their house.<br>
+&gt;&gt; <code>find Roy</code><br>
+&gt;&gt; <code>navigate fa/NUS tp/1</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+After the birthday party, you have a group meeting scheduled for your project. You have this meeting schedules as your first task, and you seek help from Address++ to find a path from Roy&#8217;s house to the group meeting.<br>
+&gt;&gt; <code>navigate fp/1 tt/1</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 3:</strong><br>
+To conclude your long and busy day, you have to send off your sister at Changi Airport, who is going off on an exchange programme.<br>
+Using the navigate command once again, you find an efficient route from the location of your group meeting to the airport.<br>
+&gt;&gt; <code>navigate ft/1 ta/Changi Airport</code></p>
+</div>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1023,30 +1078,39 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (fromIndex != <span class="predefined-constant">null</span>) {
-        <span class="keyword">try</span> {
-            from = setLocationByIndex(fromIndex, fromIsTask);
-        } <span class="keyword">catch</span> (IllegalValueException e) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR);
-        }
-    } <span class="keyword">else</span> {
-        from = locationFrom;
-    }</code></pre>
+    <span class="keyword">try</span> {
+        from = setLocationByIndex(fromIndex, fromIsTask);
+    } <span class="keyword">catch</span> (IllegalValueException e) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR);
+    }
+} <span class="keyword">else</span> {
+    from = locationFrom;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>setLocationByIndex throws Exceptions if the target Person or Task does not have a valid Address to extract.</p>
+<p>setLocationByIndex throws CommandException if the target Person or Task does not have a valid Address to extract due to the Address being blank, or it being private.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (fromIndex != <span class="predefined-constant">null</span>) {
-        <span class="keyword">try</span> {
-            from = setLocationByIndex(fromIndex, fromIsTask);
-        } <span class="keyword">catch</span> (IllegalValueException e) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR);
+<pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">private</span> Location setLocationByIndex(Index index, <span class="type">boolean</span> isTask) <span class="directive">throws</span> IllegalValueException, CommandException {
+    <span class="keyword">if</span> (isTask) {
+        <span class="keyword">if</span> (model.getFilteredTaskList().get(index.getZeroBased()).getTaskAddress().toString().equals(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(MESSAGE_TASK_HAS_NO_ADDRESS_ERROR, index.getOneBased()));
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> <span class="keyword">new</span> Location(model.getFilteredTaskList().get(index.getZeroBased()).getTaskAddress().toString());
         }
     } <span class="keyword">else</span> {
-        from = locationFrom;
-    }</code></pre>
+        <span class="keyword">if</span> (model.getFilteredPersonList().get(index.getZeroBased()).getAddress().toString().equals(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(MESSAGE_PERSON_HAS_NO_ADDRESS_ERROR, index.getOneBased()));
+        } <span class="keyword">else</span> <span class="keyword">if</span> (model.getFilteredPersonList().get(index.getZeroBased()).getAddress().getIsPrivate()) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(MESSAGE_PRIVATE_PERSON_ADDRESS_ERROR, index.getOneBased()));
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> <span class="keyword">new</span> Location(model.getFilteredPersonList().get(index.getZeroBased())
+                    .getAddress().toString());
+        }
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1078,7 +1142,7 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.8.1 : Sequence Diagram for Navigating from one Address to another</em></p>
+<p><em>Figure 3.11.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
@@ -1267,7 +1331,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.13.1 : Sequence Diagram for Opening a save file</em></p>
+<p><em>Figure 3.12.1 : Sequence Diagram for Opening a save file</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h4>
@@ -1283,6 +1347,175 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 <p><strong>Alternative 2:</strong> Input the file directory and file name to save or load from as part of the command.<br>
 <strong>Pros:</strong> Entirely command line based, may be more preferable for users who prefer using the command line.<br>
 <strong>Cons:</strong> Requires more complex code. Command must check if the file location to save or load from is valid, and that there is a valid file of that name.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-changing-the-theme-of-the-address-book"><a class="link" href="#enhancement-added-changing-the-theme-of-the-address-book">Enhancement Added: Changing the theme of the Address Book</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-address-book-s-theme-code-theme-code"><a class="link" href="#changing-the-address-book-s-theme-code-theme-code">Changing the Address Book&#8217;s theme : <code>theme</code></a></h3>
+<div class="paragraph">
+<p>Perhaps you may not be too fond of the existing style of the address book and you want to have something fresh. The <code>theme</code> command changes the address book between two themes, <code>light</code> and <code>dark</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>theme</code> can be replaced by <code>th</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+It is late at night and the light theme is a little too brightly coloured. Preferring a darker theme, you can choose to input the theme command to make the theme into a darker colour.<br>
+&gt;&gt; <code>theme dark</code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>theme</code> + THEME</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>There are only two themes as of v1.5, light and dark. More themes of different colours could be added in a future release.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
+<div class="paragraph">
+<p>Different users may have different preferences for the style and colour scheme of the address book. Instead of having all users conform to one style, by having a Theme command, each user can choose the look of the address book that fits them best.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-5"><a class="link" href="#implementation-5">Implementation</a></h4>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-theme-of-the-address-book"><a class="link" href="#changing-the-theme-of-the-address-book">Changing the theme of the address book</a></h3>
+<div class="paragraph">
+<p>The original style of the address book may not be for everyone. <code>ThemeCommand</code> allows users to switch between multiple preset themes.</p>
+</div>
+<div class="paragraph">
+<p><code>ThemeCommandParser</code> trims the arguments after the word <code>theme</code> in the command line, removing any whitespaces leading up to and following that word. If the entire String ended up trimmed, then <code>ThemeCommandParser</code> will throw a <code>ParseException</code>. Otherwise, it creates a new <code>ThemeCommand</code>, passing in the trimmed word as seen below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> ThemeCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="predefined-type">String</span> trimmed = args.trim();
+    <span class="keyword">if</span> (trimmed.isEmpty() || trimmed == <span class="predefined-constant">null</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> <span class="keyword">new</span> ThemeCommand(trimmed);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When initialising the Address Book, the <code>AddressBook</code> class will create a <code>HashMap&lt;String, String&gt;</code> to store the keys and values of the themes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> initialiseStyleMap() {
+    styleMap.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">dark</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">DarkTheme.css</span><span class="delimiter">&quot;</span></span>);
+    styleMap.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">Dark</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">DarkTheme.css</span><span class="delimiter">&quot;</span></span>);
+    styleMap.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">light</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">LightTheme.css</span><span class="delimiter">&quot;</span></span>);
+    styleMap.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">Light</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">LightTheme.css</span><span class="delimiter">&quot;</span></span>);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The keys correspond to the possible user inputs, such as <code>light</code> or <code>dark</code>, while the values contain the filepath of the .css files, such as <code>DarkTheme.css</code>. This way, users do not need to remember and will not have to know what the .css files are like to use the theme command.</p>
+</div>
+<div class="paragraph">
+<p>On executing <code>ThemeCommand</code>, it first checks if the input string can be found in the set of keys in the HashMap contained by the <code>AddressBook</code> class. If it cannot be found, or if the value corresponding to the input string is identical to that of the value of the file path of the .css file stored in Model, then a <code>CommandException</code> is thrown, as users cannot change to a non-existent theme, or a theme that is already in use.</p>
+</div>
+<div class="paragraph">
+<p>If the string is valid, <code>ThemeCommand</code> will post a <code>ChangeThemeRequestEvent</code> and set the theme to the new file path corresponding to the input String in <code>Model</code>. <code>Model</code> will then continue on to set the theme in <code>UserPrefs</code> as well, so that it can be loaded on starting the application.</p>
+</div>
+<div class="paragraph">
+<p><code>MainWindow</code> contains a method <code>handleChangeThemeEvent</code> that subscribes to the <code>ChangeThemeRequestEvent</code>. <code>handleChangeThemeEvent</code> calls <code>handlChangeTheme</code>, which first checks if there is an existing theme, if there is, it removes it, then sets adds the new theme through the file path that was passed to it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> handleChangeTheme(<span class="predefined-type">String</span> theme) {
+    <span class="keyword">if</span> (getRoot().getStylesheets().size() &gt; <span class="integer">1</span>) {
+         getRoot().getStylesheets().remove(<span class="integer">1</span>);
+     }
+     getRoot().getStylesheets().add(VIEW_PATH + theme);
+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After all is done, <code>ThemeCommand</code> returns a <code>CommandResult</code>, indicating the success of the command.
+The overall execution of <code>ThemeCommand</code> is seen in the following code snippet.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+    requireNonNull(model);
+
+    <span class="predefined-type">String</span> styleSheet;
+
+    <span class="keyword">if</span> (model.getStyleMap().containsKey(style)) {
+        styleSheet = model.getStyleMap().get(style);
+    } <span class="keyword">else</span> {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(MESSAGE_THEME_NOT_AVAILABLE, style));
+    }
+
+    <span class="keyword">if</span> (model.getTheme().equals(styleSheet)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(MESSAGE_THEME_IN_USE, style));
+    }
+
+    EventsCenter.getInstance().post(<span class="keyword">new</span> ChangeThemeRequestEvent(styleSheet));
+    model.setTheme(styleSheet);
+    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_THEME_CHANGE_SUCCESS, style));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The sequence diagram for the whole process is show below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ThemeSequenceDiagram.png" alt="ThemeSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.13.1 : Sequence Diagram for Changing Themes</em></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Getting the correct file path to the .css file<br>
+<strong>Alternative 1 (current choice):</strong> Store the file path in a HashMap, where the keys are the possible inputs that the user may type and the values are the actual filepaths<br>
+<strong>Pros:</strong> Easier on the user. They do not need to remember any complicated .css names or file paths, and the input string can be customisable by changing the names of the keys added to the HashMap.<br>
+<strong>Cons:</strong> Slightly more work needed to initialise the HashMap and check if the file paths are valid.<br>
+<strong>Alternative 2:</strong> Change the name of the .css file and file paths such that what the user directly inputs can correspond to the actual .css file.<br>
+<strong>Pros:</strong> A HashMap is no longer needed, instead, the input string just needs to be parsed to be turned into a file path. This makes it easier to add additional .css files, as developers do not have to keep modifying the initialisation of the HashMap<br>
+<strong>Cons:</strong> Less flexibility in naming the file, user may break the code if they realise the input string directly used as part of the file path.</p>
 </div>
 <hr>
 </div>
@@ -1317,7 +1550,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 15:26:36 +00:00
+Last updated 2017-11-12 18:22:07 +00:00
 </div>
 </div>
 </body>

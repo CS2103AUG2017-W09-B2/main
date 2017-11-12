@@ -63,15 +63,16 @@ at students who work on projects or assignments frequently, but it can also be u
 <li><a href="#assigning-contacts-to-task-code-assign-code-since-v1-4">3.31. Assigning contacts to task : <code>assign</code> (Since V1.4)</a></li>
 <li><a href="#dismissing-contacts-from-task-code-dismiss-code-since-v1-4">3.32. Dismissing contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
 <li><a href="#viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5">3.33. Viewing contacts assigned to a task : <code>viewassign</code> (Since V1.5)</a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.34. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.35. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.36. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.37. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.38. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#opening-a-save-file-code-open-code">3.39. Opening a save file : <code>open</code></a></li>
-<li><a href="#saving-the-data-as-a-new-save-file-code-save-code">3.40. Saving the data as a new save file : <code>save</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.41. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.42. Saving the data</a></li>
+<li><a href="#changing-the-address-book-s-theme-code-theme-code">3.34. Changing the Address Book&#8217;s theme : <code>theme</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.35. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.36. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.37. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.38. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.39. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#opening-a-save-file-code-open-code">3.40. Opening a save file : <code>open</code></a></li>
+<li><a href="#saving-the-data-as-a-new-save-file-code-save-code">3.41. Saving the data as a new save file : <code>save</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.42. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.43. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -737,19 +738,17 @@ You decide to promote all your project mates into friends.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>changeprivacy 1 p/false e/true</code><br>
-Sets the phone number of the 1st person to be public and their email address to be private. The 1st person&#8217;s phone number will be displayed, if available, while their email address will be hidden in the UI.</p>
-</li>
-<li>
-<p><code>cp 2 a/false n/true e/false</code><br>
-Sets the address and email of the 2nd person to be public and their name to be private. The 2nd person&#8217;s address and email will be displayed, if available, while their name will be hidden in the UI.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You are meeting some new groupmates for your upcoming project and you are not too comfortable with exposing your family&#8217;s particulars.<br>
+You decide to hide your family&#8217;s phone number, email and home address by setting them to private.<br>
+&gt;&gt; <code>changeprivacy 1 p/true e/true a/true</code></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -803,19 +802,23 @@ At level 3, any person containing at least one private field will be completely 
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>privacylevel 1</code><br>
-Changes the privacy level of the address book to 1, revealing all data hidden by private fields.</p>
-</li>
-<li>
-<p><code>pl 3</code><br>
-Changes the privacy level of the address book to 3, hiding all persons with private fields completely in the address book.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You have an address book full of various contacts with private fields, however, now you need to access the email addresses of all your contacts to ask them for help in your upcoming survey.<br>
+You decide to use the privacylevel command to reveal all you contact&#8217;s hidden data.
+&gt;&gt; <code>privacylevel 1</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+You wish to completely hide some of your confidential contacts from view, but your address book is too large, and you don&#8217;t want to have to individually set every field for every confidential person to be private.<br>
+Using the privacylevel command, you set each contact with any private field to be hidden in the address book.<br>
+&gt;&gt; <code>privacylevel 3</code></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1801,21 +1804,23 @@ The first task has a very long description, and you want to see it in full.</p>
 <p>Format (person): <code>locate INDEX</code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>locate 2</code><br>
-Locates the address of the 2nd person in the address book on Google Maps.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>locate 1</code><br>
-Locates the address of the 1st person in the results of the <code>find</code> command on Google Maps.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You wish to know where the second person in your address book lives.<br>
+&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>locate 2</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+You wish to know where a specific person in your address book, Betsy, lives.<br>
+&gt;&gt; <code>find Betsy</code><br>
+&gt;&gt; <code>locate 1</code><br></p>
+</div>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1869,23 +1874,29 @@ Locates the address of the 1st person in the results of the <code>find</code> co
 <p>Format (person): <code>navigate [fp/INDEX] [ft/INDEX] [fa/ADDRESS] (Must have only one of three) [tp/INDEX] [tt/INDEX] [ta/ADDRESS] (Must have only one of three)</code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Example Scenarios:</strong><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>navigate fa/NUS tp/1</code><br>
-Opens Google Maps to provide directions on how to navigate from NUS to the address of the first person in the address book.</p>
-</li>
-<li>
-<p><code>navigate  fp/3 tt/2</code><br>
-Opens Google Maps to provide directions on how to navigate from the address of the third person in the address book to the address of the second task in the address book.</p>
-</li>
-<li>
-<p><code>navigate  ft/1 ta/Changi Airport</code><br>
-Opens Google Maps to provide directions on how to navigate from the address of the first task in the address book to Changi Airport.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+You are planning to go to your friend Roy&#8217;s house for their birthday party that afternoon, but you&#8217;ve just ended class at NUS.<br>
+You&#8217;ve never been to their house before, and you enlist the aid of Address++ to find the fastest route to their house.<br>
+&gt;&gt; <code>find Roy</code><br>
+&gt;&gt; <code>navigate fa/NUS tp/1</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+After the birthday party, you have a group meeting scheduled for your project. You have this meeting schedules as your first task, and you seek help from Address++ to find a path from Roy&#8217;s house to the group meeting.<br>
+&gt;&gt; <code>navigate fp/1 tt/1</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenario 3:</strong><br>
+To conclude your long and busy day, you have to send off your sister at Changi Airport, who is going off on an exchange programme.<br>
+Using the navigate command once again, you find an efficient route from the location of your group meeting to the airport.<br>
+&gt;&gt; <code>navigate ft/1 ta/Changi Airport</code></p>
+</div>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -2214,7 +2225,51 @@ However you have forgotten who you have assigned to that task. You thus use <cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.34. Listing entered commands : <code>history</code></a></h3>
+<h3 id="changing-the-address-book-s-theme-code-theme-code"><a class="link" href="#changing-the-address-book-s-theme-code-theme-code">3.34. Changing the Address Book&#8217;s theme : <code>theme</code></a></h3>
+<div class="paragraph">
+<p>Perhaps you may not be too fond of the existing style of the address book and you want to have something fresh. The <code>theme</code> command changes the address book between two themes, <code>light</code> and <code>dark</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>theme</code> can be replaced by <code>th</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+It is late at night and the light theme is a little too brightly coloured. Preferring a darker theme, you can choose to input the theme command to make the theme into a darker colour.<br>
+&gt;&gt; <code>theme dark</code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>theme</code> + THEME</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>There are only two themes as of v1.5, light and dark. More themes of different colours could be added in a future release.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.35. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br></p>
 </div>
@@ -2245,7 +2300,7 @@ However you have forgotten who you have assigned to that task. You thus use <cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.35. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.36. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Did you make a mistake somewhere? <code>undo</code> restores the address book to the state before the previous <em>undoable</em> command was executed.<br></p>
 </div>
@@ -2321,7 +2376,7 @@ You have accidentally deleted one of your contacts. Furthermore, not knowing thi
 </div>
 </div>
 <div class="sect2">
-<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.36. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
+<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.37. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use <code>unfavourite</code> command to set your previous favourite persons become the normal persons. For example,<br>
 after you break up with your girlfriend, you may wish to set your girlfriend back to normal person.<br></p>
@@ -2402,7 +2457,7 @@ Instead of <code>listing</code> all the contacts, you can <code>find</code> all 
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.37. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.38. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Perhaps an <code>undo</code> was not necessary. <code>redo</code> reverses the most recent <code>undo</code> command.<br></p>
 </div>
@@ -2478,7 +2533,7 @@ You have deleted one of your contacts, as well as two of your tasks.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.38. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.39. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br></p>
 </div>
@@ -2499,7 +2554,7 @@ You have deleted one of your contacts, as well as two of your tasks.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">3.39. Opening a save file : <code>open</code></a></h3>
+<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">3.40. Opening a save file : <code>open</code></a></h3>
 <div class="paragraph">
 <p>Switching between address books is made easy with the <code>open</code> command, as it allows you can load different save files into the application.<br>
 You can choose which .xml file to open from the pop up window that appears upon executing this command.<br></p>
@@ -2521,7 +2576,7 @@ You can choose which .xml file to open from the pop up window that appears upon 
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">3.40. Saving the data as a new save file : <code>save</code></a></h3>
+<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">3.41. Saving the data as a new save file : <code>save</code></a></h3>
 <div class="paragraph">
 <p>If you would like to save a copy of your data in a separate location or with a different name, the <code>save</code> command will allow you to do just that.<br>
 You can choose what to name your save file and where to save it from the pop up window that appears upon executing this command.<br></p>
@@ -2543,7 +2598,7 @@ You can choose what to name your save file and where to save it from the pop up 
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.41. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.42. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Once you have finished using Address++, you may use this command to exit the program.<br>
 Format: <code>exit</code></p>
@@ -2553,7 +2608,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.42. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.43. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need for you to save manually.</p>
@@ -2702,6 +2757,10 @@ e.g. <code>assign 4 1 17 18 to/21</code></p>
 e.g. <code>dismiss 4 1 from/17</code></p>
 </li>
 <li>
+<p><strong>Theme</strong> : <code>theme THEME</code><br>
+e.g. <code>theme light</code></p>
+</li>
+<li>
 <p><strong>History</strong> : <code>history</code></p>
 </li>
 <li>
@@ -2846,6 +2905,10 @@ e.g. <code>as 4 1 17 18 to/21</code></p>
 e.g. <code>ds 4 1 from/17</code></p>
 </li>
 <li>
+<p><strong>Theme</strong> : <code>th THEME</code><br>
+e.g. <code>th light</code></p>
+</li>
+<li>
 <p><strong>History</strong> : <code>h</code></p>
 </li>
 <li>
@@ -2910,7 +2973,7 @@ e.g. <code>ds 4 1 from/17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 15:26:35 +00:00
+Last updated 2017-11-12 18:22:07 +00:00
 </div>
 </div>
 </body>
