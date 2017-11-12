@@ -857,21 +857,29 @@ The sequence diagram below shows how this is done:</p>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of Task-related commands<br>
-<strong>Alternative 1 (current choice):</strong> Use inheritance to implement different commands for Task and Person objects<br>
+<p><strong>Aspect:</strong> Implementation of Task-related commands<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Use inheritance to implement different commands for Task and Person objects<br>
 <strong>Pros:</strong> Can be easily extended to allow handling of other types of objects, and preserves Separation of Concerns.<br>
-<strong>Cons:</strong> Minor code duplication occurs as the commands for Person and Tasks objects share the same structure.<br>
-<strong>Alternative 2:</strong> Use polymorphism to allow existing commands to implement task handling<br>
+<strong>Cons:</strong> Minor code duplication occurs as the commands for Person and Tasks objects share the same structure.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Use polymorphism to allow existing commands to implement task handling<br>
 <strong>Pros:</strong> Code duplication is kept to a minimum as the Command will handle Task and Person objects in the same class.<br>
 <strong>Cons:</strong> Single Responsibility Principle is violated as each Command class now needs to handle 2 different types of objects.<br></p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Storage of Task objects<br>
-<strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
+<p><strong>Aspect:</strong> Storage of Task objects<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
 <strong>Pros</strong> Only 1 storage file is needed. The storage manager thus only needs to refer to one storage<br>
-<strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.<br>
-<strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
+<strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
 <strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.<br>
 <strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.<br></p>
 </div>
@@ -1002,7 +1010,7 @@ For example, given the below list of persons:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:07:44 +00:00
+Last updated 2017-11-12 08:18:17 +00:00
 </div>
 </div>
 </body>

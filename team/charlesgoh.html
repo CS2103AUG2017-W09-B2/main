@@ -16,20 +16,302 @@
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="project-addressbook"><a class="link" href="#project-addressbook">Project: AddressBook++</a></h2>
+<h2 id="project-address"><a class="link" href="#project-address">Project: Address++</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook++ is a desktop address book application used for teaching Software Engineering principles.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about
-6 kLoC.</p>
+<p>Address++ is a desktop address book application that aims to provide students and
+professionals with an effective tool to help them manage their contacts and their time.</p>
+</div>
+<div class="paragraph">
+<p>A list of my contributions to Address++ are explained below:</p>
 </div>
 <div class="paragraph">
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/main/charlesgoh.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/test/charlesgoh.md">Test code</a>]</p>
 </div>
 <div class="sect2">
-<h3 id="enhancement-added-sort-command"><a class="link" href="#enhancement-added-sort-command">Enhancement Added: Sort Command</a></h3>
+<h3 id="password-protection-commands-code-lock-code-code-unlock-code-code-changepassword-code"><a class="link" href="#password-protection-commands-code-lock-code-code-unlock-code-code-changepassword-code">Password Protection Commands <code>lock</code> <code>unlock</code> <code>changepassword</code></a></h3>
 <div class="sect3">
 <h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="protecting-your-data-code-lock-code-code-unlock-code"><a class="link" href="#protecting-your-data-code-lock-code-code-unlock-code">Protecting your data : <code>lock</code> <code>unlock</code></a></h3>
+<div class="paragraph">
+<p>Worried about security? Address++ allows your to protect your data with a password.
+Using the <code>lock</code> and <code>unlock</code> commands, you can toggle between security modes.<br></p>
+</div>
+<div class="paragraph">
+<p>Locked address books only allow viewing of data. If anyone attempts to tamper with
+your data, they will be greeted with this error:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LockedRestriction.png" alt="LockedRestriction" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Format for <code>lock</code> Command: <code>lock pw/[PASSWORD]</code><br>
+Format for <code>unlock</code> Command: <code>unlock pw/[PASSWORD]</code><br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The default password is 'password'
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios</strong>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You just finished editing your contacts on Address when you decide to have a break away from
+you computer. You decide to lock Address using the following command:</p>
+</div>
+<div class="paragraph">
+<p><code>lock pw/password</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+When you return to your computer, you decide to continue adding contacts in Address.
+You decide to unlock Address using the following command:</p>
+</div>
+<div class="paragraph">
+<p><code>unlock pw/password</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-your-password-code-changepassword-code"><a class="link" href="#changing-your-password-code-changepassword-code">Changing your password : <code>changepassword</code></a></h3>
+<div class="paragraph">
+<p>Want to choose a better password? The <code>changepassword</code> command allows you to change your
+password whenever you want, provided you know the old password.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The default password is 'password'
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ChangePasswordImages.png" alt="ChangePasswordImages" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>changepassword pw/[PASSWORD] pw/[NEWPASSWORD] pw/[CONFIRMPASSWORD]</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios</strong>:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You open Address++ for the first time. After reading the user guide, you realize
+that the default password ("password") is not good enough. You decide to make a new
+one with the following command:</p>
+</div>
+<div class="paragraph">
+<p><code>changepassword pw/password np/newpassword cfp/newpassword</code></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark>
+---</p>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>Many users have security related concerns. In order to slow malicious users from causing
+damage to users' Address++ application, the password protection suite of commands were
+created.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lock-and-unlock-command"><a class="link" href="#lock-and-unlock-command">Lock and Unlock Command</a></h3>
+<div class="paragraph">
+<p>The <code>lock</code> and <code>unlock</code> commands utilise the Model to access the user preferences of
+the application.</p>
+</div>
+<div class="paragraph">
+<p>Like most of the other commands, arguments are parsed through the <code>UnlockCommandParser</code> or <code>LockCommandParser</code>,
+which passes control over to the <code>UnlockCommand</code> and <code>LockCommand</code> class respectively.
+These <code>Command</code> classes will then call the Model to toggle the lock&#8217;s state.</p>
+</div>
+<div class="paragraph">
+<p>The activity diagram below outlines the basic logic of the lock states concept.:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LockStatesActivityDiagram.png" alt="LockStatesActivityDiagram" width=""800">
+</div>
+</div>
+<div class="paragraph">
+<p>From the activity diagram we can see that lock states are preserved in preferences.json
+after the application closes by passing the lock state into the <code>UserPrefs</code> class to be
+saved by the Storage component.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The default state of the lock is set to False (i.e. locked) when the user first opens the
+application. Subsequent changes to the lock will persist in the user preferences.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>lock</code> and <code>unlock</code> Commands</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Call methods in the Model directly to change UserPrefs<br>
+<strong>Pros:</strong> More intuitive. Highest returns for minimal amount of code<br>
+<strong>Cons:</strong> May be confusing to some developers in the beginning, since another
+intuitive approach is to use event handlers<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Use Event Handlers<br>
+<strong>Pros:</strong> More intuitive for some developers<br>
+<strong>Cons:</strong> Will still have to access Model, which makes its advantage over direct calls next to none</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changepassword-command"><a class="link" href="#changepassword-command">ChangePassword Command</a></h3>
+<div class="paragraph">
+<p>The default password when users first open Address++ is <code>password</code>. The ChangePassword command
+sets a new password in the temporary User Preferences. When the application is closed, this
+information is passed to the Storage Component to be saved into the file <code>preferences.json</code></p>
+</div>
+<div class="paragraph">
+<p>To illustrate this concept better, let us have a look at the <code>preferences.json</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">guiSettings</span><span class="delimiter">&quot;</span></span> : {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowWidth</span><span class="delimiter">&quot;</span></span> : <span class="float">1080.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowHeight</span><span class="delimiter">&quot;</span></span> : <span class="float">720.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowCoordinates</span><span class="delimiter">&quot;</span></span> : {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">x</span><span class="delimiter">&quot;</span></span> : <span class="integer">0</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">y</span><span class="delimiter">&quot;</span></span> : <span class="integer">22</span>
+    }
+  },
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookFilePath</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">data/addressbook.xml</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookName</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">My Address++</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookLockState</span><span class="delimiter">&quot;</span></span> : <span class="value">false</span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookEncryptedPassword</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span><span class="delimiter">&quot;</span></span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the cope snippet above, the password is stored as one of the entries in the JSON
+file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+SHA256 encryption was used to calculate a hash for the password. This is to delay anyone snooping around the
+user&#8217;s file directories.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Validation Checks</strong></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Password Validation &#8594; Is password correct?</p>
+</li>
+<li>
+<p>Password Confirmation &#8594; Does the new password and confirmation password match?</p>
+</li>
+<li>
+<p>Password Uniqueness &#8594; Is the new password different from the old password?</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The activity diagram below outlines the process flow for the <code>ChangePasswordCommand</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ChangePasswordActivityDiagram.png" alt="ChangePasswordActivityDiagram" width=""800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> On Demand Saving vs. Save On Exit<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Save On Exit<br>
+<strong>Pros:</strong> Simplifies process flow as the command class no longer has to access both Model and Storage components<br>
+<strong>Cons:</strong> Any system/application crash may cause change password data to be lost<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> On Demand Saving<br>
+<strong>Pros:</strong> Changes may persist even through system and application crashes<br>
+<strong>Cons:</strong> May slow down application, although not significantly. Complicates process flow.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sort-command"><a class="link" href="#sort-command">Sort Command</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
@@ -64,7 +346,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 <p>Allows you to sort your contacts by any field in either ascending or descending order</p>
 </li>
 <li>
-<p>Allows you to srot your tasks by deadline or by priority in ascending or descending order</p>
+<p>Allows you to sort your tasks by deadline or by priority in ascending or descending order</p>
 </li>
 <li>
 <p>Field parameters for person contacts: NAME, PHONE, EMAIL, ADDRESS, REMARK, AVATAR.</p>
@@ -83,42 +365,38 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 </div>
 </div>
 <div class="paragraph">
-<p>Examples for sorting person contacts:</p>
+<p><strong>Example Scenarios</strong>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>sort person name asc</code><br>
-This allows you to sort all persons in the address book in ascending order by the name field.</p>
-</li>
-<li>
-<p><code>sort person address desc</code><br>
-This allows you to sort all persons in the address book in descending order by the address field.</p>
-</li>
-</ul>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1</strong><br>
+You have many contacts on Address++. You decide to make it neater by sorting your contacts
+by name in ascending order:</p>
 </div>
 <div class="paragraph">
-<p>Examples for sorting tasks:</p>
+<p><code>sort person name asc</code></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>sort task deadline asc</code><br>
-This allows you to sort all tasks in ascending order by the deadline field (i.e. closer deadlines are at the bottom).</p>
-</li>
-<li>
-<p><code>sort task priority desc</code><br>
-This allows you to sort all tasks in descending order by the priority field (i.e. higher priority tasks
-are listed on top).</p>
-</li>
-</ul>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2</strong><br>
+You add a few tasks of different priorities. You decide to sort the tasks so you can see
+the higher priority tasks on the top of the list:</p>
+</div>
+<div class="paragraph">
+<p><code>sort task priority desc</code></p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark>
 ---</p>
 </div>
 <div class="sect3">
-<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
 <p>As more contacts and tasks are added to the application, the lists may get long and disorganized. The Sort Command
 allows users to sort both contacts and tasks by important fields. Examples include sorting contacts by name and
@@ -126,7 +404,7 @@ sorting contacts by deadlines.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: Developer Guide]</mark></p>
@@ -134,7 +412,7 @@ sorting contacts by deadlines.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-command"><a class="link" href="#sort-command">Sort Command</a></h3>
+<h3 id="sort-command-2"><a class="link" href="#sort-command-2">Sort Command</a></h3>
 <div class="paragraph">
 <p>The sort command is facilitated by the <code>sortBy</code> methods in UniquePersonList and UniqueTaskList. It supports
 sort by ascending or by descending order in any field.</p>
@@ -180,24 +458,32 @@ demonstrates how the sort command works.</p>
 is not returned, but will be reflected in the application&#8217;s storage and graphical user interface.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br>
-<strong>Alternative 1 (current choice):</strong> Implement sorting functionality in <code>UniquePersonList</code> and <code>UniqueTaskList</code> class.<br>
+<p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Implement sorting functionality in <code>UniquePersonList</code> and <code>UniqueTaskList</code> class.<br>
 <strong>Pros:</strong> Delegates the concern of sorting to the class that is responsible for the core of most operations done to the lists.
 Future changes to the implementation will be easier as a consequence.<br>
-<strong>Cons:</strong> Hard for new developers to understand the flow of control passed between classes at first.<br>
-<strong>Alternative 2:</strong> Implement the sorting functionality within other classes like <code>AddressBook</code> or <code>SortCommand</code>.<br>
+<strong>Cons:</strong> Hard for new developers to understand the flow of control passed between classes at first.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the sorting functionality within other classes like <code>AddressBook</code> or <code>SortCommand</code>.<br>
 <strong>Pros:</strong> May be more intuitive for new developers and it is easier to trace function calls between lesser classes involved.<br>
 <strong>Cons:</strong> Violates Separation of Concern principle and causes unnecessary content coupling whereby the <code>UniquePersonList</code> will have to rely on the <code>SortCommand</code> class.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Temporary Sort Implementation vs. Persistent Sort Implementation<br>
-<strong>Alternative 1 (current choice):</strong> Saves the entire address book after sorting.<br>
+<p><strong>Aspect:</strong> Temporary Sort Implementation vs. Persistent Sort Implementation<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book after sorting.<br>
 <strong>Pros:</strong> More intuitive and reduces complexity in implementation.<br>
-<strong>Cons:</strong> Old order of contact instances in the address book will be lost<br>
-<strong>Alternative 2:</strong> Duplicate a temporary version of the list and sort it for viewing (i.e. the actual list is not sorted)<br>
+<strong>Cons:</strong> Old order of contact instances in the address book will be lost<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Duplicate a temporary version of the list and sort it for viewing (i.e. the actual list is not sorted)<br>
 <strong>Pros:</strong> Old order of contact instances remains intact.<br>
 <strong>Cons:</strong> Will use more memory and may be less intuitive for developer to understand and in terms of user experience. Also, sorting will not persist in the system.</p>
 </div>
@@ -208,9 +494,9 @@ Future changes to the implementation will be easier as a consequence.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="enhancement-added-backup-command"><a class="link" href="#enhancement-added-backup-command">Enhancement Added: Backup Command</a></h3>
+<h3 id="backup-command"><a class="link" href="#backup-command">Backup Command</a></h3>
 <div class="sect3">
-<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
@@ -222,6 +508,9 @@ Future changes to the implementation will be easier as a consequence.<br>
 <div class="paragraph">
 <p>You can backup your saved data on Address++ by using the <code>backup</code> command.<br></p>
 </div>
+<div class="paragraph">
+<p>Format: <code>backup [FILENAME]</code><br></p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -229,59 +518,39 @@ Future changes to the implementation will be easier as a consequence.<br>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>backup</code> can be replaced by <code>bk</code> for faster input.<br>
+This allows you to backup your saved data on Address++ in another file.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Format: <code>backup [RELATIVE LOCATION]</code><br></p>
-</div>
 <div class="sidebarblock">
 <div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Allows you to backup your saved data on Address++ in another file.</p>
-</li>
-<li>
-<p>You can backup your data in the default location or you can specify your desired save location.</p>
-</li>
-<li>
-<p>You can use the default save name or use your own.</p>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p><strong>Example Scenario</strong>:<br>
+You decide to backup your data just in case you accidentally make changes that
+cannot be undone. You type the following code:</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><code>backup filename.xml</code></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>backup</code> or <code>bk</code><br>
-This command will help you back up in the default save location -&#8594; In the data directory of your application.</p>
-</li>
-<li>
-<p><code>backup ./test.xml</code> or <code>bk ./test.xml</code><br>
-This saves the backup file in the current data directory, with the name <code>test.xml</code>.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The file will then be saved in the same directory location as your .JAR application file</p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark>
 ---</p>
 </div>
 <div class="sect3">
-<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
 <div class="paragraph">
 <p>Users are able to back up their data before making any changes so that in the event of an emergency (e.g. clearing all data and then closing afterwards)
 , the old save data can be restored.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: Developer Guide]</mark></p>
@@ -289,46 +558,34 @@ This saves the backup file in the current data directory, with the name <code>te
 </div>
 </div>
 <div class="sect2">
-<h3 id="backup-command"><a class="link" href="#backup-command">Backup Command</a></h3>
+<h3 id="backup-command-2"><a class="link" href="#backup-command-2">Backup Command</a></h3>
 <div class="paragraph">
-<p>The backup command makes use of both the model manager and the storage manager. The <code>LogicManager</code> class was
-improved to support the accessing of storage value.</p>
+<p>The <code>backup</code> command uses the event handler <code>BackupRequestEvent</code>. When raised, this
+event notifies the subscriber <code>backupAddressBook</code> method in Storage class.</p>
 </div>
 <div class="paragraph">
-<p>The backup command arguments are parsed through the <code>BackupCommandParser</code>, which passes control over to the
-<code>BackupCommand</code> class. The <code>BackupCommand</code> class will save the backup file to a user specified path.</p>
-</div>
-<div class="paragraph">
-<p>Suppose a user enters a new command <code>backup filepath</code>. The backup file will be saved to a default location.
-The sequence diagram that illustrates this process is shown below:</p>
+<p>The outlining sequence diagram for this process (excluding the interaction with the
+<code>BackupRequestEvent</code>) is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width=""800">
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-that the execution of the sort methods result in the actual person list being sorted.
-</td>
-</tr>
-</table>
-</div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br>
-<strong>Alternative 1 (current choice):</strong> Implement backup command via Command Line Interface<br>
-<strong>Pros:</strong> Backing up data is easier and faster for users who are familiar with the commands. Less button clicks.<br>
-<strong>Cons:</strong> UI not as intuitive. Users who are not familiar with the application may not know about this feature<br>
-<strong>Alternative 2:</strong> Implement backup command via GUI<br>
-<strong>Pros:</strong> More intuitive for all users since the options are all graphical<br>
-<strong>Cons:</strong> Hinders productivity. Excessive number of clicks to accomplish an essential task.</p>
+<p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Use an event handler to initialize the backup process<br>
+<strong>Pros:</strong> Avoids coupling the logic to the storage unnecessarily.<br>
+<strong>Cons:</strong> May not be as intuitive for some developers in the beginning<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Access storage component directly instead of using event handlers<br>
+<strong>Pros:</strong> May be more intuitive as it is a direct approach<br>
+<strong>Cons:</strong> Violates the Law of Demeter.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -337,9 +594,9 @@ that the execution of the sort methods result in the actual person list being so
 </div>
 </div>
 <div class="sect2">
-<h3 id="enhancement-added-font-size-command"><a class="link" href="#enhancement-added-font-size-command">Enhancement Added: Font Size Command</a></h3>
+<h3 id="font-size-command"><a class="link" href="#font-size-command">Font Size Command</a></h3>
 <div class="sect3">
-<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
@@ -432,14 +689,14 @@ ways of triggering a change in font sizes:</p>
 ---</p>
 </div>
 <div class="sect3">
-<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
 <div class="paragraph">
 <p>Different monitors render the application differently. On some monitors, the words appear to be too small. The font size
 commands and buttons allow users to increase/decrease/reset the font sizes at any time when using the application.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: Developer Guide]</mark></p>
@@ -494,13 +751,15 @@ standardised the handling of font size change requests through events.
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Use either UI or CLI based implementations<br>
 <strong>Alternative 1 (current choice):</strong> Implementing both UI and CLI functionality<br>
 <strong>Pros:</strong> More options for the user. The was also not much increase in complexity when implementing the CLI version <br>
-<strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br>
-<strong>Alternative 2:</strong> Implementing only UI functionality<br>
+<strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implementing only UI functionality<br>
 <strong>Pros:</strong> Less tedious to implement and very intuitive for the user<br>
 <strong>Cons:</strong> Users who prefer typing commands will not have the option of editing their font sizes using the CLI</p>
 </div>
@@ -511,9 +770,9 @@ standardised the handling of font size change requests through events.
 </div>
 </div>
 <div class="sect2">
-<h3 id="enhancement-added-avatar-and-remark-fields"><a class="link" href="#enhancement-added-avatar-and-remark-fields">Enhancement Added: Avatar and Remark Fields</a></h3>
+<h3 id="avatar-and-remark-fields"><a class="link" href="#avatar-and-remark-fields">Avatar and Remark Fields</a></h3>
 <div class="sect3">
-<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<h4 id="external-behavior-5"><a class="link" href="#external-behavior-5">External behavior</a></h4>
 <hr>
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
@@ -602,7 +861,7 @@ option while typing in your command:</p>
 ---</p>
 </div>
 <div class="sect3">
-<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
 <div class="paragraph">
 <p>Avatars and remarks help users to identify different contacts. It was also implemented with the intention of making the application
 more user friendly.</p>
@@ -688,7 +947,7 @@ As of v1.5rc, the avatar field supports only URLs sourced online. References to 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:07:44 +00:00
+Last updated 2017-11-12 08:18:17 +00:00
 </div>
 </div>
 </body>

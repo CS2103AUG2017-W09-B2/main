@@ -138,22 +138,30 @@ If the tag to be added exists in every target person in the address book, the <c
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
-<strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
 <strong>Pros:</strong> Easier to implement. <code>ModelManager</code> includes all the methods and variables.<br>
-<strong>Cons:</strong> Must modify <code>Model</code> also to fit the <code>ModelManager</code>. Beginner may have difficulty to understand the different functions in Model component+
-<strong>Alternative 2:</strong> Implement the <code>addtag</code> and <code>deletetag</code> in <code>AddTagCommand</code> and <code>DeleteTagCommand</code> respectively.<br>
+<strong>Cons:</strong> Must modify <code>Model</code> also to fit the <code>ModelManager</code>. Beginner may have difficulty to understand the different functions in Model component+</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the <code>addtag</code> and <code>deletetag</code> in <code>AddTagCommand</code> and <code>DeleteTagCommand</code> respectively.<br>
 <strong>Pros:</strong> Easier to understand.<br>
 <strong>Cons:</strong> Repetitive code. Additional overload constructor needs to be implement. The <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will have to update the person list.
 This violates the Single Responsibility Principle.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> create new command <code>addtag</code> and <code>deletetag</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> create new command <code>addtag</code> and <code>deletetag</code><br>
 <strong>Pros:</strong> Less modification of existing command and parser<br>
-<strong>Cons:</strong> Users have to learn how to use the additional commands<br>
-<strong>Alternative 2:</strong> Modify the existing <code>add</code> and <code>delete</code> command<br>
+<strong>Cons:</strong> Users have to learn how to use the additional commands<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Modify the existing <code>add</code> and <code>delete</code> command<br>
 <strong>Pros:</strong> Users could use the same commands to achieve different purpose<br>
 <strong>Cons:</strong> Additional override the constructor for the existing command. It might not be easy for the beginner.</p>
 </div>
@@ -240,11 +248,15 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br>
-<strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
 <strong>Pros:</strong> Easier to implement. <code>findtag</code> command will be similar to the <code>find</code> command.<br>
-<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br>
-<strong>Alternative 2:</strong> Implement the <code>findtag</code> in <code>FindCommand</code>.<br>
+<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the <code>findtag</code> in <code>FindCommand</code>.<br>
 <strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
 <strong>Cons:</strong> The existing <code>FindCommand</code> will not only response for finding persons through names only. This Violates Single Responsibility Principle
 and Separation of Concerns as FindCommand now needs to do two different things.</p>
@@ -280,7 +292,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:07:44 +00:00
+Last updated 2017-11-12 08:18:17 +00:00
 </div>
 </div>
 </body>

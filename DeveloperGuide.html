@@ -50,17 +50,19 @@
 <li><a href="#task-object">3.4. Task Object</a></li>
 <li><a href="#sort-command">3.5. Sort Command</a></li>
 <li><a href="#backup-command">3.6. Backup Command</a></li>
-<li><a href="#privacy-of-fields">3.7. Privacy of fields</a></li>
-<li><a href="#changing-of-a-person-s-privacy">3.8. Changing of a Person&#8217;s Privacy</a></li>
-<li><a href="#changing-the-address-book-s-privacy-level">3.9. Changing the address book&#8217;s privacy level</a></li>
-<li><a href="#locating-a-person-on-google-maps">3.10. Locating a Person on Google Maps</a></li>
-<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.11. Navigating from one address to another using Google Maps</a></li>
-<li><a href="#opening-and-saving-of-the-xml-save-file">3.12. Opening and Saving of the .xml save file</a></li>
-<li><a href="#add-delete-tag-mechanism">3.13. Add/Delete Tag mechanism</a></li>
-<li><a href="#find-tag-mechanism">3.14. Find Tag mechanism</a></li>
-<li><a href="#favourite-unfavourite-person-mechanism">3.15. Favourite/Unfavourite Person mechanism</a></li>
-<li><a href="#logging">3.16. Logging</a></li>
-<li><a href="#configuration">3.17. Configuration</a></li>
+<li><a href="#lock-and-unlock-command">3.7. Lock and Unlock Command</a></li>
+<li><a href="#changepassword-command">3.8. ChangePassword Command</a></li>
+<li><a href="#privacy-of-fields">3.9. Privacy of fields</a></li>
+<li><a href="#changing-of-a-person-s-privacy">3.10. Changing of a Person&#8217;s Privacy</a></li>
+<li><a href="#changing-the-address-book-s-privacy-level">3.11. Changing the address book&#8217;s privacy level</a></li>
+<li><a href="#locating-a-person-on-google-maps">3.12. Locating a Person on Google Maps</a></li>
+<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.13. Navigating from one address to another using Google Maps</a></li>
+<li><a href="#opening-and-saving-of-the-xml-save-file">3.14. Opening and Saving of the .xml save file</a></li>
+<li><a href="#add-delete-tag-mechanism">3.15. Add/Delete Tag mechanism</a></li>
+<li><a href="#find-tag-mechanism">3.16. Find Tag mechanism</a></li>
+<li><a href="#favourite-unfavourite-person-mechanism">3.17. Favourite/Unfavourite Person mechanism</a></li>
+<li><a href="#logging">3.18. Logging</a></li>
+<li><a href="#configuration">3.19. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -630,8 +632,10 @@ standardised the handling of font size change requests through events.
 <p><strong>Aspect:</strong> Use either UI or CLI based implementations<br>
 <strong>Alternative 1 (current choice):</strong> Implementing both UI and CLI functionality<br>
 <strong>Pros:</strong> More options for the user. The was also not much increase in complexity when implementing the CLI version <br>
-<strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br>
-<strong>Alternative 2:</strong> Implementing only UI functionality<br>
+<strong>Cons:</strong> This implementation required passing information between classes, which may cause unnecessary coupling.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implementing only UI functionality<br>
 <strong>Pros:</strong> Less tedious to implement and very intuitive for the user<br>
 <strong>Cons:</strong> Users who prefer typing commands will not have the option of editing their font sizes using the CLI</p>
 </div>
@@ -844,8 +848,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
-<strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br>
-<strong>Cons:</strong> Hard for new developers to understand the template pattern.<br>
+<strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Cons:</strong> Hard for new developers to understand the template pattern.<br>
 <strong>Alternative 2:</strong> Just override <code>execute()</code><br>
 <strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br>
 <strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to undo/redo.</p>
@@ -855,8 +861,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <p><strong>Aspect:</strong> How undo &amp; redo executes<br>
 <strong>Alternative 1 (current choice):</strong> Saves the entire address book.<br>
 <strong>Pros:</strong> Easy to implement.<br>
-<strong>Cons:</strong> May have performance issues in terms of memory usage.<br>
-<strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.<br>
+<strong>Cons:</strong> May have performance issues in terms of memory usage.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.<br>
 <strong>Pros:</strong> Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).<br>
 <strong>Cons:</strong> We must ensure that the implementation of each individual command are correct.</p>
 </div>
@@ -865,8 +873,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <p><strong>Aspect:</strong> Type of commands that can be undone/redone<br>
 <strong>Alternative 1 (current choice):</strong> Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).<br>
 <strong>Pros:</strong> We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).<br>
-<strong>Cons:</strong> User might think that undo also applies when the list is modified (undoing filtering for example), only to realize that it does not do that, after executing <code>undo</code>.<br>
-<strong>Alternative 2:</strong> Include all commands.<br>
+<strong>Cons:</strong> User might think that undo also applies when the list is modified (undoing filtering for example), only to realize that it does not do that, after executing <code>undo</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Include all commands.<br>
 <strong>Pros:</strong> Might be more intuitive for the user.<br>
 <strong>Cons:</strong> User have no way of skipping such commands if he or she just want to reset the state of the address book and not the view.<br></p>
 </div>
@@ -875,8 +885,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br>
 <strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo<br>
 <strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.<br>
-<strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>UndoRedoStack</code>.<br>
-<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br>
+<strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>UndoRedoStack</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br>
 <strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
 <strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br></p>
 </div>
@@ -956,21 +968,29 @@ The sequence diagram below shows how this is done:</p>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.3. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of Task-related commands<br>
-<strong>Alternative 1 (current choice):</strong> Use inheritance to implement different commands for Task and Person objects<br>
+<p><strong>Aspect:</strong> Implementation of Task-related commands<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Use inheritance to implement different commands for Task and Person objects<br>
 <strong>Pros:</strong> Can be easily extended to allow handling of other types of objects, and preserves Separation of Concerns.<br>
-<strong>Cons:</strong> Minor code duplication occurs as the commands for Person and Tasks objects share the same structure.<br>
-<strong>Alternative 2:</strong> Use polymorphism to allow existing commands to implement task handling<br>
+<strong>Cons:</strong> Minor code duplication occurs as the commands for Person and Tasks objects share the same structure.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Use polymorphism to allow existing commands to implement task handling<br>
 <strong>Pros:</strong> Code duplication is kept to a minimum as the Command will handle Task and Person objects in the same class.<br>
 <strong>Cons:</strong> Single Responsibility Principle is violated as each Command class now needs to handle 2 different types of objects.<br></p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Storage of Task objects<br>
-<strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
+<p><strong>Aspect:</strong> Storage of Task objects<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Store Task objects together in the default XML storage file<br>
 <strong>Pros</strong> Only 1 storage file is needed. The storage manager thus only needs to refer to one storage<br>
-<strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.<br>
-<strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
+<strong>Cons</strong> Any changes to the Person or Task will affect the storage of both the Person and Task objects. This will increase coupling between the Person and Task classes.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Store Tasks objects in a separate XML file<br>
 <strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.<br>
 <strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.<br></p>
 </div>
@@ -1025,22 +1045,30 @@ is not returned, but will be reflected in the application&#8217;s storage and gr
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br>
-<strong>Alternative 1 (current choice):</strong> Implement sorting functionality in <code>UniquePersonList</code> and <code>UniqueTaskList</code> class.<br>
+<p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Implement sorting functionality in <code>UniquePersonList</code> and <code>UniqueTaskList</code> class.<br>
 <strong>Pros:</strong> Delegates the concern of sorting to the class that is responsible for the core of most operations done to the lists.
 Future changes to the implementation will be easier as a consequence.<br>
-<strong>Cons:</strong> Hard for new developers to understand the flow of control passed between classes at first.<br>
-<strong>Alternative 2:</strong> Implement the sorting functionality within other classes like <code>AddressBook</code> or <code>SortCommand</code>.<br>
+<strong>Cons:</strong> Hard for new developers to understand the flow of control passed between classes at first.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the sorting functionality within other classes like <code>AddressBook</code> or <code>SortCommand</code>.<br>
 <strong>Pros:</strong> May be more intuitive for new developers and it is easier to trace function calls between lesser classes involved.<br>
 <strong>Cons:</strong> Violates Separation of Concern principle and causes unnecessary content coupling whereby the <code>UniquePersonList</code> will have to rely on the <code>SortCommand</code> class.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Temporary Sort Implementation vs. Persistent Sort Implementation<br>
-<strong>Alternative 1 (current choice):</strong> Saves the entire address book after sorting.<br>
+<p><strong>Aspect:</strong> Temporary Sort Implementation vs. Persistent Sort Implementation<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book after sorting.<br>
 <strong>Pros:</strong> More intuitive and reduces complexity in implementation.<br>
-<strong>Cons:</strong> Old order of contact instances in the address book will be lost<br>
-<strong>Alternative 2:</strong> Duplicate a temporary version of the list and sort it for viewing (i.e. the actual list is not sorted)<br>
+<strong>Cons:</strong> Old order of contact instances in the address book will be lost<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Duplicate a temporary version of the list and sort it for viewing (i.e. the actual list is not sorted)<br>
 <strong>Pros:</strong> Old order of contact instances remains intact.<br>
 <strong>Cons:</strong> Will use more memory and may be less intuitive for developer to understand and in terms of user experience. Also, sorting will not persist in the system.</p>
 </div>
@@ -1049,21 +1077,58 @@ Future changes to the implementation will be easier as a consequence.<br>
 <div class="sect2">
 <h3 id="backup-command"><a class="link" href="#backup-command">3.6. Backup Command</a></h3>
 <div class="paragraph">
-<p>The backup command makes use of both the model manager and the storage manager. The <code>LogicManager</code> class was
-improved to support the accessing of storage value.</p>
+<p>The <code>backup</code> command uses the event handler <code>BackupRequestEvent</code>. When raised, this
+event notifies the subscriber <code>backupAddressBook</code> method in Storage class.</p>
 </div>
 <div class="paragraph">
-<p>The backup command arguments are parsed through the <code>BackupCommandParser</code>, which passes control over to the
-<code>BackupCommand</code> class. The <code>BackupCommand</code> class will save the backup file to a user specified path.</p>
-</div>
-<div class="paragraph">
-<p>Suppose a user enters a new command <code>backup filepath</code>. The backup file will be saved to a default location.
-The sequence diagram that illustrates this process is shown below:</p>
+<p>The outlining sequence diagram for this process (excluding the interaction with the
+<code>BackupRequestEvent</code>) is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width=""800">
 </div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Use an event handler to initialize the backup process<br>
+<strong>Pros:</strong> Avoids coupling the logic to the storage unnecessarily.<br>
+<strong>Cons:</strong> May not be as intuitive for some developers in the beginning<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Access storage component directly instead of using event handlers<br>
+<strong>Pros:</strong> May be more intuitive as it is a direct approach<br>
+<strong>Cons:</strong> Violates the Law of Demeter.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="lock-and-unlock-command"><a class="link" href="#lock-and-unlock-command">3.7. Lock and Unlock Command</a></h3>
+<div class="paragraph">
+<p>The <code>lock</code> and <code>unlock</code> commands utilise the Model to access the user preferences of
+the application.</p>
+</div>
+<div class="paragraph">
+<p>Like most of the other commands, arguments are parsed through the <code>UnlockCommandParser</code> or <code>LockCommandParser</code>,
+which passes control over to the <code>UnlockCommand</code> and <code>LockCommand</code> class respectively.
+These <code>Command</code> classes will then call the Model to toggle the lock&#8217;s state.</p>
+</div>
+<div class="paragraph">
+<p>The activity diagram below outlines the basic logic of the lock states concept.:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LockStatesActivityDiagram.png" alt="LockStatesActivityDiagram" width=""800">
+</div>
+</div>
+<div class="paragraph">
+<p>From the activity diagram we can see that lock states are preserved in preferences.json
+after the application closes by passing the lock state into the <code>UserPrefs</code> class to be
+saved by the Storage component.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1072,26 +1137,122 @@ The sequence diagram that illustrates this process is shown below:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-that the execution of the sort methods result in the actual person list being sorted.
+The default state of the lock is set to False (i.e. locked) when the user first opens the
+application. Subsequent changes to the lock will persist in the user preferences.
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.7.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br>
-<strong>Alternative 1 (current choice):</strong> Implement backup command via Command Line Interface<br>
-<strong>Pros:</strong> Backing up data is easier and faster for users who are familiar with the commands. Less button clicks.<br>
-<strong>Cons:</strong> UI not as intuitive. Users who are not familiar with the application may not know about this feature<br>
-<strong>Alternative 2:</strong> Implement backup command via GUI<br>
-<strong>Pros:</strong> More intuitive for all users since the options are all graphical<br>
-<strong>Cons:</strong> Hinders productivity. Excessive number of clicks to accomplish an essential task.</p>
+<p><strong>Aspect:</strong> Implementation of <code>lock</code> and <code>unlock</code> Commands</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Call methods in the Model directly to change UserPrefs<br>
+<strong>Pros:</strong> More intuitive. Highest returns for minimal amount of code<br>
+<strong>Cons:</strong> May be confusing to some developers in the beginning, since another
+intuitive approach is to use event handlers<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Use Event Handlers<br>
+<strong>Pros:</strong> More intuitive for some developers<br>
+<strong>Cons:</strong> Will still have to access Model, which makes its advantage over direct calls next to none</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.7. Privacy of fields</a></h3>
+<h3 id="changepassword-command"><a class="link" href="#changepassword-command">3.8. ChangePassword Command</a></h3>
+<div class="paragraph">
+<p>The default password when users first open Address++ is <code>password</code>. The ChangePassword command
+sets a new password in the temporary User Preferences. When the application is closed, this
+information is passed to the Storage Component to be saved into the file <code>preferences.json</code></p>
+</div>
+<div class="paragraph">
+<p>To illustrate this concept better, let us have a look at the <code>preferences.json</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">guiSettings</span><span class="delimiter">&quot;</span></span> : {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowWidth</span><span class="delimiter">&quot;</span></span> : <span class="float">1080.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowHeight</span><span class="delimiter">&quot;</span></span> : <span class="float">720.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowCoordinates</span><span class="delimiter">&quot;</span></span> : {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">x</span><span class="delimiter">&quot;</span></span> : <span class="integer">0</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">y</span><span class="delimiter">&quot;</span></span> : <span class="integer">22</span>
+    }
+  },
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookFilePath</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">data/addressbook.xml</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookName</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">My Address++</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookLockState</span><span class="delimiter">&quot;</span></span> : <span class="value">false</span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookEncryptedPassword</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span><span class="delimiter">&quot;</span></span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the cope snippet above, the password is stored as one of the entries in the JSON
+file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+SHA256 encryption was used to calculate a hash for the password. This is to delay anyone snooping around the
+user&#8217;s file directories.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Validation Checks</strong></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Password Validation &#8594; Is password correct?</p>
+</li>
+<li>
+<p>Password Confirmation &#8594; Does the new password and confirmation password match?</p>
+</li>
+<li>
+<p>Password Uniqueness &#8594; Is the new password different from the old password?</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The activity diagram below outlines the process flow for the <code>ChangePasswordCommand</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChangePasswordActivityDiagram.png" alt="ChangePasswordActivityDiagram" width=""800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.8.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> On Demand Saving vs. Save On Exit<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Save On Exit<br>
+<strong>Pros:</strong> Simplifies process flow as the command class no longer has to access both Model and Storage components<br>
+<strong>Cons:</strong> Any system/application crash may cause change password data to be lost<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> On Demand Saving<br>
+<strong>Pros:</strong> Changes may persist even through system and application crashes<br>
+<strong>Cons:</strong> May slow down application, although not significantly. Complicates process flow.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.9. Privacy of fields</a></h3>
 <div class="paragraph">
 <p>The <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
 </div>
@@ -1230,30 +1391,38 @@ Hence, a private field will remain private and the value stored by that field wi
 <p>Upon generation of all the fields, if <code>areFieldsAllPrivate</code> is still true, <code>createEditedPerson</code> will throw an <code>IllegalArgumentException</code>, which will cause <code>EditCommand</code> to throw a <code>CommandException</code> and prevent the command from continuing.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.9.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
+<p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
 <strong>Pros:</strong> Similar implementation to how the fields are currently being implemented. Privacy settings can be obtained directly from the field class itself.<br>
-<strong>Cons:</strong> Repetitive code. Additional overloaded constructor and methods are needed to set and get the value of <code>isPrivate</code>. <br>
-<strong>Alternative 2:</strong> Store a person&#8217;s privacy settings outside of the field classes in an Array or a HashMap in <code>Person</code>.<br>
+<strong>Cons:</strong> Repetitive code. Additional overloaded constructor and methods are needed to set and get the value of <code>isPrivate</code>. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Store a person&#8217;s privacy settings outside of the field classes in an Array or a HashMap in <code>Person</code>.<br>
 <strong>Pros:</strong> Can access and modify the privacy settings of all fields easily.<br>
 <strong>Cons:</strong> The fields themselves do not have any indication of whether or not they are private, and will have to check with the <code>Person</code> the belong to.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to determine if a field for a newly added person should be private.<br>
-<strong>Alternative 1 (current choice):</strong> Add a <code>p</code> to the start of each field&#8217;s prefix to signify that that field should be private.<br>
+<p><strong>Aspect:</strong> How to determine if a field for a newly added person should be private.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Add a <code>p</code> to the start of each field&#8217;s prefix to signify that that field should be private.<br>
 <strong>Pros:</strong> Can add <code>Person</code> containing any combination of private and public fields in 1 command line.<br>
-<strong>Cons:</strong> Have to modify <code>AddCommand</code>, <code>AddCommandParser</code>, <code>ParserUtil</code> and other classes to detect the new prefix and call a separate constructor when a field is private.<br>
-<strong>Alternative 2:</strong> A <code>Person</code> is added with all field public, a separate command will then have to be used to set the desired fields to be private.<br>
+<strong>Cons:</strong> Have to modify <code>AddCommand</code>, <code>AddCommandParser</code>, <code>ParserUtil</code> and other classes to detect the new prefix and call a separate constructor when a field is private.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> A <code>Person</code> is added with all field public, a separate command will then have to be used to set the desired fields to be private.<br>
 <strong>Pros:</strong> Easier implementation, do not have to modify <code>AddCommand</code>.<br>
 <strong>Cons:</strong> Requires 2 command lines to create a <code>Person</code> with private fields, which takes more time and is more inconvenient for users.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.8. Changing of a Person&#8217;s Privacy</a></h3>
+<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.10. Changing of a Person&#8217;s Privacy</a></h3>
 <div class="paragraph">
 <p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
 </div>
@@ -1298,20 +1467,24 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.8.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.10.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br>
-<strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
+<p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
 <strong>Pros:</strong> It is clear to users and developers that <code>changeprivacy</code> is to modify a person&#8217;s privacy while <code>edit</code> changes the actual data if the relevant field is not private. <br>
-<strong>Cons:</strong> Additional command, parser and tests must be created. <br>
-<strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
+<strong>Cons:</strong> Additional command, parser and tests must be created. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
 <strong>Pros:</strong> Can make use of existing code to aid the implementation.<br>
 <strong>Cons:</strong> Increases the complexity of EditCommand for both users and developers. More ambiguous as to how editing a private field will affect the data.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-the-address-book-s-privacy-level"><a class="link" href="#changing-the-address-book-s-privacy-level">3.9. Changing the address book&#8217;s privacy level</a></h3>
+<h3 id="changing-the-address-book-s-privacy-level"><a class="link" href="#changing-the-address-book-s-privacy-level">3.11. Changing the address book&#8217;s privacy level</a></h3>
 <div class="paragraph">
 <p><code>PrivacyLevelCommand</code> allows the user to change the privacy level of Address++, letting users easily reveal data hidden by private fields, or hide persons containing private fields entirely.</p>
 </div>
@@ -1381,20 +1554,24 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.9.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.11.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Storing of the privacy level<br>
-<strong>Alternative 1 (current choice):</strong> Have each relevant class store a privacy level integer.<br>
+<p><strong>Aspect:</strong> Storing of the privacy level<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Have each relevant class store a privacy level integer.<br>
 <strong>Pros:</strong> Less coupling, less modification of existing code required. <br>
-<strong>Cons:</strong> Have to modify every relevant object every time <code>PrivacyLevelCommand</code> is called. Runs the risk that an object may accidentally not have its privacy level modified to match the other objects if privacy levels are not properly updated.<br>
-<strong>Alternative 2:</strong> Store the privacy level in the model and have any object that needs to check it query from model.<br>
+<strong>Cons:</strong> Have to modify every relevant object every time <code>PrivacyLevelCommand</code> is called. Runs the risk that an object may accidentally not have its privacy level modified to match the other objects if privacy levels are not properly updated.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Store the privacy level in the model and have any object that needs to check it query from model.<br>
 <strong>Pros:</strong> Only one integer needs to be modified for the privacy level of the entire address book to change, which also eliminates any possibility that privacy level may be different when used by different objects.<br>
 <strong>Cons:</strong> Increases coupling, classes such as Name will need to have a Model object as one of its variables to access Model. Large scale modification of existing code and tests are necessary.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.10. Locating a Person on Google Maps</a></h3>
+<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.12. Locating a Person on Google Maps</a></h3>
 <div class="paragraph">
 <p>Upon calling the <code>locate</code> command, <code>LocateCommandParser</code> will parse the input string into an <code>Index</code>, and create a new <code>LocateCommand</code>. Should the arguments be a non-integer, a <code>ParseException</code> will be thrown.<br>
 This can be seen from the code snippet below:</p>
@@ -1466,20 +1643,24 @@ This can be seen from the code snippet below:</p>
 <p><em>Figure 3.7.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.10.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.12.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
-<strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
+<p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
 <strong>Pros:</strong> No modification needed for existing commands, which makes it clear the purpose of each command.<br>
-<strong>Cons:</strong> Additional commands will need to be learnt for both developers and users.<br>
-<strong>Alternative 2:</strong> Add the functionality into <code>SelectCommand</code>.<br>
+<strong>Cons:</strong> Additional commands will need to be learnt for both developers and users.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Add the functionality into <code>SelectCommand</code>.<br>
 <strong>Pros:</strong> Expands the utility of <code>SelectCommand</code> beyond performing a Google search on their name.<br>
 <strong>Cons:</strong> Will require significant modification of existing code, and may make it more confusing for users.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.11. Navigating from one address to another using Google Maps</a></h3>
+<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.13. Navigating from one address to another using Google Maps</a></h3>
 <div class="paragraph">
 <p>When the <code>navigate</code> command is entered into the command line, <code>NavigateCommandParse</code> will first reset its internal <code>from</code>, <code>to</code>, <code>fromIndex</code>, <code>toIndex</code> to null. It will then check for the input prefixes and ensure that only one of the prefixes from the group <code>fp/</code>, <code>ft/</code>, and <code>fa/</code>, which we will subsequently call the <code>from</code> prefixes are present. It then does the same with the prefixes from the group <code>tp/</code>, <code>tt/</code> and <code>ta/</code>, which we will call the <code>to</code> prefixes.<br></p>
 </div>
@@ -1624,29 +1805,37 @@ This can be seen from the code snippet below:</p>
 <p><em>Figure 3.8.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.11.1. Design Considerations</a></h4>
+<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">3.13.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br>
-<strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
+<p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
 <strong>Pros:</strong> Only 1 constructor needed.<br>
-<strong>Cons:</strong> Additional methods will be needed to properly identify which Location to use for navigation. <br>
-<strong>Alternative 2:</strong> Create many constructors to segregate the different possible scenarios that might happen.<br>
+<strong>Cons:</strong> Additional methods will be needed to properly identify which Location to use for navigation. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Create many constructors to segregate the different possible scenarios that might happen.<br>
 <strong>Pros:</strong> It is clear what information to use to generate the Locations<br>
 <strong>Cons:</strong> Requires large numbers of constructors to be created, easy for mistakes to occur as Constructors all share the same name but different argument types.</p>
 </div>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to transfer information of the address from one class to another<br>
-<strong>Alternative 1 (current choice):</strong> Wrap the address in a <code>Location</code> class before posting the BrowserPanelNavigateEvent.<br>
+<p><strong>Aspect:</strong> How to transfer information of the address from one class to another<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Wrap the address in a <code>Location</code> class before posting the BrowserPanelNavigateEvent.<br>
 <strong>Pros:</strong> Only Locations, which indicates that the address is properly parsed, will be passed for the BrowserPanel to read, reducing the possibility of BrowserPanel reading stray unwanted strings as addresses to navigate to and from. The value stored inside each Location cannot be altered once that Location object has been created.<br>
-<strong>Cons:</strong> A new class has to be created and Strings, Addresses and TaskAddresses will need to be converted to Locations first. <br>
-<strong>Alternative 2:</strong> Simply pass on a String containing the address from class to class<br>
+<strong>Cons:</strong> A new class has to be created and Strings, Addresses and TaskAddresses will need to be converted to Locations first. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Simply pass on a String containing the address from class to class<br>
 <strong>Pros:</strong> Easy to read and transfer information, lower overhead<br>
 <strong>Cons:</strong> It is easier for stray Strings to pollute the information, and the Strings can be unintentionally modified.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="opening-and-saving-of-the-xml-save-file"><a class="link" href="#opening-and-saving-of-the-xml-save-file">3.12. Opening and Saving of the .xml save file</a></h3>
+<h3 id="opening-and-saving-of-the-xml-save-file"><a class="link" href="#opening-and-saving-of-the-xml-save-file">3.14. Opening and Saving of the .xml save file</a></h3>
 <div class="paragraph">
 <p>Both <code>OpenCommand</code> and <code>SaveAsCommand</code> function in a very similar way.
 When <code>open</code> or <code>save</code> is input by the user, <code>AddressBookParser</code> will create a new <code>OpenCommand</code> or <code>SaveAsCommand</code>.</p>
@@ -1726,20 +1915,24 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 <p><em>Figure 3.8.1 : Sequence Diagram for Opening a save file</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.12.1. Design Considerations</a></h4>
+<h4 id="design-considerations-13"><a class="link" href="#design-considerations-13">3.14.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br>
-<strong>Alternative 1 (current choice):</strong> Open a <code>FileChooser</code> window, allowing the user to move through their file directory to acquire their save location and to select the name of the save file.<br>
+<p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Open a <code>FileChooser</code> window, allowing the user to move through their file directory to acquire their save location and to select the name of the save file.<br>
 <strong>Pros:</strong> User friendly, many other applications function similarly when saving and loading. Easier to implement and use as part of the dropdown menu in the User Interface.<br>
-<strong>Cons:</strong> Not entirely command line based. <br>
-<strong>Alternative 2:</strong> Input the file directory and file name to save or load from as part of the command.<br>
+<strong>Cons:</strong> Not entirely command line based. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Input the file directory and file name to save or load from as part of the command.<br>
 <strong>Pros:</strong> Entirely command line based, may be more preferable for users who prefer using the command line.<br>
 <strong>Cons:</strong> Requires more complex code. Command must check if the file location to save or load from is valid, and that there is a valid file of that name.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.13. Add/Delete Tag mechanism</a></h3>
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.15. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -1808,31 +2001,39 @@ If the tag to be added exists in every target person in the address book, the <c
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">3.13.1. Design Considerations</a></h4>
+<h4 id="design-considerations-14"><a class="link" href="#design-considerations-14">3.15.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br>
-<strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
 <strong>Pros:</strong> Easier to implement. <code>ModelManager</code> includes all the methods and variables.<br>
-<strong>Cons:</strong> Must modify <code>Model</code> also to fit the <code>ModelManager</code>. Beginner may have difficulty to understand the different functions in Model component+
-<strong>Alternative 2:</strong> Implement the <code>addtag</code> and <code>deletetag</code> in <code>AddTagCommand</code> and <code>DeleteTagCommand</code> respectively.<br>
+<strong>Cons:</strong> Must modify <code>Model</code> also to fit the <code>ModelManager</code>. Beginner may have difficulty to understand the different functions in Model component+</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the <code>addtag</code> and <code>deletetag</code> in <code>AddTagCommand</code> and <code>DeleteTagCommand</code> respectively.<br>
 <strong>Pros:</strong> Easier to understand.<br>
 <strong>Cons:</strong> Repetitive code. Additional overload constructor needs to be implement. The <code>AddTagCommand</code> and <code>DeleteTagCommand</code> will have to update the person list.
 This violates the Single Responsibility Principle.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> create new command <code>addtag</code> and <code>deletetag</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> create new command <code>addtag</code> and <code>deletetag</code><br>
 <strong>Pros:</strong> Less modification of existing command and parser<br>
-<strong>Cons:</strong> Users have to learn how to use the additional commands<br>
-<strong>Alternative 2:</strong> Modify the existing <code>add</code> and <code>delete</code> command<br>
+<strong>Cons:</strong> Users have to learn how to use the additional commands<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Modify the existing <code>add</code> and <code>delete</code> command<br>
 <strong>Pros:</strong> Users could use the same commands to achieve different purpose<br>
 <strong>Cons:</strong> Additional override the constructor for the existing command. It might not be easy for the beginner.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.14. Find Tag mechanism</a></h3>
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.16. Find Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
 This command will not inherit from <code>UndoableCommand</code>.</p>
@@ -1910,13 +2111,17 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-13"><a class="link" href="#design-considerations-13">3.14.1. Design Considerations</a></h4>
+<h4 id="design-considerations-15"><a class="link" href="#design-considerations-15">3.16.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br>
-<strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
 <strong>Pros:</strong> Easier to implement. <code>findtag</code> command will be similar to the <code>find</code> command.<br>
-<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br>
-<strong>Alternative 2:</strong> Implement the <code>findtag</code> in <code>FindCommand</code>.<br>
+<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Implement the <code>findtag</code> in <code>FindCommand</code>.<br>
 <strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
 <strong>Cons:</strong> The existing <code>FindCommand</code> will not only response for finding persons through names only. This Violates Single Responsibility Principle
 and Separation of Concerns as FindCommand now needs to do two different things.</p>
@@ -1924,7 +2129,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">3.15. Favourite/Unfavourite Person mechanism</a></h3>
+<h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">3.17. Favourite/Unfavourite Person mechanism</a></h3>
 <div class="paragraph">
 <p>To favourite a person is achieved by <code>FavouriteCommand</code>. It basically changes the value of the <code>Favourite</code> field of a <code>Person</code>. The <code>Favourite</code> class has two status indicators: one is a boolean value and the other is a String. The boolean one is used in the constructor while the String one is for UI and output purposes.</p>
 </div>
@@ -1941,7 +2146,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.16. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.18. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1979,7 +2184,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.17. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.19. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2355,6 +2560,12 @@ b. Require developers to download those libraries manually (this creates extra w
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide information I do not want to share from others</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with a 4K screen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able keep track of my upcoming tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ditch my Todo application and migrate to Address++ for my people and task management needs</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
@@ -2401,6 +2612,30 @@ b. Require developers to download those libraries manually (this creates extra w
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to update the address book application easily when new updates are published</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">continue using the address book easily with any newly added features</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cautious user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to lock my address book application whenever I want with a password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prevent people with malicious intent from making changes to my data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cautious user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to back up my address book data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">retrieve my back up data in the event I make breaking changes to my actual address book and there is no way of undoing them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with a 4K screen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to increase the font size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use the application without straining my eyes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">picky user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to change the colour theme of the application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customize the application to suit my visual tastebuds.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2744,7 +2979,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:07:44 +00:00
+Last updated 2017-11-12 08:18:17 +00:00
 </div>
 </div>
 </body>

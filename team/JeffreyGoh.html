@@ -481,21 +481,29 @@ Hence, a private field will remain private and the value stored by that field wi
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
+<p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Add a boolean to each field class.<br>
 <strong>Pros:</strong> Similar implementation to how the fields are currently being implemented. Privacy settings can be obtained directly from the field class itself.<br>
-<strong>Cons:</strong> Repetitive code. Additional overloaded constructor and methods are needed to set and get the value of <code>isPrivate</code>. <br>
-<strong>Alternative 2:</strong> Store a person&#8217;s privacy settings outside of the field classes in an Array or a HashMap in <code>Person</code>.<br>
+<strong>Cons:</strong> Repetitive code. Additional overloaded constructor and methods are needed to set and get the value of <code>isPrivate</code>. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Store a person&#8217;s privacy settings outside of the field classes in an Array or a HashMap in <code>Person</code>.<br>
 <strong>Pros:</strong> Can access and modify the privacy settings of all fields easily.<br>
 <strong>Cons:</strong> The fields themselves do not have any indication of whether or not they are private, and will have to check with the <code>Person</code> the belong to.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to determine if a field for a newly added person should be private.<br>
-<strong>Alternative 1 (current choice):</strong> Add a <code>p</code> to the start of each field&#8217;s prefix to signify that that field should be private.<br>
+<p><strong>Aspect:</strong> How to determine if a field for a newly added person should be private.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Add a <code>p</code> to the start of each field&#8217;s prefix to signify that that field should be private.<br>
 <strong>Pros:</strong> Can add <code>Person</code> containing any combination of private and public fields in 1 command line.<br>
-<strong>Cons:</strong> Have to modify <code>AddCommand</code>, <code>AddCommandParser</code>, <code>ParserUtil</code> and other classes to detect the new prefix and call a separate constructor when a field is private.<br>
-<strong>Alternative 2:</strong> A <code>Person</code> is added with all field public, a separate command will then have to be used to set the desired fields to be private.<br>
+<strong>Cons:</strong> Have to modify <code>AddCommand</code>, <code>AddCommandParser</code>, <code>ParserUtil</code> and other classes to detect the new prefix and call a separate constructor when a field is private.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> A <code>Person</code> is added with all field public, a separate command will then have to be used to set the desired fields to be private.<br>
 <strong>Pros:</strong> Easier implementation, do not have to modify <code>AddCommand</code>.<br>
 <strong>Cons:</strong> Requires 2 command lines to create a <code>Person</code> with private fields, which takes more time and is more inconvenient for users.</p>
 </div>
@@ -549,11 +557,15 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br>
-<strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
+<p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Create a separate command to do so.<br>
 <strong>Pros:</strong> It is clear to users and developers that <code>changeprivacy</code> is to modify a person&#8217;s privacy while <code>edit</code> changes the actual data if the relevant field is not private. <br>
-<strong>Cons:</strong> Additional command, parser and tests must be created. <br>
-<strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
+<strong>Cons:</strong> Additional command, parser and tests must be created. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Enhance the functionality of EditCommand.<br>
 <strong>Pros:</strong> Can make use of existing code to aid the implementation.<br>
 <strong>Cons:</strong> Increases the complexity of EditCommand for both users and developers. More ambiguous as to how editing a private field will affect the data.</p>
 </div>
@@ -632,11 +644,15 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Storing of the privacy level<br>
-<strong>Alternative 1 (current choice):</strong> Have each relevant class store a privacy level integer.<br>
+<p><strong>Aspect:</strong> Storing of the privacy level<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Have each relevant class store a privacy level integer.<br>
 <strong>Pros:</strong> Less coupling, less modification of existing code required. <br>
-<strong>Cons:</strong> Have to modify every relevant object every time <code>PrivacyLevelCommand</code> is called. Runs the risk that an object may accidentally not have its privacy level modified to match the other objects if privacy levels are not properly updated.<br>
-<strong>Alternative 2:</strong> Store the privacy level in the model and have any object that needs to check it query from model.<br>
+<strong>Cons:</strong> Have to modify every relevant object every time <code>PrivacyLevelCommand</code> is called. Runs the risk that an object may accidentally not have its privacy level modified to match the other objects if privacy levels are not properly updated.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Store the privacy level in the model and have any object that needs to check it query from model.<br>
 <strong>Pros:</strong> Only one integer needs to be modified for the privacy level of the entire address book to change, which also eliminates any possibility that privacy level may be different when used by different objects.<br>
 <strong>Cons:</strong> Increases coupling, classes such as Name will need to have a Model object as one of its variables to access Model. Large scale modification of existing code and tests are necessary.</p>
 </div>
@@ -804,11 +820,15 @@ This can be seen from the code snippet below:</p>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br>
-<strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
+<p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Create a separate command <code>locate</code>.<br>
 <strong>Pros:</strong> No modification needed for existing commands, which makes it clear the purpose of each command.<br>
-<strong>Cons:</strong> Additional commands will need to be learnt for both developers and users.<br>
-<strong>Alternative 2:</strong> Add the functionality into <code>SelectCommand</code>.<br>
+<strong>Cons:</strong> Additional commands will need to be learnt for both developers and users.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Add the functionality into <code>SelectCommand</code>.<br>
 <strong>Pros:</strong> Expands the utility of <code>SelectCommand</code> beyond performing a Google search on their name.<br>
 <strong>Cons:</strong> Will require significant modification of existing code, and may make it more confusing for users.</p>
 </div>
@@ -1067,20 +1087,28 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br>
-<strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
+<p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Have a constructor that takes in a large number of arguments so that NavigateCommand can correctly identify what kind of Location to post in BrowserPanelNavigateEvent.<br>
 <strong>Pros:</strong> Only 1 constructor needed.<br>
-<strong>Cons:</strong> Additional methods will be needed to properly identify which Location to use for navigation. <br>
-<strong>Alternative 2:</strong> Create many constructors to segregate the different possible scenarios that might happen.<br>
+<strong>Cons:</strong> Additional methods will be needed to properly identify which Location to use for navigation. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Create many constructors to segregate the different possible scenarios that might happen.<br>
 <strong>Pros:</strong> It is clear what information to use to generate the Locations<br>
 <strong>Cons:</strong> Requires large numbers of constructors to be created, easy for mistakes to occur as Constructors all share the same name but different argument types.</p>
 </div>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to transfer information of the address from one class to another<br>
-<strong>Alternative 1 (current choice):</strong> Wrap the address in a <code>Location</code> class before posting the BrowserPanelNavigateEvent.<br>
+<p><strong>Aspect:</strong> How to transfer information of the address from one class to another<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Wrap the address in a <code>Location</code> class before posting the BrowserPanelNavigateEvent.<br>
 <strong>Pros:</strong> Only Locations, which indicates that the address is properly parsed, will be passed for the BrowserPanel to read, reducing the possibility of BrowserPanel reading stray unwanted strings as addresses to navigate to and from. The value stored inside each Location cannot be altered once that Location object has been created.<br>
-<strong>Cons:</strong> A new class has to be created and Strings, Addresses and TaskAddresses will need to be converted to Locations first. <br>
-<strong>Alternative 2:</strong> Simply pass on a String containing the address from class to class<br>
+<strong>Cons:</strong> A new class has to be created and Strings, Addresses and TaskAddresses will need to be converted to Locations first. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Simply pass on a String containing the address from class to class<br>
 <strong>Pros:</strong> Easy to read and transfer information, lower overhead<br>
 <strong>Cons:</strong> It is easier for stray Strings to pollute the information, and the Strings can be unintentionally modified.</p>
 </div>
@@ -1248,11 +1276,15 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br>
-<strong>Alternative 1 (current choice):</strong> Open a <code>FileChooser</code> window, allowing the user to move through their file directory to acquire their save location and to select the name of the save file.<br>
+<p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Open a <code>FileChooser</code> window, allowing the user to move through their file directory to acquire their save location and to select the name of the save file.<br>
 <strong>Pros:</strong> User friendly, many other applications function similarly when saving and loading. Easier to implement and use as part of the dropdown menu in the User Interface.<br>
-<strong>Cons:</strong> Not entirely command line based. <br>
-<strong>Alternative 2:</strong> Input the file directory and file name to save or load from as part of the command.<br>
+<strong>Cons:</strong> Not entirely command line based. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Input the file directory and file name to save or load from as part of the command.<br>
 <strong>Pros:</strong> Entirely command line based, may be more preferable for users who prefer using the command line.<br>
 <strong>Cons:</strong> Requires more complex code. Command must check if the file location to save or load from is valid, and that there is a valid file of that name.</p>
 </div>
@@ -1289,7 +1321,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 08:07:44 +00:00
+Last updated 2017-11-12 08:18:17 +00:00
 </div>
 </div>
 </body>
