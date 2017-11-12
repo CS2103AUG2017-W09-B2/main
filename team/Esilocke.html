@@ -506,6 +506,9 @@ The first task has a very long description, and you want to see it in full.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -558,6 +561,9 @@ You have finally completed a task that involves writing a 1500-word essay.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -612,6 +618,9 @@ in progress.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -667,6 +676,9 @@ You have created a new task to complete a paper model. However you are unable to
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -693,10 +705,63 @@ You have created a new task to complete a paper model. However you are unable to
 <div class="paragraph">
 <p><strong>Example Scenario 1:</strong><br>
 One of the tasks that you had created previously with many people assigned turned out to be easier than expected.
-You believe that this task does not require so many people and would like to remove some of them from this task.</p>
+You believe that this task could do with less manpower and would like to remove some of the previously assigned contacts from this task.</p>
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>dismiss 1 5 7 from/5</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5"><a class="link" href="#viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5">Viewing contacts assigned to a task : <code>viewassign</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>You can use <code>viewassign</code> to see who is assigned to a particular task. You may wish to use <code>viewassign</code> when you want to contact only the people who are assigned to a particular task, for example.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>viewassign</code> can be replaced by <code>va</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>viewassign INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+2 weeks after assigning some of your contacts to a particular task, you decide to obtain a status report about their current progress.<br>
+However you have forgotten who you have assigned to that task. You thus use <code>viewassign</code> to see who is assigned to that task.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>viewassign 4</code></p>
 </div>
 </div>
 </div>
@@ -937,7 +1002,7 @@ For example, given the below list of persons:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 07:06:03 +00:00
+Last updated 2017-11-12 08:07:44 +00:00
 </div>
 </div>
 </body>

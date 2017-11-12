@@ -59,15 +59,16 @@ at students who work on projects or assignments frequently, but it can also be u
 <li><a href="#marking-tasks-as-incomplete-code-setincomplete-code-since-v1-5">3.27. Marking tasks as incomplete : <code>setincomplete</code> (Since V1.5)</a></li>
 <li><a href="#assigning-contacts-to-task-code-assign-code-since-v1-4">3.28. Assigning contacts to task : <code>assign</code> (Since V1.4)</a></li>
 <li><a href="#dismissing-contacts-from-task-code-dismiss-code-since-v1-4">3.29. Dismissing contacts from task : <code>dismiss</code> (Since V1.4)</a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.30. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.31. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.32. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.33. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.34. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#opening-a-save-file-code-open-code">3.35. Opening a save file : <code>open</code></a></li>
-<li><a href="#saving-the-data-as-a-new-save-file-code-save-code">3.36. Saving the data as a new save file : <code>save</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.37. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.38. Saving the data</a></li>
+<li><a href="#viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5">3.30. Viewing contacts assigned to a task : <code>viewassign</code> (Since V1.5)</a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.31. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.32. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.33. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.34. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.35. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#opening-a-save-file-code-open-code">3.36. Opening a save file : <code>open</code></a></li>
+<li><a href="#saving-the-data-as-a-new-save-file-code-save-code">3.37. Saving the data as a new save file : <code>save</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.38. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.39. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -1862,6 +1863,9 @@ Opens Google Maps to provide directions on how to navigate from the address of t
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1914,6 +1918,9 @@ You have finally completed a task that involves writing a 1500-word essay.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1968,6 +1975,9 @@ in progress.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2023,6 +2033,9 @@ You have created a new task to complete a paper model. However you are unable to
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2049,7 +2062,7 @@ You have created a new task to complete a paper model. However you are unable to
 <div class="paragraph">
 <p><strong>Example Scenario 1:</strong><br>
 One of the tasks that you had created previously with many people assigned turned out to be easier than expected.
-You believe that this task does not require so many people and would like to remove some of them from this task.</p>
+You believe that this task could do with less manpower and would like to remove some of the previously assigned contacts from this task.</p>
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>dismiss 1 5 7 from/5</code></p>
@@ -2058,7 +2071,60 @@ You believe that this task does not require so many people and would like to rem
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.30. Listing entered commands : <code>history</code></a></h3>
+<h3 id="viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5"><a class="link" href="#viewing-contacts-assigned-to-a-task-code-viewassign-code-since-v1-5">3.30. Viewing contacts assigned to a task : <code>viewassign</code> (Since V1.5)</a></h3>
+<div class="paragraph">
+<p>You can use <code>viewassign</code> to see who is assigned to a particular task. You may wish to use <code>viewassign</code> when you want to contact only the people who are assigned to a particular task, for example.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>viewassign</code> can be replaced by <code>va</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>viewassign INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+2 weeks after assigning some of your contacts to a particular task, you decide to obtain a status report about their current progress.<br>
+However you have forgotten who you have assigned to that task. You thus use <code>viewassign</code> to see who is assigned to that task.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>viewassign 4</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.31. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br></p>
 </div>
@@ -2089,7 +2155,7 @@ You believe that this task does not require so many people and would like to rem
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.31. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.32. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Did you make a mistake somewhere? <code>undo</code> restores the address book to the state before the previous <em>undoable</em> command was executed.<br></p>
 </div>
@@ -2165,7 +2231,7 @@ You have accidentally deleted one of your contacts. Furthermore, not knowing thi
 </div>
 </div>
 <div class="sect2">
-<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.32. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
+<h3 id="unfavouriting-persons-code-unfavourite-code-since-v1-3"><a class="link" href="#unfavouriting-persons-code-unfavourite-code-since-v1-3">3.33. Unfavouriting persons : <code>unfavourite</code> (since V1.3)</a></h3>
 <div class="paragraph">
 <p>You can use <code>unfavourite</code> command to set your previous favourite persons become the normal persons. For example,<br>
 after you break up with your girlfriend, you may wish to set your girlfriend back to normal person.<br></p>
@@ -2238,7 +2304,7 @@ Instead of <code>listing</code> all the contacts, you can <code>find</code> all 
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.33. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.34. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Perhaps an <code>undo</code> was not necessary. <code>redo</code> reverses the most recent <code>undo</code> command.<br></p>
 </div>
@@ -2314,7 +2380,7 @@ You have deleted one of your contacts, as well as two of your tasks.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.34. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.35. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br></p>
 </div>
@@ -2335,7 +2401,7 @@ You have deleted one of your contacts, as well as two of your tasks.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">3.35. Opening a save file : <code>open</code></a></h3>
+<h3 id="opening-a-save-file-code-open-code"><a class="link" href="#opening-a-save-file-code-open-code">3.36. Opening a save file : <code>open</code></a></h3>
 <div class="paragraph">
 <p>Switching between address books is made easy with the <code>open</code> command, as it allows you can load different save files into the application.<br>
 You can choose which .xml file to open from the pop up window that appears upon executing this command.<br></p>
@@ -2357,7 +2423,7 @@ You can choose which .xml file to open from the pop up window that appears upon 
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">3.36. Saving the data as a new save file : <code>save</code></a></h3>
+<h3 id="saving-the-data-as-a-new-save-file-code-save-code"><a class="link" href="#saving-the-data-as-a-new-save-file-code-save-code">3.37. Saving the data as a new save file : <code>save</code></a></h3>
 <div class="paragraph">
 <p>If you would like to save a copy of your data in a separate location or with a different name, the <code>save</code> command will allow you to do just that.<br>
 You can choose what to name your save file and where to save it from the pop up window that appears upon executing this command.<br></p>
@@ -2379,7 +2445,7 @@ You can choose what to name your save file and where to save it from the pop up 
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.37. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.38. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Once you have finished using Address++, you may use this command to exit the program.<br>
 Format: <code>exit</code></p>
@@ -2389,7 +2455,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.38. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.39. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need for you to save manually.</p>
@@ -2746,7 +2812,7 @@ e.g. <code>ds 4 1 from/17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 07:06:03 +00:00
+Last updated 2017-11-12 08:07:44 +00:00
 </div>
 </div>
 </body>
