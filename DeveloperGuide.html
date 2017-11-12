@@ -1916,7 +1916,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.8.1 : Sequence Diagram for Opening a save file</em></p>
+<p><em>Figure 3.13.1 : Sequence Diagram for Opening a save file</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-13"><a class="link" href="#design-considerations-13">3.14.1. Design Considerations</a></h4>
@@ -1944,8 +1944,8 @@ tag for all persons in the address book. This command will inherit from <code>Un
 <div class="paragraph">
 <p>The add/delete tag command are executed by <code>AddTagCommand</code> and <code>DeleteTagCommand</code> are parsed through <code>AddTagCommandParser</code> and <code>DeleteTagCommandParser</code>.
 It is different from <code>edit [INDEX] [TAG]</code> since it allows the user to perform the addition and deletion of tags for multiple people at once.
-If the user wants to add the <code>t/friends</code> tag for the first 3 persons in the address book, the <code>AddTagCommand</code> (<code>addtag 1 2 3 t/friends</code>) will be executed.
-The same operation will happen for <code>deletetag</code> command.</p>
+If the user wants to add the <code>t/friends</code> tag for the first 3 persons in the address book, the <code>AddTagCommand</code> (<code>add tag/ 1 2 3 t/friends</code>) will be executed.
+The same operation will happen for <code>delete tag/</code> command.</p>
 </div>
 <div class="paragraph">
 <p>The <code>AddTagCommand</code> goes through all the persons in the address book and add tag to the persons with specific index. The <code>DeleteTagCommand</code> works
@@ -1959,7 +1959,7 @@ in a similar way.</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
  * Adds a tag to the persons in the list from the address book.
  */</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">AddTagCommand</span> <span class="directive">extends</span> UndoableCommand {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AddTagCommand</span> <span class="directive">extends</span> AddCommand {
     <span class="comment">/**
          * Check whether the index within the range then checks whether the specific persons have the tag.
          * If not, add the tag to the person that doesn't have the given tag.
@@ -1979,7 +1979,7 @@ in a similar way.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Suppose the user enter the <code>addtag 1 2 t/friends</code> command. The following sequence diagram shows how the add tag command works:</p>
+<p>Suppose the user enter the <code>add tag/ 1 2 t/friends</code> command. The following sequence diagram shows how the add tag command works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1988,7 +1988,7 @@ in a similar way.</p>
 </div>
 <div class="paragraph">
 <p><em>Figure 3.8.1 : Add Tag Sequence Diagram for Logic</em><br>
-The <code>deletetag</code> command works the same as <code>addtag</code> command with different name only.</p>
+The <code>delete tag/</code> command works the same as <code>add tag/</code> command with different name only.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2007,10 +2007,8 @@ If the tag to be added exists in every target person in the address book, the <c
 <div class="sect3">
 <h4 id="design-considerations-14"><a class="link" href="#design-considerations-14">3.15.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>addtag</code> and <code>deletetag</code><br></p>
-</div>
-<div class="paragraph">
-<p><strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>add tag/</code> and <code>delete tag/</code><br>
+<strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
 <strong>Pros:</strong> Easier to implement. <code>ModelManager</code> includes all the methods and variables.<br>
 <strong>Cons:</strong> Must modify <code>Model</code> also to fit the <code>ModelManager</code>. Beginner may have difficulty to understand the different functions in Model component+</p>
 </div>
@@ -2022,10 +2020,8 @@ This violates the Single Responsibility Principle.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br></p>
-</div>
-<div class="paragraph">
-<p><strong>Alternative 1 (current choice):</strong> create new command <code>addtag</code> and <code>deletetag</code><br>
+<p><strong>Aspect:</strong> Implementation of the <code>AddTagCommand</code> and <code>DeleteTagCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> create new command <code>add tag/</code> and <code>delete tag/</code><br>
 <strong>Pros:</strong> Less modification of existing command and parser<br>
 <strong>Cons:</strong> Users have to learn how to use the additional commands<br></p>
 </div>
@@ -2043,7 +2039,7 @@ This violates the Single Responsibility Principle.</p>
 This command will not inherit from <code>UndoableCommand</code>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>findtag</code> command is executed by <code>FindTagCommand</code> and is parsed through <code>FindTagCommandParser</code>.
+<p>The <code>find tag/</code> command is executed by <code>FindTagCommand</code> and is parsed through <code>FindTagCommandParser</code>.
 After parsing through <code>FindTagCommandParser</code>, it does not goes to the <code>FindTagCommand</code> straightly. The list of tags input will be processed by <code>NameContainsTagsPredicate</code> first.
 It is similar to the <code>find</code> command since find persons through their names and find persons through their tags are quite similar.</p>
 </div>
@@ -2092,7 +2088,7 @@ is for the tags to be excluded.</p>
 </div>
 <div class="paragraph">
 <p>Lastly, it will return the result according to the user input.<br>
-Suppose the user enter <code>findtag friends</code> command. The following sequence diagram shows how the find tag command works:</p>
+Suppose the user enter <code>find tag/ friends</code> command. The following sequence diagram shows how the find tag command works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2100,7 +2096,7 @@ Suppose the user enter <code>findtag friends</code> command. The following seque
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.9.1 : Find Tag Sequence Diagram for Logic</em><br></p>
+<p><em>Figure 3.14.1 : Find Tag Sequence Diagram for Logic</em><br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2117,15 +2113,11 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 <div class="sect3">
 <h4 id="design-considerations-15"><a class="link" href="#design-considerations-15">3.16.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of the <code>findtag</code><br></p>
-</div>
-<div class="paragraph">
-<p><strong>Alternative 1 (current choice):</strong> implement a new command <code>findtag</code><br>
-<strong>Pros:</strong> Easier to implement. <code>findtag</code> command will be similar to the <code>find</code> command.<br>
-<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Alternative 2:</strong> Implement the <code>findtag</code> in <code>FindCommand</code>.<br>
+<p><strong>Aspect:</strong> Implementation of the <code>find tag/</code><br>
+<strong>Alternative 1 (current choice):</strong> implement a new command <code>find tag/</code><br>
+<strong>Pros:</strong> Easier to implement. <code>find tag/</code> command will be similar to the <code>find</code> command.<br>
+<strong>Cons:</strong> Must create <code>NameContainsTagsPredicate</code> in model. It does not fully utilize the existing <code>NameContainsKeywordsPredicate</code>.<br>
+<strong>Alternative 2:</strong> Implement the <code>find tag/</code> in <code>FindCommand</code>.<br>
 <strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
 <strong>Cons:</strong> The existing <code>FindCommand</code> will not only response for finding persons through names only. This Violates Single Responsibility Principle
 and Separation of Concerns as FindCommand now needs to do two different things.</p>
@@ -2135,17 +2127,99 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 <div class="sect2">
 <h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">3.17. Favourite/Unfavourite Person mechanism</a></h3>
 <div class="paragraph">
-<p>To favourite a person is achieved by <code>FavouriteCommand</code>. It basically changes the value of the <code>Favourite</code> field of a <code>Person</code>. The <code>Favourite</code> class has two status indicators: one is a boolean value and the other is a String. The boolean one is used in the constructor while the String one is for UI and output purposes.</p>
+<p>To favourite a person is achieved by <code>FavouriteCommand</code>. It basically changes the value of the <code>favourite</code> status of a <code>Person</code> but there is no specific <code>Favourite</code> field for person.</p>
 </div>
 <div class="paragraph">
-<p>In this sense, <code>Favourite</code> class needs to be created to store the favourite status of a contact. As <code>AddCommand</code> does not involve <code>Favourite</code>, the default <code>Favourite</code> status for every newly added <code>Person</code> is false.</p>
+<p>In this sense, a boolean value needs to be created to store the favourite status of a contact. As <code>AddCommand</code> does not involve <code>favourite</code>, the default <code>favourite</code> status for every newly added <code>Person</code> is false.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how a <code>FavouriteCommand</code> is processed:</p>
+<p>The <code>favourite</code> status is a boolean value and it will be set as true through <code>FavouriteCommand</code>. Then, the target person will be updated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+
+        <span class="predefined-type">List</span>&lt;ReadOnlyPerson&gt; lastShownList = model.getFilteredPersonList();
+
+        <span class="comment">// throw invalid person index</span>
+
+        <span class="comment">// update favourite status</span>
+        ReadOnlyPerson personToFavourite = lastShownList.get(targetIndex.getZeroBased());
+        Person editedPerson = <span class="keyword">new</span> Person(personToFavourite.getName(),
+                personToFavourite.getPhone(), personToFavourite.getEmail(),
+                personToFavourite.getAddress(), <span class="predefined-constant">true</span>,
+                personToFavourite.getRemark(), personToFavourite.getAvatar(),
+                personToFavourite.getTags());
+        <span class="comment">// update target person</span>
+        <span class="keyword">try</span> {
+            model.updatePerson(personToFavourite, editedPerson);
+        } <span class="keyword">catch</span> (DuplicatePersonException dpe) {
+            <span class="comment">// throw exception</span>
+        }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite));
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>FavouriteCommand</code> takes in an integer as its argument. The command is first being parsed in <code>AddressBookParser</code> to be identified as an instance of <code>FavouriteCommand</code>.
+Then it is parsed by <code>FavouriteCommandParser</code> to parse the index. Invalid indexes will be handled by throwing an exception. This is how <code>FavouriteCommandParser</code> is implemented:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+     * Parses the given {@code String} of arguments in the context of the FavouriteCommand
+     * and returns an FavouriteCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */</span>
+    <span class="directive">public</span> FavouriteCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+        <span class="keyword">try</span> {
+            Index index = ParserUtil.parseIndex(args);
+            <span class="keyword">return</span> <span class="keyword">new</span> FavouriteCommand(index);
+        } <span class="keyword">catch</span> (IllegalValueException ive) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(
+                    <span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, FavouriteCommand.MESSAGE_USAGE));
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how a <code>FavouriteCommand</code> is processed:<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/FavouriteSequenceDiagram.png" alt="FavouriteSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.15.1 : Favourite Sequence Diagram for Logic</em><br></p>
+</div>
+<div class="paragraph">
+<p>To indicate that a person has been <code>favoured</code>, <code>PersonCard</code> is modified to contain a <code>favouriteLabel</code> that changes its appearance based on the <code>favourite</code> status of the person.
+It will first detect the boolean favourite status of the person. If the person is a favourite contact, a heart will be shown.
+The colours of the border and the background of the label are set to transparent, so that only the background picture, which is a heart, will be shown.</p>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.17.1. Design Consideration</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>favourite</code><br>
+<strong>Alternative 1 (current choice):</strong> implement a new command <code>favourite</code>.<br>
+<strong>Pros:</strong> Easier to implement. Does not need to modify existing command.<br>
+<strong>Cons:</strong> Must modify <code>Person</code> class to update the person status. The constructor of <code>person</code> has been modified so all the <code>person</code> in the address book must change accordingly.<br>
+<strong>Alternative 2:</strong> Implement the <code>favourite</code> in <code>AddCommand</code><br>
+<strong>Pros:</strong> Easier for user. They do not have to memorize some many commands.<br>
+<strong>Cons:</strong> Difficult to implement. The <code>favourite</code> status will be treated as an optional field when using <code>AddCommand</code>. In order to change <code>favourite</code> status, <code>EditCommand</code> may be modified which is very troublesome.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Store <code>Favourite</code> values<br>
+<strong>Alternative 1 (current choice):</strong> Store it as a <code>Boolean</code> value<br>
+<strong>Pros:</strong> Easier to implement. Does not need to create another class.<br>
+<strong>Cons:</strong> Must modify <code>Model</code> and <code>ModelManager</code> to update the person status.It is also prone to bugs when developers forget to change the ObjectProperty to <code>String</code> in UI classes.<br>
+<strong>Alternative 2:</strong> Add a new <code>Favourite</code> field<br>
+<strong>Pros:</strong> Similar way to store other personal information. It also follows the open-close principle and exercises cohesion, where all matters related to <code>Favourite</code> field is dealt in its own class.<br>
+<strong>Cons:</strong> Difficult to implement. Adding a new field will cause many changes in UI, Logic, Model and Storage. Some test cases will be rewritten.</p>
 </div>
 </div>
 </div>
@@ -2983,7 +3057,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 14:11:00 +00:00
+Last updated 2017-11-12 14:23:29 +00:00
 </div>
 </div>
 </body>

@@ -46,7 +46,7 @@ at students who work on projects or assignments frequently, but it can also be u
 <li><a href="#locating-persons-by-name-code-find-code">3.14. Locating persons by name : <code>find</code></a></li>
 <li><a href="#finding-a-task-code-find-task-code">3.15. Finding a task : <code>find task/</code></a></li>
 <li><a href="#listing-all-tags-code-showtag-code-since-v1-5">3.16. Listing all tags : <code>showtag</code> (Since V1.5)</a></li>
-<li><a href="#locating-persons-by-tag-code-findtag-code-since-v1-4">3.17. Locating persons by tag : <code>findtag</code> (Since V1.4)</a></li>
+<li><a href="#locating-persons-by-tag-code-find-tag-code-since-v1-4">3.17. Locating persons by tag : <code>find tag/</code> (Since V1.4)</a></li>
 <li><a href="#deleting-a-person-code-delete-code">3.18. Deleting a person : <code>delete</code></a></li>
 <li><a href="#deleting-a-task-code-delete-task-code">3.19. Deleting a task : <code>delete task/</code></a></li>
 <li><a href="#deleting-a-tag-of-persons-code-delete-tag-code-since-v1-2">3.20. Deleting a tag of persons : <code>delete tag/</code> (Since V1.2)</a></li>
@@ -451,7 +451,7 @@ then use the <code>addtag</code> command to achieve it.</p>
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>list</code><br>
-&gt;&gt; <code>addtag 1 2 t/friends</code><br></p>
+&gt;&gt; <code>add tag/ 1 2 t/friends</code><br></p>
 </div>
 </div>
 </div>
@@ -463,9 +463,17 @@ Suppose you want to add a common tag to all the persons in the address book. You
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>list</code><br>
-&gt;&gt; <code>addtag t/acquaintance</code><br></p>
+&gt;&gt; <code>add tag/ t/acquaintance</code><br></p>
 </div>
 </div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddTagCommand.png" alt="AddTagCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.5.1 : AddTagCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -888,7 +896,7 @@ Instead of <code>listing</code> all the contacts, you can <code>find</code> all 
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.9.1 : FavouriteCommand</em></p>
+<p><em>Figure 3.12.1 : FavouriteCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -929,7 +937,7 @@ Format: <code>showfavourite</code><br>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.10.1 : ShowFavouriteCommand</em></p>
+<p><em>Figure 3.13.1 : ShowFavouriteCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -1141,9 +1149,9 @@ Furthermore, as you have several tasks related to "Report" that are already comp
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-tag-code-findtag-code-since-v1-4"><a class="link" href="#locating-persons-by-tag-code-findtag-code-since-v1-4">3.17. Locating persons by tag : <code>findtag</code> (Since V1.4)</a></h3>
+<h3 id="locating-persons-by-tag-code-find-tag-code-since-v1-4"><a class="link" href="#locating-persons-by-tag-code-find-tag-code-since-v1-4">3.17. Locating persons by tag : <code>find tag/</code> (Since V1.4)</a></h3>
 <div class="paragraph">
-<p>You can use the <code>findtag</code> command to quickly filter out contacts who match your criteria. For example, you may wish to find contacts who are your <code>classmates</code>.<br>
+<p>You can use the <code>find tag/</code> command to quickly filter out contacts who match your criteria. For example, you may wish to find contacts who are your <code>classmates</code>.<br>
 If you want to find contacts who are your <code>classmates</code> but not your <code>friends</code>, you just need to add <code>/</code> in front of the <code>friends</code>.<br></p>
 </div>
 <div class="admonitionblock note">
@@ -1153,13 +1161,13 @@ If you want to find contacts who are your <code>classmates</code> but not your <
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>findtag</code> can be replaced by <code>ftag</code> for faster input.<br>
+<code>find tag/</code> can be replaced by <code>f tag/</code> for faster input.<br>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>findtag KEYWORD [MORE_KEYWORDS]</code><br></p>
+<p>Format: <code>find tag/ KEYWORD [MORE_KEYWORDS]</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1197,7 +1205,7 @@ If you want to find contacts who are your <code>classmates</code> but not your <
 Suppose you want to find contatcs with tag <code>friends</code> or <code>colleagues</code>, you can just key in the following command.</p>
 </div>
 <div class="paragraph">
-<p>&gt;&gt; <code>findtag friends colleagues</code></p>
+<p>&gt;&gt; <code>find tag/ friends colleagues</code></p>
 </div>
 </div>
 </div>
@@ -1208,7 +1216,7 @@ Suppose you want to find contatcs with tag <code>friends</code> or <code>colleag
 Suppose you want to find contacts without tag <code>frineds</code>, you can key in the following command.</p>
 </div>
 <div class="paragraph">
-<p>&gt;&gt; <code>findtag /friends</code></p>
+<p>&gt;&gt; <code>find tag/ /friends</code></p>
 </div>
 </div>
 </div>
@@ -1219,9 +1227,17 @@ Suppose you want to find contacts without tag <code>frineds</code>, you can key 
 Suppose you want to find contacts with tag <code>friends</code> but without <code>colleagues</code>, you can key in the following command.</p>
 </div>
 <div class="paragraph">
-<p>&gt;&gt; <code>findtag friends /colleagues</code></p>
+<p>&gt;&gt; <code>find tag/ friends /colleagues</code></p>
 </div>
 </div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindTagCommand.png" alt="FindTagCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.17.1 : FindTagCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -1372,7 +1388,7 @@ You thus use <code>find task/</code> to find tasks related to "Essays", before u
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>delete tag/</code> can be replaced by <code>dtag</code> for faster input.<br>
+<code>delete tag/</code> can be replaced by <code>d tag/</code> for faster input.<br>
 </td>
 </tr>
 </table>
@@ -1414,8 +1430,8 @@ Suppose you want to delete <code>classmates</code> tag for the first two persons
 use the <code>delete tag/</code> command to achieve.</p>
 </div>
 <div class="paragraph">
-<p><code>list</code><br>
-<code>delete tag/ 1 2 t/friends</code><br></p>
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>delete tag/ 1 2 t/friends</code><br></p>
 </div>
 </div>
 </div>
@@ -1426,10 +1442,18 @@ use the <code>delete tag/</code> command to achieve.</p>
 Suppose you want to delete <code>friends</code> tag from all contacts in the address book.</p>
 </div>
 <div class="paragraph">
-<p><code>list</code><br>
-<code>delete tag/ t/friends</code><br></p>
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>delete tag/ t/friends</code><br></p>
 </div>
 </div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleTagCommand.png" alt="DeleTagCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.20.1 : DeleteTagCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -2350,8 +2374,8 @@ after you break up with your girlfriend, you may wish to set your girlfriend bac
 Suppose you do not want to the 2nd person in the address book to be your favourite contact anymore, you should <code>list</code> all the persons first, then use <code>unfavourite</code> command to achieve it.</p>
 </div>
 <div class="paragraph">
-<p><code>list</code><br>
-<code>unfavourite 2</code><br></p>
+<p>&gt;&gt; <code>list</code><br>
+&gt;&gt; <code>unfavourite 2</code><br></p>
 </div>
 </div>
 </div>
@@ -2360,13 +2384,21 @@ Suppose you do not want to the 2nd person in the address book to be your favouri
 <div class="paragraph">
 <p><strong>Example Scenario 2:</strong><br>
 Suppose you have <code>Betsy Brandt, Betsy Devos and Betsy Ross</code> in your address book. You want to <code>unfavourite</code> <code>Betsy Brandt</code> in the address book.
-Instead of <code>listing</code> all the contacts, you can <code>find</code> all the <code>Besty</code> first, then <code>unfavourite</code> her.</p>
+Instead of <code>listing</code> all the contacts, you can <code>find</code> all the <code>Besty</code> first, then <code>unfavourite</code> <code>Betsy Brandt</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>find Betsy</code><br>
-<code>unfavourite 1</code><br></p>
+<p>&gt;&gt; <code>find Betsy</code><br>
+&gt;&gt; <code>unfavourite 1</code><br></p>
 </div>
 </div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UnfavouriteCommand.png" alt="UnfavouriteCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.20.1 : UnfavouriteCommand</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -2878,7 +2910,7 @@ e.g. <code>ds 4 1 from/17</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 14:11:00 +00:00
+Last updated 2017-11-12 14:23:29 +00:00
 </div>
 </div>
 </body>
