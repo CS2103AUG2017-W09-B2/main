@@ -535,6 +535,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>exposes an unmodifiable <code>ObservableList&lt;ReadOnlyPerson&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
+<p>exposes an unmodifiable <code>ObservableList&lt;ReadOnlyTask&gt;</code> that can be 'observed'.</p>
+</li>
+<li>
 <p>does not depend on any of the other three components.</p>
 </li>
 </ul>
@@ -943,11 +946,25 @@ The sequence diagram below shows how this is done:</p>
 <img src="images/AddTaskSeq.png" alt="AddTaskSeq" width="800">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 3.4.1.1 : Sequence Diagram for adding a Task</em></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="task-structure-and-subclasses"><a class="link" href="#task-structure-and-subclasses">3.4.2. Task structure and subclasses</a></h4>
 <div class="paragraph">
 <p>The Task object has several subclasses, which store information about the task. The following class diagram illustrates the structure of a Task object.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TaskClassDiagram.png" alt="TaskClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.4.2.1 : Class Diagram for the Task class</em></p>
+</div>
+<div class="paragraph">
+<p>Each subclass contains its own methods for input validation, and the Assignees class supports some methods for changing its assignedList.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1021,6 +1038,9 @@ For example, given the below list of persons:</p>
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 3.5.1 : Mapping of indexes to a task</em></p>
+</div>
+<div class="paragraph">
 <p>After a <code>find</code> operation, only the second, fourth and fifth persons are visible.
 When you call <code>assign 1 2 to/1</code>, while the first and second persons in the visible list will be assigned to the first Task, in this case the "Second person" and "Fourth person", internally the assignee list contain Indexes corresponding the following values:<br></p>
 </div>
@@ -1051,6 +1071,9 @@ The activity diagram below illustrates the process of updating task assignee lis
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 3.5.2 : Activity Diagram for updating Assignees after deleting a Person</em></p>
+</div>
+<div class="paragraph">
 <p>After a <code>sort</code> operation, the order of the persons in the persons list may change as well. However, in comparison to <code>delete</code>, the new position of the person is not fixed.
 To ensure that the indexes are updated properly, the change in positions after each <code>sort</code> operation is maintained as well inside the UniquePersonList.<br></p>
 </div>
@@ -1058,6 +1081,9 @@ To ensure that the indexes are updated properly, the change in positions after e
 <div class="content">
 <img src="images/AssignIndexSort.png" alt="AssignIndexSort" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.5.3 : Mapping of indexes after a sort operation</em></p>
 </div>
 <div class="paragraph">
 <p>All task assignee lists will thus be updated using the mappings from the sort operation. Each index in the list will be replaced by the value given in the mappings.
@@ -2744,7 +2770,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <div class="sect2">
 <h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.4. Managing Dependencies</a></h3>
 <div class="paragraph">
-<p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
+<p>A project often depends on third-party libraries. For example, Address++ depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)</p>
 </div>
@@ -2783,7 +2809,19 @@ b. Require developers to download those libraries manually (this creates extra w
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add a new person</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of my contacts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete a person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove entries that I no longer need</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a new task</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of my tasks and assignments</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2816,6 +2854,12 @@ b. Require developers to download those libraries manually (this creates extra w
 <td class="tableblock halign-left valign-top"><p class="tableblock">operate without the need to create dummy values</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cautious user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to lock my address book application whenever I want with a password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prevent people with malicious intent from making changes to my data</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default</p></td>
@@ -2838,12 +2882,6 @@ b. Require developers to download those libraries manually (this creates extra w
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">type commands partially and have the application fill in the rest for me</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">increase typing productivity</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">first-time user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to see a user guide when I first start the program</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be clear on how to use it</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -2871,27 +2909,27 @@ b. Require developers to download those libraries manually (this creates extra w
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with many social media accounts</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to add my contacts' social media accounts to the address book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">improve connectivity and learn more about my contacts</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user who values privacy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to to choose and modify which contacts and what information are to be displayed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide information I do not want to share from others</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with a 4K screen</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able keep track of my upcoming tasks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ditch my Todo application and migrate to Address++ for my people and task management needs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cautious user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to back up my address book data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">retrieve my back up data in the event I make breaking changes to my actual address book and there is no way of undoing them</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with poor eyesight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to increase the font size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use the application without straining my eyes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to see who is assigned to a task</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find my contacts who are in charge more quickly</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -2913,51 +2951,21 @@ b. Require developers to download those libraries manually (this creates extra w
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to mark my favourite contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find them more easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">long-time user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to access shortcut commands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">use the address book more efficiently</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">non tech-savvy user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have the option to fill out certain fields</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use the address book without having to use the intimidating CLI.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">error-prone user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have minor typos auto corrected</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">continue using the address book without correcting my mistakes</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to update the address book application easily when new updates are published</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">continue using the address book easily with any newly added features</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cautious user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to lock my address book application whenever I want with a password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">prevent people with malicious intent from making changes to my data</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cautious user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to back up my address book data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">retrieve my back up data in the event I make breaking changes to my actual address book and there is no way of undoing them</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with a 4K screen</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to increase the font size</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use the application without straining my eyes.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">picky user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to change the colour theme of the application</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">customize the application to suit my visual tastebuds.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3301,7 +3309,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 10:39:41 +00:00
+Last updated 2017-11-13 11:51:42 +00:00
 </div>
 </div>
 </body>
