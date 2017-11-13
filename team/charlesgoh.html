@@ -192,6 +192,9 @@ These <code>Command</code> classes will then call the Model to toggle the lock&#
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 3.8.1 : Lock/Unlock command activity diagram</em></p>
+</div>
+<div class="paragraph">
 <p>From the activity diagram we can see that lock states are preserved in the <code>preferences.json</code>
 file after the application closes by passing the lock state into the <code>UserPrefs</code> class to be
 saved by the Storage component.</p>
@@ -300,6 +303,9 @@ user&#8217;s file directories from seeing the real password immediately.
 <div class="content">
 <img src="../images/ChangePasswordActivityDiagram.png" alt="ChangePasswordActivityDiagram" width=""800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.9.1 : ChangePassword command activity diagram</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
@@ -447,12 +453,18 @@ class. The actual sorting happens via the UniquePersonList class or the UniqueTa
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 3.6.1 : Sort command class diagram</em></p>
+</div>
+<div class="paragraph">
 <p>Likewise, the UML Class diagram for sort commands that trigger sorting in task listings is shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/SortCommandTaskDiagram.png" alt="SortCommandTaskDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.6.1 : Sort task command class diagram</em></p>
 </div>
 <div class="paragraph">
 <p>We can deduce from the UML diagrams diagrams above that the only difference between the implementation
@@ -467,6 +479,9 @@ demonstrates how the sort command works.</p>
 <div class="content">
 <img src="../images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width=""800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.6.1 : Sort command sequence diagram</em></p>
 </div>
 <div class="paragraph">
 <p>Note that the execution of the sort methods results in the actual person or task list being sorted. This list will be
@@ -589,6 +604,9 @@ event notifies the subscriber <code>backupAddressBook</code> method in Storage c
 <img src="../images/BackupSequenceDiagram.png" alt="BackupSequenceDiagram" width=""800">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 3.7.1 : Backup command sequence diagram</em></p>
+</div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
 <div class="paragraph">
@@ -710,6 +728,9 @@ users to customize the application&#8217;s font size quickly on the go.</p>
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 3.1.1 : Using the UI to change font size</em></p>
+</div>
+<div class="paragraph">
 <p>There are two methods of calling changes in font size:</p>
 </div>
 <div class="olist arabic">
@@ -727,6 +748,9 @@ new events via <code>ComponentManager</code>.</p>
 <div class="content">
 <img src="../images/FontSizeChangeSequenceDiagram.png" alt="FontSizeChangeSequenceDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.1.2 : Sequence diagram for fontsize changing</em></p>
 </div>
 <div class="paragraph">
 <p>From the sequence diagram above, we can observe that the font size changes are handled by subscriber functions in PersonListPanel
@@ -939,7 +963,7 @@ prefix "file:"
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 15:21:24 +00:00
+Last updated 2017-11-13 15:30:00 +00:00
 </div>
 </div>
 </body>
