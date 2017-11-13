@@ -165,7 +165,7 @@ Allowing optional data input thus lifts the restriction of making every field co
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-task-code-add-task-code-since-v1-2"><a class="link" href="#adding-a-task-code-add-task-code-since-v1-2">Adding a task: <code>add task/</code> (Since V1.2)</a></h3>
+<h3 id="adding-a-task-code-add-task-code"><a class="link" href="#adding-a-task-code-add-task-code">Adding a task: <code>add task/</code></a></h3>
 <div class="paragraph">
 <p>You can use the <code>add task/</code> command to add new tasks to your address book. This allows you to keep track of your
 assignments and project objectives.</p>
@@ -224,7 +224,7 @@ you add it into Address++.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-task-code-since-v1-2"><a class="link" href="#editing-a-person-code-edit-task-code-since-v1-2">Editing a person : <code>edit task/</code> (Since V1.2)</a></h3>
+<h3 id="editing-a-person-code-edit-task-code"><a class="link" href="#editing-a-person-code-edit-task-code">Editing a person : <code>edit task/</code></a></h3>
 <div class="paragraph">
 <p>You can use the <code>edit task/</code> command to quickly fix mistakes in your entries, or add/remove details in your tasks. You may wish to edit your tasks when their requirements change, for example.<br></p>
 </div>
@@ -285,7 +285,7 @@ One of your assignments has been pushed back and is no longer as urgent as befor
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-task-code-delete-task-code-since-v1-2"><a class="link" href="#deleting-a-task-code-delete-task-code-since-v1-2">Deleting a task : <code>delete task/</code> (Since V1.2)</a></h3>
+<h3 id="deleting-a-task-code-delete-task-code"><a class="link" href="#deleting-a-task-code-delete-task-code">Deleting a task : <code>delete task/</code></a></h3>
 <div class="paragraph">
 <p>You can use the <code>delete task/</code> command to remove tasks from the address book. The <code>delete task/</code> command will help you clean up obsolete or completed tasks.<br></p>
 </div>
@@ -353,7 +353,7 @@ You thus use <code>find task/</code> to find tasks related to "Essays", before u
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-a-task-code-find-task-code-since-v1-3"><a class="link" href="#finding-a-task-code-find-task-code-since-v1-3">Finding a task : <code>find task/</code> (Since V1.3)</a></h3>
+<h3 id="finding-a-task-code-find-task-code"><a class="link" href="#finding-a-task-code-find-task-code">Finding a task : <code>find task/</code></a></h3>
 <div class="paragraph">
 <p>You can use the <code>find task/</code> command to quickly find tasks that match your criteria, as well as tasks that have a certain level of urgency.<br>
 Furthermore, you can choose to only retrieve tasks that are either complete, or still in progress.<br></p>
@@ -450,7 +450,7 @@ Furthermore, as you have several tasks related to "Report" that are already comp
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-task-code-select-task-code-since-v1-4"><a class="link" href="#selecting-a-task-code-select-task-code-since-v1-4">Selecting a task : <code>select task/</code> (Since V1.4)</a></h3>
+<h3 id="selecting-a-task-code-select-task-code"><a class="link" href="#selecting-a-task-code-select-task-code">Selecting a task : <code>select task/</code></a></h3>
 <div class="paragraph">
 <p>You can use <code>select task/</code> to pick out a task, and look at it in greater detail.<br></p>
 </div>
@@ -783,82 +783,6 @@ However you have forgotten who you have assigned to that task. You thus use <cod
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">Clearing all entries : <code>clear</code></a></h3>
-<div class="paragraph">
-<p>If you would like to start fresh on a clean slate, you can use this command to clear all entries from the address book.<br>
-Additionally, if you clear only the contacts list or the task list, you can specify which type to clear in the command.<br></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<code>clear</code> can be replaced by <code>c</code> for faster input.<br>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Format: <code>clear</code><br></p>
-</div>
-<div class="paragraph">
-<p>To clear only the contacts list, type <code>clear person/</code><br>
-To clear only the tasks list, type <code>clear task/</code><br></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Things To Note</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If both <code>person/</code> and <code>task</code> are specified, or if neither were specified, the <code>clear</code> command will delete all entries in the address book.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Example Scenarios:</strong><br></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Example Scenario 1:</strong><br>
-You have completed every task in your task list, and want to clean it up.</p>
-</div>
-<div class="paragraph">
-<p>&gt;&gt; <code>clear task/</code><br></p>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Example Scenario 2:</strong><br>
-You first start up Address++, and after getting used to how the app works, find that you do not need the initial sample data anymore. However you would still like to keep smome of the tasks for further reference.</p>
-</div>
-<div class="paragraph">
-<p>&gt;&gt; <code>clear person/</code><br></p>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Example Scenario 2:</strong><br>
-You first start up Address, and after getting used to how the app works, find that you do not need the initial sample data anymore. You would like to clear everything in Address to make space for your own contacts and tasks.</p>
-</div>
-<div class="paragraph">
-<p>&gt;&gt; <code>clear</code><br></p>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -1101,7 +1025,7 @@ For example, if a task previously had an index of "1" assigned to it, it be repl
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 14:43:24 +00:00
+Last updated 2017-11-13 14:27:31 +00:00
 </div>
 </div>
 </body>
