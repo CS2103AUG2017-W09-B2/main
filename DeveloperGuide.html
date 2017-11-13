@@ -48,22 +48,23 @@
 <li><a href="#setting-avatar-on-viewpersonpanel">3.2. Setting Avatar on ViewPersonPanel</a></li>
 <li><a href="#undo-redo-mechanism">3.3. Undo/Redo mechanism</a></li>
 <li><a href="#task-object">3.4. Task Object</a></li>
-<li><a href="#sort-command">3.5. Sort Command</a></li>
-<li><a href="#backup-command">3.6. Backup Command</a></li>
-<li><a href="#lock-and-unlock-command">3.7. Lock and Unlock Command</a></li>
-<li><a href="#changepassword-command">3.8. ChangePassword Command</a></li>
-<li><a href="#privacy-of-fields">3.9. Privacy of fields</a></li>
-<li><a href="#changing-of-a-person-s-privacy">3.10. Changing of a Person&#8217;s Privacy</a></li>
-<li><a href="#changing-the-address-book-s-privacy-level">3.11. Changing the address book&#8217;s privacy level</a></li>
-<li><a href="#locating-a-person-on-google-maps">3.12. Locating a Person on Google Maps</a></li>
-<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.13. Navigating from one address to another using Google Maps</a></li>
-<li><a href="#opening-and-saving-of-the-xml-save-file">3.14. Opening and Saving of the .xml save file</a></li>
-<li><a href="#changing-the-theme-of-the-address-book">3.15. Changing the theme of the address book</a></li>
-<li><a href="#add-delete-tag-mechanism">3.16. Add/Delete Tag mechanism</a></li>
-<li><a href="#find-tag-mechanism">3.17. Find Tag mechanism</a></li>
-<li><a href="#favourite-unfavourite-person-mechanism">3.18. Favourite/Unfavourite Person mechanism</a></li>
-<li><a href="#logging">3.19. Logging</a></li>
-<li><a href="#configuration">3.20. Configuration</a></li>
+<li><a href="#assign-and-dismiss-commands">3.5. Assign and Dismiss Commands</a></li>
+<li><a href="#sort-command">3.6. Sort Command</a></li>
+<li><a href="#backup-command">3.7. Backup Command</a></li>
+<li><a href="#lock-and-unlock-command">3.8. Lock and Unlock Command</a></li>
+<li><a href="#changepassword-command">3.9. ChangePassword Command</a></li>
+<li><a href="#privacy-of-fields">3.10. Privacy of fields</a></li>
+<li><a href="#changing-of-a-person-s-privacy">3.11. Changing of a Person&#8217;s Privacy</a></li>
+<li><a href="#changing-the-address-book-s-privacy-level">3.12. Changing the address book&#8217;s privacy level</a></li>
+<li><a href="#locating-a-person-on-google-maps">3.13. Locating a Person on Google Maps</a></li>
+<li><a href="#navigating-from-one-address-to-another-using-google-maps">3.14. Navigating from one address to another using Google Maps</a></li>
+<li><a href="#opening-and-saving-of-the-xml-save-file">3.15. Opening and Saving of the .xml save file</a></li>
+<li><a href="#changing-the-theme-of-the-address-book">3.16. Changing the theme of the address book</a></li>
+<li><a href="#add-delete-tag-mechanism">3.17. Add/Delete Tag mechanism</a></li>
+<li><a href="#find-tag-mechanism">3.18. Find Tag mechanism</a></li>
+<li><a href="#favourite-unfavourite-person-mechanism">3.19. Favourite/Unfavourite Person mechanism</a></li>
+<li><a href="#logging">3.20. Logging</a></li>
+<li><a href="#configuration">3.21. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -944,7 +945,13 @@ The sequence diagram below shows how this is done:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="task-object-storage"><a class="link" href="#task-object-storage">3.4.2. Task Object Storage</a></h4>
+<h4 id="task-structure-and-subclasses"><a class="link" href="#task-structure-and-subclasses">3.4.2. Task structure and subclasses</a></h4>
+<div class="paragraph">
+<p>The Task object has several subclasses, which store information about the task. The following class diagram illustrates the structure of a Task object.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="task-object-storage"><a class="link" href="#task-object-storage">3.4.3. Task Object Storage</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml">---
@@ -968,7 +975,7 @@ The sequence diagram below shows how this is done:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.3. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.4. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of Task-related commands<br></p>
 </div>
@@ -999,7 +1006,79 @@ The sequence diagram below shows how this is done:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-command"><a class="link" href="#sort-command">3.5. Sort Command</a></h3>
+<h3 id="assign-and-dismiss-commands"><a class="link" href="#assign-and-dismiss-commands">3.5. Assign and Dismiss Commands</a></h3>
+<div class="paragraph">
+<p>The <code>assign</code> and <code>dismiss</code> command allows you to assign contacts to and from your tasks, thus aiding coordination and collaboration.<br>
+The Assignees class stores information related to who is assigned to a particular task through maintaining an internal ArrayList that keeps track of all the indexes of the people who are assigned to the task.<br></p>
+</div>
+<div class="paragraph">
+<p>The indexes stored in the Assignees class <strong>refer to the index of the person in the UniquePersonList, not the visible index shown to the user in the UI</strong>. This means that the indexes will not change even if the list shown in the UI changes, such as after a <code>find</code> operation.<br>
+For example, given the below list of persons:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AssignIndexMovement.png" alt="AssignIndexMovement" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>After a <code>find</code> operation, only the second, fourth and fifth persons are visible.
+When you call <code>assign 1 2 to/1</code>, while the first and second persons in the visible list will be assigned to the first Task, in this case the "Second person" and "Fourth person", internally the assignee list contain Indexes corresponding the following values:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">assignedList = {<span class="integer">1</span>, <span class="integer">3</span>}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The indexes 1 and 3 refer to the zero-based index of the "Second person" and "Fourth person" in the complete list.</p>
+</div>
+<div class="paragraph">
+<p>Due to this requirement, when the UniquePersonList changes, the assigned indexes of each task will be updated as well.</p>
+</div>
+<div class="paragraph">
+<p>The <code>add</code> operation will not require the assigned indexes to be updated, as each newly added person is not assigned to any task by default, and when a person is added, he is inserted to the end of the list, thus the order of the other persons will not change.</p>
+</div>
+<div class="paragraph">
+<p>After a <code>clear</code> operation that clears only the persons list, all task assignee lists will be cleared and re-initialized.</p>
+</div>
+<div class="paragraph">
+<p>After a <code>delete</code> operation, the order of the persons in the persons list may change. This is especially so when the first person is deleted, as this will cause the positions of all other persons to decrease by 1.
+The activity diagram below illustrates the process of updating task assignee lists when a person is deleted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AssignIndexDelete.png" alt="AssignIndexDelete" width=""800">
+</div>
+</div>
+<div class="paragraph">
+<p>After a <code>sort</code> operation, the order of the persons in the persons list may change as well. However, in comparison to <code>delete</code>, the new position of the person is not fixed.
+To ensure that the indexes are updated properly, the change in positions after each <code>sort</code> operation is maintained as well inside the UniquePersonList.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AssignIndexSort.png" alt="AssignIndexSort" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>All task assignee lists will thus be updated using the mappings from the sort operation. Each index in the list will be replaced by the value given in the mappings.
+For example, if a task previously had an index of "1" assigned to it, it be replaced by an index of "4".</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storage of assigned persons in the Assignee class<br>
+<strong>Alternative 1 (current choice):</strong> Store the Indexes of the persons only<br>
+<strong>Pros:</strong> The assigned persons will only need to be retrieved on a per-need basis, rather than residing in the Assignee class all the time, thus making storage simpler<br>
+<strong>Cons:</strong> UniquePersonList will be coupled to Tasks, as Tasks will need to retrieve information from the UniquePersonList in order to update itself after any operation that could potentially change the UniquePersonList ordering.<br>
+<strong>Alternative 2:</strong> Store the whole person in the Assignees class<br>
+<strong>Pros:</strong> The Assignees class will not need to depend on the UniquePersonList as its internal list is independent from that of the UniquePersonList<br>
+<strong>Cons:</strong> Repetition of information is incurred in the storage file, as the same person can appear multiple times if he is assigned to multiple tasks. This will increase the size of the storage file, and make read-write operations slow.<br></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sort-command"><a class="link" href="#sort-command">3.6. Sort Command</a></h3>
 <div class="paragraph">
 <p>The sort command is facilitated by the <code>sortBy</code> methods in UniquePersonList and UniqueTaskList. It supports
 sort by ascending or by descending order in any field.</p>
@@ -1046,7 +1125,7 @@ demonstrates how the sort command works.</p>
 reflected in both the application&#8217;s storage as well as the graphical user interface.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>sort Command</code><br></p>
 </div>
@@ -1079,7 +1158,7 @@ and <code>UniqueTaskList</code> will have to rely on the <code>SortCommand</code
 </div>
 </div>
 <div class="sect2">
-<h3 id="backup-command"><a class="link" href="#backup-command">3.6. Backup Command</a></h3>
+<h3 id="backup-command"><a class="link" href="#backup-command">3.7. Backup Command</a></h3>
 <div class="paragraph">
 <p>The <code>backup</code> command uses the event handler <code>BackupRequestEvent</code>. When raised, this
 event notifies the subscriber <code>backupAddressBook</code> method in Storage class.</p>
@@ -1094,7 +1173,7 @@ event notifies the subscriber <code>backupAddressBook</code> method in Storage c
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>backup Command</code><br></p>
 </div>
@@ -1111,7 +1190,7 @@ event notifies the subscriber <code>backupAddressBook</code> method in Storage c
 </div>
 </div>
 <div class="sect2">
-<h3 id="lock-and-unlock-command"><a class="link" href="#lock-and-unlock-command">3.7. Lock and Unlock Command</a></h3>
+<h3 id="lock-and-unlock-command"><a class="link" href="#lock-and-unlock-command">3.8. Lock and Unlock Command</a></h3>
 <div class="paragraph">
 <p>The <code>lock</code> and <code>unlock</code> commands utilise the Model to access the user preferences of
 the application.</p>
@@ -1148,7 +1227,7 @@ application. Subsequent changes to the lock will persist in the user preferences
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>lock</code> and <code>unlock</code> Commands</p>
 </div>
@@ -1166,7 +1245,7 @@ intuitive approach is to use event handlers<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="changepassword-command"><a class="link" href="#changepassword-command">3.8. ChangePassword Command</a></h3>
+<h3 id="changepassword-command"><a class="link" href="#changepassword-command">3.9. ChangePassword Command</a></h3>
 <div class="paragraph">
 <p>The default password when users first open Address++ is <code>password</code>. The ChangePassword command
 sets a new password in the temporary User Preferences. When the application is closed, this
@@ -1240,7 +1319,7 @@ user&#8217;s file directories from seeing the real password immediately.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.8.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.9.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> On Demand Saving vs. Save On Exit<br></p>
 </div>
@@ -1257,7 +1336,7 @@ user&#8217;s file directories from seeing the real password immediately.
 </div>
 </div>
 <div class="sect2">
-<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.9. Privacy of fields</a></h3>
+<h3 id="privacy-of-fields"><a class="link" href="#privacy-of-fields">3.10. Privacy of fields</a></h3>
 <div class="paragraph">
 <p>The <code>Name</code>, <code>Phone</code>, <code>Email</code>, <code>Address</code> and <code>Remark</code> of a <code>Person</code> contains a boolean <code>isPrivate</code>, which will determine if the field belonging to that person is private or not.</p>
 </div>
@@ -1396,7 +1475,7 @@ Hence, a private field will remain private and the value stored by that field wi
 <p>Upon generation of all the fields, if <code>areFieldsAllPrivate</code> is still true, <code>createEditedPerson</code> will throw an <code>IllegalArgumentException</code>, which will cause <code>EditCommand</code> to throw a <code>CommandException</code> and prevent the command from continuing.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">3.9.1. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.10.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>isPrivate</code><br></p>
 </div>
@@ -1427,7 +1506,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.10. Changing of a Person&#8217;s Privacy</a></h3>
+<h3 id="changing-of-a-person-s-privacy"><a class="link" href="#changing-of-a-person-s-privacy">3.11. Changing of a Person&#8217;s Privacy</a></h3>
 <div class="paragraph">
 <p><code>ChangePrivacyCommand</code> facilitates the setting of an existing person&#8217;s field&#8217;s privacy. Depending on the user&#8217;s input, <code>ChangePrivacyCommand</code> will use each field&#8217;s <code>setPrivate()</code> method to set the value of <code>isPrivate</code>.</p>
 </div>
@@ -1514,7 +1593,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">3.10.1. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.11.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of changing of a person&#8217;s privacy.<br></p>
 </div>
@@ -1531,7 +1610,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-the-address-book-s-privacy-level"><a class="link" href="#changing-the-address-book-s-privacy-level">3.11. Changing the address book&#8217;s privacy level</a></h3>
+<h3 id="changing-the-address-book-s-privacy-level"><a class="link" href="#changing-the-address-book-s-privacy-level">3.12. Changing the address book&#8217;s privacy level</a></h3>
 <div class="paragraph">
 <p><code>PrivacyLevelCommand</code> allows the user to change the privacy level of Address++, letting users easily reveal data hidden by private fields, or hide persons containing private fields entirely.</p>
 </div>
@@ -1602,7 +1681,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">3.11.1. Design Considerations</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.12.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Storing of the privacy level<br></p>
 </div>
@@ -1619,7 +1698,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.12. Locating a Person on Google Maps</a></h3>
+<h3 id="locating-a-person-on-google-maps"><a class="link" href="#locating-a-person-on-google-maps">3.13. Locating a Person on Google Maps</a></h3>
 <div class="paragraph">
 <p>Locating a person&#8217;s address allows users to take the address that is stored by a person and search it on Google Maps in the browser.</p>
 </div>
@@ -1693,7 +1772,7 @@ This can be seen from the code snippet below:</p>
 <p><em>Figure 3.10.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">3.12.1. Design Considerations</a></h4>
+<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">3.13.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the Google Maps to search for a person&#8217;s <code>Address</code><br></p>
 </div>
@@ -1710,7 +1789,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.13. Navigating from one address to another using Google Maps</a></h3>
+<h3 id="navigating-from-one-address-to-another-using-google-maps"><a class="link" href="#navigating-from-one-address-to-another-using-google-maps">3.14. Navigating from one address to another using Google Maps</a></h3>
 <div class="paragraph">
 <p>When the <code>navigate</code> command is entered into the command line, <code>NavigateCommandParse</code> will first reset its internal <code>from</code>, <code>to</code>, <code>fromIndex</code>, <code>toIndex</code> to null. It will then check for the input prefixes and ensure that only one of the prefixes from the group <code>fp/</code>, <code>ft/</code>, and <code>fa/</code>, which we will subsequently call the <code>from</code> prefixes are present. It then does the same with the prefixes from the group <code>tp/</code>, <code>tt/</code> and <code>ta/</code>, which we will call the <code>to</code> prefixes.<br></p>
 </div>
@@ -1864,7 +1943,7 @@ This can be seen from the code snippet below:</p>
 <p><em>Figure 3.11.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">3.13.1. Design Considerations</a></h4>
+<h4 id="design-considerations-13"><a class="link" href="#design-considerations-13">3.14.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to pass the appropriate information to NavigateCommand<br></p>
 </div>
@@ -1894,7 +1973,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="opening-and-saving-of-the-xml-save-file"><a class="link" href="#opening-and-saving-of-the-xml-save-file">3.14. Opening and Saving of the .xml save file</a></h3>
+<h3 id="opening-and-saving-of-the-xml-save-file"><a class="link" href="#opening-and-saving-of-the-xml-save-file">3.15. Opening and Saving of the .xml save file</a></h3>
 <div class="paragraph">
 <p>Both <code>OpenCommand</code> and <code>SaveAsCommand</code> function in a very similar way.
 When <code>open</code> or <code>save</code> is input by the user, <code>AddressBookParser</code> will create a new <code>OpenCommand</code> or <code>SaveAsCommand</code>.</p>
@@ -1974,7 +2053,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 <p><em>Figure 3.12.1 : Sequence Diagram for Opening a save file</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-13"><a class="link" href="#design-considerations-13">3.14.1. Design Considerations</a></h4>
+<h4 id="design-considerations-14"><a class="link" href="#design-considerations-14">3.15.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How does <code>OpenCommand</code> and <code>SaveAsCommand</code> determine the file location to save or load the save file from<br></p>
 </div>
@@ -1991,7 +2070,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-the-theme-of-the-address-book"><a class="link" href="#changing-the-theme-of-the-address-book">3.15. Changing the theme of the address book</a></h3>
+<h3 id="changing-the-theme-of-the-address-book"><a class="link" href="#changing-the-theme-of-the-address-book">3.16. Changing the theme of the address book</a></h3>
 <div class="paragraph">
 <p>The original style of the address book may not be for everyone. <code>ThemeCommand</code> allows users to switch between multiple preset themes.</p>
 </div>
@@ -2084,7 +2163,7 @@ The overall execution of <code>ThemeCommand</code> is seen in the following code
 <p><em>Figure 3.13.1 : Sequence Diagram for Changing Themes</em></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-14"><a class="link" href="#design-considerations-14">3.15.1. Design Considerations</a></h4>
+<h4 id="design-considerations-15"><a class="link" href="#design-considerations-15">3.16.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Getting the correct file path to the .css file<br>
 <strong>Alternative 1 (current choice):</strong> Store the file path in a HashMap, where the keys are the possible inputs that the user may type and the values are the actual filepaths<br>
@@ -2097,7 +2176,7 @@ The overall execution of <code>ThemeCommand</code> is seen in the following code
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.16. Add/Delete Tag mechanism</a></h3>
+<h3 id="add-delete-tag-mechanism"><a class="link" href="#add-delete-tag-mechanism">3.17. Add/Delete Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The add/delete tag mechanism is facilitated by <code>personArrayList</code>, which resides inside <code>LogicManager</code>. It supports add/delete
 tag for all persons in the address book. This command will inherit from <code>UndoableCommand</code>.</p>
@@ -2166,7 +2245,7 @@ If the tag to be added exists in every target person in the address book, the <c
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-15"><a class="link" href="#design-considerations-15">3.16.1. Design Considerations</a></h4>
+<h4 id="design-considerations-16"><a class="link" href="#design-considerations-16">3.17.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>add tag/</code> and <code>delete tag/</code><br>
 <strong>Alternative 1 (current choice):</strong> implement the methods in <code>ModelManager</code><br>
@@ -2194,7 +2273,7 @@ This violates the Single Responsibility Principle.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.17. Find Tag mechanism</a></h3>
+<h3 id="find-tag-mechanism"><a class="link" href="#find-tag-mechanism">3.18. Find Tag mechanism</a></h3>
 <div class="paragraph">
 <p>The find tag mechanism is facilitated by an ArrayList of Tags, which resides inside <code>LogicManager</code>. It supports finding persons by their tags in the address book.
 This command will not inherit from <code>UndoableCommand</code>.</p>
@@ -2272,7 +2351,7 @@ If the input index tags do not exist, the <code>FindTagCommand</code> will give 
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-16"><a class="link" href="#design-considerations-16">3.17.1. Design Considerations</a></h4>
+<h4 id="design-considerations-17"><a class="link" href="#design-considerations-17">3.18.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of the <code>find tag/</code><br>
 <strong>Alternative 1 (current choice):</strong> implement a new command <code>find tag/</code><br>
@@ -2288,7 +2367,7 @@ and Separation of Concerns as FindCommand now needs to do two different things.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">3.18. Favourite/Unfavourite Person mechanism</a></h3>
+<h3 id="favourite-unfavourite-person-mechanism"><a class="link" href="#favourite-unfavourite-person-mechanism">3.19. Favourite/Unfavourite Person mechanism</a></h3>
 <div class="paragraph">
 <p>To favourite a person is achieved by <code>FavouriteCommand</code>. It basically changes the value of the <code>favourite</code> status of a <code>Person</code> but there is no specific <code>Favourite</code> field for person.</p>
 </div>
@@ -2364,7 +2443,7 @@ It will first detect the boolean favourite status of the person. If the person i
 The colours of the border and the background of the label are set to transparent, so that only the background picture, which is a heart, will be shown.</p>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">3.18.1. Design Consideration</a></h4>
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.19.1. Design Consideration</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>favourite</code><br>
 <strong>Alternative 1 (current choice):</strong> implement a new command <code>favourite</code>.<br>
@@ -2389,7 +2468,7 @@ The colours of the border and the background of the label are set to transparent
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.19. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.20. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -2427,7 +2506,7 @@ The colours of the border and the background of the label are set to transparent
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.20. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.21. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3222,7 +3301,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 20:24:01 +00:00
+Last updated 2017-11-13 02:35:40 +00:00
 </div>
 </div>
 </body>

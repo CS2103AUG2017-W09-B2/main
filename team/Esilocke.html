@@ -19,7 +19,8 @@
 <h2 id="project-addressbook"><a class="link" href="#project-addressbook">Project: AddressBook++</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook++ is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 6 kLoC.</p>
+<p>Address++ is an application that keeps track of your contacts and your daily to-dos for you. It is targeted
+at students who work on projects or assignments frequently, but it can also be used for other purposes.</p>
 </div>
 <div class="paragraph">
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/main/Esilocke.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-W09-B2/main/blob/master/collated/test/Esilocke.md">Test code</a>]</p>
@@ -120,8 +121,8 @@ The user would need to delete the tag from all users who are tagged with <code>C
 <div class="sect3">
 <h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
-<p>We may not always have the opportunity to have contacts or tasks with complete information.<br>
-Some contacts may not have an address, or email address, while some tasks may not have a deadline, or require a description. Without Optional Data Input, the user would need to come up with random placeholder values for each prefix, which would greatly hinder user experience as the user would need to type in unnecessary values to satisfy the command format.<br>
+<p>We may not always have the opportunity to find contacts or tasks with complete information.<br>
+This means that some contacts may not have an address, or email address, while some tasks may not have a deadline, or a description. Without Optional Data Input, the user would need to come up with random placeholder values for each prefix, which would greatly hinder user experience as the user would need to type in unnecessary values to satisfy the command format.<br>
 Allowing optional data input thus lifts the restriction of making every field compulsory, and thus allows users to fill in a wider range of input.</p>
 </div>
 </div>
@@ -172,7 +173,8 @@ assignments and project objectives.</p>
 <div class="content">
 <div class="paragraph">
 <p><strong>Things To Note</strong><br>
-* A task priority must be a positive integer from 1 to 5 inclusive, with 5 being the highest priority<br>
+* A task priority must be a positive integer from 0 to 5 inclusive, with 5 being the highest priority<br>
+* Adding a task with a priority of 0 is the same as not adding a priority. Only priority level above 1 will be displayed in the User Interface<br>
 * Newly added tasks are marked as incomplete by default.</p>
 </div>
 </div>
@@ -269,7 +271,7 @@ One of your assignments has been pushed back and is no longer as urgent as befor
 <div class="sect2">
 <h3 id="deleting-a-task-code-delete-task-code"><a class="link" href="#deleting-a-task-code-delete-task-code">Deleting a task : <code>delete task/</code></a></h3>
 <div class="paragraph">
-<p>You can use the <code>delete task/</code> command to remove tasks from the address book. The <code>delete</code> command will help you clean up obsolete or completed tasks.<br></p>
+<p>You can use the <code>delete task/</code> command to remove tasks from the address book. The <code>delete task/</code> command will help you clean up obsolete or completed tasks.<br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -278,13 +280,13 @@ One of your assignments has been pushed back and is no longer as urgent as befor
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>delete</code> can be replaced by <code>d</code> for faster input.<br>
+<code>delete task/</code> can be replaced by <code>d task/</code> for faster input.<br>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>delete task / INDEX</code><br></p>
+<p>Format: <code>delete task/ INDEX</code><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -294,10 +296,10 @@ One of your assignments has been pushed back and is no longer as urgent as befor
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the person or task at the specified <code>INDEX</code>.</p>
+<p>Deletes the  task at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the most recent listing.</p>
+<p>The index refers to the index number shown in the most recent task listing.</p>
 </li>
 <li>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
@@ -316,7 +318,7 @@ One of your assignments has been pushed back and is no longer as urgent as befor
 You wish to delete the first task.</p>
 </div>
 <div class="paragraph">
-<p>&gt;&gt; <code>delete task /1</code></p>
+<p>&gt;&gt; <code>delete task/ 1</code></p>
 </div>
 </div>
 </div>
@@ -329,7 +331,7 @@ You thus use <code>find task/</code> to find tasks related to "Essays", before u
 </div>
 <div class="paragraph">
 <p>&gt;&gt; <code>find task/ Essay</code><br>
-&gt;&gt; <code>delete 3</code></p>
+&gt;&gt; <code>delete task/ 3</code></p>
 </div>
 </div>
 </div>
@@ -831,6 +833,12 @@ The sequence diagram below shows how this is done:</p>
 </div>
 </div>
 <div class="sect3">
+<h4 id="task-structure-and-subclasses"><a class="link" href="#task-structure-and-subclasses">Task structure and subclasses</a></h4>
+<div class="paragraph">
+<p>The Task object has several subclasses, which store information about the task. The following class diagram illustrates the structure of a Task object.</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="task-object-storage"><a class="link" href="#task-object-storage">Task Object Storage</a></h4>
 <div class="listingblock">
 <div class="content">
@@ -883,9 +891,6 @@ The sequence diagram below shows how this is done:</p>
 <strong>Pros:</strong> Easier to manage as Person storage will not interfere with Task storage, and vice versa.<br>
 <strong>Cons:</strong> All existing save/load functions will require an additional method to handle Task storage.<br></p>
 </div>
-<div class="paragraph">
-<p><mark>End of Extract</mark></p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -898,46 +903,14 @@ The Assignees class stores information related to who is assigned to a particula
 <p>The indexes stored in the Assignees class <strong>refer to the index of the person in the UniquePersonList, not the visible index shown to the user in the UI</strong>. This means that the indexes will not change even if the list shown in the UI changes, such as after a <code>find</code> operation.<br>
 For example, given the below list of persons:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>First person</p>
-</li>
-<li>
-<p>Second person</p>
-</li>
-<li>
-<p>Third person</p>
-</li>
-<li>
-<p>Fourth person</p>
-</li>
-<li>
-<p>Fifth person</p>
-</li>
-<li>
-<p>Sixth person</p>
-</li>
-</ol>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignIndexMovement.png" alt="AssignIndexMovement" width="800">
+</div>
 </div>
 <div class="paragraph">
-<p>After a <code>find</code> operation, the following list of persons is shown to the user:<br></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Second person</p>
-</li>
-<li>
-<p>Fourth person</p>
-</li>
-<li>
-<p>Fifth person</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>When you call <code>assign 1 2 to/1</code>, while the first and second persons in the visible list will be assigned to the first Task, in this case the "Second person" and "Fourth person", internally the assignee list contains the following values:<br></p>
+<p>After a <code>find</code> operation, only the second, fourth and fifth persons are visible.
+When you call <code>assign 1 2 to/1</code>, while the first and second persons in the visible list will be assigned to the first Task, in this case the "Second person" and "Fourth person", internally the assignee list contain Indexes corresponding the following values:<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -947,49 +920,52 @@ For example, given the below list of persons:</p>
 <div class="paragraph">
 <p>The indexes 1 and 3 refer to the zero-based index of the "Second person" and "Fourth person" in the complete list.</p>
 </div>
+<div class="paragraph">
+<p>Due to this requirement, when the UniquePersonList changes, the assigned indexes of each task will be updated as well.</p>
+</div>
+<div class="paragraph">
+<p>The <code>add</code> operation will not require the assigned indexes to be updated, as each newly added person is not assigned to any task by default, and when a person is added, he is inserted to the end of the list, thus the order of the other persons will not change.</p>
+</div>
+<div class="paragraph">
+<p>After a <code>clear</code> operation that clears only the persons list, all task assignee lists will be cleared and re-initialized.</p>
+</div>
+<div class="paragraph">
+<p>After a <code>delete</code> operation, the order of the persons in the persons list may change. This is especially so when the first person is deleted, as this will cause the positions of all other persons to decrease by 1.
+The activity diagram below illustrates the process of updating task assignee lists when a person is deleted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignIndexDelete.png" alt="AssignIndexDelete" width=""800">
+</div>
+</div>
+<div class="paragraph">
+<p>After a <code>sort</code> operation, the order of the persons in the persons list may change as well. However, in comparison to <code>delete</code>, the new position of the person is not fixed.
+To ensure that the indexes are updated properly, the change in positions after each <code>sort</code> operation is maintained as well inside the UniquePersonList.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignIndexSort.png" alt="AssignIndexSort" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>All task assignee lists will thus be updated using the mappings from the sort operation. Each index in the list will be replaced by the value given in the mappings.
+For example, if a task previously had an index of "1" assigned to it, it be replaced by an index of "4".</p>
+</div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Storage of assigned persons in the Assignee class<br>
 <strong>Alternative 1 (current choice):</strong> Store the Indexes of the persons only<br>
 <strong>Pros:</strong> The assigned persons will only need to be retrieved on a per-need basis, rather than residing in the Assignee class all the time, thus making storage simpler<br>
-<strong>Cons:</strong> UniquePersonList will be coupled to Tasks, as Tasks will need to retrieve information from the UniquePersonList in order to .<br>
+<strong>Cons:</strong> UniquePersonList will be coupled to Tasks, as Tasks will need to retrieve information from the UniquePersonList in order to update itself after any operation that could potentially change the UniquePersonList ordering.<br>
 <strong>Alternative 2:</strong> Store the whole person in the Assignees class<br>
 <strong>Pros:</strong> The Assignees class will not need to depend on the UniquePersonList as its internal list is independent from that of the UniquePersonList<br>
 <strong>Cons:</strong> Repetition of information is incurred in the storage file, as the same person can appear multiple times if he is assigned to multiple tasks. This will increase the size of the storage file, and make read-write operations slow.<br></p>
 </div>
 <hr>
-</div>
-</div>
-<div class="sect2">
-<h3 id="enhancement-proposed-add-automatic-reminders-for-upcoming-tasks"><a class="link" href="#enhancement-proposed-add-automatic-reminders-for-upcoming-tasks">Enhancement Proposed: Add automatic reminders for upcoming tasks</a></h3>
-<div class="sect3">
-<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
-<hr>
-<div class="paragraph">
-<p><mark>Start of Extract [from: User Guide]</mark></p>
-</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
-<hr>
-</div>
-<div class="sect3">
-<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
-<div class="paragraph">
-<p>When a user has many tasks, they might wish to see which tasks are due, or already past their deadlines. While the user could do this indirectly via sorting the tasks by their deadlines, having the application remind the user of the number of tasks upcoming would serve as an alternative.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
-<hr>
-<div class="paragraph">
-<p><mark>Start of Extract [from: Developer Guide]</mark></p>
-</div>
-<div class="paragraph">
-<p><mark>End of Extract</mark></p>
-</div>
-<hr>
 </div>
 </div>
 <div class="sect2">
@@ -997,7 +973,7 @@ For example, given the below list of persons:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Conducted internal rigorous Acceptance testing (Link to Issues found)</p>
+<p>Conducted internal acceptance testing [<a href="https://github.com/CS2103AUG2017-W09-B2/main/issues/155">Issue #155</a>]</p>
 </li>
 <li>
 <p>Conducted Acceptance Testing for other teams [<a href="https://github.com/CS2103AUG2017-F09-B1/main/issues/83">F09-B1</a>] [<a href="https://github.com/CS2103AUG2017-F09-B1/main/issues/82">F09-B1</a>]</p>
@@ -1010,7 +986,7 @@ For example, given the below list of persons:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 20:24:01 +00:00
+Last updated 2017-11-13 02:35:40 +00:00
 </div>
 </div>
 </body>
