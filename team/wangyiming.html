@@ -353,11 +353,103 @@ This violates the Single Responsibility Principle.</p>
 <div class="paragraph">
 <p><mark>Start of Extract [from: User Guide]</mark></p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-tag-code-find-tag-code-since-v1-4"><a class="link" href="#locating-persons-by-tag-code-find-tag-code-since-v1-4">Locating persons by tag : <code>find tag/</code> (Since V1.4)</a></h3>
+<div class="paragraph">
+<p>You can use the <code>find tag/</code> command to quickly filter out contacts who match your criteria. For example, you may wish to find contacts who are your <code>classmates</code>.<br>
+If you want to find contacts who are your <code>classmates</code> but not your <code>friends</code>, you just need to add <code>/</code> in front of the <code>friends</code>.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>find tag/</code> can be replaced by <code>f tag/</code> for faster input.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>find tag/ KEYWORD [MORE_KEYWORDS]</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Things To Note</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The search is not case insensitive. e.g <code>friends</code> will match <code>FRIENDS</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>friends classmates</code> will match <code>classmates friends</code></p>
+</li>
+<li>
+<p>Only the tag is searched for persons.</p>
+</li>
+<li>
+<p>Only full words will be matched. e.g. <code>friend</code> will not match <code>friends</code></p>
+</li>
+<li>
+<p>There is no space between <code>/</code> and tag name. e.g. <code>/ friends</code> will not match <code>/friends</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Scenarios:</strong><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 1:</strong><br>
+Suppose you want to find contatcs with tag <code>friends</code> or <code>colleagues</code>, you can just key in the following command.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>find tag/ friends colleagues</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 2:</strong><br>
+Suppose you want to find contacts without tag <code>frineds</code>, you can key in the following command.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>find tag/ /friends</code></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Example Scenario 3:</strong><br>
+Suppose you want to find contacts with tag <code>friends</code> but without <code>colleagues</code>, you can key in the following command.</p>
+</div>
+<div class="paragraph">
+<p>&gt;&gt; <code>find tag/ friends /colleagues</code></p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FindTagCommand.png" alt="FindTagCommand" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 3.17.1 : FindTagCommand</em></p>
+</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
 <hr>
-</div>
 <div class="sect3">
 <h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
 <div class="paragraph">
@@ -940,7 +1032,7 @@ The colours of the border and the background of the label are set to transparent
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:51:42 +00:00
+Last updated 2017-11-13 13:36:04 +00:00
 </div>
 </div>
 </body>
