@@ -348,7 +348,7 @@ Using the privacylevel command, you set each contact with any private field to b
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.7.1 : Class diagram for a Person, only Name, Phone, Email, Address and Remark contain an isPrivate boolean to indicate if it is private or not</em></p>
+<p><em>Figure 3.10.1 : Class diagram for a Person, only Name, Phone, Email, Address and Remark contain an isPrivate boolean to indicate if it is private or not</em></p>
 </div>
 <div class="paragraph">
 <p>Adding a person with private fields uses the same <code>AddCommand</code> as adding a person with no public fields.<br>
@@ -367,7 +367,7 @@ Upon obtaining all the fields anc creating a new <code>Person</code>, <code>AddC
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.7.2 : Sequence Diagram for adding a Person with private fields</em></p>
+<p><em>Figure 3.10.2 : Sequence Diagram for adding a Person with private fields</em></p>
 </div>
 <div class="paragraph">
 <p>If a field is private, then the <code>toString</code> method will return a string <code>&lt;Private [FIELD]&gt;</code>, where <code>[FIELD]</code> is the name of that field.<br>
@@ -521,7 +521,7 @@ Hence, a private field will remain private and the value stored by that field wi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.8.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
+<p><em>Figure 3.11.1 : Sequence Diagram for changing the privacy of a Person&#8217;s fields</em></p>
 </div>
 <div class="paragraph">
 <p>Upon receiving a String containing the arguments from <code>AddressBookParser</code>, <code>ChangePrivacyCommandParser</code> will create a <code>PersonPrivacySettings</code> object.</p>
@@ -625,7 +625,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.9.1 : Sequence Diagram for changing the privacy level of the address book</em></p>
+<p><em>Figure 3.12.1 : Sequence Diagram for changing the privacy level of the address book</em></p>
 </div>
 <div class="paragraph">
 <p><code>PrivacyLevelCommandParser</code> will accept any integer that is input in the command line, and create a <code>PrivacyLevelCommand</code> that stores the integer, which represents the privacy level to switch to.</p>
@@ -645,7 +645,7 @@ This allows <code>isAnyFieldNonNull</code> to check if the user has input any fi
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.9.2 : Class Diagram of Person, which shows which classes contain an integer to indicate the privacy level</em></p>
+<p><em>Figure 3.12.2 : Class Diagram of Person, which shows which classes contain an integer to indicate the privacy level</em></p>
 </div>
 <div class="paragraph">
 <p>Finally, depending on the privacy level, <code>PrivacyLevelCommand</code> will update the call <code>model.updateFilteredPersonList()</code> with the appropriate predicate.</p>
@@ -860,7 +860,7 @@ This can be seen from the code snippet below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.10.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
+<p><em>Figure 3.13.1 : Sequence Diagram for Locating a Person&#8217;s Address</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
@@ -1142,7 +1142,7 @@ Using the navigate command once again, you find an efficient route from the loca
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.11.1 : Sequence Diagram for Navigating from one Address to another</em></p>
+<p><em>Figure 3.14.1 : Sequence Diagram for Navigating from one Address to another</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
@@ -1331,7 +1331,7 @@ When <code>open</code> or <code>save</code> is input by the user, <code>AddressB
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.12.1 : Sequence Diagram for Opening a save file</em></p>
+<p><em>Figure 3.15.1 : Sequence Diagram for Opening a save file</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h4>
@@ -1504,7 +1504,7 @@ The overall execution of <code>ThemeCommand</code> is seen in the following code
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 3.13.1 : Sequence Diagram for Changing Themes</em></p>
+<p><em>Figure 3.16.1 : Sequence Diagram for Changing Themes</em></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h4>
@@ -1550,7 +1550,7 @@ The overall execution of <code>ThemeCommand</code> is seen in the following code
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 02:35:40 +00:00
+Last updated 2017-11-13 04:23:16 +00:00
 </div>
 </div>
 </body>
