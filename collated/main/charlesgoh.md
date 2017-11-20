@@ -1,4 +1,24 @@
 # charlesgoh
+###### /java/seedu/address/ui/TaskCard.java
+``` java
+    /**
+     * Set default size for all attributes
+     */
+    public void updateAttributeSizes() {
+        nameSize = DEFAULT_NAME_SIZE + (fontSizeMultipler * FONT_SIZE_EXTENDER);
+        attributeSize = DEFAULT_ATTRIBUTE_SIZE + (fontSizeMultipler * FONT_SIZE_EXTENDER);
+
+        // Set styles using set name and attribute sizes
+        taskName.setStyle("-fx-font-size: " + Integer.toString(nameSize));
+        id.setStyle("-fx-font-size: " + Integer.toString(nameSize));
+        description.setStyle("-fx-font-size: " + Integer.toString(attributeSize));
+        deadline.setStyle("-fx-font-size: " + Integer.toString(attributeSize));
+        priority.setStyle("-fx-font-size: " + Integer.toString(attributeSize));
+        taskAddress.setStyle("-fx-font-size: " + Integer.toString(attributeSize));
+        assignCount.setStyle("-fx-font-size: " + Integer.toString(attributeSize));
+        state.setStyle("-fx-font-size: " + Integer.toString(attributeSize));
+    }
+```
 ###### /java/seedu/address/ui/TaskListPanel.java
 ``` java
     /**
