@@ -151,7 +151,6 @@ public class PersonCard extends UiPart<Region> {
         email.setStyle("-fx-font-size: " + Integer.toString(attributeSize));
     }
     //@@author
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

@@ -56,7 +56,6 @@
             </graphic>
          </MenuItem>
     </Menu>
-      <!-- @@author charlesgoh -->
       <Menu mnemonicParsing="false" text="Font Size">
         <items>
           <MenuItem fx:id="increaseSizeMenuItem" mnemonicParsing="false" onAction="#handleIncreaseFontSize" text="Increase +" />

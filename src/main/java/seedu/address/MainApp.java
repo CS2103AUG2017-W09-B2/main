@@ -206,13 +206,11 @@ public class MainApp extends Application {
         System.exit(0);
     }
 
-    //@@author charlesgoh
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
-    //@@author
 
     public static void main(String[] args) {
         launch(args);
